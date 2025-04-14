@@ -3011,20 +3011,20 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-        94          0          0          0          0       2465   delay.o
-       172         64          0         32         12       3895   gray_detection.o
-        68         12         15          0          0       4139   log.o
-        30          0          0          0          0        397   main.o
-      1696         64         23         32          0      19265   oled.o
-         0          0       2248        128          0        544   oled_data.o
-        48          0          0          0          0       3935   pca9555.o
-      1208         16          0          0          0      17221   software_i2c.o
+        94          0          0          0          0       2474   delay.o
+       172         64          0         32         12       3904   gray_detection.o
+        68         12         15          0          0       4198   log.o
+        30          0          0          0          0        406   main.o
+      1696         64         23         32          0      19324   oled.o
+         0          0       2248        128          0        553   oled_data.o
+        48          0          0          0          0       3944   pca9555.o
+      1208         16          0          0          0      17230   software_i2c.o
         44         18        192          0        256        692   startup_mspm0g350x_uvision.o
-       656        132         57          0        376      20355   ti_msp_dl_config.o
-        70          0          0          0          0       3470   uart.o
+       656        132         57          0        376      20364   ti_msp_dl_config.o
+        70          0          0          0          0       3579   uart.o
 
     ----------------------------------------------------------------------
-      4098        318       2572        192        644      76378   Object Totals
+      4098        318       2572        192        644      76668   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         12         12          5          0          0          0   (incl. Padding)
 
@@ -3144,8 +3144,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     13504        816       3124        196       1012     183265   Grand Totals
-     13504        816       3124        196       1012     183265   ELF Image Totals
+     13504        816       3124        196       1012     183555   Grand Totals
+     13504        816       3124        196       1012     183555   ELF Image Totals
      13504        816       3124        196          0          0   ROM Totals
 
 ==============================================================================

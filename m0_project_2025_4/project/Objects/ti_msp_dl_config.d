@@ -1,15 +1,7 @@
 ./objects/ti_msp_dl_config.o: ti_msp_dl_config.c ti_msp_dl_config.h \
   ..\source\ti\devices\msp\msp.h ..\source\ti\devices\DeviceFamily.h \
   ..\source\ti\devices\msp\m0p\mspm0g350x.h \
-  C:\Users\kjmsd\AppData\Local\Keil_v5\ARM\ARMCLANG\bin\..\include\stdint.h \
-  C:\Users\kjmsd\AppData\Local\Keil_v5\ARM\ARMCLANG\bin\..\include\stdbool.h \
   ..\source\third_party\CMSIS\Core\Include\core_cm0plus.h \
-  ..\source\third_party\CMSIS\Core\Include\cmsis_version.h \
-  ..\source\third_party\CMSIS\Core\Include\cmsis_compiler.h \
-  ..\source\third_party\CMSIS\Core\Include\cmsis_armclang.h \
-  C:\Users\kjmsd\AppData\Local\Keil_v5\ARM\ARMCLANG\bin\..\include\arm_compat.h \
-  C:\Users\kjmsd\AppData\Local\Keil_v5\ARM\ARMCLANG\bin\..\include\arm_acle.h \
-  ..\source\third_party\CMSIS\Core\Include\mpu_armv7.h \
   ..\source\ti\devices\msp\peripherals\hw_adc12.h \
   ..\source\ti\devices\msp\peripherals\hw_aes.h \
   ..\source\ti\devices\msp\peripherals\hw_comp.h \
@@ -37,11 +29,9 @@
   ..\source\ti\devices\msp\peripherals\m0p\hw_sysctl.h \
   ..\source\ti\devices\msp\peripherals\m0p\sysctl\hw_sysctl_mspm0g1x0x_g3x0x.h \
   ..\source\ti\driverlib\driverlib.h ..\source\ti\driverlib\dl_adc12.h \
-  C:\Users\kjmsd\AppData\Local\Keil_v5\ARM\ARMCLANG\bin\..\include\math.h \
   ..\source\ti\driverlib\dl_common.h \
   ..\source\ti\driverlib\m0p\dl_factoryregion.h \
   ..\source\ti\driverlib\m0p\dl_core.h ..\source\ti\driverlib\dl_aes.h \
-  C:\Users\kjmsd\AppData\Local\Keil_v5\ARM\ARMCLANG\bin\..\include\stddef.h \
   ..\source\ti\driverlib\dl_aesadv.h ..\source\ti\driverlib\dl_comp.h \
   ..\source\ti\driverlib\dl_crc.h ..\source\ti\driverlib\dl_crcp.h \
   ..\source\ti\driverlib\dl_dac12.h ..\source\ti\driverlib\dl_dma.h \
