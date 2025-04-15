@@ -63,6 +63,7 @@ void OLED_Init(void)
 	for (uint8_t i = 0; i < sizeof(init_cmds); i++) {
 			OLED_WR_CMD(init_cmds[i]);
 	}
+	OLED_Clear();
 }
 
 void OLED_Test(void) {
