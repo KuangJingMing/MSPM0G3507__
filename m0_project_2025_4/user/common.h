@@ -8,5 +8,7 @@
 #include "task.h"
 #include "oled.h"
 #include "gray_detection.h"
+#include "motor.h"
+#include "encoder.h"
 
 #endif // COMMON_H

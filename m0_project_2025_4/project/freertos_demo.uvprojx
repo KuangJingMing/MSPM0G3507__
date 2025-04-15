@@ -444,6 +444,11 @@
               <FileType>1</FileType>
               <FilePath>..\drivers\pca9555.c</FilePath>
             </File>
+            <File>
+              <FileName>encoder.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\drivers\encoder.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -148,10 +148,10 @@ extern "C" {
 #define SPI_0_INST                                                         SPI1
 #define SPI_0_INST_IRQHandler                                   SPI1_IRQHandler
 #define SPI_0_INST_INT_IRQN                                       SPI1_INT_IRQn
-#define GPIO_SPI_0_PICO_PORT                                              GPIOB
-#define GPIO_SPI_0_PICO_PIN                                      DL_GPIO_PIN_15
-#define GPIO_SPI_0_IOMUX_PICO                                   (IOMUX_PINCM32)
-#define GPIO_SPI_0_IOMUX_PICO_FUNC                   IOMUX_PINCM32_PF_SPI1_PICO
+#define GPIO_SPI_0_PICO_PORT                                              GPIOA
+#define GPIO_SPI_0_PICO_PIN                                      DL_GPIO_PIN_18
+#define GPIO_SPI_0_IOMUX_PICO                                   (IOMUX_PINCM40)
+#define GPIO_SPI_0_IOMUX_PICO_FUNC                   IOMUX_PINCM40_PF_SPI1_PICO
 #define GPIO_SPI_0_POCI_PORT                                              GPIOA
 #define GPIO_SPI_0_POCI_PIN                                      DL_GPIO_PIN_16
 #define GPIO_SPI_0_IOMUX_POCI                                   (IOMUX_PINCM38)

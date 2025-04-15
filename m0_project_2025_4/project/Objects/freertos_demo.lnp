@@ -7,6 +7,7 @@
 ".\objects\motor.o"
 ".\objects\oled.o"
 ".\objects\pca9555.o"
+".\objects\encoder.o"
 ".\objects\software_i2c.o"
 ".\objects\uart.o"
 ".\objects\spi.o"

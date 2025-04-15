@@ -8,9 +8,9 @@
 #include "stdlib.h"
 
 //I2C驱动
-#define I2C_OLED
+//#define I2C_OLED
 //SPI驱动
-//#define SPI_OLED
+#define SPI_OLED
 
 #define OLED_MAX_BUFFER_SIZE 256
 
