@@ -12,6 +12,7 @@
 ".\objects\spi.o"
 ".\objects\oled_data.o"
 ".\objects\gray_detection.o"
+".\objects\motor_controller.o"
 --strict --scatter ".\mspm0g3507.sct"
 ../source/ti/driverlib/lib/keil/m0p/mspm0g1x0x_g3x0x/driverlib.a ../kernel/freertos/builds/LP_MSPM0G3507/release/keil/Objects/freertos_builds_LP_MSPM0G3507_release_keil.lib --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

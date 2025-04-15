@@ -5,11 +5,11 @@
 <h2>Tool Versions:</h2>
 IDE-Version: ¦ÌVision V5.42.0.0
 Copyright (C) 2025 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: kuang Jing Ming  , hunnan, LIC=8VRJ7-EKUE3-X70RZ-JXJIG-B5KIZ-33TWR
+License Information: 1 huhongguang2004@outlook.com, 1, LIC=KRMW3-ABGUN-HLRCL-0PEZW-6ZJPH-RDW84
  
 Tool Versions:
 Toolchain:       MDK-ARM Plus  Version: 5.42.0.0
-Toolchain Path:  C:\Users\kjmsd\AppData\Local\Keil_v5\ARM\ARMCLANG\Bin
+Toolchain Path:  D:\keil5\ARM\ARMCLANG\Bin
 C Compiler:      ArmClang.exe V6.23
 Assembler:       Armasm.exe V6.23
 Linker/Locator:  ArmLink.exe V6.23
@@ -21,26 +21,34 @@ Target DLL:      CMSIS_AGDI.dll V1.33.22.0
 Dialog DLL:      TARMCM1.DLL V1.14.6.0
  
 <h2>Project:</h2>
-C:\Users\kjmsd\Documents\GitHub\MSPM0G3507__\m0_project_2025_4\project\freertos_demo.uvprojx
-Project File Date:  04/14/2025
+C:\Users\huhon\Documents\GitHub\MSPM0G3507__\m0_project_2025_4\project\freertos_demo.uvprojx
+Project File Date:  04/15/2025
 
 <h2>Output:</h2>
-*** Using Compiler 'V6.23', folder: 'C:\Users\kjmsd\AppData\Local\Keil_v5\ARM\ARMCLANG\Bin'
+*** Using Compiler 'V6.23', folder: 'D:\keil5\ARM\ARMCLANG\Bin'
 Build target 'freertos_demo'
-Before Build - User command #1: cmd.exe /C "C:\Users\kjmsd\Documents\GitHub\MSPM0G3507__\m0_project_2025_4\project\../tools/syscfg.bat 'C:\Users\kjmsd\Documents\GitHub\MSPM0G3507__\m0_project_2025_4\project\' blink_led.syscfg"
-Couldn't find Sysconfig Tool "C:\TI\sysconfig\sysconfig_cli.bat"
-"Update the file located at <sdk path>/tools/keil/syscfg.bat"
-compiling motor.c...
+Before Build - User command #1: cmd.exe /C "C:\Users\huhon\Documents\GitHub\MSPM0G3507__\m0_project_2025_4\project\../tools/syscfg.bat 'C:\Users\huhon\Documents\GitHub\MSPM0G3507__\m0_project_2025_4\project\' blink_led.syscfg"
+Using Sysconfig Tool from "C:\TI\sysconfig\sysconfig_cli.bat"
+"Update the file located at <sdk path>/tools/keil/syscfg.bat to use a different version"
+Error: File "C:\Users\huhon\Documents\GitHub\MSPM0G3507__\m0_project_2025_4\project\blink_led.syscfg" does not exist
+    at contents [as readScriptFile] (C:\TI\sysconfig\dist\webpack:\sysconfig\src\pinmux\services\resources\otherLoaders\scriptAndProductLoader.ts:33:10)
+    at parsedArgs (C:\TI\sysconfig\dist\webpack:\sysconfig\src\pinmux\services\args\resolveScriptArg.ts:17:10)
+    at async Promise.all (index 0)
+    at parsedArgs (C:\TI\sysconfig\dist\webpack:\sysconfig\src\pinmux\services\args\resolveScriptArg.ts:33:19)
+    at resolvedArgs (C:\TI\sysconfig\dist\webpack:\sysconfig\src\pinmux\services\args\parseAndResolveArgs.ts:25:6)
+    at t.runCLI (C:\TI\sysconfig\dist\webpack:\sysconfig\src\cli\runCli.ts:32:9)
 compiling oled_data.c...
-compiling delay.c...
+compiling motor.c...
 compiling main.c...
-compiling gray_detection.c...
-compiling software_i2c.c...
-compiling spi.c...
-compiling pca9555.c...
-compiling log.c...
 compiling uart.c...
+compiling gray_detection.c...
+compiling log.c...
+compiling spi.c...
+compiling motor_controller.c...
 compiling ti_msp_dl_config.c...
+compiling pca9555.c...
+compiling delay.c...
+compiling software_i2c.c...
 compiling oled.c...
 linking...
 Program Size: Code=13504 RO-data=3124 RW-data=196 ZI-data=1012  
@@ -50,9 +58,9 @@ FromELF: creating hex file...
 <h2>Software Packages used:</h2>
 
 Package Vendor: TexasInstruments
-                http://software-dl.ti.com/msp430/esd/MSPM0-CMSIS/MSPM0G/latest/exports/TexasInstruments.MSPM0G_DFP.1.2.1.pack
-                TexasInstruments::MSPM0G_DFP@1.2.1
-                Device Family Pack for Texas Instruments MSPM0G Series
+                https://software-dl.ti.com/msp430/esd/MSPM0-CMSIS/MSPM0G1X0X_G3X0X/latest/exports/TexasInstruments.MSPM0G1X0X_G3X0X_DFP.1.3.1.pack
+                TexasInstruments::MSPM0G1X0X_G3X0X_DFP@1.3.1
+                Device Family Pack for Texas Instruments MSPM0G1X0X_G3X0X Series
 
 <h2>Collection of Component include folders:</h2>
 
