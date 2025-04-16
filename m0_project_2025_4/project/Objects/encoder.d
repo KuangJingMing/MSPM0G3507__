@@ -55,4 +55,17 @@
   ..\source\ti\driverlib\dl_uart.h ..\source\ti\driverlib\dl_uart_main.h \
   ..\source\ti\driverlib\dl_vref.h ..\source\ti\driverlib\dl_wwdt.h \
   ..\source\ti\driverlib\m0p\dl_interrupt.h \
-  ..\source\ti\driverlib\m0p\dl_systick.h
+  ..\source\ti\driverlib\m0p\dl_systick.h \
+  ..\kernel\freertos\Source\include\FreeRTOS.h \
+  ..\kernel\freertos\builds\LP_MSPM0G3507\release\FreeRTOSConfig.h \
+  ..\kernel\freertos\Source\include\projdefs.h \
+  ..\kernel\freertos\Source\include\portable.h \
+  ..\kernel\freertos\Source\include\deprecated_definitions.h \
+  ..\kernel\freertos\Source\portable\GCC\ARM_CM0\portmacro.h \
+  ..\kernel\freertos\Source\include\mpu_wrappers.h \
+  ..\kernel\freertos\Source\include\timers.h \
+  ..\kernel\freertos\Source\include\task.h \
+  ..\kernel\freertos\Source\include\list.h \
+  ..\kernel\freertos\Source\include\semphr.h \
+  ..\kernel\freertos\Source\include\queue.h ..\utils\log.h \
+  ..\hardware\bsp\uart.h

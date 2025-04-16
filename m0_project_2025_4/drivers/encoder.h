@@ -1,11 +1,5 @@
 /*
  * encoder.h
- *
- *  Created on: [Current Date]
- *      Author: [Your Name]
- *
- *  Header file for encoder counting functionality on MSPM0G350X using GPIO interrupts.
- *  Designed for counting using pulse and direction signals (ENC_P, D1/D2) from the motor driver.
  *  Pin mapping (based on configuration):
  *    - Motor 1: P1 (Pulse) -> PB4 (Encoder_GPIO_Encoder_P1_PIN)
  *    - Motor 1: D1 (Direction) -> PB5 (Encoder_GPIO_Encoder_D1_PIN)
@@ -18,22 +12,24 @@
 
 #include <stdint.h>
 #include "ti_msp_dl_config.h"
+#include "FreeRTOS.h"
 
+// 编码器数据结构体
 typedef struct {
-    int left_motor_period_ms;      // 左电机周期（毫秒）
-    int right_motor_period_ms;     // 右电机周期（毫秒）
-    float left_motor_speed_rpm;    // 左电机速度（RPM）
-    float right_motor_speed_rpm;   // 右电机速度（RPM）
-    float left_motor_speed_cmps;   // 左电机速度（cm/s）
-    float right_motor_speed_cmps;  // 右电机速度（cm/s）
+    int left_motor_period_ms;       // 左电机计算周期（ms）
+    int right_motor_period_ms;      // 右电机计算周期（ms）
+    float left_motor_speed_rpm;     // 左电机速度（转/分钟）
+    float left_motor_speed_mps;     // 左电机速度（m/s）
+    float right_motor_speed_rpm;    // 右电机速度（转/分钟）
+    float right_motor_speed_mps;    // 右电机速度（m/s）
 } encoder;
 
-// 声明独立的全局变量
-extern int left_motor_period_cnt;     // 左电机脉冲计数
-extern int right_motor_period_cnt;    // 右电机脉冲计数
+// 外部变量声明（如果需要在其他文件中访问）
+extern encoder NEncoder;
 
+// 函数声明
 void Encoder_init(void);
-extern float get_left_motor_speed(void);
-extern float get_right_motor_speed(void);
+float get_left_motor_speed(void);
+float get_right_motor_speed(void);
 
 #endif /* ENCODER_H_ */

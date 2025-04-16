@@ -67,4 +67,5 @@
   ..\kernel\freertos\Source\include\list.h ..\drivers\oled.h \
   ..\fonts\oled_data.h ..\utils\delay.h ..\app\gray_detection.h \
   ..\drivers\pca9555.h ..\hardware\bsp\software_i2c.h ..\drivers\motor.h \
-  ..\drivers\encoder.h ..\utils\log.h ..\hardware\bsp\uart.h
+  ..\drivers\encoder.h ..\kernel\freertos\Source\include\timers.h \
+  ..\app\motor_controller.h ..\utils\log.h ..\hardware\bsp\uart.h

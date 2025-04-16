@@ -239,8 +239,8 @@ I (..\source\ti\driverlib\dl_vref.h)(0x67FDEBF5)
 I (..\source\ti\driverlib\dl_wwdt.h)(0x67FDEBF5)
 I (..\source\ti\driverlib\m0p\dl_interrupt.h)(0x67FDEBF5)
 I (..\source\ti\driverlib\m0p\dl_systick.h)(0x67FDEBF5)
-F (..\user\main.c)(0x67FE2957)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../project -I ../source -I ../source/third_party/CMSIS/Core/Include -I ../kernel/freertos/Source/include -I ../kernel/freertos/Source/portable/GCC/ARM_CM0 -I ../kernel/freertos/builds/LP_MSPM0G3507/release -I ../drivers -I ../hardware/bsp -I ../utils -I ../fonts -I ../app -I ../user-D__UVISION_VERSION="542" -D__MSPM0G3507__ -D__MSPM0G3507__-o ./objects/main.o -MMD)
-I (..\user\common.h)(0x67FE25EF)
+F (..\user\main.c)(0x67FF7F1D)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../project -I ../source -I ../source/third_party/CMSIS/Core/Include -I ../kernel/freertos/Source/include -I ../kernel/freertos/Source/portable/GCC/ARM_CM0 -I ../kernel/freertos/builds/LP_MSPM0G3507/release -I ../drivers -I ../hardware/bsp -I ../utils -I ../fonts -I ../app -I ../user-D__UVISION_VERSION="542" -D__MSPM0G3507__ -D__MSPM0G3507__-o ./objects/main.o -MMD)
+I (..\user\common.h)(0x67FF7E96)
 I (..\project\ti_msp_dl_config.h)(0x67FE2050)
 I (..\source\ti\devices\msp\msp.h)(0x67FDEBF5)
 I (..\source\ti\devices\DeviceFamily.h)(0x67FDEBF5)
@@ -331,7 +331,9 @@ I (..\app\gray_detection.h)(0x67FDEBF5)
 I (..\drivers\pca9555.h)(0x67FDEBF5)
 I (..\hardware\bsp\software_i2c.h)(0x67FDEBF5)
 I (..\drivers\motor.h)(0x67FDF41A)
-I (..\drivers\encoder.h)(0x67FE2117)
+I (..\drivers\encoder.h)(0x67FF5620)
+I (..\kernel\freertos\Source\include\timers.h)(0x67FDEBF5)
+I (..\app\motor_controller.h)(0x67FF7F4C)
 I (..\utils\log.h)(0x67FDEBF6)
 I (..\hardware\bsp\uart.h)(0x67FDEBF5)
 F (..\drivers\motor.c)(0x67FE1B1D)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../project -I ../source -I ../source/third_party/CMSIS/Core/Include -I ../kernel/freertos/Source/include -I ../kernel/freertos/Source/portable/GCC/ARM_CM0 -I ../kernel/freertos/builds/LP_MSPM0G3507/release -I ../drivers -I ../hardware/bsp -I ../utils -I ../fonts -I ../app -I ../user-D__UVISION_VERSION="542" -D__MSPM0G3507__ -D__MSPM0G3507__-o ./objects/motor.o -MMD)
@@ -571,8 +573,8 @@ I (..\hardware\bsp\software_i2c.h)(0x67FDEBF5)
 I (..\utils\delay.h)(0x67FDEBF6)
 I (..\utils\log.h)(0x67FDEBF6)
 I (..\hardware\bsp\uart.h)(0x67FDEBF5)
-F (..\drivers\encoder.c)(0x67FE2523)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../project -I ../source -I ../source/third_party/CMSIS/Core/Include -I ../kernel/freertos/Source/include -I ../kernel/freertos/Source/portable/GCC/ARM_CM0 -I ../kernel/freertos/builds/LP_MSPM0G3507/release -I ../drivers -I ../hardware/bsp -I ../utils -I ../fonts -I ../app -I ../user-D__UVISION_VERSION="542" -D__MSPM0G3507__ -D__MSPM0G3507__-o ./objects/encoder.o -MMD)
-I (..\drivers\encoder.h)(0x67FE2117)
+F (..\drivers\encoder.c)(0x67FF7B31)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../project -I ../source -I ../source/third_party/CMSIS/Core/Include -I ../kernel/freertos/Source/include -I ../kernel/freertos/Source/portable/GCC/ARM_CM0 -I ../kernel/freertos/builds/LP_MSPM0G3507/release -I ../drivers -I ../hardware/bsp -I ../utils -I ../fonts -I ../app -I ../user-D__UVISION_VERSION="542" -D__MSPM0G3507__ -D__MSPM0G3507__-o ./objects/encoder.o -MMD)
+I (..\drivers\encoder.h)(0x67FF5620)
 I (..\project\ti_msp_dl_config.h)(0x67FE2050)
 I (..\source\ti\devices\msp\msp.h)(0x67FDEBF5)
 I (..\source\ti\devices\DeviceFamily.h)(0x67FDEBF5)
@@ -647,6 +649,20 @@ I (..\source\ti\driverlib\dl_vref.h)(0x67FDEBF5)
 I (..\source\ti\driverlib\dl_wwdt.h)(0x67FDEBF5)
 I (..\source\ti\driverlib\m0p\dl_interrupt.h)(0x67FDEBF5)
 I (..\source\ti\driverlib\m0p\dl_systick.h)(0x67FDEBF5)
+I (..\kernel\freertos\Source\include\FreeRTOS.h)(0x67FDEBF5)
+I (..\kernel\freertos\builds\LP_MSPM0G3507\release\FreeRTOSConfig.h)(0x67FDEBF5)
+I (..\kernel\freertos\Source\include\projdefs.h)(0x67FDEBF5)
+I (..\kernel\freertos\Source\include\portable.h)(0x67FDEBF5)
+I (..\kernel\freertos\Source\include\deprecated_definitions.h)(0x67FDEBF5)
+I (..\kernel\freertos\Source\portable\GCC\ARM_CM0\portmacro.h)(0x67FDEBF5)
+I (..\kernel\freertos\Source\include\mpu_wrappers.h)(0x67FDEBF5)
+I (..\kernel\freertos\Source\include\timers.h)(0x67FDEBF5)
+I (..\kernel\freertos\Source\include\task.h)(0x67FDEBF5)
+I (..\kernel\freertos\Source\include\list.h)(0x67FDEBF5)
+I (..\kernel\freertos\Source\include\semphr.h)(0x67FDEBF5)
+I (..\kernel\freertos\Source\include\queue.h)(0x67FDEBF5)
+I (..\utils\log.h)(0x67FDEBF6)
+I (..\hardware\bsp\uart.h)(0x67FDEBF5)
 F (..\hardware\bsp\software_i2c.c)(0x67FDEBF5)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../project -I ../source -I ../source/third_party/CMSIS/Core/Include -I ../kernel/freertos/Source/include -I ../kernel/freertos/Source/portable/GCC/ARM_CM0 -I ../kernel/freertos/builds/LP_MSPM0G3507/release -I ../drivers -I ../hardware/bsp -I ../utils -I ../fonts -I ../app -I ../user-D__UVISION_VERSION="542" -D__MSPM0G3507__ -D__MSPM0G3507__-o ./objects/software_i2c.o -MMD)
 I (..\hardware\bsp\software_i2c.h)(0x67FDEBF5)
 I (..\project\ti_msp_dl_config.h)(0x67FE2050)
@@ -883,7 +899,7 @@ I (..\fonts\oled_data.h)(0x67FDEBF5)
 I (..\utils\delay.h)(0x67FDEBF6)
 F (..\fonts\oled_data.c)(0x67FDEBF5)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../project -I ../source -I ../source/third_party/CMSIS/Core/Include -I ../kernel/freertos/Source/include -I ../kernel/freertos/Source/portable/GCC/ARM_CM0 -I ../kernel/freertos/builds/LP_MSPM0G3507/release -I ../drivers -I ../hardware/bsp -I ../utils -I ../fonts -I ../app -I ../user-D__UVISION_VERSION="542" -D__MSPM0G3507__ -D__MSPM0G3507__-o ./objects/oled_data.o -MMD)
 I (..\fonts\oled_data.h)(0x67FDEBF5)
-F (..\app\gray_detection.c)(0x67FDEBF5)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../project -I ../source -I ../source/third_party/CMSIS/Core/Include -I ../kernel/freertos/Source/include -I ../kernel/freertos/Source/portable/GCC/ARM_CM0 -I ../kernel/freertos/builds/LP_MSPM0G3507/release -I ../drivers -I ../hardware/bsp -I ../utils -I ../fonts -I ../app -I ../user-D__UVISION_VERSION="542" -D__MSPM0G3507__ -D__MSPM0G3507__-o ./objects/gray_detection.o -MMD)
+F (..\app\gray_detection.c)(0x67FF7D79)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../project -I ../source -I ../source/third_party/CMSIS/Core/Include -I ../kernel/freertos/Source/include -I ../kernel/freertos/Source/portable/GCC/ARM_CM0 -I ../kernel/freertos/builds/LP_MSPM0G3507/release -I ../drivers -I ../hardware/bsp -I ../utils -I ../fonts -I ../app -I ../user-D__UVISION_VERSION="542" -D__MSPM0G3507__ -D__MSPM0G3507__-o ./objects/gray_detection.o -MMD)
 I (..\drivers\pca9555.h)(0x67FDEBF5)
 I (..\project\ti_msp_dl_config.h)(0x67FE2050)
 I (..\source\ti\devices\msp\msp.h)(0x67FDEBF5)
@@ -965,5 +981,96 @@ I (..\app\gray_detection.h)(0x67FDEBF5)
 I (..\utils\log_config.h)(0x67FDEBF6)
 I (..\utils\log.h)(0x67FDEBF6)
 I (..\hardware\bsp\uart.h)(0x67FDEBF5)
-F (..\app\motor_controller.c)(0x67FDECFB)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../project -I ../source -I ../source/third_party/CMSIS/Core/Include -I ../kernel/freertos/Source/include -I ../kernel/freertos/Source/portable/GCC/ARM_CM0 -I ../kernel/freertos/builds/LP_MSPM0G3507/release -I ../drivers -I ../hardware/bsp -I ../utils -I ../fonts -I ../app -I ../user-D__UVISION_VERSION="542" -D__MSPM0G3507__ -D__MSPM0G3507__-o ./objects/motor_controller.o -MMD)
+F (..\app\motor_controller.c)(0x67FF7F5E)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../project -I ../source -I ../source/third_party/CMSIS/Core/Include -I ../kernel/freertos/Source/include -I ../kernel/freertos/Source/portable/GCC/ARM_CM0 -I ../kernel/freertos/builds/LP_MSPM0G3507/release -I ../drivers -I ../hardware/bsp -I ../utils -I ../fonts -I ../app -I ../user-D__UVISION_VERSION="542" -D__MSPM0G3507__ -D__MSPM0G3507__-o ./objects/motor_controller.o -MMD)
+I (..\app\motor_controller.h)(0x67FF7F4C)
+I (..\drivers\encoder.h)(0x67FF5620)
+I (..\project\ti_msp_dl_config.h)(0x67FE2050)
+I (..\source\ti\devices\msp\msp.h)(0x67FDEBF5)
+I (..\source\ti\devices\DeviceFamily.h)(0x67FDEBF5)
+I (..\source\ti\devices\msp\m0p\mspm0g350x.h)(0x67FDEBF5)
+I (..\source\third_party\CMSIS\Core\Include\core_cm0plus.h)(0x67FDEBF5)
+I (..\source\ti\devices\msp\peripherals\hw_adc12.h)(0x67FDEBF5)
+I (..\source\ti\devices\msp\peripherals\hw_aes.h)(0x67FDEBF5)
+I (..\source\ti\devices\msp\peripherals\hw_comp.h)(0x67FDEBF5)
+I (..\source\ti\devices\msp\peripherals\hw_crc.h)(0x67FDEBF5)
+I (..\source\ti\devices\msp\peripherals\hw_dac12.h)(0x67FDEBF5)
+I (..\source\ti\devices\msp\peripherals\hw_dma.h)(0x67FDEBF5)
+I (..\source\ti\devices\msp\peripherals\hw_flashctl.h)(0x67FDEBF5)
+I (..\source\ti\devices\msp\peripherals\hw_gpio.h)(0x67FDEBF5)
+I (..\source\ti\devices\msp\peripherals\hw_gptimer.h)(0x67FDEBF5)
+I (..\source\ti\devices\msp\peripherals\hw_i2c.h)(0x67FDEBF5)
+I (..\source\ti\devices\msp\peripherals\hw_iomux.h)(0x67FDEBF5)
+I (..\source\ti\devices\msp\peripherals\hw_mathacl.h)(0x67FDEBF5)
+I (..\source\ti\devices\msp\peripherals\hw_mcan.h)(0x67FDEBF5)
+I (..\source\ti\devices\msp\peripherals\hw_oa.h)(0x67FDEBF5)
+I (..\source\ti\devices\msp\peripherals\hw_rtc.h)(0x67FDEBF5)
+I (..\source\ti\devices\msp\peripherals\hw_spi.h)(0x67FDEBF5)
+I (..\source\ti\devices\msp\peripherals\hw_trng.h)(0x67FDEBF5)
+I (..\source\ti\devices\msp\peripherals\hw_uart.h)(0x67FDEBF5)
+I (..\source\ti\devices\msp\peripherals\hw_vref.h)(0x67FDEBF5)
+I (..\source\ti\devices\msp\peripherals\hw_wuc.h)(0x67FDEBF5)
+I (..\source\ti\devices\msp\peripherals\hw_wwdt.h)(0x67FDEBF5)
+I (..\source\ti\devices\msp\peripherals\m0p\hw_factoryregion.h)(0x67FDEBF5)
+I (..\source\ti\devices\msp\peripherals\m0p\hw_cpuss.h)(0x67FDEBF5)
+I (..\source\ti\devices\msp\peripherals\m0p\hw_debugss.h)(0x67FDEBF5)
+I (..\source\ti\devices\msp\peripherals\m0p\hw_sysctl.h)(0x67FDEBF5)
+I (..\source\ti\devices\msp\peripherals\m0p\sysctl\hw_sysctl_mspm0g1x0x_g3x0x.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\driverlib.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_adc12.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_common.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\m0p\dl_factoryregion.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\m0p\dl_core.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_aes.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_aesadv.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_comp.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_crc.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_crcp.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_dac12.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_dma.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_flashctl.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\m0p\dl_sysctl.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\m0p\sysctl\dl_sysctl_mspm0g1x0x_g3x0x.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_gpamp.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_gpio.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_i2c.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_iwdt.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_lfss.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_keystorectl.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_lcd.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_mathacl.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_mcan.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_opa.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_rtc.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_rtc_common.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_rtc_a.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_rtc_b.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_scratchpad.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_spi.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_tamperio.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_timera.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_timer.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_timerg.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_trng.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_uart_extend.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_uart.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_uart_main.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_vref.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\dl_wwdt.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\m0p\dl_interrupt.h)(0x67FDEBF5)
+I (..\source\ti\driverlib\m0p\dl_systick.h)(0x67FDEBF5)
+I (..\kernel\freertos\Source\include\FreeRTOS.h)(0x67FDEBF5)
+I (..\kernel\freertos\builds\LP_MSPM0G3507\release\FreeRTOSConfig.h)(0x67FDEBF5)
+I (..\kernel\freertos\Source\include\projdefs.h)(0x67FDEBF5)
+I (..\kernel\freertos\Source\include\portable.h)(0x67FDEBF5)
+I (..\kernel\freertos\Source\include\deprecated_definitions.h)(0x67FDEBF5)
+I (..\kernel\freertos\Source\portable\GCC\ARM_CM0\portmacro.h)(0x67FDEBF5)
+I (..\kernel\freertos\Source\include\mpu_wrappers.h)(0x67FDEBF5)
+I (..\drivers\oled.h)(0x67FE27E1)
+I (..\fonts\oled_data.h)(0x67FDEBF5)
+I (..\utils\delay.h)(0x67FDEBF6)
+I (..\kernel\freertos\Source\include\task.h)(0x67FDEBF5)
+I (..\kernel\freertos\Source\include\list.h)(0x67FDEBF5)
+I (..\kernel\freertos\Source\include\timers.h)(0x67FDEBF5)
+I (..\utils\log.h)(0x67FDEBF6)
+I (..\hardware\bsp\uart.h)(0x67FDEBF5)
 F (..\..\README.md)(0x67FDECB0)()

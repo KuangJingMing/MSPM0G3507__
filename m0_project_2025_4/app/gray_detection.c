@@ -33,4 +33,4 @@ void Gray_ReadData(void) {
           gray_datas[0], gray_datas[1], gray_datas[2], gray_datas[3],
           gray_datas[4], gray_datas[5], gray_datas[6], gray_datas[7],
           gray_datas[8], gray_datas[9], gray_datas[10], gray_datas[11]);
-}
+}    

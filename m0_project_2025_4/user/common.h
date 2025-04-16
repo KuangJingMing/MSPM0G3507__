@@ -10,5 +10,8 @@
 #include "gray_detection.h"
 #include "motor.h"
 #include "encoder.h"
+#include "timers.h"
+#include "motor_controller.h"
+
 
 #endif // COMMON_H

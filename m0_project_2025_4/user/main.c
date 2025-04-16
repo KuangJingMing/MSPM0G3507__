@@ -1,29 +1,29 @@
 #include "common.h"
-
-//#include "log_config.h"
 #include "log.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "timers.h"
+#include "encoder.h" // 假设这是你的编码器头文件
 
 
 int main(void)
 {
+    // 系统和硬件初始化
     SYSCFG_DL_init();
-		Gray_Detection_Init();
-		OLED_Init();
-		//OLED_Test();
-	  Motor_Init();//电机初始化
-		Encoder_init();//编码器初始化
-	  Motor_Control(1200, 1200);
-    for (;;)
-    {
-		  float right=get_right_motor_speed();
-	    float left=get_left_motor_speed();
-			//Gray_ReadData();
-			//delay_ms(1000);
-			delay_ms(20);
-			OLED_Showdecimal(0,0,right,4,2,16,1);
-	    OLED_Showdecimal(1,3,left,4,2,16,1);
-	    OLED_ShowNum(2,6,left_motor_period_cnt,4,16,1);
-	    OLED_ShowNum(60,6,right_motor_period_cnt,4,16,1);
+    Gray_Detection_Init();
+    OLED_Init();
+    // OLED_Test(); // 如果不需要测试，可以注释掉
+    Motor_Init(); // 电机初始化
+    Encoder_init(); // 编码器初始化（包括 FreeRTOS 软件定时器）
+    // 设置初始电机速度
+    Motor_Control(1200, 1200);
+    // 创建显示任务
+    xTaskCreate(DisplayTask, "DisplayTask", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, NULL);
+    // 启动 FreeRTOS 调度器
+    vTaskStartScheduler();
+
+    while (1) {
     }
+
     return 0;
 }
