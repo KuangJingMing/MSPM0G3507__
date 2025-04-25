@@ -6,6 +6,7 @@
 FLIGHT_PARAMETER Trackless_Params;
 #define WP_FLASH_BASE 0
 static float eeprom_write_data[3] = {0, 0, 0};
+
 void ReadFlashParameterALL(FLIGHT_PARAMETER *WriteData)
 {
 	W25QXX_Read_f((float *)(&WriteData->parameter_table), WP_FLASH_BASE, FLIGHT_PARAMETER_TABLE_NUM);

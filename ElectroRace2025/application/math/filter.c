@@ -1,7 +1,8 @@
 #include "stdint.h"
 #include "filter.h"
 #include "math.h"
-#include "wp_math.h"
+#include "fast_math.h"
+
 /***************************************************
 函数名: float LPButterworth(float curr_input,lpf_buf *buf,lpf_param *params)
 说明:	二阶巴特沃斯低通滤波器

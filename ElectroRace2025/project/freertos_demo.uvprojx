@@ -382,6 +382,31 @@
       </TargetOption>
       <Groups>
         <Group>
+          <GroupName>include</GroupName>
+          <Files>
+            <File>
+              <FileName>common_types.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\application\include\common_types.h</FilePath>
+            </File>
+            <File>
+              <FileName>global_config.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\application\include\global_config.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>user</GroupName>
+          <Files>
+            <File>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\user\main.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>project</GroupName>
           <Files>
             <File>
@@ -402,6 +427,56 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>app</GroupName>
+          <Files>
+            <File>
+              <FileName>gray_detection.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\app\gray_detection.c</FilePath>
+            </File>
+            <File>
+              <FileName>motor_controller.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\app\motor_controller.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>app/communication</GroupName>
+          <Files>
+            <File>
+              <FileName>embedfire_protocol_receive.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\app\communication\embedfire_protocol_receive.c</FilePath>
+            </File>
+            <File>
+              <FileName>embedfire_protocol_send.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\app\communication\embedfire_protocol_send.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>app/fusion</GroupName>
+          <Files>
+            <File>
+              <FileName>FusionAhrs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\app\fusion\FusionAhrs.c</FilePath>
+            </File>
+            <File>
+              <FileName>FusionCompass.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\app\fusion\FusionCompass.c</FilePath>
+            </File>
+            <File>
+              <FileName>FusionOffset.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\app\fusion\FusionOffset.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>utils</GroupName>
           <Files>
             <File>
@@ -413,16 +488,6 @@
               <FileName>log.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\application\utils\log.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>user</GroupName>
-          <Files>
-            <File>
-              <FileName>main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\user\main.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -467,41 +532,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>app</GroupName>
-          <Files>
-            <File>
-              <FileName>gray_detection.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\app\gray_detection.c</FilePath>
-            </File>
-            <File>
-              <FileName>motor_controller.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\app\motor_controller.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>app/fusion</GroupName>
-          <Files>
-            <File>
-              <FileName>FusionAhrs.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\app\fusion\FusionAhrs.c</FilePath>
-            </File>
-            <File>
-              <FileName>FusionCompass.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\app\fusion\FusionCompass.c</FilePath>
-            </File>
-            <File>
-              <FileName>FusionOffset.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\app\fusion\FusionOffset.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>hardware/bsp</GroupName>
           <Files>
             <File>
@@ -515,14 +545,14 @@
               <FilePath>..\application\hardware\bsp\software_i2c.c</FilePath>
             </File>
             <File>
+              <FileName>uart_driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\hardware\bsp\uart_driver.c</FilePath>
+            </File>
+            <File>
               <FileName>spi.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\application\hardware\bsp\spi.c</FilePath>
-            </File>
-            <File>
-              <FileName>uart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\hardware\bsp\uart.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -540,9 +570,9 @@
               <FilePath>..\application\math\sensor.c</FilePath>
             </File>
             <File>
-              <FileName>wp_math.c</FileName>
+              <FileName>fast_math.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\math\wp_math.c</FilePath>
+              <FilePath>..\application\math\fast_math.c</FilePath>
             </File>
           </Files>
         </Group>

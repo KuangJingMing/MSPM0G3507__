@@ -4,6 +4,15 @@ Component: Arm Compiler for Embedded 6.23 Tool: armlink [5f102400]
 
 Section Cross References
 
+    main.o(.text.main) refers to ti_msp_dl_config.o(.text.SYSCFG_DL_init) for SYSCFG_DL_init
+    main.o(.text.main) refers to gray_detection.o(.text.Gray_Detection_Init) for Gray_Detection_Init
+    main.o(.text.main) refers to oled.o(.text.OLED_Init) for OLED_Init
+    main.o(.text.main) refers to motor.o(.text.Motor_Init) for Motor_Init
+    main.o(.text.main) refers to encoder.o(.text.Encoder_init) for Encoder_init
+    main.o(.text.main) refers to tasks.o(.text.xTaskCreate) for xTaskCreate
+    main.o(.text.main) refers to tasks.o(.text.vTaskStartScheduler) for vTaskStartScheduler
+    main.o(.text.main) refers to motor_controller.o(.text.DisplayTask) for DisplayTask
+    main.o(.ARM.exidx.text.main) refers to main.o(.text.main) for [Anonymous Symbol]
     ti_msp_dl_config.o(.text.SYSCFG_DL_init) refers to ti_msp_dl_config.o(.text.SYSCFG_DL_initPower) for SYSCFG_DL_initPower
     ti_msp_dl_config.o(.text.SYSCFG_DL_init) refers to ti_msp_dl_config.o(.text.SYSCFG_DL_GPIO_init) for SYSCFG_DL_GPIO_init
     ti_msp_dl_config.o(.text.SYSCFG_DL_init) refers to ti_msp_dl_config.o(.text.SYSCFG_DL_SYSCTL_init) for SYSCFG_DL_SYSCTL_init
@@ -80,6 +89,150 @@ Section Cross References
     startup_mspm0g350x_uvision.o(.text) refers to __main.o(!!!main) for __main
     startup_mspm0g350x_uvision.o(.text) refers to startup_mspm0g350x_uvision.o(HEAP) for Heap_Mem
     startup_mspm0g350x_uvision.o(.text) refers to startup_mspm0g350x_uvision.o(STACK) for Stack_Mem
+    gray_detection.o(.text.Gray_Detection_Init) refers to software_i2c.o(.text.SoftwareI2C_Init) for SoftwareI2C_Init
+    gray_detection.o(.text.Gray_Detection_Init) refers to gray_detection.o(.data.pca9555_i2c) for pca9555_i2c
+    gray_detection.o(.ARM.exidx.text.Gray_Detection_Init) refers to gray_detection.o(.text.Gray_Detection_Init) for [Anonymous Symbol]
+    gray_detection.o(.text.Gray_ReadData) refers to pca9555.o(.text.pca9555_read_bit12) for pca9555_read_bit12
+    gray_detection.o(.text.Gray_ReadData) refers to log.o(.text.LOG_I) for LOG_I
+    gray_detection.o(.text.Gray_ReadData) refers to gray_detection.o(.data.pca9555_i2c) for pca9555_i2c
+    gray_detection.o(.text.Gray_ReadData) refers to gray_detection.o(.bss.gray_datas) for gray_datas
+    gray_detection.o(.ARM.exidx.text.Gray_ReadData) refers to gray_detection.o(.text.Gray_ReadData) for [Anonymous Symbol]
+    motor_controller.o(.text.QuaternionToEulerAngles) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    motor_controller.o(.text.QuaternionToEulerAngles) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    motor_controller.o(.text.QuaternionToEulerAngles) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
+    motor_controller.o(.text.QuaternionToEulerAngles) refers to atan2f.o(i.atan2f) for atan2f
+    motor_controller.o(.text.QuaternionToEulerAngles) refers to fcmp.o(i._fls) for __aeabi_fcmplt
+    motor_controller.o(.text.QuaternionToEulerAngles) refers to asinf.o(i.asinf) for asinf
+    motor_controller.o(.text.QuaternionToEulerAngles) refers to f2d.o(.text) for __aeabi_f2d
+    motor_controller.o(.text.QuaternionToEulerAngles) refers to dmul.o(.text) for __aeabi_dmul
+    motor_controller.o(.text.QuaternionToEulerAngles) refers to d2f.o(.text) for __aeabi_d2f
+    motor_controller.o(.ARM.exidx.text.QuaternionToEulerAngles) refers to motor_controller.o(.text.QuaternionToEulerAngles) for [Anonymous Symbol]
+    motor_controller.o(.text.DisplayTask) refers to icm20608.o(.text.ICM206xx_Init) for ICM206xx_Init
+    motor_controller.o(.text.DisplayTask) refers to log.o(.text.LOG_E) for LOG_E
+    motor_controller.o(.text.DisplayTask) refers to tasks.o(.text.vTaskDelete) for vTaskDelete
+    motor_controller.o(.text.DisplayTask) refers to icm20608.o(.text.imu_calibration_params_init) for imu_calibration_params_init
+    motor_controller.o(.text.DisplayTask) refers to fusionahrs.o(.text.FusionAhrsInitialise) for FusionAhrsInitialise
+    motor_controller.o(.text.DisplayTask) refers to icm20608.o(.text.ICM206xx_Read_Data) for ICM206xx_Read_Data
+    motor_controller.o(.text.DisplayTask) refers to icm20608.o(.text.imu_calibration) for imu_calibration
+    motor_controller.o(.text.DisplayTask) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
+    motor_controller.o(.text.DisplayTask) refers to fusionahrs.o(.text.FusionAhrsUpdateNoMagnetometer) for FusionAhrsUpdateNoMagnetometer
+    motor_controller.o(.text.DisplayTask) refers to fusionahrs.o(.text.FusionAhrsGetQuaternion) for FusionAhrsGetQuaternion
+    motor_controller.o(.text.DisplayTask) refers to motor_controller.o(.text.QuaternionToEulerAngles) for QuaternionToEulerAngles
+    motor_controller.o(.text.DisplayTask) refers to f2d.o(.text) for __aeabi_f2d
+    motor_controller.o(.text.DisplayTask) refers to log.o(.text.LOG_I) for LOG_I
+    motor_controller.o(.text.DisplayTask) refers to delay.o(.text.delay_ms) for delay_ms
+    motor_controller.o(.text.DisplayTask) refers to motor_controller.o(.bss.ahrs) for [Anonymous Symbol]
+    motor_controller.o(.text.DisplayTask) refers to motor_controller.o(.bss.gyro) for [Anonymous Symbol]
+    motor_controller.o(.text.DisplayTask) refers to motor_controller.o(.bss.accel) for [Anonymous Symbol]
+    motor_controller.o(.text.DisplayTask) refers to motor_controller.o(.bss.temperature) for [Anonymous Symbol]
+    motor_controller.o(.text.DisplayTask) refers to sensor.o(.bss.smartcar_imu) for smartcar_imu
+    motor_controller.o(.ARM.exidx.text.DisplayTask) refers to motor_controller.o(.text.DisplayTask) for [Anonymous Symbol]
+    embedfire_protocol_receive.o(.text.protocol_register_rx_callbacks) refers to embedfire_protocol_receive.o(.bss.rx_callbacks) for [Anonymous Symbol]
+    embedfire_protocol_receive.o(.ARM.exidx.text.protocol_register_rx_callbacks) refers to embedfire_protocol_receive.o(.text.protocol_register_rx_callbacks) for [Anonymous Symbol]
+    embedfire_protocol_receive.o(.text.process_received_packet) refers to embedfire_protocol_receive.o(.bss.rx_callbacks) for [Anonymous Symbol]
+    embedfire_protocol_receive.o(.ARM.exidx.text.process_received_packet) refers to embedfire_protocol_receive.o(.text.process_received_packet) for [Anonymous Symbol]
+    embedfire_protocol_receive.o(.text.protocol_receive_byte) refers to embedfire_protocol_send.o(.text.protocol_calculate_checksum) for protocol_calculate_checksum
+    embedfire_protocol_receive.o(.text.protocol_receive_byte) refers to embedfire_protocol_receive.o(.text.process_received_packet) for process_received_packet
+    embedfire_protocol_receive.o(.text.protocol_receive_byte) refers to embedfire_protocol_receive.o(.bss.rx_buffer_index) for [Anonymous Symbol]
+    embedfire_protocol_receive.o(.text.protocol_receive_byte) refers to embedfire_protocol_receive.o(.bss.rx_state) for [Anonymous Symbol]
+    embedfire_protocol_receive.o(.text.protocol_receive_byte) refers to embedfire_protocol_receive.o(.bss.rx_buffer) for [Anonymous Symbol]
+    embedfire_protocol_receive.o(.text.protocol_receive_byte) refers to embedfire_protocol_receive.o(.bss.expected_packet_length) for [Anonymous Symbol]
+    embedfire_protocol_receive.o(.ARM.exidx.text.protocol_receive_byte) refers to embedfire_protocol_receive.o(.text.protocol_receive_byte) for [Anonymous Symbol]
+    embedfire_protocol_send.o(.ARM.exidx.text.protocol_calculate_checksum) refers to embedfire_protocol_send.o(.text.protocol_calculate_checksum) for [Anonymous Symbol]
+    embedfire_protocol_send.o(.text.protocol_send_packet) refers to uart_driver.o(.text.usart_send_bytes) for usart_send_bytes
+    embedfire_protocol_send.o(.text.protocol_send_packet) refers to uart_driver.o(.text.uart_send_byte) for uart_send_byte
+    embedfire_protocol_send.o(.ARM.exidx.text.protocol_send_packet) refers to embedfire_protocol_send.o(.text.protocol_send_packet) for [Anonymous Symbol]
+    embedfire_protocol_send.o(.text.protocol_send_set_target_value) refers to uart_driver.o(.text.usart_send_bytes) for usart_send_bytes
+    embedfire_protocol_send.o(.text.protocol_send_set_target_value) refers to uart_driver.o(.text.uart_send_byte) for uart_send_byte
+    embedfire_protocol_send.o(.ARM.exidx.text.protocol_send_set_target_value) refers to embedfire_protocol_send.o(.text.protocol_send_set_target_value) for [Anonymous Symbol]
+    embedfire_protocol_send.o(.text.protocol_send_set_actual_value) refers to uart_driver.o(.text.usart_send_bytes) for usart_send_bytes
+    embedfire_protocol_send.o(.text.protocol_send_set_actual_value) refers to uart_driver.o(.text.uart_send_byte) for uart_send_byte
+    embedfire_protocol_send.o(.ARM.exidx.text.protocol_send_set_actual_value) refers to embedfire_protocol_send.o(.text.protocol_send_set_actual_value) for [Anonymous Symbol]
+    embedfire_protocol_send.o(.text.protocol_send_set_pid_params) refers to uart_driver.o(.text.usart_send_bytes) for usart_send_bytes
+    embedfire_protocol_send.o(.text.protocol_send_set_pid_params) refers to uart_driver.o(.text.uart_send_byte) for uart_send_byte
+    embedfire_protocol_send.o(.ARM.exidx.text.protocol_send_set_pid_params) refers to embedfire_protocol_send.o(.text.protocol_send_set_pid_params) for [Anonymous Symbol]
+    embedfire_protocol_send.o(.text.protocol_send_sync_start) refers to uart_driver.o(.text.usart_send_bytes) for usart_send_bytes
+    embedfire_protocol_send.o(.text.protocol_send_sync_start) refers to uart_driver.o(.text.uart_send_byte) for uart_send_byte
+    embedfire_protocol_send.o(.ARM.exidx.text.protocol_send_sync_start) refers to embedfire_protocol_send.o(.text.protocol_send_sync_start) for [Anonymous Symbol]
+    embedfire_protocol_send.o(.text.protocol_send_sync_stop) refers to uart_driver.o(.text.usart_send_bytes) for usart_send_bytes
+    embedfire_protocol_send.o(.text.protocol_send_sync_stop) refers to uart_driver.o(.text.uart_send_byte) for uart_send_byte
+    embedfire_protocol_send.o(.ARM.exidx.text.protocol_send_sync_stop) refers to embedfire_protocol_send.o(.text.protocol_send_sync_stop) for [Anonymous Symbol]
+    embedfire_protocol_send.o(.text.protocol_send_set_period) refers to uart_driver.o(.text.usart_send_bytes) for usart_send_bytes
+    embedfire_protocol_send.o(.text.protocol_send_set_period) refers to uart_driver.o(.text.uart_send_byte) for uart_send_byte
+    embedfire_protocol_send.o(.ARM.exidx.text.protocol_send_set_period) refers to embedfire_protocol_send.o(.text.protocol_send_set_period) for [Anonymous Symbol]
+    fusionahrs.o(.text.FusionAhrsInitialise) refers to fusionahrs.o(.text.FusionAhrsSetSettings) for FusionAhrsSetSettings
+    fusionahrs.o(.ARM.exidx.text.FusionAhrsInitialise) refers to fusionahrs.o(.text.FusionAhrsInitialise) for [Anonymous Symbol]
+    fusionahrs.o(.text.FusionAhrsSetSettings) refers to fcmp.o(i._feq) for __aeabi_fcmpeq
+    fusionahrs.o(.text.FusionAhrsSetSettings) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    fusionahrs.o(.text.FusionAhrsSetSettings) refers to sinf.o(i.sinf) for sinf
+    fusionahrs.o(.text.FusionAhrsSetSettings) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
+    fusionahrs.o(.text.FusionAhrsSetSettings) refers to fdiv.o(.text) for __aeabi_fdiv
+    fusionahrs.o(.ARM.exidx.text.FusionAhrsSetSettings) refers to fusionahrs.o(.text.FusionAhrsSetSettings) for [Anonymous Symbol]
+    fusionahrs.o(.ARM.exidx.text.FusionAhrsReset) refers to fusionahrs.o(.text.FusionAhrsReset) for [Anonymous Symbol]
+    fusionahrs.o(.text.FusionAhrsUpdate) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    fusionahrs.o(.text.FusionAhrsUpdate) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
+    fusionahrs.o(.text.FusionAhrsUpdate) refers to fcmp.o(i._fgeq) for __aeabi_fcmpge
+    fusionahrs.o(.text.FusionAhrsUpdate) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    fusionahrs.o(.text.FusionAhrsUpdate) refers to fcmp.o(i._fgr) for __aeabi_fcmpgt
+    fusionahrs.o(.text.FusionAhrsUpdate) refers to fusioncompass.o(.text.FusionCompassCalculateHeading) for FusionCompassCalculateHeading
+    fusionahrs.o(.text.FusionAhrsUpdate) refers to fusionahrs.o(.text.FusionAhrsSetHeading) for FusionAhrsSetHeading
+    fusionahrs.o(.ARM.exidx.text.FusionAhrsUpdate) refers to fusionahrs.o(.text.FusionAhrsUpdate) for [Anonymous Symbol]
+    fusionahrs.o(.text.FusionAhrsSetHeading) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    fusionahrs.o(.text.FusionAhrsSetHeading) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    fusionahrs.o(.text.FusionAhrsSetHeading) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
+    fusionahrs.o(.text.FusionAhrsSetHeading) refers to atan2f.o(i.atan2f) for atan2f
+    fusionahrs.o(.text.FusionAhrsSetHeading) refers to cosf.o(i.cosf) for cosf
+    fusionahrs.o(.text.FusionAhrsSetHeading) refers to sinf.o(i.sinf) for sinf
+    fusionahrs.o(.ARM.exidx.text.FusionAhrsSetHeading) refers to fusionahrs.o(.text.FusionAhrsSetHeading) for [Anonymous Symbol]
+    fusionahrs.o(.text.FusionAhrsUpdateNoMagnetometer) refers to fusionahrs.o(.text.FusionAhrsUpdate) for FusionAhrsUpdate
+    fusionahrs.o(.text.FusionAhrsUpdateNoMagnetometer) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    fusionahrs.o(.text.FusionAhrsUpdateNoMagnetometer) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    fusionahrs.o(.text.FusionAhrsUpdateNoMagnetometer) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
+    fusionahrs.o(.text.FusionAhrsUpdateNoMagnetometer) refers to atan2f.o(i.atan2f) for atan2f
+    fusionahrs.o(.text.FusionAhrsUpdateNoMagnetometer) refers to cosf.o(i.cosf) for cosf
+    fusionahrs.o(.text.FusionAhrsUpdateNoMagnetometer) refers to sinf.o(i.sinf) for sinf
+    fusionahrs.o(.ARM.exidx.text.FusionAhrsUpdateNoMagnetometer) refers to fusionahrs.o(.text.FusionAhrsUpdateNoMagnetometer) for [Anonymous Symbol]
+    fusionahrs.o(.text.FusionAhrsUpdateExternalHeading) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    fusionahrs.o(.text.FusionAhrsUpdateExternalHeading) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    fusionahrs.o(.text.FusionAhrsUpdateExternalHeading) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
+    fusionahrs.o(.text.FusionAhrsUpdateExternalHeading) refers to atan2f.o(i.atan2f) for atan2f
+    fusionahrs.o(.text.FusionAhrsUpdateExternalHeading) refers to sinf.o(i.sinf) for sinf
+    fusionahrs.o(.text.FusionAhrsUpdateExternalHeading) refers to cosf.o(i.cosf) for cosf
+    fusionahrs.o(.text.FusionAhrsUpdateExternalHeading) refers to fusionahrs.o(.text.FusionAhrsUpdate) for FusionAhrsUpdate
+    fusionahrs.o(.ARM.exidx.text.FusionAhrsUpdateExternalHeading) refers to fusionahrs.o(.text.FusionAhrsUpdateExternalHeading) for [Anonymous Symbol]
+    fusionahrs.o(.ARM.exidx.text.FusionAhrsGetQuaternion) refers to fusionahrs.o(.text.FusionAhrsGetQuaternion) for [Anonymous Symbol]
+    fusionahrs.o(.text.FusionAhrsGetLinearAcceleration) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    fusionahrs.o(.text.FusionAhrsGetLinearAcceleration) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    fusionahrs.o(.text.FusionAhrsGetLinearAcceleration) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
+    fusionahrs.o(.ARM.exidx.text.FusionAhrsGetLinearAcceleration) refers to fusionahrs.o(.text.FusionAhrsGetLinearAcceleration) for [Anonymous Symbol]
+    fusionahrs.o(.text.FusionAhrsGetEarthAcceleration) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    fusionahrs.o(.text.FusionAhrsGetEarthAcceleration) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
+    fusionahrs.o(.text.FusionAhrsGetEarthAcceleration) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    fusionahrs.o(.ARM.exidx.text.FusionAhrsGetEarthAcceleration) refers to fusionahrs.o(.text.FusionAhrsGetEarthAcceleration) for [Anonymous Symbol]
+    fusionahrs.o(.text.FusionAhrsGetInternalStates) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    fusionahrs.o(.text.FusionAhrsGetInternalStates) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    fusionahrs.o(.text.FusionAhrsGetInternalStates) refers to sqrtf.o(i.sqrtf) for sqrtf
+    fusionahrs.o(.text.FusionAhrsGetInternalStates) refers to fcmp.o(i._fleq) for __aeabi_fcmple
+    fusionahrs.o(.text.FusionAhrsGetInternalStates) refers to fcmp.o(i._fgeq) for __aeabi_fcmpge
+    fusionahrs.o(.text.FusionAhrsGetInternalStates) refers to asinf.o(i.asinf) for asinf
+    fusionahrs.o(.text.FusionAhrsGetInternalStates) refers to fflti.o(.text) for __aeabi_ui2f
+    fusionahrs.o(.text.FusionAhrsGetInternalStates) refers to fdiv.o(.text) for __aeabi_fdiv
+    fusionahrs.o(.ARM.exidx.text.FusionAhrsGetInternalStates) refers to fusionahrs.o(.text.FusionAhrsGetInternalStates) for [Anonymous Symbol]
+    fusionahrs.o(.ARM.exidx.text.FusionAhrsGetFlags) refers to fusionahrs.o(.text.FusionAhrsGetFlags) for [Anonymous Symbol]
+    fusioncompass.o(.text.FusionCompassCalculateHeading) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    fusioncompass.o(.text.FusionCompassCalculateHeading) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
+    fusioncompass.o(.text.FusionCompassCalculateHeading) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    fusioncompass.o(.text.FusionCompassCalculateHeading) refers to atan2f.o(i.atan2f) for atan2f
+    fusioncompass.o(.ARM.exidx.text.FusionCompassCalculateHeading) refers to fusioncompass.o(.text.FusionCompassCalculateHeading) for [Anonymous Symbol]
+    fusionoffset.o(.text.FusionOffsetInitialise) refers to fflti.o(.text) for __aeabi_ui2f
+    fusionoffset.o(.text.FusionOffsetInitialise) refers to fdiv.o(.text) for __aeabi_fdiv
+    fusionoffset.o(.text.FusionOffsetInitialise) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    fusionoffset.o(.ARM.exidx.text.FusionOffsetInitialise) refers to fusionoffset.o(.text.FusionOffsetInitialise) for [Anonymous Symbol]
+    fusionoffset.o(.text.FusionOffsetUpdate) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
+    fusionoffset.o(.text.FusionOffsetUpdate) refers to fcmp.o(i._fgr) for __aeabi_fcmpgt
+    fusionoffset.o(.text.FusionOffsetUpdate) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    fusionoffset.o(.text.FusionOffsetUpdate) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    fusionoffset.o(.ARM.exidx.text.FusionOffsetUpdate) refers to fusionoffset.o(.text.FusionOffsetUpdate) for [Anonymous Symbol]
     delay.o(.text.delay_us) refers to dl_common.o(.text.DL_Common_delayCycles) for DL_Common_delayCycles
     delay.o(.ARM.exidx.text.delay_us) refers to delay.o(.text.delay_us) for [Anonymous Symbol]
     delay.o(.text.delay_ms) refers to dl_common.o(.text.DL_Common_delayCycles) for DL_Common_delayCycles
@@ -93,29 +246,20 @@ Section Cross References
     delay.o(.text.delay_s) refers to tasks.o(.text.vTaskDelay) for vTaskDelay
     delay.o(.ARM.exidx.text.delay_s) refers to delay.o(.text.delay_s) for [Anonymous Symbol]
     log.o(.text.LOG_I) refers to vsnprintf.o(.text) for vsnprintf
-    log.o(.text.LOG_I) refers to uart.o(.text.usart_printf) for usart_printf
+    log.o(.text.LOG_I) refers to uart_driver.o(.text.usart_printf) for usart_printf
     log.o(.text.LOG_I) refers to log.o(.rodata.str1.1) for [Anonymous Symbol]
     log.o(.ARM.exidx.text.LOG_I) refers to log.o(.text.LOG_I) for [Anonymous Symbol]
     log.o(.text.LOG_W) refers to vsnprintf.o(.text) for vsnprintf
-    log.o(.text.LOG_W) refers to uart.o(.text.usart_printf) for usart_printf
+    log.o(.text.LOG_W) refers to uart_driver.o(.text.usart_printf) for usart_printf
     log.o(.text.LOG_W) refers to log.o(.rodata.str1.1) for [Anonymous Symbol]
     log.o(.ARM.exidx.text.LOG_W) refers to log.o(.text.LOG_W) for [Anonymous Symbol]
     log.o(.text.LOG_E) refers to vsnprintf.o(.text) for vsnprintf
-    log.o(.text.LOG_E) refers to uart.o(.text.usart_printf) for usart_printf
+    log.o(.text.LOG_E) refers to uart_driver.o(.text.usart_printf) for usart_printf
     log.o(.text.LOG_E) refers to log.o(.rodata.str1.1) for [Anonymous Symbol]
     log.o(.ARM.exidx.text.LOG_E) refers to log.o(.text.LOG_E) for [Anonymous Symbol]
-    log.o(.text.LOG_HEX) refers to uart.o(.text.usart_printf) for usart_printf
+    log.o(.text.LOG_HEX) refers to uart_driver.o(.text.usart_printf) for usart_printf
     log.o(.text.LOG_HEX) refers to log.o(.rodata.str1.1) for [Anonymous Symbol]
     log.o(.ARM.exidx.text.LOG_HEX) refers to log.o(.text.LOG_HEX) for [Anonymous Symbol]
-    main.o(.text.main) refers to ti_msp_dl_config.o(.text.SYSCFG_DL_init) for SYSCFG_DL_init
-    main.o(.text.main) refers to gray_detection.o(.text.Gray_Detection_Init) for Gray_Detection_Init
-    main.o(.text.main) refers to oled.o(.text.OLED_Init) for OLED_Init
-    main.o(.text.main) refers to motor.o(.text.Motor_Init) for Motor_Init
-    main.o(.text.main) refers to encoder.o(.text.Encoder_init) for Encoder_init
-    main.o(.text.main) refers to tasks.o(.text.xTaskCreate) for xTaskCreate
-    main.o(.text.main) refers to tasks.o(.text.vTaskStartScheduler) for vTaskStartScheduler
-    main.o(.text.main) refers to motor_controller.o(.text.DisplayTask) for DisplayTask
-    main.o(.ARM.exidx.text.main) refers to main.o(.text.main) for [Anonymous Symbol]
     eeprom.o(.text.ReadFlashParameterALL) refers to w25qxx.o(.text.W25QXX_Read_f) for W25QXX_Read_f
     eeprom.o(.ARM.exidx.text.ReadFlashParameterALL) refers to eeprom.o(.text.ReadFlashParameterALL) for [Anonymous Symbol]
     eeprom.o(.text.ReadFlashParameterOne) refers to w25qxx.o(.text.W25QXX_Read_f) for W25QXX_Read_f
@@ -201,7 +345,7 @@ Section Cross References
     icm20608.o(.text.imu_calibration) refers to fflti.o(.text) for __aeabi_ui2f
     icm20608.o(.text.imu_calibration) refers to fdiv.o(.text) for __aeabi_fdiv
     icm20608.o(.text.imu_calibration) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    icm20608.o(.text.imu_calibration) refers to wp_math.o(.text.safe_sqrt) for safe_sqrt
+    icm20608.o(.text.imu_calibration) refers to fast_math.o(.text.safe_sqrt) for safe_sqrt
     icm20608.o(.text.imu_calibration) refers to eeprom.o(.text.WriteFlashParameter_Three) for WriteFlashParameter_Three
     icm20608.o(.text.imu_calibration) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
     icm20608.o(.text.imu_calibration) refers to sensor.o(.bss.smartcar_imu) for smartcar_imu
@@ -343,117 +487,6 @@ Section Cross References
     w25qxx.o(.text.Resume_Factory_Setting) refers to w25qxx.o(.text.W25QXX_Erase_Chip) for W25QXX_Erase_Chip
     w25qxx.o(.text.Resume_Factory_Setting) refers to w25qxx.o(.text.W25Q64_erase_sector) for W25Q64_erase_sector
     w25qxx.o(.ARM.exidx.text.Resume_Factory_Setting) refers to w25qxx.o(.text.Resume_Factory_Setting) for [Anonymous Symbol]
-    gray_detection.o(.text.Gray_Detection_Init) refers to software_i2c.o(.text.SoftwareI2C_Init) for SoftwareI2C_Init
-    gray_detection.o(.text.Gray_Detection_Init) refers to gray_detection.o(.data.pca9555_i2c) for pca9555_i2c
-    gray_detection.o(.ARM.exidx.text.Gray_Detection_Init) refers to gray_detection.o(.text.Gray_Detection_Init) for [Anonymous Symbol]
-    gray_detection.o(.text.Gray_ReadData) refers to pca9555.o(.text.pca9555_read_bit12) for pca9555_read_bit12
-    gray_detection.o(.text.Gray_ReadData) refers to log.o(.text.LOG_I) for LOG_I
-    gray_detection.o(.text.Gray_ReadData) refers to gray_detection.o(.data.pca9555_i2c) for pca9555_i2c
-    gray_detection.o(.text.Gray_ReadData) refers to gray_detection.o(.bss.gray_datas) for gray_datas
-    gray_detection.o(.ARM.exidx.text.Gray_ReadData) refers to gray_detection.o(.text.Gray_ReadData) for [Anonymous Symbol]
-    motor_controller.o(.text.QuaternionToEulerAngles) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    motor_controller.o(.text.QuaternionToEulerAngles) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    motor_controller.o(.text.QuaternionToEulerAngles) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
-    motor_controller.o(.text.QuaternionToEulerAngles) refers to atan2f.o(i.atan2f) for atan2f
-    motor_controller.o(.text.QuaternionToEulerAngles) refers to fcmp.o(i._fls) for __aeabi_fcmplt
-    motor_controller.o(.text.QuaternionToEulerAngles) refers to asinf.o(i.asinf) for asinf
-    motor_controller.o(.text.QuaternionToEulerAngles) refers to f2d.o(.text) for __aeabi_f2d
-    motor_controller.o(.text.QuaternionToEulerAngles) refers to dmul.o(.text) for __aeabi_dmul
-    motor_controller.o(.text.QuaternionToEulerAngles) refers to d2f.o(.text) for __aeabi_d2f
-    motor_controller.o(.ARM.exidx.text.QuaternionToEulerAngles) refers to motor_controller.o(.text.QuaternionToEulerAngles) for [Anonymous Symbol]
-    motor_controller.o(.text.DisplayTask) refers to icm20608.o(.text.ICM206xx_Init) for ICM206xx_Init
-    motor_controller.o(.text.DisplayTask) refers to log.o(.text.LOG_E) for LOG_E
-    motor_controller.o(.text.DisplayTask) refers to tasks.o(.text.vTaskDelete) for vTaskDelete
-    motor_controller.o(.text.DisplayTask) refers to icm20608.o(.text.imu_calibration_params_init) for imu_calibration_params_init
-    motor_controller.o(.text.DisplayTask) refers to fusionahrs.o(.text.FusionAhrsInitialise) for FusionAhrsInitialise
-    motor_controller.o(.text.DisplayTask) refers to icm20608.o(.text.ICM206xx_Read_Data) for ICM206xx_Read_Data
-    motor_controller.o(.text.DisplayTask) refers to icm20608.o(.text.imu_calibration) for imu_calibration
-    motor_controller.o(.text.DisplayTask) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
-    motor_controller.o(.text.DisplayTask) refers to fusionahrs.o(.text.FusionAhrsUpdateNoMagnetometer) for FusionAhrsUpdateNoMagnetometer
-    motor_controller.o(.text.DisplayTask) refers to fusionahrs.o(.text.FusionAhrsGetQuaternion) for FusionAhrsGetQuaternion
-    motor_controller.o(.text.DisplayTask) refers to motor_controller.o(.text.QuaternionToEulerAngles) for QuaternionToEulerAngles
-    motor_controller.o(.text.DisplayTask) refers to f2d.o(.text) for __aeabi_f2d
-    motor_controller.o(.text.DisplayTask) refers to log.o(.text.LOG_I) for LOG_I
-    motor_controller.o(.text.DisplayTask) refers to delay.o(.text.delay_ms) for delay_ms
-    motor_controller.o(.text.DisplayTask) refers to motor_controller.o(.bss.ahrs) for [Anonymous Symbol]
-    motor_controller.o(.text.DisplayTask) refers to motor_controller.o(.bss.gyro) for [Anonymous Symbol]
-    motor_controller.o(.text.DisplayTask) refers to motor_controller.o(.bss.accel) for [Anonymous Symbol]
-    motor_controller.o(.text.DisplayTask) refers to motor_controller.o(.bss.temperature) for [Anonymous Symbol]
-    motor_controller.o(.text.DisplayTask) refers to sensor.o(.bss.smartcar_imu) for smartcar_imu
-    motor_controller.o(.ARM.exidx.text.DisplayTask) refers to motor_controller.o(.text.DisplayTask) for [Anonymous Symbol]
-    fusionahrs.o(.text.FusionAhrsInitialise) refers to fusionahrs.o(.text.FusionAhrsSetSettings) for FusionAhrsSetSettings
-    fusionahrs.o(.ARM.exidx.text.FusionAhrsInitialise) refers to fusionahrs.o(.text.FusionAhrsInitialise) for [Anonymous Symbol]
-    fusionahrs.o(.text.FusionAhrsSetSettings) refers to fcmp.o(i._feq) for __aeabi_fcmpeq
-    fusionahrs.o(.text.FusionAhrsSetSettings) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    fusionahrs.o(.text.FusionAhrsSetSettings) refers to sinf.o(i.sinf) for sinf
-    fusionahrs.o(.text.FusionAhrsSetSettings) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
-    fusionahrs.o(.text.FusionAhrsSetSettings) refers to fdiv.o(.text) for __aeabi_fdiv
-    fusionahrs.o(.ARM.exidx.text.FusionAhrsSetSettings) refers to fusionahrs.o(.text.FusionAhrsSetSettings) for [Anonymous Symbol]
-    fusionahrs.o(.ARM.exidx.text.FusionAhrsReset) refers to fusionahrs.o(.text.FusionAhrsReset) for [Anonymous Symbol]
-    fusionahrs.o(.text.FusionAhrsUpdate) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    fusionahrs.o(.text.FusionAhrsUpdate) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
-    fusionahrs.o(.text.FusionAhrsUpdate) refers to fcmp.o(i._fgeq) for __aeabi_fcmpge
-    fusionahrs.o(.text.FusionAhrsUpdate) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    fusionahrs.o(.text.FusionAhrsUpdate) refers to fcmp.o(i._fgr) for __aeabi_fcmpgt
-    fusionahrs.o(.text.FusionAhrsUpdate) refers to fusioncompass.o(.text.FusionCompassCalculateHeading) for FusionCompassCalculateHeading
-    fusionahrs.o(.text.FusionAhrsUpdate) refers to fusionahrs.o(.text.FusionAhrsSetHeading) for FusionAhrsSetHeading
-    fusionahrs.o(.ARM.exidx.text.FusionAhrsUpdate) refers to fusionahrs.o(.text.FusionAhrsUpdate) for [Anonymous Symbol]
-    fusionahrs.o(.text.FusionAhrsSetHeading) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    fusionahrs.o(.text.FusionAhrsSetHeading) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    fusionahrs.o(.text.FusionAhrsSetHeading) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
-    fusionahrs.o(.text.FusionAhrsSetHeading) refers to atan2f.o(i.atan2f) for atan2f
-    fusionahrs.o(.text.FusionAhrsSetHeading) refers to cosf.o(i.cosf) for cosf
-    fusionahrs.o(.text.FusionAhrsSetHeading) refers to sinf.o(i.sinf) for sinf
-    fusionahrs.o(.ARM.exidx.text.FusionAhrsSetHeading) refers to fusionahrs.o(.text.FusionAhrsSetHeading) for [Anonymous Symbol]
-    fusionahrs.o(.text.FusionAhrsUpdateNoMagnetometer) refers to fusionahrs.o(.text.FusionAhrsUpdate) for FusionAhrsUpdate
-    fusionahrs.o(.text.FusionAhrsUpdateNoMagnetometer) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    fusionahrs.o(.text.FusionAhrsUpdateNoMagnetometer) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    fusionahrs.o(.text.FusionAhrsUpdateNoMagnetometer) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
-    fusionahrs.o(.text.FusionAhrsUpdateNoMagnetometer) refers to atan2f.o(i.atan2f) for atan2f
-    fusionahrs.o(.text.FusionAhrsUpdateNoMagnetometer) refers to cosf.o(i.cosf) for cosf
-    fusionahrs.o(.text.FusionAhrsUpdateNoMagnetometer) refers to sinf.o(i.sinf) for sinf
-    fusionahrs.o(.ARM.exidx.text.FusionAhrsUpdateNoMagnetometer) refers to fusionahrs.o(.text.FusionAhrsUpdateNoMagnetometer) for [Anonymous Symbol]
-    fusionahrs.o(.text.FusionAhrsUpdateExternalHeading) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    fusionahrs.o(.text.FusionAhrsUpdateExternalHeading) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    fusionahrs.o(.text.FusionAhrsUpdateExternalHeading) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
-    fusionahrs.o(.text.FusionAhrsUpdateExternalHeading) refers to atan2f.o(i.atan2f) for atan2f
-    fusionahrs.o(.text.FusionAhrsUpdateExternalHeading) refers to sinf.o(i.sinf) for sinf
-    fusionahrs.o(.text.FusionAhrsUpdateExternalHeading) refers to cosf.o(i.cosf) for cosf
-    fusionahrs.o(.text.FusionAhrsUpdateExternalHeading) refers to fusionahrs.o(.text.FusionAhrsUpdate) for FusionAhrsUpdate
-    fusionahrs.o(.ARM.exidx.text.FusionAhrsUpdateExternalHeading) refers to fusionahrs.o(.text.FusionAhrsUpdateExternalHeading) for [Anonymous Symbol]
-    fusionahrs.o(.ARM.exidx.text.FusionAhrsGetQuaternion) refers to fusionahrs.o(.text.FusionAhrsGetQuaternion) for [Anonymous Symbol]
-    fusionahrs.o(.text.FusionAhrsGetLinearAcceleration) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    fusionahrs.o(.text.FusionAhrsGetLinearAcceleration) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    fusionahrs.o(.text.FusionAhrsGetLinearAcceleration) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
-    fusionahrs.o(.ARM.exidx.text.FusionAhrsGetLinearAcceleration) refers to fusionahrs.o(.text.FusionAhrsGetLinearAcceleration) for [Anonymous Symbol]
-    fusionahrs.o(.text.FusionAhrsGetEarthAcceleration) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    fusionahrs.o(.text.FusionAhrsGetEarthAcceleration) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
-    fusionahrs.o(.text.FusionAhrsGetEarthAcceleration) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    fusionahrs.o(.ARM.exidx.text.FusionAhrsGetEarthAcceleration) refers to fusionahrs.o(.text.FusionAhrsGetEarthAcceleration) for [Anonymous Symbol]
-    fusionahrs.o(.text.FusionAhrsGetInternalStates) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    fusionahrs.o(.text.FusionAhrsGetInternalStates) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    fusionahrs.o(.text.FusionAhrsGetInternalStates) refers to sqrtf.o(i.sqrtf) for sqrtf
-    fusionahrs.o(.text.FusionAhrsGetInternalStates) refers to fcmp.o(i._fleq) for __aeabi_fcmple
-    fusionahrs.o(.text.FusionAhrsGetInternalStates) refers to fcmp.o(i._fgeq) for __aeabi_fcmpge
-    fusionahrs.o(.text.FusionAhrsGetInternalStates) refers to asinf.o(i.asinf) for asinf
-    fusionahrs.o(.text.FusionAhrsGetInternalStates) refers to fflti.o(.text) for __aeabi_ui2f
-    fusionahrs.o(.text.FusionAhrsGetInternalStates) refers to fdiv.o(.text) for __aeabi_fdiv
-    fusionahrs.o(.ARM.exidx.text.FusionAhrsGetInternalStates) refers to fusionahrs.o(.text.FusionAhrsGetInternalStates) for [Anonymous Symbol]
-    fusionahrs.o(.ARM.exidx.text.FusionAhrsGetFlags) refers to fusionahrs.o(.text.FusionAhrsGetFlags) for [Anonymous Symbol]
-    fusioncompass.o(.text.FusionCompassCalculateHeading) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    fusioncompass.o(.text.FusionCompassCalculateHeading) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
-    fusioncompass.o(.text.FusionCompassCalculateHeading) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    fusioncompass.o(.text.FusionCompassCalculateHeading) refers to atan2f.o(i.atan2f) for atan2f
-    fusioncompass.o(.ARM.exidx.text.FusionCompassCalculateHeading) refers to fusioncompass.o(.text.FusionCompassCalculateHeading) for [Anonymous Symbol]
-    fusionoffset.o(.text.FusionOffsetInitialise) refers to fflti.o(.text) for __aeabi_ui2f
-    fusionoffset.o(.text.FusionOffsetInitialise) refers to fdiv.o(.text) for __aeabi_fdiv
-    fusionoffset.o(.text.FusionOffsetInitialise) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    fusionoffset.o(.ARM.exidx.text.FusionOffsetInitialise) refers to fusionoffset.o(.text.FusionOffsetInitialise) for [Anonymous Symbol]
-    fusionoffset.o(.text.FusionOffsetUpdate) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
-    fusionoffset.o(.text.FusionOffsetUpdate) refers to fcmp.o(i._fgr) for __aeabi_fcmpgt
-    fusionoffset.o(.text.FusionOffsetUpdate) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    fusionoffset.o(.text.FusionOffsetUpdate) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    fusionoffset.o(.ARM.exidx.text.FusionOffsetUpdate) refers to fusionoffset.o(.text.FusionOffsetUpdate) for [Anonymous Symbol]
     hardware_i2c.o(.text.I2C_WriteReg) refers to rt_memcpy.o(.text) for __aeabi_memcpy
     hardware_i2c.o(.text.I2C_WriteReg) refers to dl_i2c.o(.text.DL_I2C_fillControllerTXFIFO) for DL_I2C_fillControllerTXFIFO
     hardware_i2c.o(.text.I2C_WriteReg) refers to dl_i2c.o(.text.DL_I2C_flushControllerTXFIFO) for DL_I2C_flushControllerTXFIFO
@@ -506,15 +539,17 @@ Section Cross References
     software_i2c.o(.text.SoftWareI2C_Read_Len) refers to software_i2c.o(.text.SoftwareI2C_SendAck) for SoftwareI2C_SendAck
     software_i2c.o(.text.SoftWareI2C_Read_Len) refers to software_i2c.o(.text.SoftwareI2C_Stop) for SoftwareI2C_Stop
     software_i2c.o(.ARM.exidx.text.SoftWareI2C_Read_Len) refers to software_i2c.o(.text.SoftWareI2C_Read_Len) for [Anonymous Symbol]
+    uart_driver.o(.text.uart_send_byte) refers to dl_uart.o(.text.DL_UART_transmitDataBlocking) for DL_UART_transmitDataBlocking
+    uart_driver.o(.ARM.exidx.text.uart_send_byte) refers to uart_driver.o(.text.uart_send_byte) for [Anonymous Symbol]
+    uart_driver.o(.text.usart_send_bytes) refers to dl_uart.o(.text.DL_UART_transmitDataBlocking) for DL_UART_transmitDataBlocking
+    uart_driver.o(.ARM.exidx.text.usart_send_bytes) refers to uart_driver.o(.text.usart_send_bytes) for [Anonymous Symbol]
+    uart_driver.o(.text.usart_printf) refers to vsnprintf.o(.text) for vsnprintf
+    uart_driver.o(.text.usart_printf) refers to strlen.o(.text) for strlen
+    uart_driver.o(.text.usart_printf) refers to dl_uart.o(.text.DL_UART_transmitDataBlocking) for DL_UART_transmitDataBlocking
+    uart_driver.o(.ARM.exidx.text.usart_printf) refers to uart_driver.o(.text.usart_printf) for [Anonymous Symbol]
     spi.o(.ARM.exidx.text.SPI_WriteByte) refers to spi.o(.text.SPI_WriteByte) for [Anonymous Symbol]
     spi.o(.ARM.exidx.text.SPI_LCD_WrDat) refers to spi.o(.text.SPI_LCD_WrDat) for [Anonymous Symbol]
     spi.o(.ARM.exidx.text.SPI_LCD_WrCmd) refers to spi.o(.text.SPI_LCD_WrCmd) for [Anonymous Symbol]
-    uart.o(.text.usart_send_bytes) refers to dl_uart.o(.text.DL_UART_transmitDataBlocking) for DL_UART_transmitDataBlocking
-    uart.o(.ARM.exidx.text.usart_send_bytes) refers to uart.o(.text.usart_send_bytes) for [Anonymous Symbol]
-    uart.o(.text.usart_printf) refers to vsnprintf.o(.text) for vsnprintf
-    uart.o(.text.usart_printf) refers to strlen.o(.text) for strlen
-    uart.o(.text.usart_printf) refers to dl_uart.o(.text.DL_UART_transmitDataBlocking) for DL_UART_transmitDataBlocking
-    uart.o(.ARM.exidx.text.usart_printf) refers to uart.o(.text.usart_printf) for [Anonymous Symbol]
     filter.o(.text.LPButterworth) refers to fcmp.o(i._feq) for __aeabi_fcmpeq
     filter.o(.text.LPButterworth) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
     filter.o(.text.LPButterworth) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
@@ -543,7 +578,7 @@ Section Cross References
     sensor.o(.text.imu_data_sampling) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
     sensor.o(.text.imu_data_sampling) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
     sensor.o(.text.imu_data_sampling) refers to icm20608.o(.text.imu_calibration) for imu_calibration
-    sensor.o(.text.imu_data_sampling) refers to wp_math.o(.text.invSqrt) for invSqrt
+    sensor.o(.text.imu_data_sampling) refers to fast_math.o(.text.invSqrt) for invSqrt
     sensor.o(.text.imu_data_sampling) refers to f2d.o(.text) for __aeabi_f2d
     sensor.o(.text.imu_data_sampling) refers to atan.o(i.atan) for atan
     sensor.o(.text.imu_data_sampling) refers to dmul.o(.text) for __aeabi_dmul
@@ -558,49 +593,49 @@ Section Cross References
     sensor.o(.text.imu_data_sampling) refers to sensor.o(.bss.kalman_filter.x) for [Anonymous Symbol]
     sensor.o(.text.imu_data_sampling) refers to sensor.o(.data.kalman_filter.P) for [Anonymous Symbol]
     sensor.o(.ARM.exidx.text.imu_data_sampling) refers to sensor.o(.text.imu_data_sampling) for [Anonymous Symbol]
-    wp_math.o(.text.constrain_float) refers to fcmp.o(i._fls) for __aeabi_fcmplt
-    wp_math.o(.text.constrain_float) refers to fcmp.o(i._fgr) for __aeabi_fcmpgt
-    wp_math.o(.text.constrain_float) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    wp_math.o(.text.constrain_float) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    wp_math.o(.ARM.exidx.text.constrain_float) refers to wp_math.o(.text.constrain_float) for [Anonymous Symbol]
-    wp_math.o(.text.sq) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    wp_math.o(.ARM.exidx.text.sq) refers to wp_math.o(.text.sq) for [Anonymous Symbol]
-    wp_math.o(.text.safe_sqrt) refers to sqrtf.o(i.sqrtf) for sqrtf
-    wp_math.o(.ARM.exidx.text.safe_sqrt) refers to wp_math.o(.text.safe_sqrt) for [Anonymous Symbol]
-    wp_math.o(.text.invSqrt) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    wp_math.o(.text.invSqrt) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    wp_math.o(.ARM.exidx.text.invSqrt) refers to wp_math.o(.text.invSqrt) for [Anonymous Symbol]
-    wp_math.o(.text.FastSinCos) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    wp_math.o(.text.FastSinCos) refers to ffixi.o(.text) for __aeabi_f2iz
-    wp_math.o(.text.FastSinCos) refers to fcmp.o(i._fls) for __aeabi_fcmplt
-    wp_math.o(.text.FastSinCos) refers to fflti.o(.text) for __aeabi_i2f
-    wp_math.o(.text.FastSinCos) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
-    wp_math.o(.text.FastSinCos) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    wp_math.o(.text.FastSinCos) refers to wp_math.o(.rodata.sinTable) for sinTable
-    wp_math.o(.ARM.exidx.text.FastSinCos) refers to wp_math.o(.text.FastSinCos) for [Anonymous Symbol]
-    wp_math.o(.text.FastSin) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    wp_math.o(.text.FastSin) refers to ffixi.o(.text) for __aeabi_f2iz
-    wp_math.o(.text.FastSin) refers to fcmp.o(i._fls) for __aeabi_fcmplt
-    wp_math.o(.text.FastSin) refers to fflti.o(.text) for __aeabi_i2f
-    wp_math.o(.text.FastSin) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
-    wp_math.o(.text.FastSin) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    wp_math.o(.text.FastSin) refers to wp_math.o(.rodata.sinTable) for sinTable
-    wp_math.o(.ARM.exidx.text.FastSin) refers to wp_math.o(.text.FastSin) for [Anonymous Symbol]
-    wp_math.o(.text.FastCos) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    wp_math.o(.text.FastCos) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    wp_math.o(.text.FastCos) refers to ffixi.o(.text) for __aeabi_f2iz
-    wp_math.o(.text.FastCos) refers to fcmp.o(i._fls) for __aeabi_fcmplt
-    wp_math.o(.text.FastCos) refers to fflti.o(.text) for __aeabi_i2f
-    wp_math.o(.text.FastCos) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
-    wp_math.o(.text.FastCos) refers to wp_math.o(.rodata.sinTable) for sinTable
-    wp_math.o(.ARM.exidx.text.FastCos) refers to wp_math.o(.text.FastCos) for [Anonymous Symbol]
-    wp_math.o(.text.FastSqrtI) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    wp_math.o(.text.FastSqrtI) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    wp_math.o(.ARM.exidx.text.FastSqrtI) refers to wp_math.o(.text.FastSqrtI) for [Anonymous Symbol]
-    wp_math.o(.text.FastSqrt) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    wp_math.o(.text.FastSqrt) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    wp_math.o(.ARM.exidx.text.FastSqrt) refers to wp_math.o(.text.FastSqrt) for [Anonymous Symbol]
-    wp_math.o(.ARM.exidx.text.constrain_int16) refers to wp_math.o(.text.constrain_int16) for [Anonymous Symbol]
+    fast_math.o(.text.constrain_float) refers to fcmp.o(i._fls) for __aeabi_fcmplt
+    fast_math.o(.text.constrain_float) refers to fcmp.o(i._fgr) for __aeabi_fcmpgt
+    fast_math.o(.text.constrain_float) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    fast_math.o(.text.constrain_float) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    fast_math.o(.ARM.exidx.text.constrain_float) refers to fast_math.o(.text.constrain_float) for [Anonymous Symbol]
+    fast_math.o(.text.sq) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    fast_math.o(.ARM.exidx.text.sq) refers to fast_math.o(.text.sq) for [Anonymous Symbol]
+    fast_math.o(.text.safe_sqrt) refers to sqrtf.o(i.sqrtf) for sqrtf
+    fast_math.o(.ARM.exidx.text.safe_sqrt) refers to fast_math.o(.text.safe_sqrt) for [Anonymous Symbol]
+    fast_math.o(.text.invSqrt) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    fast_math.o(.text.invSqrt) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    fast_math.o(.ARM.exidx.text.invSqrt) refers to fast_math.o(.text.invSqrt) for [Anonymous Symbol]
+    fast_math.o(.text.FastSinCos) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    fast_math.o(.text.FastSinCos) refers to ffixi.o(.text) for __aeabi_f2iz
+    fast_math.o(.text.FastSinCos) refers to fcmp.o(i._fls) for __aeabi_fcmplt
+    fast_math.o(.text.FastSinCos) refers to fflti.o(.text) for __aeabi_i2f
+    fast_math.o(.text.FastSinCos) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
+    fast_math.o(.text.FastSinCos) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    fast_math.o(.text.FastSinCos) refers to fast_math.o(.rodata.sinTable) for sinTable
+    fast_math.o(.ARM.exidx.text.FastSinCos) refers to fast_math.o(.text.FastSinCos) for [Anonymous Symbol]
+    fast_math.o(.text.FastSin) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    fast_math.o(.text.FastSin) refers to ffixi.o(.text) for __aeabi_f2iz
+    fast_math.o(.text.FastSin) refers to fcmp.o(i._fls) for __aeabi_fcmplt
+    fast_math.o(.text.FastSin) refers to fflti.o(.text) for __aeabi_i2f
+    fast_math.o(.text.FastSin) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
+    fast_math.o(.text.FastSin) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    fast_math.o(.text.FastSin) refers to fast_math.o(.rodata.sinTable) for sinTable
+    fast_math.o(.ARM.exidx.text.FastSin) refers to fast_math.o(.text.FastSin) for [Anonymous Symbol]
+    fast_math.o(.text.FastCos) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    fast_math.o(.text.FastCos) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    fast_math.o(.text.FastCos) refers to ffixi.o(.text) for __aeabi_f2iz
+    fast_math.o(.text.FastCos) refers to fcmp.o(i._fls) for __aeabi_fcmplt
+    fast_math.o(.text.FastCos) refers to fflti.o(.text) for __aeabi_i2f
+    fast_math.o(.text.FastCos) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
+    fast_math.o(.text.FastCos) refers to fast_math.o(.rodata.sinTable) for sinTable
+    fast_math.o(.ARM.exidx.text.FastCos) refers to fast_math.o(.text.FastCos) for [Anonymous Symbol]
+    fast_math.o(.text.FastSqrtI) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    fast_math.o(.text.FastSqrtI) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    fast_math.o(.ARM.exidx.text.FastSqrtI) refers to fast_math.o(.text.FastSqrtI) for [Anonymous Symbol]
+    fast_math.o(.text.FastSqrt) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    fast_math.o(.text.FastSqrt) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    fast_math.o(.ARM.exidx.text.FastSqrt) refers to fast_math.o(.text.FastSqrt) for [Anonymous Symbol]
+    fast_math.o(.ARM.exidx.text.constrain_int16) refers to fast_math.o(.text.constrain_int16) for [Anonymous Symbol]
     dl_common.o(.ARM.exidx.text.DL_Common_delayCycles) refers to dl_common.o(.text.DL_Common_delayCycles) for [Anonymous Symbol]
     dl_i2c.o(.ARM.exidx.text.DL_I2C_setClockConfig) refers to dl_i2c.o(.text.DL_I2C_setClockConfig) for [Anonymous Symbol]
     dl_i2c.o(.ARM.exidx.text.DL_I2C_getClockConfig) refers to dl_i2c.o(.text.DL_I2C_getClockConfig) for [Anonymous Symbol]
@@ -1907,6 +1942,9 @@ Section Cross References
 
 Removing Unused input sections from the image.
 
+    Removing main.o(.text), (0 bytes).
+    Removing main.o(.ARM.exidx.text.main), (8 bytes).
+    Removing main.o(.ARM.use_no_argv), (4 bytes).
     Removing ti_msp_dl_config.o(.text), (0 bytes).
     Removing ti_msp_dl_config.o(.ARM.exidx.text.SYSCFG_DL_init), (8 bytes).
     Removing ti_msp_dl_config.o(.ARM.exidx.text.SYSCFG_DL_initPower), (8 bytes).
@@ -1922,6 +1960,69 @@ Removing Unused input sections from the image.
     Removing ti_msp_dl_config.o(.ARM.exidx.text.SYSCFG_DL_saveConfiguration), (8 bytes).
     Removing ti_msp_dl_config.o(.text.SYSCFG_DL_restoreConfiguration), (68 bytes).
     Removing ti_msp_dl_config.o(.ARM.exidx.text.SYSCFG_DL_restoreConfiguration), (8 bytes).
+    Removing gray_detection.o(.text), (0 bytes).
+    Removing gray_detection.o(.ARM.exidx.text.Gray_Detection_Init), (8 bytes).
+    Removing gray_detection.o(.text.Gray_ReadData), (160 bytes).
+    Removing gray_detection.o(.ARM.exidx.text.Gray_ReadData), (8 bytes).
+    Removing gray_detection.o(.bss.gray_datas), (12 bytes).
+    Removing motor_controller.o(.text), (0 bytes).
+    Removing motor_controller.o(.ARM.exidx.text.QuaternionToEulerAngles), (8 bytes).
+    Removing motor_controller.o(.ARM.exidx.text.DisplayTask), (8 bytes).
+    Removing embedfire_protocol_receive.o(.text), (0 bytes).
+    Removing embedfire_protocol_receive.o(.text.protocol_register_rx_callbacks), (40 bytes).
+    Removing embedfire_protocol_receive.o(.ARM.exidx.text.protocol_register_rx_callbacks), (8 bytes).
+    Removing embedfire_protocol_receive.o(.text.process_received_packet), (208 bytes).
+    Removing embedfire_protocol_receive.o(.ARM.exidx.text.process_received_packet), (8 bytes).
+    Removing embedfire_protocol_receive.o(.text.protocol_receive_byte), (236 bytes).
+    Removing embedfire_protocol_receive.o(.ARM.exidx.text.protocol_receive_byte), (8 bytes).
+    Removing embedfire_protocol_receive.o(.bss.rx_callbacks), (24 bytes).
+    Removing embedfire_protocol_receive.o(.bss.rx_state), (1 bytes).
+    Removing embedfire_protocol_receive.o(.bss.rx_buffer_index), (4 bytes).
+    Removing embedfire_protocol_receive.o(.bss.rx_buffer), (23 bytes).
+    Removing embedfire_protocol_receive.o(.bss.expected_packet_length), (4 bytes).
+    Removing embedfire_protocol_send.o(.text), (0 bytes).
+    Removing embedfire_protocol_send.o(.text.protocol_calculate_checksum), (20 bytes).
+    Removing embedfire_protocol_send.o(.ARM.exidx.text.protocol_calculate_checksum), (8 bytes).
+    Removing embedfire_protocol_send.o(.text.protocol_send_packet), (48 bytes).
+    Removing embedfire_protocol_send.o(.ARM.exidx.text.protocol_send_packet), (8 bytes).
+    Removing embedfire_protocol_send.o(.text.protocol_send_set_target_value), (80 bytes).
+    Removing embedfire_protocol_send.o(.ARM.exidx.text.protocol_send_set_target_value), (8 bytes).
+    Removing embedfire_protocol_send.o(.text.protocol_send_set_actual_value), (80 bytes).
+    Removing embedfire_protocol_send.o(.ARM.exidx.text.protocol_send_set_actual_value), (8 bytes).
+    Removing embedfire_protocol_send.o(.text.protocol_send_set_pid_params), (92 bytes).
+    Removing embedfire_protocol_send.o(.ARM.exidx.text.protocol_send_set_pid_params), (8 bytes).
+    Removing embedfire_protocol_send.o(.text.protocol_send_sync_start), (76 bytes).
+    Removing embedfire_protocol_send.o(.ARM.exidx.text.protocol_send_sync_start), (8 bytes).
+    Removing embedfire_protocol_send.o(.text.protocol_send_sync_stop), (76 bytes).
+    Removing embedfire_protocol_send.o(.ARM.exidx.text.protocol_send_sync_stop), (8 bytes).
+    Removing embedfire_protocol_send.o(.text.protocol_send_set_period), (80 bytes).
+    Removing embedfire_protocol_send.o(.ARM.exidx.text.protocol_send_set_period), (8 bytes).
+    Removing fusionahrs.o(.text), (0 bytes).
+    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsInitialise), (8 bytes).
+    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsSetSettings), (8 bytes).
+    Removing fusionahrs.o(.text.FusionAhrsReset), (68 bytes).
+    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsReset), (8 bytes).
+    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsUpdate), (8 bytes).
+    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsSetHeading), (8 bytes).
+    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsUpdateNoMagnetometer), (8 bytes).
+    Removing fusionahrs.o(.text.FusionAhrsUpdateExternalHeading), (188 bytes).
+    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsUpdateExternalHeading), (8 bytes).
+    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsGetQuaternion), (8 bytes).
+    Removing fusionahrs.o(.text.FusionAhrsGetLinearAcceleration), (156 bytes).
+    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsGetLinearAcceleration), (8 bytes).
+    Removing fusionahrs.o(.text.FusionAhrsGetEarthAcceleration), (376 bytes).
+    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsGetEarthAcceleration), (8 bytes).
+    Removing fusionahrs.o(.text.FusionAhrsGetInternalStates), (328 bytes).
+    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsGetInternalStates), (8 bytes).
+    Removing fusionahrs.o(.text.FusionAhrsGetFlags), (54 bytes).
+    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsGetFlags), (8 bytes).
+    Removing fusioncompass.o(.text), (0 bytes).
+    Removing fusioncompass.o(.ARM.exidx.text.FusionCompassCalculateHeading), (8 bytes).
+    Removing fusionoffset.o(.text), (0 bytes).
+    Removing fusionoffset.o(.text.FusionOffsetInitialise), (52 bytes).
+    Removing fusionoffset.o(.ARM.exidx.text.FusionOffsetInitialise), (8 bytes).
+    Removing fusionoffset.o(.text.FusionOffsetUpdate), (200 bytes).
+    Removing fusionoffset.o(.ARM.exidx.text.FusionOffsetUpdate), (8 bytes).
     Removing delay.o(.text), (0 bytes).
     Removing delay.o(.text.delay_us), (20 bytes).
     Removing delay.o(.ARM.exidx.text.delay_us), (8 bytes).
@@ -1935,9 +2036,6 @@ Removing Unused input sections from the image.
     Removing log.o(.ARM.exidx.text.LOG_E), (8 bytes).
     Removing log.o(.text.LOG_HEX), (124 bytes).
     Removing log.o(.ARM.exidx.text.LOG_HEX), (8 bytes).
-    Removing main.o(.text), (0 bytes).
-    Removing main.o(.ARM.exidx.text.main), (8 bytes).
-    Removing main.o(.ARM.use_no_argv), (4 bytes).
     Removing eeprom.o(.text), (0 bytes).
     Removing eeprom.o(.text.ReadFlashParameterALL), (18 bytes).
     Removing eeprom.o(.ARM.exidx.text.ReadFlashParameterALL), (8 bytes).
@@ -2067,40 +2165,6 @@ Removing Unused input sections from the image.
     Removing w25qxx.o(.text.Resume_Factory_Setting), (14 bytes).
     Removing w25qxx.o(.ARM.exidx.text.Resume_Factory_Setting), (8 bytes).
     Removing w25qxx.o(.bss.w25qxx_id), (2 bytes).
-    Removing gray_detection.o(.text), (0 bytes).
-    Removing gray_detection.o(.ARM.exidx.text.Gray_Detection_Init), (8 bytes).
-    Removing gray_detection.o(.text.Gray_ReadData), (160 bytes).
-    Removing gray_detection.o(.ARM.exidx.text.Gray_ReadData), (8 bytes).
-    Removing gray_detection.o(.bss.gray_datas), (12 bytes).
-    Removing motor_controller.o(.text), (0 bytes).
-    Removing motor_controller.o(.ARM.exidx.text.QuaternionToEulerAngles), (8 bytes).
-    Removing motor_controller.o(.ARM.exidx.text.DisplayTask), (8 bytes).
-    Removing fusionahrs.o(.text), (0 bytes).
-    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsInitialise), (8 bytes).
-    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsSetSettings), (8 bytes).
-    Removing fusionahrs.o(.text.FusionAhrsReset), (68 bytes).
-    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsReset), (8 bytes).
-    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsUpdate), (8 bytes).
-    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsSetHeading), (8 bytes).
-    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsUpdateNoMagnetometer), (8 bytes).
-    Removing fusionahrs.o(.text.FusionAhrsUpdateExternalHeading), (188 bytes).
-    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsUpdateExternalHeading), (8 bytes).
-    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsGetQuaternion), (8 bytes).
-    Removing fusionahrs.o(.text.FusionAhrsGetLinearAcceleration), (156 bytes).
-    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsGetLinearAcceleration), (8 bytes).
-    Removing fusionahrs.o(.text.FusionAhrsGetEarthAcceleration), (376 bytes).
-    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsGetEarthAcceleration), (8 bytes).
-    Removing fusionahrs.o(.text.FusionAhrsGetInternalStates), (328 bytes).
-    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsGetInternalStates), (8 bytes).
-    Removing fusionahrs.o(.text.FusionAhrsGetFlags), (54 bytes).
-    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsGetFlags), (8 bytes).
-    Removing fusioncompass.o(.text), (0 bytes).
-    Removing fusioncompass.o(.ARM.exidx.text.FusionCompassCalculateHeading), (8 bytes).
-    Removing fusionoffset.o(.text), (0 bytes).
-    Removing fusionoffset.o(.text.FusionOffsetInitialise), (52 bytes).
-    Removing fusionoffset.o(.ARM.exidx.text.FusionOffsetInitialise), (8 bytes).
-    Removing fusionoffset.o(.text.FusionOffsetUpdate), (200 bytes).
-    Removing fusionoffset.o(.ARM.exidx.text.FusionOffsetUpdate), (8 bytes).
     Removing hardware_i2c.o(.text), (0 bytes).
     Removing hardware_i2c.o(.text.I2C_WriteReg), (196 bytes).
     Removing hardware_i2c.o(.ARM.exidx.text.I2C_WriteReg), (8 bytes).
@@ -2138,15 +2202,17 @@ Removing Unused input sections from the image.
     Removing software_i2c.o(.ARM.exidx.text.SoftWareI2C_Write_Len), (8 bytes).
     Removing software_i2c.o(.text.SoftWareI2C_Read_Len), (154 bytes).
     Removing software_i2c.o(.ARM.exidx.text.SoftWareI2C_Read_Len), (8 bytes).
+    Removing uart_driver.o(.text), (0 bytes).
+    Removing uart_driver.o(.text.uart_send_byte), (8 bytes).
+    Removing uart_driver.o(.ARM.exidx.text.uart_send_byte), (8 bytes).
+    Removing uart_driver.o(.text.usart_send_bytes), (28 bytes).
+    Removing uart_driver.o(.ARM.exidx.text.usart_send_bytes), (8 bytes).
+    Removing uart_driver.o(.ARM.exidx.text.usart_printf), (8 bytes).
     Removing spi.o(.text), (0 bytes).
     Removing spi.o(.text.SPI_WriteByte), (28 bytes).
     Removing spi.o(.ARM.exidx.text.SPI_WriteByte), (8 bytes).
     Removing spi.o(.ARM.exidx.text.SPI_LCD_WrDat), (8 bytes).
     Removing spi.o(.ARM.exidx.text.SPI_LCD_WrCmd), (8 bytes).
-    Removing uart.o(.text), (0 bytes).
-    Removing uart.o(.text.usart_send_bytes), (28 bytes).
-    Removing uart.o(.ARM.exidx.text.usart_send_bytes), (8 bytes).
-    Removing uart.o(.ARM.exidx.text.usart_printf), (8 bytes).
     Removing filter.o(.text), (0 bytes).
     Removing filter.o(.text.LPButterworth), (324 bytes).
     Removing filter.o(.ARM.exidx.text.LPButterworth), (8 bytes).
@@ -2166,27 +2232,27 @@ Removing Unused input sections from the image.
     Removing sensor.o(.bss.accel_lpf_param), (24 bytes).
     Removing sensor.o(.bss.gyro_filter_buf), (72 bytes).
     Removing sensor.o(.bss.accel_filter_buf), (72 bytes).
-    Removing wp_math.o(.text), (0 bytes).
-    Removing wp_math.o(.text.constrain_float), (80 bytes).
-    Removing wp_math.o(.ARM.exidx.text.constrain_float), (8 bytes).
-    Removing wp_math.o(.text.sq), (10 bytes).
-    Removing wp_math.o(.ARM.exidx.text.sq), (8 bytes).
-    Removing wp_math.o(.ARM.exidx.text.safe_sqrt), (8 bytes).
-    Removing wp_math.o(.text.invSqrt), (52 bytes).
-    Removing wp_math.o(.ARM.exidx.text.invSqrt), (8 bytes).
-    Removing wp_math.o(.text.FastSinCos), (428 bytes).
-    Removing wp_math.o(.ARM.exidx.text.FastSinCos), (8 bytes).
-    Removing wp_math.o(.text.FastSin), (144 bytes).
-    Removing wp_math.o(.ARM.exidx.text.FastSin), (8 bytes).
-    Removing wp_math.o(.text.FastCos), (148 bytes).
-    Removing wp_math.o(.ARM.exidx.text.FastCos), (8 bytes).
-    Removing wp_math.o(.text.FastSqrtI), (56 bytes).
-    Removing wp_math.o(.ARM.exidx.text.FastSqrtI), (8 bytes).
-    Removing wp_math.o(.text.FastSqrt), (64 bytes).
-    Removing wp_math.o(.ARM.exidx.text.FastSqrt), (8 bytes).
-    Removing wp_math.o(.text.constrain_int16), (26 bytes).
-    Removing wp_math.o(.ARM.exidx.text.constrain_int16), (8 bytes).
-    Removing wp_math.o(.rodata.sinTable), (2052 bytes).
+    Removing fast_math.o(.text), (0 bytes).
+    Removing fast_math.o(.text.constrain_float), (80 bytes).
+    Removing fast_math.o(.ARM.exidx.text.constrain_float), (8 bytes).
+    Removing fast_math.o(.text.sq), (10 bytes).
+    Removing fast_math.o(.ARM.exidx.text.sq), (8 bytes).
+    Removing fast_math.o(.ARM.exidx.text.safe_sqrt), (8 bytes).
+    Removing fast_math.o(.text.invSqrt), (52 bytes).
+    Removing fast_math.o(.ARM.exidx.text.invSqrt), (8 bytes).
+    Removing fast_math.o(.text.FastSinCos), (428 bytes).
+    Removing fast_math.o(.ARM.exidx.text.FastSinCos), (8 bytes).
+    Removing fast_math.o(.text.FastSin), (144 bytes).
+    Removing fast_math.o(.ARM.exidx.text.FastSin), (8 bytes).
+    Removing fast_math.o(.text.FastCos), (148 bytes).
+    Removing fast_math.o(.ARM.exidx.text.FastCos), (8 bytes).
+    Removing fast_math.o(.text.FastSqrtI), (56 bytes).
+    Removing fast_math.o(.ARM.exidx.text.FastSqrtI), (8 bytes).
+    Removing fast_math.o(.text.FastSqrt), (64 bytes).
+    Removing fast_math.o(.ARM.exidx.text.FastSqrt), (8 bytes).
+    Removing fast_math.o(.text.constrain_int16), (26 bytes).
+    Removing fast_math.o(.ARM.exidx.text.constrain_int16), (8 bytes).
+    Removing fast_math.o(.rodata.sinTable), (2052 bytes).
     Removing oled_data.o(.text), (0 bytes).
     Removing oled_data.o(.rodata.F6x8), (552 bytes).
     Removing oled_data.o(.rodata.F8X16), (1504 bytes).
@@ -2591,7 +2657,7 @@ Removing Unused input sections from the image.
     Removing staticallocs_freertos.o(.ARM.exidx.text.vApplicationGetIdleTaskMemory), (8 bytes).
     Removing staticallocs_freertos.o(.ARM.exidx.text.vApplicationGetTimerTaskMemory), (8 bytes).
 
-683 unused section(s) (total 31107 bytes) removed from the image.
+714 unused section(s) (total 32303 bytes) removed from the image.
 
 ==============================================================================
 
@@ -2797,7 +2863,10 @@ Image Symbol Table
     dl_timer.c                               0x00000000   Number         0  dl_timer.o ABSOLUTE
     dl_uart.c                                0x00000000   Number         0  dl_uart.o ABSOLUTE
     eeprom.c                                 0x00000000   Number         0  eeprom.o ABSOLUTE
+    embedfire_protocol_receive.c             0x00000000   Number         0  embedfire_protocol_receive.o ABSOLUTE
+    embedfire_protocol_send.c                0x00000000   Number         0  embedfire_protocol_send.o ABSOLUTE
     encoder.c                                0x00000000   Number         0  encoder.o ABSOLUTE
+    fast_math.c                              0x00000000   Number         0  fast_math.o ABSOLUTE
     filter.c                                 0x00000000   Number         0  filter.o ABSOLUTE
     gray_detection.c                         0x00000000   Number         0  gray_detection.o ABSOLUTE
     hardware_i2c.c                           0x00000000   Number         0  hardware_i2c.o ABSOLUTE
@@ -2820,9 +2889,8 @@ Image Symbol Table
     tasks.c                                  0x00000000   Number         0  tasks.o ABSOLUTE
     ti_msp_dl_config.c                       0x00000000   Number         0  ti_msp_dl_config.o ABSOLUTE
     timers.c                                 0x00000000   Number         0  timers.o ABSOLUTE
-    uart.c                                   0x00000000   Number         0  uart.o ABSOLUTE
+    uart_driver.c                            0x00000000   Number         0  uart_driver.o ABSOLUTE
     w25qxx.c                                 0x00000000   Number         0  w25qxx.o ABSOLUTE
-    wp_math.c                                0x00000000   Number         0  wp_math.o ABSOLUTE
     RESET                                    0x00000000   Section      192  startup_mspm0g350x_uvision.o(RESET)
     !!!main                                  0x000000c0   Section        8  __main.o(!!!main)
     !!!scatter                               0x000000c8   Section       84  __scatter.o(!!!scatter)
@@ -3258,8 +3326,8 @@ Image Symbol Table
     __arm_cp.52_0                            0x00005534   Number         4  tasks.o(.text.pvTaskIncrementMutexHeldCount)
     [Anonymous Symbol]                       0x00005538   Section        0  port.o(.text.pxPortInitialiseStack)
     __arm_cp.0_0                             0x00005558   Number         4  port.o(.text.pxPortInitialiseStack)
-    [Anonymous Symbol]                       0x0000555c   Section        0  wp_math.o(.text.safe_sqrt)
-    __arm_cp.2_0                             0x00005570   Number         4  wp_math.o(.text.safe_sqrt)
+    [Anonymous Symbol]                       0x0000555c   Section        0  fast_math.o(.text.safe_sqrt)
+    __arm_cp.2_0                             0x00005570   Number         4  fast_math.o(.text.safe_sqrt)
     [Anonymous Symbol]                       0x00005574   Section        0  hardware_i2c.o(.text.single_readi2c)
     [Anonymous Symbol]                       0x0000558c   Section        0  hardware_i2c.o(.text.single_writei2c)
     __arm_cp.2_0                             0x0000562c   Number         4  hardware_i2c.o(.text.single_writei2c)
@@ -3268,7 +3336,7 @@ Image Symbol Table
     __arm_cp.2_3                             0x00005638   Number         4  hardware_i2c.o(.text.single_writei2c)
     __arm_cp.2_4                             0x0000563c   Number         4  hardware_i2c.o(.text.single_writei2c)
     [Anonymous Symbol]                       0x00005640   Section        0  port.o(.text.ulSetInterruptMaskFromISR)
-    [Anonymous Symbol]                       0x00005648   Section        0  uart.o(.text.usart_printf)
+    [Anonymous Symbol]                       0x00005648   Section        0  uart_driver.o(.text.usart_printf)
     [Anonymous Symbol]                       0x0000568e   Section        0  list.o(.text.uxListRemove)
     [Anonymous Symbol]                       0x000056b0   Section        0  staticallocs_freertos.o(.text.vApplicationGetIdleTaskMemory)
     __arm_cp.0_0                             0x000056c0   Number         4  staticallocs_freertos.o(.text.vApplicationGetIdleTaskMemory)
@@ -3920,11 +3988,11 @@ Image Symbol Table
     pvPortMalloc                             0x000053b1   Thumb Code   340  heap_4.o(.text.pvPortMalloc)
     pvTaskIncrementMutexHeldCount            0x00005521   Thumb Code    20  tasks.o(.text.pvTaskIncrementMutexHeldCount)
     pxPortInitialiseStack                    0x00005539   Thumb Code    32  port.o(.text.pxPortInitialiseStack)
-    safe_sqrt                                0x0000555d   Thumb Code    20  wp_math.o(.text.safe_sqrt)
+    safe_sqrt                                0x0000555d   Thumb Code    20  fast_math.o(.text.safe_sqrt)
     single_readi2c                           0x00005575   Thumb Code    24  hardware_i2c.o(.text.single_readi2c)
     single_writei2c                          0x0000558d   Thumb Code   160  hardware_i2c.o(.text.single_writei2c)
     ulSetInterruptMaskFromISR                0x00005641   Thumb Code     8  port.o(.text.ulSetInterruptMaskFromISR)
-    usart_printf                             0x00005649   Thumb Code    70  uart.o(.text.usart_printf)
+    usart_printf                             0x00005649   Thumb Code    70  uart_driver.o(.text.usart_printf)
     uxListRemove                             0x0000568f   Thumb Code    32  list.o(.text.uxListRemove)
     vApplicationGetIdleTaskMemory            0x000056b1   Thumb Code    16  staticallocs_freertos.o(.text.vApplicationGetIdleTaskMemory)
     vApplicationGetTimerTaskMemory           0x000056c9   Thumb Code    16  staticallocs_freertos.o(.text.vApplicationGetTimerTaskMemory)
@@ -4053,453 +4121,453 @@ Memory Map of the image
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x00000000   0x00000000   0x000000c0   Data   RO           49    RESET               startup_mspm0g350x_uvision.o
-    0x000000c0   0x000000c0   0x00000008   Code   RO         1188  * !!!main             c_p.l(__main.o)
-    0x000000c8   0x000000c8   0x00000054   Code   RO         1668    !!!scatter          c_p.l(__scatter.o)
+    0x00000000   0x00000000   0x000000c0   Data   RO           58    RESET               startup_mspm0g350x_uvision.o
+    0x000000c0   0x000000c0   0x00000008   Code   RO         1233  * !!!main             c_p.l(__main.o)
+    0x000000c8   0x000000c8   0x00000054   Code   RO         1713    !!!scatter          c_p.l(__scatter.o)
     0x0000011c   0x0000011c   0x00000004   PAD
-    0x00000120   0x00000120   0x0000001a   Code   RO         1672    !!handler_copy      c_p.l(__scatter_copy.o)
+    0x00000120   0x00000120   0x0000001a   Code   RO         1717    !!handler_copy      c_p.l(__scatter_copy.o)
     0x0000013a   0x0000013a   0x00000006   PAD
-    0x00000140   0x00000140   0x00000002   Code   RO         1669    !!handler_null      c_p.l(__scatter.o)
+    0x00000140   0x00000140   0x00000002   Code   RO         1714    !!handler_null      c_p.l(__scatter.o)
     0x00000142   0x00000142   0x00000006   PAD
-    0x00000148   0x00000148   0x0000001c   Code   RO         1674    !!handler_zi        c_p.l(__scatter_zi.o)
-    0x00000164   0x00000164   0x00000002   Code   RO         1352    .ARM.Collect$$_printf_percent$$00000000  c_p.l(_printf_percent.o)
-    0x00000166   0x00000166   0x0000000a   Code   RO         1341    .ARM.Collect$$_printf_percent$$00000001  c_p.l(_printf_n.o)
-    0x00000170   0x00000170   0x0000000a   Code   RO         1343    .ARM.Collect$$_printf_percent$$00000002  c_p.l(_printf_p.o)
-    0x0000017a   0x0000017a   0x0000000a   Code   RO         1348    .ARM.Collect$$_printf_percent$$00000003  c_p.l(_printf_f.o)
-    0x00000184   0x00000184   0x0000000a   Code   RO         1349    .ARM.Collect$$_printf_percent$$00000004  c_p.l(_printf_e.o)
-    0x0000018e   0x0000018e   0x0000000a   Code   RO         1350    .ARM.Collect$$_printf_percent$$00000005  c_p.l(_printf_g.o)
-    0x00000198   0x00000198   0x0000000a   Code   RO         1351    .ARM.Collect$$_printf_percent$$00000006  c_p.l(_printf_a.o)
-    0x000001a2   0x000001a2   0x0000000a   Code   RO         1356    .ARM.Collect$$_printf_percent$$00000007  c_p.l(_printf_ll.o)
-    0x000001ac   0x000001ac   0x0000000a   Code   RO         1345    .ARM.Collect$$_printf_percent$$00000008  c_p.l(_printf_i.o)
-    0x000001b6   0x000001b6   0x0000000a   Code   RO         1346    .ARM.Collect$$_printf_percent$$00000009  c_p.l(_printf_d.o)
-    0x000001c0   0x000001c0   0x0000000a   Code   RO         1347    .ARM.Collect$$_printf_percent$$0000000A  c_p.l(_printf_u.o)
-    0x000001ca   0x000001ca   0x0000000a   Code   RO         1344    .ARM.Collect$$_printf_percent$$0000000B  c_p.l(_printf_o.o)
-    0x000001d4   0x000001d4   0x0000000a   Code   RO         1342    .ARM.Collect$$_printf_percent$$0000000C  c_p.l(_printf_x.o)
-    0x000001de   0x000001de   0x0000000a   Code   RO         1353    .ARM.Collect$$_printf_percent$$0000000D  c_p.l(_printf_lli.o)
-    0x000001e8   0x000001e8   0x0000000a   Code   RO         1354    .ARM.Collect$$_printf_percent$$0000000E  c_p.l(_printf_lld.o)
-    0x000001f2   0x000001f2   0x0000000a   Code   RO         1355    .ARM.Collect$$_printf_percent$$0000000F  c_p.l(_printf_llu.o)
-    0x000001fc   0x000001fc   0x0000000a   Code   RO         1360    .ARM.Collect$$_printf_percent$$00000010  c_p.l(_printf_llo.o)
-    0x00000206   0x00000206   0x0000000a   Code   RO         1361    .ARM.Collect$$_printf_percent$$00000011  c_p.l(_printf_llx.o)
-    0x00000210   0x00000210   0x0000000a   Code   RO         1357    .ARM.Collect$$_printf_percent$$00000012  c_p.l(_printf_l.o)
-    0x0000021a   0x0000021a   0x0000000a   Code   RO         1339    .ARM.Collect$$_printf_percent$$00000013  c_p.l(_printf_c.o)
-    0x00000224   0x00000224   0x0000000a   Code   RO         1340    .ARM.Collect$$_printf_percent$$00000014  c_p.l(_printf_s.o)
-    0x0000022e   0x0000022e   0x0000000a   Code   RO         1358    .ARM.Collect$$_printf_percent$$00000015  c_p.l(_printf_lc.o)
-    0x00000238   0x00000238   0x0000000a   Code   RO         1359    .ARM.Collect$$_printf_percent$$00000016  c_p.l(_printf_ls.o)
-    0x00000242   0x00000242   0x00000004   Code   RO         1470    .ARM.Collect$$_printf_percent$$00000017  c_p.l(_printf_percent_end.o)
-    0x00000246   0x00000246   0x00000002   Code   RO         1516    .ARM.Collect$$libinit$$00000000  c_p.l(libinit.o)
-    0x00000248   0x00000248   0x00000000   Code   RO         1540    .ARM.Collect$$libinit$$00000002  c_p.l(libinit2.o)
-    0x00000248   0x00000248   0x00000000   Code   RO         1542    .ARM.Collect$$libinit$$00000004  c_p.l(libinit2.o)
-    0x00000248   0x00000248   0x00000000   Code   RO         1544    .ARM.Collect$$libinit$$00000006  c_p.l(libinit2.o)
-    0x00000248   0x00000248   0x00000000   Code   RO         1547    .ARM.Collect$$libinit$$0000000C  c_p.l(libinit2.o)
-    0x00000248   0x00000248   0x00000000   Code   RO         1549    .ARM.Collect$$libinit$$0000000E  c_p.l(libinit2.o)
-    0x00000248   0x00000248   0x00000000   Code   RO         1551    .ARM.Collect$$libinit$$00000010  c_p.l(libinit2.o)
-    0x00000248   0x00000248   0x00000006   Code   RO         1552    .ARM.Collect$$libinit$$00000011  c_p.l(libinit2.o)
-    0x0000024e   0x0000024e   0x00000000   Code   RO         1554    .ARM.Collect$$libinit$$00000013  c_p.l(libinit2.o)
-    0x0000024e   0x0000024e   0x0000000c   Code   RO         1555    .ARM.Collect$$libinit$$00000014  c_p.l(libinit2.o)
-    0x0000025a   0x0000025a   0x00000000   Code   RO         1556    .ARM.Collect$$libinit$$00000015  c_p.l(libinit2.o)
-    0x0000025a   0x0000025a   0x00000000   Code   RO         1558    .ARM.Collect$$libinit$$00000017  c_p.l(libinit2.o)
-    0x0000025a   0x0000025a   0x0000000a   Code   RO         1559    .ARM.Collect$$libinit$$00000018  c_p.l(libinit2.o)
-    0x00000264   0x00000264   0x00000000   Code   RO         1560    .ARM.Collect$$libinit$$00000019  c_p.l(libinit2.o)
-    0x00000264   0x00000264   0x00000000   Code   RO         1562    .ARM.Collect$$libinit$$0000001B  c_p.l(libinit2.o)
-    0x00000264   0x00000264   0x00000000   Code   RO         1564    .ARM.Collect$$libinit$$0000001D  c_p.l(libinit2.o)
-    0x00000264   0x00000264   0x00000000   Code   RO         1566    .ARM.Collect$$libinit$$0000001F  c_p.l(libinit2.o)
-    0x00000264   0x00000264   0x00000000   Code   RO         1568    .ARM.Collect$$libinit$$00000021  c_p.l(libinit2.o)
-    0x00000264   0x00000264   0x00000000   Code   RO         1570    .ARM.Collect$$libinit$$00000023  c_p.l(libinit2.o)
-    0x00000264   0x00000264   0x00000000   Code   RO         1572    .ARM.Collect$$libinit$$00000025  c_p.l(libinit2.o)
-    0x00000264   0x00000264   0x00000000   Code   RO         1574    .ARM.Collect$$libinit$$00000027  c_p.l(libinit2.o)
-    0x00000264   0x00000264   0x00000000   Code   RO         1578    .ARM.Collect$$libinit$$0000002E  c_p.l(libinit2.o)
-    0x00000264   0x00000264   0x00000000   Code   RO         1580    .ARM.Collect$$libinit$$00000030  c_p.l(libinit2.o)
-    0x00000264   0x00000264   0x00000000   Code   RO         1582    .ARM.Collect$$libinit$$00000032  c_p.l(libinit2.o)
-    0x00000264   0x00000264   0x00000000   Code   RO         1584    .ARM.Collect$$libinit$$00000034  c_p.l(libinit2.o)
-    0x00000264   0x00000264   0x00000002   Code   RO         1585    .ARM.Collect$$libinit$$00000035  c_p.l(libinit2.o)
-    0x00000266   0x00000266   0x00000002   Code   RO         1624    .ARM.Collect$$libshutdown$$00000000  c_p.l(libshutdown.o)
-    0x00000268   0x00000268   0x00000000   Code   RO         1652    .ARM.Collect$$libshutdown$$00000002  c_p.l(libshutdown2.o)
-    0x00000268   0x00000268   0x00000000   Code   RO         1654    .ARM.Collect$$libshutdown$$00000004  c_p.l(libshutdown2.o)
-    0x00000268   0x00000268   0x00000000   Code   RO         1657    .ARM.Collect$$libshutdown$$00000007  c_p.l(libshutdown2.o)
-    0x00000268   0x00000268   0x00000000   Code   RO         1660    .ARM.Collect$$libshutdown$$0000000A  c_p.l(libshutdown2.o)
-    0x00000268   0x00000268   0x00000000   Code   RO         1662    .ARM.Collect$$libshutdown$$0000000C  c_p.l(libshutdown2.o)
-    0x00000268   0x00000268   0x00000000   Code   RO         1665    .ARM.Collect$$libshutdown$$0000000F  c_p.l(libshutdown2.o)
-    0x00000268   0x00000268   0x00000002   Code   RO         1666    .ARM.Collect$$libshutdown$$00000010  c_p.l(libshutdown2.o)
-    0x0000026a   0x0000026a   0x00000000   Code   RO         1264    .ARM.Collect$$rtentry$$00000000  c_p.l(__rtentry.o)
-    0x0000026a   0x0000026a   0x00000000   Code   RO         1432    .ARM.Collect$$rtentry$$00000002  c_p.l(__rtentry2.o)
-    0x0000026a   0x0000026a   0x00000006   Code   RO         1444    .ARM.Collect$$rtentry$$00000004  c_p.l(__rtentry4.o)
-    0x00000270   0x00000270   0x00000000   Code   RO         1434    .ARM.Collect$$rtentry$$00000009  c_p.l(__rtentry2.o)
-    0x00000270   0x00000270   0x00000004   Code   RO         1435    .ARM.Collect$$rtentry$$0000000A  c_p.l(__rtentry2.o)
-    0x00000274   0x00000274   0x00000000   Code   RO         1437    .ARM.Collect$$rtentry$$0000000C  c_p.l(__rtentry2.o)
-    0x00000274   0x00000274   0x00000008   Code   RO         1438    .ARM.Collect$$rtentry$$0000000D  c_p.l(__rtentry2.o)
-    0x0000027c   0x0000027c   0x00000002   Code   RO         1524    .ARM.Collect$$rtexit$$00000000  c_p.l(rtexit.o)
-    0x0000027e   0x0000027e   0x00000000   Code   RO         1593    .ARM.Collect$$rtexit$$00000002  c_p.l(rtexit2.o)
-    0x0000027e   0x0000027e   0x00000004   Code   RO         1594    .ARM.Collect$$rtexit$$00000003  c_p.l(rtexit2.o)
-    0x00000282   0x00000282   0x00000006   Code   RO         1595    .ARM.Collect$$rtexit$$00000004  c_p.l(rtexit2.o)
-    0x00000288   0x00000288   0x00000038   Code   RO         1172    .emb_text           c_p.l(rt_memcpy.o)
-    0x000002c0   0x000002c0   0x0000002c   Code   RO           50    .text               startup_mspm0g350x_uvision.o
-    0x000002ec   0x000002ec   0x00000030   Code   RO         1166    .text               c_p.l(llmul.o)
-    0x0000031c   0x0000031c   0x0000003c   Code   RO         1168    .text               c_p.l(vsnprintf.o)
-    0x00000358   0x00000358   0x00000044   Code   RO         1170    .text               c_p.l(strlen.o)
-    0x0000039c   0x0000039c   0x00000082   Code   RO         1173    .text               c_p.l(rt_memcpy.o)
-    0x0000041e   0x0000041e   0x00000012   Code   RO         1176    .text               c_p.l(aeabi_memset4.o)
-    0x00000430   0x00000430   0x000001f8   Code   RO         1178    .text               c_p.l(aeabi_sdivfast.o)
-    0x00000628   0x00000628   0x00000006   Code   RO         1186    .text               c_p.l(heapauxi.o)
+    0x00000148   0x00000148   0x0000001c   Code   RO         1719    !!handler_zi        c_p.l(__scatter_zi.o)
+    0x00000164   0x00000164   0x00000002   Code   RO         1397    .ARM.Collect$$_printf_percent$$00000000  c_p.l(_printf_percent.o)
+    0x00000166   0x00000166   0x0000000a   Code   RO         1386    .ARM.Collect$$_printf_percent$$00000001  c_p.l(_printf_n.o)
+    0x00000170   0x00000170   0x0000000a   Code   RO         1388    .ARM.Collect$$_printf_percent$$00000002  c_p.l(_printf_p.o)
+    0x0000017a   0x0000017a   0x0000000a   Code   RO         1393    .ARM.Collect$$_printf_percent$$00000003  c_p.l(_printf_f.o)
+    0x00000184   0x00000184   0x0000000a   Code   RO         1394    .ARM.Collect$$_printf_percent$$00000004  c_p.l(_printf_e.o)
+    0x0000018e   0x0000018e   0x0000000a   Code   RO         1395    .ARM.Collect$$_printf_percent$$00000005  c_p.l(_printf_g.o)
+    0x00000198   0x00000198   0x0000000a   Code   RO         1396    .ARM.Collect$$_printf_percent$$00000006  c_p.l(_printf_a.o)
+    0x000001a2   0x000001a2   0x0000000a   Code   RO         1401    .ARM.Collect$$_printf_percent$$00000007  c_p.l(_printf_ll.o)
+    0x000001ac   0x000001ac   0x0000000a   Code   RO         1390    .ARM.Collect$$_printf_percent$$00000008  c_p.l(_printf_i.o)
+    0x000001b6   0x000001b6   0x0000000a   Code   RO         1391    .ARM.Collect$$_printf_percent$$00000009  c_p.l(_printf_d.o)
+    0x000001c0   0x000001c0   0x0000000a   Code   RO         1392    .ARM.Collect$$_printf_percent$$0000000A  c_p.l(_printf_u.o)
+    0x000001ca   0x000001ca   0x0000000a   Code   RO         1389    .ARM.Collect$$_printf_percent$$0000000B  c_p.l(_printf_o.o)
+    0x000001d4   0x000001d4   0x0000000a   Code   RO         1387    .ARM.Collect$$_printf_percent$$0000000C  c_p.l(_printf_x.o)
+    0x000001de   0x000001de   0x0000000a   Code   RO         1398    .ARM.Collect$$_printf_percent$$0000000D  c_p.l(_printf_lli.o)
+    0x000001e8   0x000001e8   0x0000000a   Code   RO         1399    .ARM.Collect$$_printf_percent$$0000000E  c_p.l(_printf_lld.o)
+    0x000001f2   0x000001f2   0x0000000a   Code   RO         1400    .ARM.Collect$$_printf_percent$$0000000F  c_p.l(_printf_llu.o)
+    0x000001fc   0x000001fc   0x0000000a   Code   RO         1405    .ARM.Collect$$_printf_percent$$00000010  c_p.l(_printf_llo.o)
+    0x00000206   0x00000206   0x0000000a   Code   RO         1406    .ARM.Collect$$_printf_percent$$00000011  c_p.l(_printf_llx.o)
+    0x00000210   0x00000210   0x0000000a   Code   RO         1402    .ARM.Collect$$_printf_percent$$00000012  c_p.l(_printf_l.o)
+    0x0000021a   0x0000021a   0x0000000a   Code   RO         1384    .ARM.Collect$$_printf_percent$$00000013  c_p.l(_printf_c.o)
+    0x00000224   0x00000224   0x0000000a   Code   RO         1385    .ARM.Collect$$_printf_percent$$00000014  c_p.l(_printf_s.o)
+    0x0000022e   0x0000022e   0x0000000a   Code   RO         1403    .ARM.Collect$$_printf_percent$$00000015  c_p.l(_printf_lc.o)
+    0x00000238   0x00000238   0x0000000a   Code   RO         1404    .ARM.Collect$$_printf_percent$$00000016  c_p.l(_printf_ls.o)
+    0x00000242   0x00000242   0x00000004   Code   RO         1515    .ARM.Collect$$_printf_percent$$00000017  c_p.l(_printf_percent_end.o)
+    0x00000246   0x00000246   0x00000002   Code   RO         1561    .ARM.Collect$$libinit$$00000000  c_p.l(libinit.o)
+    0x00000248   0x00000248   0x00000000   Code   RO         1585    .ARM.Collect$$libinit$$00000002  c_p.l(libinit2.o)
+    0x00000248   0x00000248   0x00000000   Code   RO         1587    .ARM.Collect$$libinit$$00000004  c_p.l(libinit2.o)
+    0x00000248   0x00000248   0x00000000   Code   RO         1589    .ARM.Collect$$libinit$$00000006  c_p.l(libinit2.o)
+    0x00000248   0x00000248   0x00000000   Code   RO         1592    .ARM.Collect$$libinit$$0000000C  c_p.l(libinit2.o)
+    0x00000248   0x00000248   0x00000000   Code   RO         1594    .ARM.Collect$$libinit$$0000000E  c_p.l(libinit2.o)
+    0x00000248   0x00000248   0x00000000   Code   RO         1596    .ARM.Collect$$libinit$$00000010  c_p.l(libinit2.o)
+    0x00000248   0x00000248   0x00000006   Code   RO         1597    .ARM.Collect$$libinit$$00000011  c_p.l(libinit2.o)
+    0x0000024e   0x0000024e   0x00000000   Code   RO         1599    .ARM.Collect$$libinit$$00000013  c_p.l(libinit2.o)
+    0x0000024e   0x0000024e   0x0000000c   Code   RO         1600    .ARM.Collect$$libinit$$00000014  c_p.l(libinit2.o)
+    0x0000025a   0x0000025a   0x00000000   Code   RO         1601    .ARM.Collect$$libinit$$00000015  c_p.l(libinit2.o)
+    0x0000025a   0x0000025a   0x00000000   Code   RO         1603    .ARM.Collect$$libinit$$00000017  c_p.l(libinit2.o)
+    0x0000025a   0x0000025a   0x0000000a   Code   RO         1604    .ARM.Collect$$libinit$$00000018  c_p.l(libinit2.o)
+    0x00000264   0x00000264   0x00000000   Code   RO         1605    .ARM.Collect$$libinit$$00000019  c_p.l(libinit2.o)
+    0x00000264   0x00000264   0x00000000   Code   RO         1607    .ARM.Collect$$libinit$$0000001B  c_p.l(libinit2.o)
+    0x00000264   0x00000264   0x00000000   Code   RO         1609    .ARM.Collect$$libinit$$0000001D  c_p.l(libinit2.o)
+    0x00000264   0x00000264   0x00000000   Code   RO         1611    .ARM.Collect$$libinit$$0000001F  c_p.l(libinit2.o)
+    0x00000264   0x00000264   0x00000000   Code   RO         1613    .ARM.Collect$$libinit$$00000021  c_p.l(libinit2.o)
+    0x00000264   0x00000264   0x00000000   Code   RO         1615    .ARM.Collect$$libinit$$00000023  c_p.l(libinit2.o)
+    0x00000264   0x00000264   0x00000000   Code   RO         1617    .ARM.Collect$$libinit$$00000025  c_p.l(libinit2.o)
+    0x00000264   0x00000264   0x00000000   Code   RO         1619    .ARM.Collect$$libinit$$00000027  c_p.l(libinit2.o)
+    0x00000264   0x00000264   0x00000000   Code   RO         1623    .ARM.Collect$$libinit$$0000002E  c_p.l(libinit2.o)
+    0x00000264   0x00000264   0x00000000   Code   RO         1625    .ARM.Collect$$libinit$$00000030  c_p.l(libinit2.o)
+    0x00000264   0x00000264   0x00000000   Code   RO         1627    .ARM.Collect$$libinit$$00000032  c_p.l(libinit2.o)
+    0x00000264   0x00000264   0x00000000   Code   RO         1629    .ARM.Collect$$libinit$$00000034  c_p.l(libinit2.o)
+    0x00000264   0x00000264   0x00000002   Code   RO         1630    .ARM.Collect$$libinit$$00000035  c_p.l(libinit2.o)
+    0x00000266   0x00000266   0x00000002   Code   RO         1669    .ARM.Collect$$libshutdown$$00000000  c_p.l(libshutdown.o)
+    0x00000268   0x00000268   0x00000000   Code   RO         1697    .ARM.Collect$$libshutdown$$00000002  c_p.l(libshutdown2.o)
+    0x00000268   0x00000268   0x00000000   Code   RO         1699    .ARM.Collect$$libshutdown$$00000004  c_p.l(libshutdown2.o)
+    0x00000268   0x00000268   0x00000000   Code   RO         1702    .ARM.Collect$$libshutdown$$00000007  c_p.l(libshutdown2.o)
+    0x00000268   0x00000268   0x00000000   Code   RO         1705    .ARM.Collect$$libshutdown$$0000000A  c_p.l(libshutdown2.o)
+    0x00000268   0x00000268   0x00000000   Code   RO         1707    .ARM.Collect$$libshutdown$$0000000C  c_p.l(libshutdown2.o)
+    0x00000268   0x00000268   0x00000000   Code   RO         1710    .ARM.Collect$$libshutdown$$0000000F  c_p.l(libshutdown2.o)
+    0x00000268   0x00000268   0x00000002   Code   RO         1711    .ARM.Collect$$libshutdown$$00000010  c_p.l(libshutdown2.o)
+    0x0000026a   0x0000026a   0x00000000   Code   RO         1309    .ARM.Collect$$rtentry$$00000000  c_p.l(__rtentry.o)
+    0x0000026a   0x0000026a   0x00000000   Code   RO         1477    .ARM.Collect$$rtentry$$00000002  c_p.l(__rtentry2.o)
+    0x0000026a   0x0000026a   0x00000006   Code   RO         1489    .ARM.Collect$$rtentry$$00000004  c_p.l(__rtentry4.o)
+    0x00000270   0x00000270   0x00000000   Code   RO         1479    .ARM.Collect$$rtentry$$00000009  c_p.l(__rtentry2.o)
+    0x00000270   0x00000270   0x00000004   Code   RO         1480    .ARM.Collect$$rtentry$$0000000A  c_p.l(__rtentry2.o)
+    0x00000274   0x00000274   0x00000000   Code   RO         1482    .ARM.Collect$$rtentry$$0000000C  c_p.l(__rtentry2.o)
+    0x00000274   0x00000274   0x00000008   Code   RO         1483    .ARM.Collect$$rtentry$$0000000D  c_p.l(__rtentry2.o)
+    0x0000027c   0x0000027c   0x00000002   Code   RO         1569    .ARM.Collect$$rtexit$$00000000  c_p.l(rtexit.o)
+    0x0000027e   0x0000027e   0x00000000   Code   RO         1638    .ARM.Collect$$rtexit$$00000002  c_p.l(rtexit2.o)
+    0x0000027e   0x0000027e   0x00000004   Code   RO         1639    .ARM.Collect$$rtexit$$00000003  c_p.l(rtexit2.o)
+    0x00000282   0x00000282   0x00000006   Code   RO         1640    .ARM.Collect$$rtexit$$00000004  c_p.l(rtexit2.o)
+    0x00000288   0x00000288   0x00000038   Code   RO         1217    .emb_text           c_p.l(rt_memcpy.o)
+    0x000002c0   0x000002c0   0x0000002c   Code   RO           59    .text               startup_mspm0g350x_uvision.o
+    0x000002ec   0x000002ec   0x00000030   Code   RO         1211    .text               c_p.l(llmul.o)
+    0x0000031c   0x0000031c   0x0000003c   Code   RO         1213    .text               c_p.l(vsnprintf.o)
+    0x00000358   0x00000358   0x00000044   Code   RO         1215    .text               c_p.l(strlen.o)
+    0x0000039c   0x0000039c   0x00000082   Code   RO         1218    .text               c_p.l(rt_memcpy.o)
+    0x0000041e   0x0000041e   0x00000012   Code   RO         1221    .text               c_p.l(aeabi_memset4.o)
+    0x00000430   0x00000430   0x000001f8   Code   RO         1223    .text               c_p.l(aeabi_sdivfast.o)
+    0x00000628   0x00000628   0x00000006   Code   RO         1231    .text               c_p.l(heapauxi.o)
     0x0000062e   0x0000062e   0x00000002   PAD
-    0x00000630   0x00000630   0x0000007c   Code   RO         1190    .text               fz_ps.l(d2f.o)
-    0x000006ac   0x000006ac   0x00000248   Code   RO         1192    .text               fz_ps.l(dmul.o)
-    0x000008f4   0x000008f4   0x00000054   Code   RO         1194    .text               fz_ps.l(f2d.o)
-    0x00000948   0x00000948   0x00000160   Code   RO         1226    .text               fz_ps.l(fdiv.o)
-    0x00000aa8   0x00000aa8   0x0000004c   Code   RO         1229    .text               fz_ps.l(ffixi.o)
-    0x00000af4   0x00000af4   0x0000005e   Code   RO         1231    .text               fz_ps.l(fflti.o)
-    0x00000b52   0x00000b52   0x00000016   Code   RO         1269    .text               c_p.l(_rserrno.o)
-    0x00000b68   0x00000b68   0x0000004e   Code   RO         1273    .text               c_p.l(_printf_pad.o)
-    0x00000bb6   0x00000bb6   0x00000024   Code   RO         1275    .text               c_p.l(_printf_truncate.o)
-    0x00000bda   0x00000bda   0x00000052   Code   RO         1277    .text               c_p.l(_printf_str.o)
-    0x00000c2c   0x00000c2c   0x0000006c   Code   RO         1279    .text               c_p.l(_printf_dec.o)
-    0x00000c98   0x00000c98   0x00000026   Code   RO         1281    .text               c_p.l(_printf_charcount.o)
+    0x00000630   0x00000630   0x0000007c   Code   RO         1235    .text               fz_ps.l(d2f.o)
+    0x000006ac   0x000006ac   0x00000248   Code   RO         1237    .text               fz_ps.l(dmul.o)
+    0x000008f4   0x000008f4   0x00000054   Code   RO         1239    .text               fz_ps.l(f2d.o)
+    0x00000948   0x00000948   0x00000160   Code   RO         1271    .text               fz_ps.l(fdiv.o)
+    0x00000aa8   0x00000aa8   0x0000004c   Code   RO         1274    .text               fz_ps.l(ffixi.o)
+    0x00000af4   0x00000af4   0x0000005e   Code   RO         1276    .text               fz_ps.l(fflti.o)
+    0x00000b52   0x00000b52   0x00000016   Code   RO         1314    .text               c_p.l(_rserrno.o)
+    0x00000b68   0x00000b68   0x0000004e   Code   RO         1318    .text               c_p.l(_printf_pad.o)
+    0x00000bb6   0x00000bb6   0x00000024   Code   RO         1320    .text               c_p.l(_printf_truncate.o)
+    0x00000bda   0x00000bda   0x00000052   Code   RO         1322    .text               c_p.l(_printf_str.o)
+    0x00000c2c   0x00000c2c   0x0000006c   Code   RO         1324    .text               c_p.l(_printf_dec.o)
+    0x00000c98   0x00000c98   0x00000026   Code   RO         1326    .text               c_p.l(_printf_charcount.o)
     0x00000cbe   0x00000cbe   0x00000002   PAD
-    0x00000cc0   0x00000cc0   0x00000030   Code   RO         1283    .text               c_p.l(_printf_char_common.o)
-    0x00000cf0   0x00000cf0   0x00000010   Code   RO         1285    .text               c_p.l(_snputc.o)
-    0x00000d00   0x00000d00   0x000000bc   Code   RO         1287    .text               c_p.l(_printf_wctomb.o)
-    0x00000dbc   0x00000dbc   0x00000070   Code   RO         1290    .text               c_p.l(_printf_longlong_dec.o)
-    0x00000e2c   0x00000e2c   0x00000070   Code   RO         1296    .text               c_p.l(_printf_oct_int_ll.o)
-    0x00000e9c   0x00000e9c   0x00000098   Code   RO         1316    .text               c_p.l(_printf_hex_int_ll_ptr.o)
-    0x00000f34   0x00000f34   0x00000188   Code   RO         1336    .text               c_p.l(__printf_flags_ss_wp.o)
-    0x000010bc   0x000010bc   0x00000040   Code   RO         1362    .text               c_p.l(rt_memclr.o)
-    0x000010fc   0x000010fc   0x00000080   Code   RO         1377    .text               fz_ps.l(frnd.o)
-    0x0000117c   0x0000117c   0x00000044   Code   RO         1379    .text               fz_ps.l(fscalbn.o)
-    0x000011c0   0x000011c0   0x00000090   Code   RO         1381    .text               fz_ps.l(fsqrt.o)
-    0x00001250   0x00001250   0x00000008   Code   RO         1451    .text               c_p.l(rt_errno_addr_intlibspace.o)
-    0x00001258   0x00001258   0x0000007a   Code   RO         1453    .text               c_p.l(lludiv10.o)
-    0x000012d2   0x000012d2   0x000000b0   Code   RO         1455    .text               c_p.l(_printf_intcommon.o)
+    0x00000cc0   0x00000cc0   0x00000030   Code   RO         1328    .text               c_p.l(_printf_char_common.o)
+    0x00000cf0   0x00000cf0   0x00000010   Code   RO         1330    .text               c_p.l(_snputc.o)
+    0x00000d00   0x00000d00   0x000000bc   Code   RO         1332    .text               c_p.l(_printf_wctomb.o)
+    0x00000dbc   0x00000dbc   0x00000070   Code   RO         1335    .text               c_p.l(_printf_longlong_dec.o)
+    0x00000e2c   0x00000e2c   0x00000070   Code   RO         1341    .text               c_p.l(_printf_oct_int_ll.o)
+    0x00000e9c   0x00000e9c   0x00000098   Code   RO         1361    .text               c_p.l(_printf_hex_int_ll_ptr.o)
+    0x00000f34   0x00000f34   0x00000188   Code   RO         1381    .text               c_p.l(__printf_flags_ss_wp.o)
+    0x000010bc   0x000010bc   0x00000040   Code   RO         1407    .text               c_p.l(rt_memclr.o)
+    0x000010fc   0x000010fc   0x00000080   Code   RO         1422    .text               fz_ps.l(frnd.o)
+    0x0000117c   0x0000117c   0x00000044   Code   RO         1424    .text               fz_ps.l(fscalbn.o)
+    0x000011c0   0x000011c0   0x00000090   Code   RO         1426    .text               fz_ps.l(fsqrt.o)
+    0x00001250   0x00001250   0x00000008   Code   RO         1496    .text               c_p.l(rt_errno_addr_intlibspace.o)
+    0x00001258   0x00001258   0x0000007a   Code   RO         1498    .text               c_p.l(lludiv10.o)
+    0x000012d2   0x000012d2   0x000000b0   Code   RO         1500    .text               c_p.l(_printf_intcommon.o)
     0x00001382   0x00001382   0x00000002   PAD
-    0x00001384   0x00001384   0x00000414   Code   RO         1457    .text               c_p.l(_printf_fp_dec.o)
-    0x00001798   0x00001798   0x000002d8   Code   RO         1461    .text               c_p.l(_printf_fp_hex.o)
-    0x00001a70   0x00001a70   0x0000002e   Code   RO         1466    .text               c_p.l(_printf_char.o)
-    0x00001a9e   0x00001a9e   0x0000002e   Code   RO         1468    .text               c_p.l(_printf_wchar.o)
-    0x00001acc   0x00001acc   0x00000042   Code   RO         1471    .text               c_p.l(_c16rtomb.o)
-    0x00001b0e   0x00001b0e   0x00000028   Code   RO         1473    .text               c_p.l(rtudiv10.o)
+    0x00001384   0x00001384   0x00000414   Code   RO         1502    .text               c_p.l(_printf_fp_dec.o)
+    0x00001798   0x00001798   0x000002d8   Code   RO         1506    .text               c_p.l(_printf_fp_hex.o)
+    0x00001a70   0x00001a70   0x0000002e   Code   RO         1511    .text               c_p.l(_printf_char.o)
+    0x00001a9e   0x00001a9e   0x0000002e   Code   RO         1513    .text               c_p.l(_printf_wchar.o)
+    0x00001acc   0x00001acc   0x00000042   Code   RO         1516    .text               c_p.l(_c16rtomb.o)
+    0x00001b0e   0x00001b0e   0x00000028   Code   RO         1518    .text               c_p.l(rtudiv10.o)
     0x00001b36   0x00001b36   0x00000002   PAD
-    0x00001b38   0x00001b38   0x00000064   Code   RO         1475    .text               fz_ps.l(fcmpin.o)
-    0x00001b9c   0x00001b9c   0x00000008   Code   RO         1477    .text               c_p.l(libspace.o)
-    0x00001ba4   0x00001ba4   0x0000003e   Code   RO         1480    .text               c_p.l(sys_stackheap_outer.o)
+    0x00001b38   0x00001b38   0x00000064   Code   RO         1520    .text               fz_ps.l(fcmpin.o)
+    0x00001b9c   0x00001b9c   0x00000008   Code   RO         1522    .text               c_p.l(libspace.o)
+    0x00001ba4   0x00001ba4   0x0000003e   Code   RO         1525    .text               c_p.l(sys_stackheap_outer.o)
     0x00001be2   0x00001be2   0x00000002   PAD
-    0x00001be4   0x00001be4   0x00000010   Code   RO         1483    .text               c_p.l(rt_ctype_table.o)
-    0x00001bf4   0x00001bf4   0x00000008   Code   RO         1488    .text               c_p.l(rt_locale_intlibspace.o)
-    0x00001bfc   0x00001bfc   0x00000088   Code   RO         1490    .text               c_p.l(_printf_fp_infnan.o)
-    0x00001c84   0x00001c84   0x000000d8   Code   RO         1492    .text               c_p.l(bigflt0.o)
-    0x00001d5c   0x00001d5c   0x00000580   Code   RO         1495    .text               c_p.l(btod.o)
-    0x000022dc   0x000022dc   0x00000010   Code   RO         1505    .text               c_p.l(exit.o)
-    0x000022ec   0x000022ec   0x0000002e   Code   RO         1517    .text               fz_ps.l(cmpret.o)
+    0x00001be4   0x00001be4   0x00000010   Code   RO         1528    .text               c_p.l(rt_ctype_table.o)
+    0x00001bf4   0x00001bf4   0x00000008   Code   RO         1533    .text               c_p.l(rt_locale_intlibspace.o)
+    0x00001bfc   0x00001bfc   0x00000088   Code   RO         1535    .text               c_p.l(_printf_fp_infnan.o)
+    0x00001c84   0x00001c84   0x000000d8   Code   RO         1537    .text               c_p.l(bigflt0.o)
+    0x00001d5c   0x00001d5c   0x00000580   Code   RO         1540    .text               c_p.l(btod.o)
+    0x000022dc   0x000022dc   0x00000010   Code   RO         1550    .text               c_p.l(exit.o)
+    0x000022ec   0x000022ec   0x0000002e   Code   RO         1562    .text               fz_ps.l(cmpret.o)
     0x0000231a   0x0000231a   0x00000002   PAD
-    0x0000231c   0x0000231c   0x00000010   Code   RO         1519    .text               fz_ps.l(fnan2.o)
-    0x0000232c   0x0000232c   0x000000b0   Code   RO         1537    .text               c_p.l(strcmpv6m.o)
-    0x000023dc   0x000023dc   0x0000005e   Code   RO         1586    .text               fz_ps.l(retnan.o)
+    0x0000231c   0x0000231c   0x00000010   Code   RO         1564    .text               fz_ps.l(fnan2.o)
+    0x0000232c   0x0000232c   0x000000b0   Code   RO         1582    .text               c_p.l(strcmpv6m.o)
+    0x000023dc   0x000023dc   0x0000005e   Code   RO         1631    .text               fz_ps.l(retnan.o)
     0x0000243a   0x0000243a   0x00000002   PAD
-    0x0000243c   0x0000243c   0x0000000c   Code   RO         1588    .text               c_p.l(sys_exit.o)
-    0x00002448   0x00002448   0x00000002   Code   RO         1613    .text               c_p.l(use_no_semi.o)
-    0x0000244a   0x0000244a   0x00000000   Code   RO         1615    .text               c_p.l(indicate_semi.o)
-    0x0000244a   0x0000244a   0x0000000a   Code   RO          550    .text.DL_Common_delayCycles  driverlib.a(dl_common.o)
-    0x00002454   0x00002454   0x0000002c   Code   RO          563    .text.DL_I2C_fillControllerTXFIFO  driverlib.a(dl_i2c.o)
-    0x00002480   0x00002480   0x00000028   Code   RO          565    .text.DL_I2C_flushControllerTXFIFO  driverlib.a(dl_i2c.o)
-    0x000024a8   0x000024a8   0x00000026   Code   RO          559    .text.DL_I2C_setClockConfig  driverlib.a(dl_i2c.o)
+    0x0000243c   0x0000243c   0x0000000c   Code   RO         1633    .text               c_p.l(sys_exit.o)
+    0x00002448   0x00002448   0x00000002   Code   RO         1658    .text               c_p.l(use_no_semi.o)
+    0x0000244a   0x0000244a   0x00000000   Code   RO         1660    .text               c_p.l(indicate_semi.o)
+    0x0000244a   0x0000244a   0x0000000a   Code   RO          595    .text.DL_Common_delayCycles  driverlib.a(dl_common.o)
+    0x00002454   0x00002454   0x0000002c   Code   RO          608    .text.DL_I2C_fillControllerTXFIFO  driverlib.a(dl_i2c.o)
+    0x00002480   0x00002480   0x00000028   Code   RO          610    .text.DL_I2C_flushControllerTXFIFO  driverlib.a(dl_i2c.o)
+    0x000024a8   0x000024a8   0x00000026   Code   RO          604    .text.DL_I2C_setClockConfig  driverlib.a(dl_i2c.o)
     0x000024ce   0x000024ce   0x00000002   PAD
-    0x000024d0   0x000024d0   0x00000044   Code   RO          591    .text.DL_SPI_init   driverlib.a(dl_spi.o)
-    0x00002514   0x00002514   0x00000012   Code   RO          593    .text.DL_SPI_setClockConfig  driverlib.a(dl_spi.o)
+    0x000024d0   0x000024d0   0x00000044   Code   RO          636    .text.DL_SPI_init   driverlib.a(dl_spi.o)
+    0x00002514   0x00002514   0x00000012   Code   RO          638    .text.DL_SPI_setClockConfig  driverlib.a(dl_spi.o)
     0x00002526   0x00002526   0x00000002   PAD
-    0x00002528   0x00002528   0x00000108   Code   RO          725    .text.DL_Timer_initFourCCPWMMode  driverlib.a(dl_timer.o)
-    0x00002630   0x00002630   0x000000f0   Code   RO          649    .text.DL_Timer_initTimerMode  driverlib.a(dl_timer.o)
-    0x00002720   0x00002720   0x0000001c   Code   RO          691    .text.DL_Timer_setCaptCompUpdateMethod  driverlib.a(dl_timer.o)
-    0x0000273c   0x0000273c   0x00000018   Code   RO          699    .text.DL_Timer_setCaptureCompareOutCtl  driverlib.a(dl_timer.o)
-    0x00002754   0x00002754   0x00000010   Code   RO          651    .text.DL_Timer_setCaptureCompareValue  driverlib.a(dl_timer.o)
-    0x00002764   0x00002764   0x0000001c   Code   RO          645    .text.DL_Timer_setClockConfig  driverlib.a(dl_timer.o)
-    0x00002780   0x00002780   0x00000048   Code   RO          746    .text.DL_UART_init  driverlib.a(dl_uart.o)
-    0x000027c8   0x000027c8   0x00000012   Code   RO          748    .text.DL_UART_setClockConfig  driverlib.a(dl_uart.o)
+    0x00002528   0x00002528   0x00000108   Code   RO          770    .text.DL_Timer_initFourCCPWMMode  driverlib.a(dl_timer.o)
+    0x00002630   0x00002630   0x000000f0   Code   RO          694    .text.DL_Timer_initTimerMode  driverlib.a(dl_timer.o)
+    0x00002720   0x00002720   0x0000001c   Code   RO          736    .text.DL_Timer_setCaptCompUpdateMethod  driverlib.a(dl_timer.o)
+    0x0000273c   0x0000273c   0x00000018   Code   RO          744    .text.DL_Timer_setCaptureCompareOutCtl  driverlib.a(dl_timer.o)
+    0x00002754   0x00002754   0x00000010   Code   RO          696    .text.DL_Timer_setCaptureCompareValue  driverlib.a(dl_timer.o)
+    0x00002764   0x00002764   0x0000001c   Code   RO          690    .text.DL_Timer_setClockConfig  driverlib.a(dl_timer.o)
+    0x00002780   0x00002780   0x00000048   Code   RO          791    .text.DL_UART_init  driverlib.a(dl_uart.o)
+    0x000027c8   0x000027c8   0x00000012   Code   RO          793    .text.DL_UART_setClockConfig  driverlib.a(dl_uart.o)
     0x000027da   0x000027da   0x00000002   PAD
-    0x000027dc   0x000027dc   0x00000014   Code   RO          760    .text.DL_UART_transmitDataBlocking  driverlib.a(dl_uart.o)
-    0x000027f0   0x000027f0   0x00000134   Code   RO          329    .text.DisplayTask   motor_controller.o
-    0x00002924   0x00002924   0x00000078   Code   RO          126    .text.Encoder_init  encoder.o
-    0x0000299c   0x0000299c   0x00000010   Code   RO          357    .text.FusionAhrsGetQuaternion  fusionahrs.o
-    0x000029ac   0x000029ac   0x00000058   Code   RO          343    .text.FusionAhrsInitialise  fusionahrs.o
-    0x00002a04   0x00002a04   0x00000100   Code   RO          351    .text.FusionAhrsSetHeading  fusionahrs.o
-    0x00002b04   0x00002b04   0x000000a8   Code   RO          345    .text.FusionAhrsSetSettings  fusionahrs.o
-    0x00002bac   0x00002bac   0x00000714   Code   RO          349    .text.FusionAhrsUpdate  fusionahrs.o
-    0x000032c0   0x000032c0   0x0000011a   Code   RO          353    .text.FusionAhrsUpdateNoMagnetometer  fusionahrs.o
+    0x000027dc   0x000027dc   0x00000014   Code   RO          805    .text.DL_UART_transmitDataBlocking  driverlib.a(dl_uart.o)
+    0x000027f0   0x000027f0   0x00000134   Code   RO           82    .text.DisplayTask   motor_controller.o
+    0x00002924   0x00002924   0x00000078   Code   RO          252    .text.Encoder_init  encoder.o
+    0x0000299c   0x0000299c   0x00000010   Code   RO          153    .text.FusionAhrsGetQuaternion  fusionahrs.o
+    0x000029ac   0x000029ac   0x00000058   Code   RO          139    .text.FusionAhrsInitialise  fusionahrs.o
+    0x00002a04   0x00002a04   0x00000100   Code   RO          147    .text.FusionAhrsSetHeading  fusionahrs.o
+    0x00002b04   0x00002b04   0x000000a8   Code   RO          141    .text.FusionAhrsSetSettings  fusionahrs.o
+    0x00002bac   0x00002bac   0x00000714   Code   RO          145    .text.FusionAhrsUpdate  fusionahrs.o
+    0x000032c0   0x000032c0   0x0000011a   Code   RO          149    .text.FusionAhrsUpdateNoMagnetometer  fusionahrs.o
     0x000033da   0x000033da   0x00000002   PAD
-    0x000033dc   0x000033dc   0x0000019c   Code   RO          375    .text.FusionCompassCalculateHeading  fusioncompass.o
-    0x00003578   0x00003578   0x000000f8   Code   RO          132    .text.GROUP1_IRQHandler  encoder.o
-    0x00003670   0x00003670   0x00000010   Code   RO          313    .text.Gray_Detection_Init  gray_detection.o
-    0x00003680   0x00003680   0x000000f8   Code   RO          398    .text.I2C_ReadReg   hardware_i2c.o
-    0x00003778   0x00003778   0x00000200   Code   RO          153    .text.ICM206xx_Init  icm20608.o
-    0x00003978   0x00003978   0x00000194   Code   RO          155    .text.ICM206xx_Read_Data  icm20608.o
-    0x00003b0c   0x00003b0c   0x00000048   Code   RO           75    .text.LOG_E         log.o
-    0x00003b54   0x00003b54   0x00000044   Code   RO           71    .text.LOG_I         log.o
-    0x00003b98   0x00003b98   0x0000003c   Code   RO          181    .text.Motor_Init    motor.o
-    0x00003bd4   0x00003bd4   0x0000007c   Code   RO          199    .text.OLED_Init     oled.o
-    0x00003c50   0x00003c50   0x00000044   Code   RO         1123    .text.PendSV_Handler  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
-    0x00003c94   0x00003c94   0x00000160   Code   RO          327    .text.QuaternionToEulerAngles  motor_controller.o
-    0x00003df4   0x00003df4   0x00000010   Code   RO           99    .text.ReadFlashParameterOne  eeprom.o
-    0x00003e04   0x00003e04   0x00000028   Code   RO          456    .text.SPI_LCD_WrCmd  spi.o
-    0x00003e2c   0x00003e2c   0x0000002c   Code   RO          454    .text.SPI_LCD_WrDat  spi.o
-    0x00003e58   0x00003e58   0x00000002   Code   RO         1103    .text.SVC_Handler   freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
+    0x000033dc   0x000033dc   0x0000019c   Code   RO          171    .text.FusionCompassCalculateHeading  fusioncompass.o
+    0x00003578   0x00003578   0x000000f8   Code   RO          258    .text.GROUP1_IRQHandler  encoder.o
+    0x00003670   0x00003670   0x00000010   Code   RO           66    .text.Gray_Detection_Init  gray_detection.o
+    0x00003680   0x00003680   0x000000f8   Code   RO          441    .text.I2C_ReadReg   hardware_i2c.o
+    0x00003778   0x00003778   0x00000200   Code   RO          279    .text.ICM206xx_Init  icm20608.o
+    0x00003978   0x00003978   0x00000194   Code   RO          281    .text.ICM206xx_Read_Data  icm20608.o
+    0x00003b0c   0x00003b0c   0x00000048   Code   RO          210    .text.LOG_E         log.o
+    0x00003b54   0x00003b54   0x00000044   Code   RO          206    .text.LOG_I         log.o
+    0x00003b98   0x00003b98   0x0000003c   Code   RO          307    .text.Motor_Init    motor.o
+    0x00003bd4   0x00003bd4   0x0000007c   Code   RO          325    .text.OLED_Init     oled.o
+    0x00003c50   0x00003c50   0x00000044   Code   RO         1168    .text.PendSV_Handler  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
+    0x00003c94   0x00003c94   0x00000160   Code   RO           80    .text.QuaternionToEulerAngles  motor_controller.o
+    0x00003df4   0x00003df4   0x00000010   Code   RO          225    .text.ReadFlashParameterOne  eeprom.o
+    0x00003e04   0x00003e04   0x00000028   Code   RO          513    .text.SPI_LCD_WrCmd  spi.o
+    0x00003e2c   0x00003e2c   0x0000002c   Code   RO          511    .text.SPI_LCD_WrDat  spi.o
+    0x00003e58   0x00003e58   0x00000002   Code   RO         1148    .text.SVC_Handler   freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
     0x00003e5a   0x00003e5a   0x00000002   PAD
-    0x00003e5c   0x00003e5c   0x000000e0   Code   RO            6    .text.SYSCFG_DL_GPIO_init  ti_msp_dl_config.o
-    0x00003f3c   0x00003f3c   0x00000054   Code   RO           16    .text.SYSCFG_DL_I2C_0_init  ti_msp_dl_config.o
-    0x00003f90   0x00003f90   0x00000088   Code   RO           10    .text.SYSCFG_DL_Motor_PWM1_init  ti_msp_dl_config.o
-    0x00004018   0x00004018   0x0000008c   Code   RO           12    .text.SYSCFG_DL_Motor_PWM2_init  ti_msp_dl_config.o
-    0x000040a4   0x000040a4   0x0000004c   Code   RO           20    .text.SYSCFG_DL_SPI_0_init  ti_msp_dl_config.o
-    0x000040f0   0x000040f0   0x0000001c   Code   RO            8    .text.SYSCFG_DL_SYSCTL_init  ti_msp_dl_config.o
-    0x0000410c   0x0000410c   0x00000038   Code   RO           14    .text.SYSCFG_DL_TIMER_delay_init  ti_msp_dl_config.o
-    0x00004144   0x00004144   0x00000060   Code   RO           18    .text.SYSCFG_DL_UART_DEBUG_init  ti_msp_dl_config.o
-    0x000041a4   0x000041a4   0x00000048   Code   RO            2    .text.SYSCFG_DL_init  ti_msp_dl_config.o
-    0x000041ec   0x000041ec   0x00000070   Code   RO            4    .text.SYSCFG_DL_initPower  ti_msp_dl_config.o
-    0x0000425c   0x0000425c   0x0000002c   Code   RO          414    .text.SoftwareI2C_Init  software_i2c.o
-    0x00004288   0x00004288   0x000000e4   Code   RO          124    .text.SpeedTimerCallback  encoder.o
-    0x0000436c   0x0000436c   0x00000024   Code   RO         1125    .text.SysTick_Handler  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
-    0x00004390   0x00004390   0x00000174   Code   RO          273    .text.W25Q64_erase_sector  w25qxx.o
-    0x00004504   0x00004504   0x000000d8   Code   RO          283    .text.W25Q64_read   w25qxx.o
-    0x000045dc   0x000045dc   0x00000160   Code   RO          285    .text.W25Q64_write_page  w25qxx.o
-    0x0000473c   0x0000473c   0x0000002e   Code   RO          295    .text.W25QXX_Read_f  w25qxx.o
+    0x00003e5c   0x00003e5c   0x000000e0   Code   RO           15    .text.SYSCFG_DL_GPIO_init  ti_msp_dl_config.o
+    0x00003f3c   0x00003f3c   0x00000054   Code   RO           25    .text.SYSCFG_DL_I2C_0_init  ti_msp_dl_config.o
+    0x00003f90   0x00003f90   0x00000088   Code   RO           19    .text.SYSCFG_DL_Motor_PWM1_init  ti_msp_dl_config.o
+    0x00004018   0x00004018   0x0000008c   Code   RO           21    .text.SYSCFG_DL_Motor_PWM2_init  ti_msp_dl_config.o
+    0x000040a4   0x000040a4   0x0000004c   Code   RO           29    .text.SYSCFG_DL_SPI_0_init  ti_msp_dl_config.o
+    0x000040f0   0x000040f0   0x0000001c   Code   RO           17    .text.SYSCFG_DL_SYSCTL_init  ti_msp_dl_config.o
+    0x0000410c   0x0000410c   0x00000038   Code   RO           23    .text.SYSCFG_DL_TIMER_delay_init  ti_msp_dl_config.o
+    0x00004144   0x00004144   0x00000060   Code   RO           27    .text.SYSCFG_DL_UART_DEBUG_init  ti_msp_dl_config.o
+    0x000041a4   0x000041a4   0x00000048   Code   RO           11    .text.SYSCFG_DL_init  ti_msp_dl_config.o
+    0x000041ec   0x000041ec   0x00000070   Code   RO           13    .text.SYSCFG_DL_initPower  ti_msp_dl_config.o
+    0x0000425c   0x0000425c   0x0000002c   Code   RO          457    .text.SoftwareI2C_Init  software_i2c.o
+    0x00004288   0x00004288   0x000000e4   Code   RO          250    .text.SpeedTimerCallback  encoder.o
+    0x0000436c   0x0000436c   0x00000024   Code   RO         1170    .text.SysTick_Handler  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
+    0x00004390   0x00004390   0x00000174   Code   RO          399    .text.W25Q64_erase_sector  w25qxx.o
+    0x00004504   0x00004504   0x000000d8   Code   RO          409    .text.W25Q64_read   w25qxx.o
+    0x000045dc   0x000045dc   0x00000160   Code   RO          411    .text.W25Q64_write_page  w25qxx.o
+    0x0000473c   0x0000473c   0x0000002e   Code   RO          421    .text.W25QXX_Read_f  w25qxx.o
     0x0000476a   0x0000476a   0x00000002   PAD
-    0x0000476c   0x0000476c   0x0000014c   Code   RO          289    .text.W25QXX_Write  w25qxx.o
-    0x000048b8   0x000048b8   0x0000002e   Code   RO          299    .text.W25QXX_Write_f  w25qxx.o
+    0x0000476c   0x0000476c   0x0000014c   Code   RO          415    .text.W25QXX_Write  w25qxx.o
+    0x000048b8   0x000048b8   0x0000002e   Code   RO          425    .text.W25QXX_Write_f  w25qxx.o
     0x000048e6   0x000048e6   0x00000002   PAD
-    0x000048e8   0x000048e8   0x00000024   Code   RO          109    .text.WriteFlashParameter_Three  eeprom.o
-    0x0000490c   0x0000490c   0x0000004a   Code   RO           59    .text.delay_ms      delay.o
+    0x000048e8   0x000048e8   0x00000024   Code   RO          235    .text.WriteFlashParameter_Three  eeprom.o
+    0x0000490c   0x0000490c   0x0000004a   Code   RO          194    .text.delay_ms      delay.o
     0x00004956   0x00004956   0x00000002   PAD
-    0x00004958   0x00004958   0x00000048   Code   RO          934    .text.eTaskConfirmSleepModeStatus  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x000049a0   0x000049a0   0x00000008   Code   RO          404    .text.i2creadnbyte  hardware_i2c.o
-    0x000049a8   0x000049a8   0x00000218   Code   RO          159    .text.imu_calibration  icm20608.o
-    0x00004bc0   0x00004bc0   0x000000ec   Code   RO          157    .text.imu_calibration_params_init  icm20608.o
-    0x00004cac   0x00004cac   0x00000040   Code   RO           88    .text.main          main.o
-    0x00004cec   0x00004cec   0x00000114   Code   RO          854    .text.prvAddNewTaskToReadyList  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x00004e00   0x00004e00   0x000000fc   Code   RO          884    .text.prvIdleTask   freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x00004efc   0x00004efc   0x000000de   Code   RO          852    .text.prvInitialiseNewTask  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x00004958   0x00004958   0x00000048   Code   RO          979    .text.eTaskConfirmSleepModeStatus  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x000049a0   0x000049a0   0x00000008   Code   RO          447    .text.i2creadnbyte  hardware_i2c.o
+    0x000049a8   0x000049a8   0x00000218   Code   RO          285    .text.imu_calibration  icm20608.o
+    0x00004bc0   0x00004bc0   0x000000ec   Code   RO          283    .text.imu_calibration_params_init  icm20608.o
+    0x00004cac   0x00004cac   0x00000040   Code   RO            2    .text.main          main.o
+    0x00004cec   0x00004cec   0x00000114   Code   RO          899    .text.prvAddNewTaskToReadyList  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x00004e00   0x00004e00   0x000000fc   Code   RO          929    .text.prvIdleTask   freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x00004efc   0x00004efc   0x000000de   Code   RO          897    .text.prvInitialiseNewTask  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
     0x00004fda   0x00004fda   0x00000002   PAD
-    0x00004fdc   0x00004fdc   0x0000008c   Code   RO         1006    .text.prvInitialiseNewTimer  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
-    0x00005068   0x00005068   0x0000009c   Code   RO         1034    .text.prvSampleTimeNow  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
-    0x00005104   0x00005104   0x00000034   Code   RO         1101    .text.prvTaskExitError  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
-    0x00005138   0x00005138   0x000001f8   Code   RO         1002    .text.prvTimerTask  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
-    0x00005330   0x00005330   0x0000007e   Code   RO          808    .text.prvUnlockQueue  freertos_builds_LP_MSPM0G3507_release_keil.lib(queue.o)
+    0x00004fdc   0x00004fdc   0x0000008c   Code   RO         1051    .text.prvInitialiseNewTimer  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
+    0x00005068   0x00005068   0x0000009c   Code   RO         1079    .text.prvSampleTimeNow  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
+    0x00005104   0x00005104   0x00000034   Code   RO         1146    .text.prvTaskExitError  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
+    0x00005138   0x00005138   0x000001f8   Code   RO         1047    .text.prvTimerTask  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
+    0x00005330   0x00005330   0x0000007e   Code   RO          853    .text.prvUnlockQueue  freertos_builds_LP_MSPM0G3507_release_keil.lib(queue.o)
     0x000053ae   0x000053ae   0x00000002   PAD
-    0x000053b0   0x000053b0   0x00000170   Code   RO         1071    .text.pvPortMalloc  freertos_builds_LP_MSPM0G3507_release_keil.lib(heap_4.o)
-    0x00005520   0x00005520   0x00000018   Code   RO          954    .text.pvTaskIncrementMutexHeldCount  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x00005538   0x00005538   0x00000024   Code   RO         1099    .text.pxPortInitialiseStack  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
-    0x0000555c   0x0000555c   0x00000018   Code   RO          516    .text.safe_sqrt     wp_math.o
-    0x00005574   0x00005574   0x00000018   Code   RO          402    .text.single_readi2c  hardware_i2c.o
-    0x0000558c   0x0000558c   0x000000b4   Code   RO          400    .text.single_writei2c  hardware_i2c.o
-    0x00005640   0x00005640   0x00000008   Code   RO         1119    .text.ulSetInterruptMaskFromISR  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
-    0x00005648   0x00005648   0x00000046   Code   RO          468    .text.usart_printf  uart.o
-    0x0000568e   0x0000568e   0x00000020   Code   RO         1061    .text.uxListRemove  freertos_builds_LP_MSPM0G3507_release_keil.lib(list.o)
+    0x000053b0   0x000053b0   0x00000170   Code   RO         1116    .text.pvPortMalloc  freertos_builds_LP_MSPM0G3507_release_keil.lib(heap_4.o)
+    0x00005520   0x00005520   0x00000018   Code   RO          999    .text.pvTaskIncrementMutexHeldCount  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x00005538   0x00005538   0x00000024   Code   RO         1144    .text.pxPortInitialiseStack  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
+    0x0000555c   0x0000555c   0x00000018   Code   RO          561    .text.safe_sqrt     fast_math.o
+    0x00005574   0x00005574   0x00000018   Code   RO          445    .text.single_readi2c  hardware_i2c.o
+    0x0000558c   0x0000558c   0x000000b4   Code   RO          443    .text.single_writei2c  hardware_i2c.o
+    0x00005640   0x00005640   0x00000008   Code   RO         1164    .text.ulSetInterruptMaskFromISR  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
+    0x00005648   0x00005648   0x00000046   Code   RO          499    .text.usart_printf  uart_driver.o
+    0x0000568e   0x0000568e   0x00000020   Code   RO         1106    .text.uxListRemove  freertos_builds_LP_MSPM0G3507_release_keil.lib(list.o)
     0x000056ae   0x000056ae   0x00000002   PAD
-    0x000056b0   0x000056b0   0x00000018   Code   RO         1149    .text.vApplicationGetIdleTaskMemory  freertos_builds_LP_MSPM0G3507_release_keil.lib(staticallocs_freertos.o)
-    0x000056c8   0x000056c8   0x00000018   Code   RO         1151    .text.vApplicationGetTimerTaskMemory  freertos_builds_LP_MSPM0G3507_release_keil.lib(staticallocs_freertos.o)
-    0x000056e0   0x000056e0   0x00000002   Code   RO         1141    .text.vApplicationStackOverflowHook  freertos_builds_LP_MSPM0G3507_release_keil.lib(apphooks_freertos.o)
-    0x000056e2   0x000056e2   0x00000006   Code   RO         1121    .text.vClearInterruptMaskFromISR  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
-    0x000056e8   0x000056e8   0x00000014   Code   RO         1053    .text.vListInitialise  freertos_builds_LP_MSPM0G3507_release_keil.lib(list.o)
-    0x000056fc   0x000056fc   0x00000006   Code   RO         1055    .text.vListInitialiseItem  freertos_builds_LP_MSPM0G3507_release_keil.lib(list.o)
-    0x00005702   0x00005702   0x0000003c   Code   RO         1059    .text.vListInsert   freertos_builds_LP_MSPM0G3507_release_keil.lib(list.o)
-    0x0000573e   0x0000573e   0x00000016   Code   RO         1057    .text.vListInsertEnd  freertos_builds_LP_MSPM0G3507_release_keil.lib(list.o)
-    0x00005754   0x00005754   0x00000014   Code   RO         1115    .text.vPortEnterCritical  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
-    0x00005768   0x00005768   0x0000001c   Code   RO         1117    .text.vPortExitCritical  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
-    0x00005784   0x00005784   0x000000a8   Code   RO         1073    .text.vPortFree     freertos_builds_LP_MSPM0G3507_release_keil.lib(heap_4.o)
-    0x0000582c   0x0000582c   0x00000024   Code   RO         1107    .text.vPortSetupTimerInterrupt  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
-    0x00005850   0x00005850   0x00000034   Code   RO         1109    .text.vPortStartFirstTask  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
-    0x00005884   0x00005884   0x0000015c   Code   RO         1127    .text.vPortSuppressTicksAndSleep  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
-    0x000059e0   0x000059e0   0x00000018   Code   RO         1113    .text.vPortYield    freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
-    0x000059f8   0x000059f8   0x00000044   Code   RO          840    .text.vQueueWaitForMessageRestricted  freertos_builds_LP_MSPM0G3507_release_keil.lib(queue.o)
-    0x00005a3c   0x00005a3c   0x00000068   Code   RO          866    .text.vTaskDelay    freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x00005aa4   0x00005aa4   0x000000c0   Code   RO          858    .text.vTaskDelete   freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x00005b64   0x00005b64   0x00000014   Code   RO          924    .text.vTaskInternalSetTimeOutState  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x00005b78   0x00005b78   0x00000008   Code   RO          928    .text.vTaskMissedYield  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x00005b80   0x00005b80   0x00000060   Code   RO          912    .text.vTaskPlaceOnEventList  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x00005be0   0x00005be0   0x00000084   Code   RO          916    .text.vTaskPlaceOnEventListRestricted  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x00005c64   0x00005c64   0x00000078   Code   RO          950    .text.vTaskPriorityDisinheritAfterTimeout  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x00005cdc   0x00005cdc   0x000000ac   Code   RO          882    .text.vTaskStartScheduler  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x00005d88   0x00005d88   0x00000024   Code   RO          900    .text.vTaskStepTick  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x00005dac   0x00005dac   0x00000010   Code   RO          862    .text.vTaskSuspendAll  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x00005dbc   0x00005dbc   0x000000e4   Code   RO          878    .text.vTaskSwitchContext  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x00005ea0   0x00005ea0   0x0000005c   Code   RO         1105    .text.xPortStartScheduler  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
-    0x00005efc   0x00005efc   0x00000028   Code   RO          792    .text.xQueueCreateMutex  freertos_builds_LP_MSPM0G3507_release_keil.lib(queue.o)
-    0x00005f24   0x00005f24   0x0000009c   Code   RO          790    .text.xQueueGenericCreate  freertos_builds_LP_MSPM0G3507_release_keil.lib(queue.o)
-    0x00005fc0   0x00005fc0   0x00000096   Code   RO          788    .text.xQueueGenericCreateStatic  freertos_builds_LP_MSPM0G3507_release_keil.lib(queue.o)
-    0x00006056   0x00006056   0x00000214   Code   RO          798    .text.xQueueGenericSend  freertos_builds_LP_MSPM0G3507_release_keil.lib(queue.o)
-    0x0000626a   0x0000626a   0x0000010c   Code   RO          810    .text.xQueueGenericSendFromISR  freertos_builds_LP_MSPM0G3507_release_keil.lib(queue.o)
-    0x00006376   0x00006376   0x00000084   Code   RO          812    .text.xQueueGiveFromISR  freertos_builds_LP_MSPM0G3507_release_keil.lib(queue.o)
-    0x000063fa   0x000063fa   0x0000017a   Code   RO          814    .text.xQueueReceive  freertos_builds_LP_MSPM0G3507_release_keil.lib(queue.o)
-    0x00006574   0x00006574   0x0000009c   Code   RO          818    .text.xQueueReceiveFromISR  freertos_builds_LP_MSPM0G3507_release_keil.lib(queue.o)
-    0x00006610   0x00006610   0x000001da   Code   RO          802    .text.xQueueSemaphoreTake  freertos_builds_LP_MSPM0G3507_release_keil.lib(queue.o)
+    0x000056b0   0x000056b0   0x00000018   Code   RO         1194    .text.vApplicationGetIdleTaskMemory  freertos_builds_LP_MSPM0G3507_release_keil.lib(staticallocs_freertos.o)
+    0x000056c8   0x000056c8   0x00000018   Code   RO         1196    .text.vApplicationGetTimerTaskMemory  freertos_builds_LP_MSPM0G3507_release_keil.lib(staticallocs_freertos.o)
+    0x000056e0   0x000056e0   0x00000002   Code   RO         1186    .text.vApplicationStackOverflowHook  freertos_builds_LP_MSPM0G3507_release_keil.lib(apphooks_freertos.o)
+    0x000056e2   0x000056e2   0x00000006   Code   RO         1166    .text.vClearInterruptMaskFromISR  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
+    0x000056e8   0x000056e8   0x00000014   Code   RO         1098    .text.vListInitialise  freertos_builds_LP_MSPM0G3507_release_keil.lib(list.o)
+    0x000056fc   0x000056fc   0x00000006   Code   RO         1100    .text.vListInitialiseItem  freertos_builds_LP_MSPM0G3507_release_keil.lib(list.o)
+    0x00005702   0x00005702   0x0000003c   Code   RO         1104    .text.vListInsert   freertos_builds_LP_MSPM0G3507_release_keil.lib(list.o)
+    0x0000573e   0x0000573e   0x00000016   Code   RO         1102    .text.vListInsertEnd  freertos_builds_LP_MSPM0G3507_release_keil.lib(list.o)
+    0x00005754   0x00005754   0x00000014   Code   RO         1160    .text.vPortEnterCritical  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
+    0x00005768   0x00005768   0x0000001c   Code   RO         1162    .text.vPortExitCritical  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
+    0x00005784   0x00005784   0x000000a8   Code   RO         1118    .text.vPortFree     freertos_builds_LP_MSPM0G3507_release_keil.lib(heap_4.o)
+    0x0000582c   0x0000582c   0x00000024   Code   RO         1152    .text.vPortSetupTimerInterrupt  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
+    0x00005850   0x00005850   0x00000034   Code   RO         1154    .text.vPortStartFirstTask  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
+    0x00005884   0x00005884   0x0000015c   Code   RO         1172    .text.vPortSuppressTicksAndSleep  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
+    0x000059e0   0x000059e0   0x00000018   Code   RO         1158    .text.vPortYield    freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
+    0x000059f8   0x000059f8   0x00000044   Code   RO          885    .text.vQueueWaitForMessageRestricted  freertos_builds_LP_MSPM0G3507_release_keil.lib(queue.o)
+    0x00005a3c   0x00005a3c   0x00000068   Code   RO          911    .text.vTaskDelay    freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x00005aa4   0x00005aa4   0x000000c0   Code   RO          903    .text.vTaskDelete   freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x00005b64   0x00005b64   0x00000014   Code   RO          969    .text.vTaskInternalSetTimeOutState  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x00005b78   0x00005b78   0x00000008   Code   RO          973    .text.vTaskMissedYield  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x00005b80   0x00005b80   0x00000060   Code   RO          957    .text.vTaskPlaceOnEventList  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x00005be0   0x00005be0   0x00000084   Code   RO          961    .text.vTaskPlaceOnEventListRestricted  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x00005c64   0x00005c64   0x00000078   Code   RO          995    .text.vTaskPriorityDisinheritAfterTimeout  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x00005cdc   0x00005cdc   0x000000ac   Code   RO          927    .text.vTaskStartScheduler  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x00005d88   0x00005d88   0x00000024   Code   RO          945    .text.vTaskStepTick  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x00005dac   0x00005dac   0x00000010   Code   RO          907    .text.vTaskSuspendAll  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x00005dbc   0x00005dbc   0x000000e4   Code   RO          923    .text.vTaskSwitchContext  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x00005ea0   0x00005ea0   0x0000005c   Code   RO         1150    .text.xPortStartScheduler  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
+    0x00005efc   0x00005efc   0x00000028   Code   RO          837    .text.xQueueCreateMutex  freertos_builds_LP_MSPM0G3507_release_keil.lib(queue.o)
+    0x00005f24   0x00005f24   0x0000009c   Code   RO          835    .text.xQueueGenericCreate  freertos_builds_LP_MSPM0G3507_release_keil.lib(queue.o)
+    0x00005fc0   0x00005fc0   0x00000096   Code   RO          833    .text.xQueueGenericCreateStatic  freertos_builds_LP_MSPM0G3507_release_keil.lib(queue.o)
+    0x00006056   0x00006056   0x00000214   Code   RO          843    .text.xQueueGenericSend  freertos_builds_LP_MSPM0G3507_release_keil.lib(queue.o)
+    0x0000626a   0x0000626a   0x0000010c   Code   RO          855    .text.xQueueGenericSendFromISR  freertos_builds_LP_MSPM0G3507_release_keil.lib(queue.o)
+    0x00006376   0x00006376   0x00000084   Code   RO          857    .text.xQueueGiveFromISR  freertos_builds_LP_MSPM0G3507_release_keil.lib(queue.o)
+    0x000063fa   0x000063fa   0x0000017a   Code   RO          859    .text.xQueueReceive  freertos_builds_LP_MSPM0G3507_release_keil.lib(queue.o)
+    0x00006574   0x00006574   0x0000009c   Code   RO          863    .text.xQueueReceiveFromISR  freertos_builds_LP_MSPM0G3507_release_keil.lib(queue.o)
+    0x00006610   0x00006610   0x000001da   Code   RO          847    .text.xQueueSemaphoreTake  freertos_builds_LP_MSPM0G3507_release_keil.lib(queue.o)
     0x000067ea   0x000067ea   0x00000002   PAD
-    0x000067ec   0x000067ec   0x00000060   Code   RO          926    .text.xTaskCheckForTimeOut  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x0000684c   0x0000684c   0x00000058   Code   RO          856    .text.xTaskCreate   freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x000068a4   0x000068a4   0x0000004e   Code   RO          850    .text.xTaskCreateStatic  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x000067ec   0x000067ec   0x00000060   Code   RO          971    .text.xTaskCheckForTimeOut  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x0000684c   0x0000684c   0x00000058   Code   RO          901    .text.xTaskCreate   freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x000068a4   0x000068a4   0x0000004e   Code   RO          895    .text.xTaskCreateStatic  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
     0x000068f2   0x000068f2   0x00000002   PAD
-    0x000068f4   0x000068f4   0x0000001c   Code   RO          944    .text.xTaskGetSchedulerState  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x00006910   0x00006910   0x00000008   Code   RO          890    .text.xTaskGetTickCount  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x00006918   0x00006918   0x00000104   Code   RO          888    .text.xTaskIncrementTick  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x00006a1c   0x00006a1c   0x00000060   Code   RO          948    .text.xTaskPriorityDisinherit  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x00006a7c   0x00006a7c   0x00000078   Code   RO          946    .text.xTaskPriorityInherit  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x00006af4   0x00006af4   0x00000080   Code   RO          918    .text.xTaskRemoveFromEventList  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x00006b74   0x00006b74   0x00000100   Code   RO          864    .text.xTaskResumeAll  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x00006c74   0x00006c74   0x00000036   Code   RO         1004    .text.xTimerCreate  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
+    0x000068f4   0x000068f4   0x0000001c   Code   RO          989    .text.xTaskGetSchedulerState  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x00006910   0x00006910   0x00000008   Code   RO          935    .text.xTaskGetTickCount  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x00006918   0x00006918   0x00000104   Code   RO          933    .text.xTaskIncrementTick  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x00006a1c   0x00006a1c   0x00000060   Code   RO          993    .text.xTaskPriorityDisinherit  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x00006a7c   0x00006a7c   0x00000078   Code   RO          991    .text.xTaskPriorityInherit  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x00006af4   0x00006af4   0x00000080   Code   RO          963    .text.xTaskRemoveFromEventList  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x00006b74   0x00006b74   0x00000100   Code   RO          909    .text.xTaskResumeAll  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x00006c74   0x00006c74   0x00000036   Code   RO         1049    .text.xTimerCreate  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
     0x00006caa   0x00006caa   0x00000002   PAD
-    0x00006cac   0x00006cac   0x000000ac   Code   RO         1000    .text.xTimerCreateTimerTask  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
-    0x00006d58   0x00006d58   0x0000005c   Code   RO         1010    .text.xTimerGenericCommand  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
-    0x00006db4   0x00006db4   0x000001f6   Code   RO         1179    .text_divfast       c_p.l(aeabi_sdivfast.o)
-    0x00006faa   0x00006faa   0x00000030   Code   RO         1498    i.__ARM_common_ll_muluu  c_p.l(btod.o)
+    0x00006cac   0x00006cac   0x000000ac   Code   RO         1045    .text.xTimerCreateTimerTask  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
+    0x00006d58   0x00006d58   0x0000005c   Code   RO         1055    .text.xTimerGenericCommand  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
+    0x00006db4   0x00006db4   0x000001f6   Code   RO         1224    .text_divfast       c_p.l(aeabi_sdivfast.o)
+    0x00006faa   0x00006faa   0x00000030   Code   RO         1543    i.__ARM_common_ll_muluu  c_p.l(btod.o)
     0x00006fda   0x00006fda   0x00000002   PAD
-    0x00006fdc   0x00006fdc   0x0000002c   Code   RO         1406    i.__ARM_fpclassify  m_ps.l(fpclassify.o)
-    0x00007008   0x00007008   0x00000022   Code   RO         1408    i.__ARM_fpclassifyf  m_ps.l(fpclassifyf.o)
-    0x0000702a   0x0000702a   0x0000000a   Code   RO         1411    i.__mathlib_flt_infnan  m_ps.l(funder.o)
-    0x00007034   0x00007034   0x00000008   Code   RO         1412    i.__mathlib_flt_infnan2  m_ps.l(funder.o)
-    0x0000703c   0x0000703c   0x0000000c   Code   RO         1413    i.__mathlib_flt_invalid  m_ps.l(funder.o)
-    0x00007048   0x00007048   0x0000000e   Code   RO         1416    i.__mathlib_flt_underflow  m_ps.l(funder.o)
+    0x00006fdc   0x00006fdc   0x0000002c   Code   RO         1451    i.__ARM_fpclassify  m_ps.l(fpclassify.o)
+    0x00007008   0x00007008   0x00000022   Code   RO         1453    i.__ARM_fpclassifyf  m_ps.l(fpclassifyf.o)
+    0x0000702a   0x0000702a   0x0000000a   Code   RO         1456    i.__mathlib_flt_infnan  m_ps.l(funder.o)
+    0x00007034   0x00007034   0x00000008   Code   RO         1457    i.__mathlib_flt_infnan2  m_ps.l(funder.o)
+    0x0000703c   0x0000703c   0x0000000c   Code   RO         1458    i.__mathlib_flt_invalid  m_ps.l(funder.o)
+    0x00007048   0x00007048   0x0000000e   Code   RO         1461    i.__mathlib_flt_underflow  m_ps.l(funder.o)
     0x00007056   0x00007056   0x00000002   PAD
-    0x00007058   0x00007058   0x00000180   Code   RO         1426    i.__mathlib_rredf2  m_ps.l(rredf.o)
-    0x000071d8   0x000071d8   0x00000016   Code   RO         1208    i._feq              fz_ps.l(fcmp.o)
-    0x000071ee   0x000071ee   0x00000016   Code   RO         1209    i._fgeq             fz_ps.l(fcmp.o)
-    0x00007204   0x00007204   0x00000016   Code   RO         1210    i._fgr              fz_ps.l(fcmp.o)
-    0x0000721a   0x0000721a   0x00000016   Code   RO         1212    i._fls              fz_ps.l(fcmp.o)
-    0x00007230   0x00007230   0x0000000e   Code   RO         1329    i._is_digit         c_p.l(__printf_wp.o)
+    0x00007058   0x00007058   0x00000180   Code   RO         1471    i.__mathlib_rredf2  m_ps.l(rredf.o)
+    0x000071d8   0x000071d8   0x00000016   Code   RO         1253    i._feq              fz_ps.l(fcmp.o)
+    0x000071ee   0x000071ee   0x00000016   Code   RO         1254    i._fgeq             fz_ps.l(fcmp.o)
+    0x00007204   0x00007204   0x00000016   Code   RO         1255    i._fgr              fz_ps.l(fcmp.o)
+    0x0000721a   0x0000721a   0x00000016   Code   RO         1257    i._fls              fz_ps.l(fcmp.o)
+    0x00007230   0x00007230   0x0000000e   Code   RO         1374    i._is_digit         c_p.l(__printf_wp.o)
     0x0000723e   0x0000723e   0x00000002   PAD
-    0x00007240   0x00007240   0x00000118   Code   RO         1236    i.asinf             m_ps.l(asinf.o)
-    0x00007358   0x00007358   0x0000029c   Code   RO         1245    i.atan2f            m_ps.l(atan2f.o)
-    0x000075f4   0x000075f4   0x00000178   Code   RO         1249    i.cosf              m_ps.l(cosf.o)
-    0x0000776c   0x0000776c   0x00000184   Code   RO         1253    i.sinf              m_ps.l(sinf.o)
-    0x000078f0   0x000078f0   0x0000002c   Code   RO         1257    i.sqrtf             m_ps.l(sqrtf.o)
-    0x0000791c   0x0000791c   0x0000002c   Code   RO         1503    locale$$code        c_p.l(lc_numeric_c.o)
-    0x00007948   0x00007948   0x0000002c   Code   RO         1531    locale$$code        c_p.l(lc_ctype_c.o)
-    0x00007974   0x00007974   0x0000008c   Code   RO         1196    x$fpl$fadd          fz_ps.l(faddsub.o)
-    0x00007a00   0x00007a00   0x00000054   Code   RO         1371    x$fpl$feqf          fz_ps.l(feqf.o)
-    0x00007a54   0x00007a54   0x00000054   Code   RO         1373    x$fpl$fgeqf         fz_ps.l(fgef.o)
-    0x00007aa8   0x00007aa8   0x00000054   Code   RO         1375    x$fpl$fleqf         fz_ps.l(flef.o)
-    0x00007afc   0x00007afc   0x000000b0   Code   RO         1233    x$fpl$fmul          fz_ps.l(fmul.o)
-    0x00007bac   0x00007bac   0x00000018   Code   RO         1197    x$fpl$frsb          fz_ps.l(faddsub.o)
-    0x00007bc4   0x00007bc4   0x000000d0   Code   RO         1198    x$fpl$fsub          fz_ps.l(faddsub.o)
-    0x00007c94   0x00007c94   0x00000010   Code   RO         1383    x$fpl$printf1       fz_ps.l(printf1.o)
-    0x00007ca4   0x00007ca4   0x00000010   Code   RO         1385    x$fpl$printf2       fz_ps.l(printf2.o)
-    0x00007cb4   0x00007cb4   0x00000000   Code   RO         1391    x$fpl$usenofp       fz_ps.l(usenofp.o)
-    0x00007cb4   0x00007cb4   0x00000040   Data   RO         1227    .constdata          fz_ps.l(fdiv.o)
-    0x00007cf4   0x00007cf4   0x00000008   Data   RO         1288    .constdata          c_p.l(_printf_wctomb.o)
-    0x00007cfc   0x00007cfc   0x00000028   Data   RO         1317    .constdata          c_p.l(_printf_hex_int_ll_ptr.o)
-    0x00007d24   0x00007d24   0x00000011   Data   RO         1337    .constdata          c_p.l(__printf_flags_ss_wp.o)
+    0x00007240   0x00007240   0x00000118   Code   RO         1281    i.asinf             m_ps.l(asinf.o)
+    0x00007358   0x00007358   0x0000029c   Code   RO         1290    i.atan2f            m_ps.l(atan2f.o)
+    0x000075f4   0x000075f4   0x00000178   Code   RO         1294    i.cosf              m_ps.l(cosf.o)
+    0x0000776c   0x0000776c   0x00000184   Code   RO         1298    i.sinf              m_ps.l(sinf.o)
+    0x000078f0   0x000078f0   0x0000002c   Code   RO         1302    i.sqrtf             m_ps.l(sqrtf.o)
+    0x0000791c   0x0000791c   0x0000002c   Code   RO         1548    locale$$code        c_p.l(lc_numeric_c.o)
+    0x00007948   0x00007948   0x0000002c   Code   RO         1576    locale$$code        c_p.l(lc_ctype_c.o)
+    0x00007974   0x00007974   0x0000008c   Code   RO         1241    x$fpl$fadd          fz_ps.l(faddsub.o)
+    0x00007a00   0x00007a00   0x00000054   Code   RO         1416    x$fpl$feqf          fz_ps.l(feqf.o)
+    0x00007a54   0x00007a54   0x00000054   Code   RO         1418    x$fpl$fgeqf         fz_ps.l(fgef.o)
+    0x00007aa8   0x00007aa8   0x00000054   Code   RO         1420    x$fpl$fleqf         fz_ps.l(flef.o)
+    0x00007afc   0x00007afc   0x000000b0   Code   RO         1278    x$fpl$fmul          fz_ps.l(fmul.o)
+    0x00007bac   0x00007bac   0x00000018   Code   RO         1242    x$fpl$frsb          fz_ps.l(faddsub.o)
+    0x00007bc4   0x00007bc4   0x000000d0   Code   RO         1243    x$fpl$fsub          fz_ps.l(faddsub.o)
+    0x00007c94   0x00007c94   0x00000010   Code   RO         1428    x$fpl$printf1       fz_ps.l(printf1.o)
+    0x00007ca4   0x00007ca4   0x00000010   Code   RO         1430    x$fpl$printf2       fz_ps.l(printf2.o)
+    0x00007cb4   0x00007cb4   0x00000000   Code   RO         1436    x$fpl$usenofp       fz_ps.l(usenofp.o)
+    0x00007cb4   0x00007cb4   0x00000040   Data   RO         1272    .constdata          fz_ps.l(fdiv.o)
+    0x00007cf4   0x00007cf4   0x00000008   Data   RO         1333    .constdata          c_p.l(_printf_wctomb.o)
+    0x00007cfc   0x00007cfc   0x00000028   Data   RO         1362    .constdata          c_p.l(_printf_hex_int_ll_ptr.o)
+    0x00007d24   0x00007d24   0x00000011   Data   RO         1382    .constdata          c_p.l(__printf_flags_ss_wp.o)
     0x00007d35   0x00007d35   0x00000003   PAD
-    0x00007d38   0x00007d38   0x00000020   Data   RO         1427    .constdata          m_ps.l(rredf.o)
-    0x00007d58   0x00007d58   0x00000026   Data   RO         1462    .constdata          c_p.l(_printf_fp_hex.o)
+    0x00007d38   0x00007d38   0x00000020   Data   RO         1472    .constdata          m_ps.l(rredf.o)
+    0x00007d58   0x00007d58   0x00000026   Data   RO         1507    .constdata          c_p.l(_printf_fp_hex.o)
     0x00007d7e   0x00007d7e   0x00000002   PAD
-    0x00007d80   0x00007d80   0x00000094   Data   RO         1493    .constdata          c_p.l(bigflt0.o)
-    0x00007e14   0x00007e14   0x00000002   Data   RO           35    .rodata.gI2C_0ClockConfig  ti_msp_dl_config.o
-    0x00007e16   0x00007e16   0x00000003   Data   RO           29    .rodata.gMotor_PWM1ClockConfig  ti_msp_dl_config.o
+    0x00007d80   0x00007d80   0x00000094   Data   RO         1538    .constdata          c_p.l(bigflt0.o)
+    0x00007e14   0x00007e14   0x00000002   Data   RO           44    .rodata.gI2C_0ClockConfig  ti_msp_dl_config.o
+    0x00007e16   0x00007e16   0x00000003   Data   RO           38    .rodata.gMotor_PWM1ClockConfig  ti_msp_dl_config.o
     0x00007e19   0x00007e19   0x00000003   PAD
-    0x00007e1c   0x00007e1c   0x00000008   Data   RO           30    .rodata.gMotor_PWM1Config  ti_msp_dl_config.o
-    0x00007e24   0x00007e24   0x00000003   Data   RO           31    .rodata.gMotor_PWM2ClockConfig  ti_msp_dl_config.o
+    0x00007e1c   0x00007e1c   0x00000008   Data   RO           39    .rodata.gMotor_PWM1Config  ti_msp_dl_config.o
+    0x00007e24   0x00007e24   0x00000003   Data   RO           40    .rodata.gMotor_PWM2ClockConfig  ti_msp_dl_config.o
     0x00007e27   0x00007e27   0x00000001   PAD
-    0x00007e28   0x00007e28   0x00000008   Data   RO           32    .rodata.gMotor_PWM2Config  ti_msp_dl_config.o
-    0x00007e30   0x00007e30   0x00000002   Data   RO           38    .rodata.gSPI_0_clockConfig  ti_msp_dl_config.o
-    0x00007e32   0x00007e32   0x0000000a   Data   RO           39    .rodata.gSPI_0_config  ti_msp_dl_config.o
-    0x00007e3c   0x00007e3c   0x00000003   Data   RO           33    .rodata.gTIMER_delayClockConfig  ti_msp_dl_config.o
+    0x00007e28   0x00007e28   0x00000008   Data   RO           41    .rodata.gMotor_PWM2Config  ti_msp_dl_config.o
+    0x00007e30   0x00007e30   0x00000002   Data   RO           47    .rodata.gSPI_0_clockConfig  ti_msp_dl_config.o
+    0x00007e32   0x00007e32   0x0000000a   Data   RO           48    .rodata.gSPI_0_config  ti_msp_dl_config.o
+    0x00007e3c   0x00007e3c   0x00000003   Data   RO           42    .rodata.gTIMER_delayClockConfig  ti_msp_dl_config.o
     0x00007e3f   0x00007e3f   0x00000001   PAD
-    0x00007e40   0x00007e40   0x00000014   Data   RO           34    .rodata.gTIMER_delayTimerConfig  ti_msp_dl_config.o
-    0x00007e54   0x00007e54   0x00000002   Data   RO           36    .rodata.gUART_DEBUGClockConfig  ti_msp_dl_config.o
-    0x00007e56   0x00007e56   0x0000000a   Data   RO           37    .rodata.gUART_DEBUGConfig  ti_msp_dl_config.o
-    0x00007e60   0x00007e60   0x0000000f   Data   RO           79    .rodata.str1.1      log.o
+    0x00007e40   0x00007e40   0x00000014   Data   RO           43    .rodata.gTIMER_delayTimerConfig  ti_msp_dl_config.o
+    0x00007e54   0x00007e54   0x00000002   Data   RO           45    .rodata.gUART_DEBUGClockConfig  ti_msp_dl_config.o
+    0x00007e56   0x00007e56   0x0000000a   Data   RO           46    .rodata.gUART_DEBUGConfig  ti_msp_dl_config.o
+    0x00007e60   0x00007e60   0x0000000f   Data   RO          214    .rodata.str1.1      log.o
     0x00007e6f   0x00007e6f   0x00000001   PAD
-    0x00007e70   0x00007e70   0x00000004   Data   RO          971    .rodata.uxTopUsedPriority  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x00007e70   0x00007e70   0x00000004   Data   RO         1016    .rodata.uxTopUsedPriority  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
     0x00007e74   0x00007e74   0x00000004   PAD
-    0x00007e78   0x00007e78   0x00000020   Data   RO         1667    Region$$Table       anon$$obj.o
-    0x00007e98   0x00007e98   0x0000001c   Data   RO         1502    locale$$data        c_p.l(lc_numeric_c.o)
-    0x00007eb4   0x00007eb4   0x00000110   Data   RO         1530    locale$$data        c_p.l(lc_ctype_c.o)
+    0x00007e78   0x00007e78   0x00000020   Data   RO         1712    Region$$Table       anon$$obj.o
+    0x00007e98   0x00007e98   0x0000001c   Data   RO         1547    locale$$data        c_p.l(lc_numeric_c.o)
+    0x00007eb4   0x00007eb4   0x00000110   Data   RO         1575    locale$$data        c_p.l(lc_ctype_c.o)
 
 
     Execution Region RW_IRAM2 (Exec base: 0x20200000, Load base: 0x00007fc8, Size: 0x00003088, Max: 0x00008000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20200000   0x00007fc8   0x00000001   Data   RW          161    .data.IMU_ID        icm20608.o
+    0x20200000   0x00007fc8   0x00000001   Data   RW          287    .data.IMU_ID        icm20608.o
     0x20200001   0x00007fc9   0x00000003   PAD
-    0x20200004   0x00007fcc   0x00000018   Data   RW          140    .data.NEncoder      encoder.o
-    0x2020001c   0x00007fe4   0x00000020   Data   RW          317    .data.pca9555_i2c   gray_detection.o
-    0x2020003c   0x00008004   0x00000008   Data   RW          141    .data.trackless_motor  encoder.o
-    0x20200044   0x0000800c   0x00000004   Data   RW         1129    .data.uxCriticalNesting  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
-    0x20200048        -       0x00000060   Zero   RW         1478    .bss                c_p.l(libspace.o)
-    0x202000a8        -       0x00000002   Zero   RW          144    .bss.D_State        encoder.o
+    0x20200004   0x00007fcc   0x00000018   Data   RW          266    .data.NEncoder      encoder.o
+    0x2020001c   0x00007fe4   0x00000020   Data   RW           70    .data.pca9555_i2c   gray_detection.o
+    0x2020003c   0x00008004   0x00000008   Data   RW          267    .data.trackless_motor  encoder.o
+    0x20200044   0x0000800c   0x00000004   Data   RW         1174    .data.uxCriticalNesting  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
+    0x20200048        -       0x00000060   Zero   RW         1523    .bss                c_p.l(libspace.o)
+    0x202000a8        -       0x00000002   Zero   RW          270    .bss.D_State        encoder.o
     0x202000aa   0x00008010   0x00000002   PAD
-    0x202000ac        -       0x0000070c   Zero   RW          115    .bss.Trackless_Params  eeprom.o
-    0x202007b8        -       0x00001000   Zero   RW          304    .bss.W25QXX_BUFFER  w25qxx.o
-    0x202017b8        -       0x0000000c   Zero   RW          333    .bss.accel          motor_controller.o
-    0x202017c4        -       0x00000064   Zero   RW          331    .bss.ahrs           motor_controller.o
-    0x20201828        -       0x0000000c   Zero   RW          113    .bss.eeprom_write_data  eeprom.o
-    0x20201834        -       0x000000bc   Zero   RW           26    .bss.gMotor_PWM1Backup  ti_msp_dl_config.o
-    0x202018f0        -       0x00000028   Zero   RW           28    .bss.gSPI_0Backup   ti_msp_dl_config.o
-    0x20201918        -       0x000000bc   Zero   RW           27    .bss.gTIMER_delayBackup  ti_msp_dl_config.o
-    0x202019d4        -       0x0000000c   Zero   RW          332    .bss.gyro           motor_controller.o
-    0x202019e0        -       0x00000005   Zero   RW          162    .bss.icm_read_check  icm20608.o
+    0x202000ac        -       0x0000070c   Zero   RW          241    .bss.Trackless_Params  eeprom.o
+    0x202007b8        -       0x00001000   Zero   RW          430    .bss.W25QXX_BUFFER  w25qxx.o
+    0x202017b8        -       0x0000000c   Zero   RW           86    .bss.accel          motor_controller.o
+    0x202017c4        -       0x00000064   Zero   RW           84    .bss.ahrs           motor_controller.o
+    0x20201828        -       0x0000000c   Zero   RW          239    .bss.eeprom_write_data  eeprom.o
+    0x20201834        -       0x000000bc   Zero   RW           35    .bss.gMotor_PWM1Backup  ti_msp_dl_config.o
+    0x202018f0        -       0x00000028   Zero   RW           37    .bss.gSPI_0Backup   ti_msp_dl_config.o
+    0x20201918        -       0x000000bc   Zero   RW           36    .bss.gTIMER_delayBackup  ti_msp_dl_config.o
+    0x202019d4        -       0x0000000c   Zero   RW           85    .bss.gyro           motor_controller.o
+    0x202019e0        -       0x00000005   Zero   RW          288    .bss.icm_read_check  icm20608.o
     0x202019e5   0x00008010   0x00000003   PAD
-    0x202019e8        -       0x00000004   Zero   RW          167    .bss.imu_calibration.accel_sum.0  icm20608.o
-    0x202019ec        -       0x00000004   Zero   RW          168    .bss.imu_calibration.accel_sum.1  icm20608.o
-    0x202019f0        -       0x00000004   Zero   RW          169    .bss.imu_calibration.accel_sum.2  icm20608.o
-    0x202019f4        -       0x00000002   Zero   RW          163    .bss.imu_calibration.cnt  icm20608.o
+    0x202019e8        -       0x00000004   Zero   RW          293    .bss.imu_calibration.accel_sum.0  icm20608.o
+    0x202019ec        -       0x00000004   Zero   RW          294    .bss.imu_calibration.accel_sum.1  icm20608.o
+    0x202019f0        -       0x00000004   Zero   RW          295    .bss.imu_calibration.accel_sum.2  icm20608.o
+    0x202019f4        -       0x00000002   Zero   RW          289    .bss.imu_calibration.cnt  icm20608.o
     0x202019f6   0x00008010   0x00000002   PAD
-    0x202019f8        -       0x00000004   Zero   RW          170    .bss.imu_calibration.gyro_sum.0  icm20608.o
-    0x202019fc        -       0x00000004   Zero   RW          171    .bss.imu_calibration.gyro_sum.1  icm20608.o
-    0x20201a00        -       0x00000004   Zero   RW          172    .bss.imu_calibration.gyro_sum.2  icm20608.o
-    0x20201a04        -       0x00000004   Zero   RW          164    .bss.imu_calibration.last_gyro.0  icm20608.o
-    0x20201a08        -       0x00000004   Zero   RW          165    .bss.imu_calibration.last_gyro.1  icm20608.o
-    0x20201a0c        -       0x00000004   Zero   RW          166    .bss.imu_calibration.last_gyro.2  icm20608.o
-    0x20201a10        -       0x00000004   Zero   RW          138    .bss.left_motor_period_cnt  encoder.o
-    0x20201a14        -       0x000000f0   Zero   RW         1044    .bss.prvCheckForValidListAndQueue.ucStaticTimerQueueStorage  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
-    0x20201b04        -       0x00000050   Zero   RW         1043    .bss.prvCheckForValidListAndQueue.xStaticTimerQueue  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
-    0x20201b54        -       0x00000004   Zero   RW         1040    .bss.prvSampleTimeNow.xLastTime  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
-    0x20201b58        -       0x00000004   Zero   RW          970    .bss.pxCurrentTCB   freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x20201b5c        -       0x00000004   Zero   RW         1038    .bss.pxCurrentTimerList  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
-    0x20201b60        -       0x00000004   Zero   RW          979    .bss.pxDelayedTaskList  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x20201b64        -       0x00000004   Zero   RW         1083    .bss.pxEnd          freertos_builds_LP_MSPM0G3507_release_keil.lib(heap_4.o)
-    0x20201b68        -       0x00000004   Zero   RW          980    .bss.pxOverflowDelayedTaskList  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x20201b6c        -       0x00000004   Zero   RW         1039    .bss.pxOverflowTimerList  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
-    0x20201b70        -       0x000000c8   Zero   RW          982    .bss.pxReadyTasksLists  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x20201c38        -       0x00000004   Zero   RW          139    .bss.right_motor_period_cnt  encoder.o
-    0x20201c3c        -       0x00000188   Zero   RW          499    .bss.smartcar_imu   sensor.o
-    0x20201dc4        -       0x00000004   Zero   RW          334    .bss.temperature    motor_controller.o
-    0x20201dc8        -       0x00000c00   Zero   RW         1090    .bss.ucHeap         freertos_builds_LP_MSPM0G3507_release_keil.lib(heap_4.o)
-    0x202029c8        -       0x00000001   Zero   RW         1132    .bss.ulStoppedTimerCompensation  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
+    0x202019f8        -       0x00000004   Zero   RW          296    .bss.imu_calibration.gyro_sum.0  icm20608.o
+    0x202019fc        -       0x00000004   Zero   RW          297    .bss.imu_calibration.gyro_sum.1  icm20608.o
+    0x20201a00        -       0x00000004   Zero   RW          298    .bss.imu_calibration.gyro_sum.2  icm20608.o
+    0x20201a04        -       0x00000004   Zero   RW          290    .bss.imu_calibration.last_gyro.0  icm20608.o
+    0x20201a08        -       0x00000004   Zero   RW          291    .bss.imu_calibration.last_gyro.1  icm20608.o
+    0x20201a0c        -       0x00000004   Zero   RW          292    .bss.imu_calibration.last_gyro.2  icm20608.o
+    0x20201a10        -       0x00000004   Zero   RW          264    .bss.left_motor_period_cnt  encoder.o
+    0x20201a14        -       0x000000f0   Zero   RW         1089    .bss.prvCheckForValidListAndQueue.ucStaticTimerQueueStorage  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
+    0x20201b04        -       0x00000050   Zero   RW         1088    .bss.prvCheckForValidListAndQueue.xStaticTimerQueue  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
+    0x20201b54        -       0x00000004   Zero   RW         1085    .bss.prvSampleTimeNow.xLastTime  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
+    0x20201b58        -       0x00000004   Zero   RW         1015    .bss.pxCurrentTCB   freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x20201b5c        -       0x00000004   Zero   RW         1083    .bss.pxCurrentTimerList  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
+    0x20201b60        -       0x00000004   Zero   RW         1024    .bss.pxDelayedTaskList  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x20201b64        -       0x00000004   Zero   RW         1128    .bss.pxEnd          freertos_builds_LP_MSPM0G3507_release_keil.lib(heap_4.o)
+    0x20201b68        -       0x00000004   Zero   RW         1025    .bss.pxOverflowDelayedTaskList  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x20201b6c        -       0x00000004   Zero   RW         1084    .bss.pxOverflowTimerList  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
+    0x20201b70        -       0x000000c8   Zero   RW         1027    .bss.pxReadyTasksLists  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x20201c38        -       0x00000004   Zero   RW          265    .bss.right_motor_period_cnt  encoder.o
+    0x20201c3c        -       0x00000188   Zero   RW          544    .bss.smartcar_imu   sensor.o
+    0x20201dc4        -       0x00000004   Zero   RW           87    .bss.temperature    motor_controller.o
+    0x20201dc8        -       0x00000c00   Zero   RW         1135    .bss.ucHeap         freertos_builds_LP_MSPM0G3507_release_keil.lib(heap_4.o)
+    0x202029c8        -       0x00000001   Zero   RW         1177    .bss.ulStoppedTimerCompensation  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
     0x202029c9   0x00008010   0x00000003   PAD
-    0x202029cc        -       0x00000001   Zero   RW         1130    .bss.ulTimerCountsForOneTick  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
+    0x202029cc        -       0x00000001   Zero   RW         1175    .bss.ulTimerCountsForOneTick  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
     0x202029cd   0x00008010   0x00000003   PAD
-    0x202029d0        -       0x00000004   Zero   RW          975    .bss.uxCurrentNumberOfTasks  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x202029d4        -       0x00000004   Zero   RW          974    .bss.uxDeletedTasksWaitingCleanUp  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x202029d8        -       0x00000004   Zero   RW          977    .bss.uxSchedulerSuspended  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x202029dc        -       0x00000004   Zero   RW          972    .bss.uxTaskNumber   freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x202029e0        -       0x00000004   Zero   RW          983    .bss.uxTopReadyPriority  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x202029e4        -       0x00000200   Zero   RW         1154    .bss.vApplicationGetIdleTaskMemory.uxIdleTaskStack  freertos_builds_LP_MSPM0G3507_release_keil.lib(staticallocs_freertos.o)
-    0x20202be4        -       0x00000064   Zero   RW         1153    .bss.vApplicationGetIdleTaskMemory.xIdleTaskTCB  freertos_builds_LP_MSPM0G3507_release_keil.lib(staticallocs_freertos.o)
-    0x20202c48        -       0x00000200   Zero   RW         1156    .bss.vApplicationGetTimerTaskMemory.uxTimerTaskStack  freertos_builds_LP_MSPM0G3507_release_keil.lib(staticallocs_freertos.o)
-    0x20202e48        -       0x00000064   Zero   RW         1155    .bss.vApplicationGetTimerTaskMemory.xTimerTaskTCB  freertos_builds_LP_MSPM0G3507_release_keil.lib(staticallocs_freertos.o)
-    0x20202eac        -       0x00000014   Zero   RW         1041    .bss.xActiveTimerList1  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
-    0x20202ec0        -       0x00000014   Zero   RW         1042    .bss.xActiveTimerList2  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
-    0x20202ed4        -       0x00000001   Zero   RW         1084    .bss.xBlockAllocatedBit  freertos_builds_LP_MSPM0G3507_release_keil.lib(heap_4.o)
+    0x202029d0        -       0x00000004   Zero   RW         1020    .bss.uxCurrentNumberOfTasks  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x202029d4        -       0x00000004   Zero   RW         1019    .bss.uxDeletedTasksWaitingCleanUp  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x202029d8        -       0x00000004   Zero   RW         1022    .bss.uxSchedulerSuspended  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x202029dc        -       0x00000004   Zero   RW         1017    .bss.uxTaskNumber   freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x202029e0        -       0x00000004   Zero   RW         1028    .bss.uxTopReadyPriority  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x202029e4        -       0x00000200   Zero   RW         1199    .bss.vApplicationGetIdleTaskMemory.uxIdleTaskStack  freertos_builds_LP_MSPM0G3507_release_keil.lib(staticallocs_freertos.o)
+    0x20202be4        -       0x00000064   Zero   RW         1198    .bss.vApplicationGetIdleTaskMemory.xIdleTaskTCB  freertos_builds_LP_MSPM0G3507_release_keil.lib(staticallocs_freertos.o)
+    0x20202c48        -       0x00000200   Zero   RW         1201    .bss.vApplicationGetTimerTaskMemory.uxTimerTaskStack  freertos_builds_LP_MSPM0G3507_release_keil.lib(staticallocs_freertos.o)
+    0x20202e48        -       0x00000064   Zero   RW         1200    .bss.vApplicationGetTimerTaskMemory.xTimerTaskTCB  freertos_builds_LP_MSPM0G3507_release_keil.lib(staticallocs_freertos.o)
+    0x20202eac        -       0x00000014   Zero   RW         1086    .bss.xActiveTimerList1  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
+    0x20202ec0        -       0x00000014   Zero   RW         1087    .bss.xActiveTimerList2  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
+    0x20202ed4        -       0x00000001   Zero   RW         1129    .bss.xBlockAllocatedBit  freertos_builds_LP_MSPM0G3507_release_keil.lib(heap_4.o)
     0x20202ed5   0x00008010   0x00000003   PAD
-    0x20202ed8        -       0x00000014   Zero   RW          990    .bss.xDelayedTaskList1  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x20202eec        -       0x00000014   Zero   RW          991    .bss.xDelayedTaskList2  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x20202f00        -       0x00000004   Zero   RW         1085    .bss.xFreeBytesRemaining  freertos_builds_LP_MSPM0G3507_release_keil.lib(heap_4.o)
-    0x20202f04        -       0x00000004   Zero   RW          984    .bss.xIdleTaskHandle  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x20202f08        -       0x00000001   Zero   RW         1131    .bss.xMaximumPossibleSuppressedTicks  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
+    0x20202ed8        -       0x00000014   Zero   RW         1035    .bss.xDelayedTaskList1  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x20202eec        -       0x00000014   Zero   RW         1036    .bss.xDelayedTaskList2  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x20202f00        -       0x00000004   Zero   RW         1130    .bss.xFreeBytesRemaining  freertos_builds_LP_MSPM0G3507_release_keil.lib(heap_4.o)
+    0x20202f04        -       0x00000004   Zero   RW         1029    .bss.xIdleTaskHandle  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x20202f08        -       0x00000001   Zero   RW         1176    .bss.xMaximumPossibleSuppressedTicks  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
     0x20202f09   0x00008010   0x00000003   PAD
-    0x20202f0c        -       0x00000004   Zero   RW         1087    .bss.xMinimumEverFreeBytesRemaining  freertos_builds_LP_MSPM0G3507_release_keil.lib(heap_4.o)
-    0x20202f10        -       0x00000004   Zero   RW          142    .bss.xMotorCountMutex  encoder.o
-    0x20202f14        -       0x00000004   Zero   RW          985    .bss.xNextTaskUnblockTime  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x20202f18        -       0x00000004   Zero   RW          989    .bss.xNumOfOverflows  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x20202f1c        -       0x00000004   Zero   RW         1088    .bss.xNumberOfSuccessfulAllocations  freertos_builds_LP_MSPM0G3507_release_keil.lib(heap_4.o)
-    0x20202f20        -       0x00000004   Zero   RW         1089    .bss.xNumberOfSuccessfulFrees  freertos_builds_LP_MSPM0G3507_release_keil.lib(heap_4.o)
-    0x20202f24        -       0x00000004   Zero   RW          988    .bss.xPendedTicks   freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x20202f28        -       0x00000014   Zero   RW          986    .bss.xPendingReadyList  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x20202f3c        -       0x00000004   Zero   RW          976    .bss.xSchedulerRunning  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x20202f40        -       0x00000004   Zero   RW          143    .bss.xSpeedTimer    encoder.o
-    0x20202f44        -       0x00000008   Zero   RW         1086    .bss.xStart         freertos_builds_LP_MSPM0G3507_release_keil.lib(heap_4.o)
-    0x20202f4c        -       0x00000014   Zero   RW          981    .bss.xSuspendedTaskList  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x20202f60        -       0x00000014   Zero   RW          973    .bss.xTasksWaitingTermination  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x20202f74        -       0x00000004   Zero   RW          978    .bss.xTickCount     freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x20202f78        -       0x00000004   Zero   RW         1036    .bss.xTimerQueue    freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
-    0x20202f7c        -       0x00000004   Zero   RW         1037    .bss.xTimerTaskHandle  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
-    0x20202f80        -       0x00000004   Zero   RW          987    .bss.xYieldPending  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x20202f0c        -       0x00000004   Zero   RW         1132    .bss.xMinimumEverFreeBytesRemaining  freertos_builds_LP_MSPM0G3507_release_keil.lib(heap_4.o)
+    0x20202f10        -       0x00000004   Zero   RW          268    .bss.xMotorCountMutex  encoder.o
+    0x20202f14        -       0x00000004   Zero   RW         1030    .bss.xNextTaskUnblockTime  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x20202f18        -       0x00000004   Zero   RW         1034    .bss.xNumOfOverflows  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x20202f1c        -       0x00000004   Zero   RW         1133    .bss.xNumberOfSuccessfulAllocations  freertos_builds_LP_MSPM0G3507_release_keil.lib(heap_4.o)
+    0x20202f20        -       0x00000004   Zero   RW         1134    .bss.xNumberOfSuccessfulFrees  freertos_builds_LP_MSPM0G3507_release_keil.lib(heap_4.o)
+    0x20202f24        -       0x00000004   Zero   RW         1033    .bss.xPendedTicks   freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x20202f28        -       0x00000014   Zero   RW         1031    .bss.xPendingReadyList  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x20202f3c        -       0x00000004   Zero   RW         1021    .bss.xSchedulerRunning  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x20202f40        -       0x00000004   Zero   RW          269    .bss.xSpeedTimer    encoder.o
+    0x20202f44        -       0x00000008   Zero   RW         1131    .bss.xStart         freertos_builds_LP_MSPM0G3507_release_keil.lib(heap_4.o)
+    0x20202f4c        -       0x00000014   Zero   RW         1026    .bss.xSuspendedTaskList  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x20202f60        -       0x00000014   Zero   RW         1018    .bss.xTasksWaitingTermination  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x20202f74        -       0x00000004   Zero   RW         1023    .bss.xTickCount     freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
+    0x20202f78        -       0x00000004   Zero   RW         1081    .bss.xTimerQueue    freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
+    0x20202f7c        -       0x00000004   Zero   RW         1082    .bss.xTimerTaskHandle  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
+    0x20202f80        -       0x00000004   Zero   RW         1032    .bss.xYieldPending  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
     0x20202f84   0x00008010   0x00000004   PAD
-    0x20202f88        -       0x00000000   Zero   RW           48    HEAP                startup_mspm0g350x_uvision.o
-    0x20202f88        -       0x00000100   Zero   RW           47    STACK               startup_mspm0g350x_uvision.o
+    0x20202f88        -       0x00000000   Zero   RW           57    HEAP                startup_mspm0g350x_uvision.o
+    0x20202f88        -       0x00000100   Zero   RW           56    STACK               startup_mspm0g350x_uvision.o
 
 
 
@@ -4528,6 +4596,7 @@ Image component sizes
         74          0          0          0          0       2512   delay.o
         52          4          0          0       1816       3534   eeprom.o
        596        100          0         32         18       8626   encoder.o
+        24          4          0          0          0       4200   fast_math.o
       2622         72          0          0          0      12080   fusionahrs.o
        412         16          0          0          0       2428   fusioncompass.o
         16          4          0         32          0       3954   gray_detection.o
@@ -4543,12 +4612,11 @@ Image component sizes
         84          8          0          0          0       6181   spi.o
         44         18        192          0        256        716   startup_mspm0g350x_uvision.o
       1024        224         71          0        416      32652   ti_msp_dl_config.o
-        70          0          0          0          0       3617   uart.o
+        70          0          0          0          0       3847   uart_driver.o
       1364         20          0          0       4096      27246   w25qxx.o
-        24          4          0          0          0       4196   wp_math.o
 
     ----------------------------------------------------------------------
-      9630        806        316         68       7172     175168   Object Totals
+      9630        806        316         68       7172     175402   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          8          0          6          3          7          0   (incl. Padding)
 
@@ -4707,8 +4775,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     31732       2042        976         72      12352     348075   Grand Totals
-     31732       2042        976         72      12352     348075   ELF Image Totals
+     31732       2042        976         72      12352     348309   Grand Totals
+     31732       2042        976         72      12352     348309   ELF Image Totals
      31732       2042        976         72          0          0   ROM Totals
 
 ==============================================================================

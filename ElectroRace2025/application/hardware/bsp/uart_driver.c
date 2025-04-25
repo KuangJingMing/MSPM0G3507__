@@ -1,7 +1,9 @@
-#include "uart.h"
+#include "uart_driver.h"
 
+void uart_send_byte(UART_Regs* uart, uint8_t byte) {
+		DL_UART_Main_transmitDataBlocking(uart, byte);
+}
 
-// 发送字节数组
 void usart_send_bytes(UART_Regs* uart, const uint8_t* data, size_t length) {
     for (size_t i = 0; i < length; i++) {
         DL_UART_Main_transmitDataBlocking(uart, data[i]);
@@ -15,6 +17,5 @@ void usart_printf(UART_Regs* uart, const char* format, ...) {
     va_start(args, format);
     vsnprintf(buffer, sizeof(buffer), format, args);
     va_end(args);
-
     usart_send_bytes(uart, (uint8_t*)buffer, strlen(buffer));
 }

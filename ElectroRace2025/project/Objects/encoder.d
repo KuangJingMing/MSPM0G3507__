@@ -68,4 +68,5 @@
   ..\kernel\freertos\Source\include\list.h \
   ..\kernel\freertos\Source\include\semphr.h \
   ..\kernel\freertos\Source\include\queue.h ..\application\utils\log.h \
-  ..\application\hardware\bsp\uart.h
+  ..\application\hardware\bsp\uart_driver.h \
+  ..\application\include\global_config.h

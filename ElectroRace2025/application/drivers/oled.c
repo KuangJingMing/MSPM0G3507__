@@ -5,7 +5,7 @@
  *      Author: Unicorn_Li
  */
 #include "oled.h"
-#include "uart.h"
+#include "uart_driver.h"
 #include "software_i2c.h"
 #include "spi.h"
 
@@ -14,7 +14,7 @@
  ***********************************************************/
 #define OLED_I2C_ADDRESS 0x3C
 
- SoftwareI2C oled_i2c = {
+SoftwareI2C oled_i2c = {
 		#ifdef I2C_OLED
 	  .sclPort = OLED_PORT,
     .sdaPort = OLED_PORT,

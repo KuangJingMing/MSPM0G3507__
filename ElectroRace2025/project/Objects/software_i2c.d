@@ -57,4 +57,5 @@
   ..\source\ti\driverlib\dl_vref.h ..\source\ti\driverlib\dl_wwdt.h \
   ..\source\ti\driverlib\m0p\dl_interrupt.h \
   ..\source\ti\driverlib\m0p\dl_systick.h ..\application\utils\delay.h \
-  ..\application\utils\log.h ..\application\hardware\bsp\uart.h
+  ..\application\utils\log.h ..\application\hardware\bsp\uart_driver.h \
+  ..\application\include\global_config.h

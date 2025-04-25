@@ -1,5 +1,5 @@
-#ifndef __WP_MATH_H__
-#define __WP_MATH_H__
+#ifndef __FAST_MATH_H__
+#define __FAST_MATH_H__
 
 #include "stdint.h"
 

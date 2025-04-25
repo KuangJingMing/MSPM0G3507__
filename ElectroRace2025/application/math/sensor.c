@@ -1,7 +1,8 @@
 #include "sensor.h"
 #include "filter.h"
 #include "icm20608.h"
-#include "wp_math.h"
+#include "fast_math.h"
+
 /***************************************************
 函数名: float kalman_filter(float angle,float gyro)
 说明:	非矩阵卡尔曼滤波

@@ -71,4 +71,5 @@
   ..\application\drivers\motor.h ..\application\drivers\encoder.h \
   ..\kernel\freertos\Source\include\timers.h \
   ..\application\app\motor_controller.h ..\application\utils\log.h \
-  ..\application\hardware\bsp\uart.h
+  ..\application\hardware\bsp\uart_driver.h \
+  ..\application\include\global_config.h

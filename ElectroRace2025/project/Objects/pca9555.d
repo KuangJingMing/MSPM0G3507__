@@ -58,4 +58,5 @@
   ..\source\ti\driverlib\m0p\dl_systick.h \
   ..\application\hardware\bsp\software_i2c.h \
   ..\application\utils\delay.h ..\application\utils\log.h \
-  ..\application\hardware\bsp\uart.h
+  ..\application\hardware\bsp\uart_driver.h \
+  ..\application\include\global_config.h

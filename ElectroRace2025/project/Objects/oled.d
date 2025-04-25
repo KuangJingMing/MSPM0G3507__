@@ -57,6 +57,7 @@
   ..\source\ti\driverlib\dl_vref.h ..\source\ti\driverlib\dl_wwdt.h \
   ..\source\ti\driverlib\m0p\dl_interrupt.h \
   ..\source\ti\driverlib\m0p\dl_systick.h \
-  ..\application\hardware\bsp\uart.h \
+  ..\application\hardware\bsp\uart_driver.h \
+  ..\application\include\global_config.h \
   ..\application\hardware\bsp\software_i2c.h \
   ..\application\hardware\bsp\spi.h

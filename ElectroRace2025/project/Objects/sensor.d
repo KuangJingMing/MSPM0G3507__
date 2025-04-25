@@ -57,4 +57,5 @@
   ..\source\ti\driverlib\dl_uart.h ..\source\ti\driverlib\dl_uart_main.h \
   ..\source\ti\driverlib\dl_vref.h ..\source\ti\driverlib\dl_wwdt.h \
   ..\source\ti\driverlib\m0p\dl_interrupt.h \
-  ..\source\ti\driverlib\m0p\dl_systick.h ..\application\math\wp_math.h
+  ..\source\ti\driverlib\m0p\dl_systick.h \
+  ..\application\math\fast_math.h

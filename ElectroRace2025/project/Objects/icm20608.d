@@ -59,7 +59,8 @@
   ..\application\hardware\bsp\hardware_i2c.h \
   ..\application\drivers\icm20608.h \
   ..\application\drivers\imu_data_type.h ..\application\utils\delay.h \
-  ..\application\math\wp_math.h ..\application\math\sensor.h \
+  ..\application\math\fast_math.h ..\application\math\sensor.h \
   ..\application\drivers\w25qxx.h ..\application\drivers\eeprom.h \
   ..\application\utils\log_config.h ..\application\utils\log.h \
-  ..\application\hardware\bsp\uart.h
+  ..\application\hardware\bsp\uart_driver.h \
+  ..\application\include\global_config.h

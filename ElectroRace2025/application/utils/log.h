@@ -3,7 +3,7 @@
 #define LOG_H
 
 #include <stdarg.h>
-#include "uart.h"
+#include "uart_driver.h"
 
 // 日志级别定义（数值越小，优先级越高）
 #define LOG_LEVEL_EMPTY 4

@@ -59,4 +59,5 @@
   ..\application\hardware\bsp\software_i2c.h \
   ..\application\utils\delay.h ..\application\app\gray_detection.h \
   ..\application\utils\log_config.h ..\application\utils\log.h \
-  ..\application\hardware\bsp\uart.h
+  ..\application\hardware\bsp\uart_driver.h \
+  ..\application\include\global_config.h
