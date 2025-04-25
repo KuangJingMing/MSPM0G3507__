@@ -1,5 +1,6 @@
-./objects/icm20608.o: ..\drivers\icm20608.c ..\project\ti_msp_dl_config.h \
-  ..\source\ti\devices\msp\msp.h ..\source\ti\devices\DeviceFamily.h \
+./objects/icm20608.o: ..\application\drivers\icm20608.c \
+  ..\project\ti_msp_dl_config.h ..\source\ti\devices\msp\msp.h \
+  ..\source\ti\devices\DeviceFamily.h \
   ..\source\ti\devices\msp\m0p\mspm0g350x.h \
   ..\source\third_party\CMSIS\Core\Include\core_cm0plus.h \
   ..\source\ti\devices\msp\peripherals\hw_adc12.h \
@@ -54,8 +55,11 @@
   ..\source\ti\driverlib\dl_uart.h ..\source\ti\driverlib\dl_uart_main.h \
   ..\source\ti\driverlib\dl_vref.h ..\source\ti\driverlib\dl_wwdt.h \
   ..\source\ti\driverlib\m0p\dl_interrupt.h \
-  ..\source\ti\driverlib\m0p\dl_systick.h ..\hardware\bsp\hardware_i2c.h \
-  ..\drivers\icm20608.h ..\drivers\imu_data_type.h ..\utils\delay.h \
-  ..\math\wp_math.h ..\math\sensor.h ..\drivers\w25qxx.h \
-  ..\drivers\eeprom.h ..\utils\log_config.h ..\utils\log.h \
-  ..\hardware\bsp\uart.h
+  ..\source\ti\driverlib\m0p\dl_systick.h \
+  ..\application\hardware\bsp\hardware_i2c.h \
+  ..\application\drivers\icm20608.h \
+  ..\application\drivers\imu_data_type.h ..\application\utils\delay.h \
+  ..\application\math\wp_math.h ..\application\math\sensor.h \
+  ..\application\drivers\w25qxx.h ..\application\drivers\eeprom.h \
+  ..\application\utils\log_config.h ..\application\utils\log.h \
+  ..\application\hardware\bsp\uart.h

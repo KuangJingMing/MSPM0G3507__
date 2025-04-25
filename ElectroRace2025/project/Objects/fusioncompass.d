@@ -1,2 +1,3 @@
-./objects/fusioncompass.o: ..\app\fusion\FusionCompass.c \
-  ..\app\fusion\FusionCompass.h ..\app\fusion\FusionMath.h
+./objects/fusioncompass.o: ..\application\app\fusion\FusionCompass.c \
+  ..\application\app\fusion\FusionCompass.h \
+  ..\application\app\fusion\FusionMath.h

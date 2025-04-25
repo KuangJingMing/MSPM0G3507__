@@ -1,4 +1,4 @@
-./objects/hardware_i2c.o: ..\hardware\bsp\hardware_i2c.c \
+./objects/hardware_i2c.o: ..\application\hardware\bsp\hardware_i2c.c \
   ..\project\ti_msp_dl_config.h ..\source\ti\devices\msp\msp.h \
   ..\source\ti\devices\DeviceFamily.h \
   ..\source\ti\devices\msp\m0p\mspm0g350x.h \
@@ -55,4 +55,5 @@
   ..\source\ti\driverlib\dl_uart.h ..\source\ti\driverlib\dl_uart_main.h \
   ..\source\ti\driverlib\dl_vref.h ..\source\ti\driverlib\dl_wwdt.h \
   ..\source\ti\driverlib\m0p\dl_interrupt.h \
-  ..\source\ti\driverlib\m0p\dl_systick.h ..\hardware\bsp\hardware_i2c.h
+  ..\source\ti\driverlib\m0p\dl_systick.h \
+  ..\application\hardware\bsp\hardware_i2c.h

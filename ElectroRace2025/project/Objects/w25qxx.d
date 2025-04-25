@@ -1,5 +1,6 @@
-./objects/w25qxx.o: ..\drivers\w25qxx.c ..\project\ti_msp_dl_config.h \
-  ..\source\ti\devices\msp\msp.h ..\source\ti\devices\DeviceFamily.h \
+./objects/w25qxx.o: ..\application\drivers\w25qxx.c \
+  ..\project\ti_msp_dl_config.h ..\source\ti\devices\msp\msp.h \
+  ..\source\ti\devices\DeviceFamily.h \
   ..\source\ti\devices\msp\m0p\mspm0g350x.h \
   ..\source\third_party\CMSIS\Core\Include\core_cm0plus.h \
   ..\source\ti\devices\msp\peripherals\hw_adc12.h \
@@ -54,5 +55,5 @@
   ..\source\ti\driverlib\dl_uart.h ..\source\ti\driverlib\dl_uart_main.h \
   ..\source\ti\driverlib\dl_vref.h ..\source\ti\driverlib\dl_wwdt.h \
   ..\source\ti\driverlib\m0p\dl_interrupt.h \
-  ..\source\ti\driverlib\m0p\dl_systick.h ..\utils\delay.h \
-  ..\drivers\w25qxx.h
+  ..\source\ti\driverlib\m0p\dl_systick.h ..\application\utils\delay.h \
+  ..\application\drivers\w25qxx.h

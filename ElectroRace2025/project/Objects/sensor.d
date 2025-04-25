@@ -1,5 +1,6 @@
-./objects/sensor.o: ..\math\sensor.c ..\math\sensor.h \
-  ..\drivers\imu_data_type.h ..\math\filter.h ..\drivers\icm20608.h \
+./objects/sensor.o: ..\application\math\sensor.c \
+  ..\application\math\sensor.h ..\application\drivers\imu_data_type.h \
+  ..\application\math\filter.h ..\application\drivers\icm20608.h \
   ..\project\ti_msp_dl_config.h ..\source\ti\devices\msp\msp.h \
   ..\source\ti\devices\DeviceFamily.h \
   ..\source\ti\devices\msp\m0p\mspm0g350x.h \
@@ -56,4 +57,4 @@
   ..\source\ti\driverlib\dl_uart.h ..\source\ti\driverlib\dl_uart_main.h \
   ..\source\ti\driverlib\dl_vref.h ..\source\ti\driverlib\dl_wwdt.h \
   ..\source\ti\driverlib\m0p\dl_interrupt.h \
-  ..\source\ti\driverlib\m0p\dl_systick.h ..\math\wp_math.h
+  ..\source\ti\driverlib\m0p\dl_systick.h ..\application\math\wp_math.h

@@ -1,2 +1,3 @@
-./objects/fusionoffset.o: ..\app\fusion\FusionOffset.c \
-  ..\app\fusion\FusionOffset.h ..\app\fusion\FusionMath.h
+./objects/fusionoffset.o: ..\application\app\fusion\FusionOffset.c \
+  ..\application\app\fusion\FusionOffset.h \
+  ..\application\app\fusion\FusionMath.h

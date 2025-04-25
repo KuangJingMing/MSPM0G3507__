@@ -1,6 +1,6 @@
-./objects/main.o: ..\user\main.c ..\user\common.h \
-  ..\project\ti_msp_dl_config.h ..\source\ti\devices\msp\msp.h \
-  ..\source\ti\devices\DeviceFamily.h \
+./objects/main.o: ..\application\user\main.c \
+  ..\application\include\common_types.h ..\project\ti_msp_dl_config.h \
+  ..\source\ti\devices\msp\msp.h ..\source\ti\devices\DeviceFamily.h \
   ..\source\ti\devices\msp\m0p\mspm0g350x.h \
   ..\source\third_party\CMSIS\Core\Include\core_cm0plus.h \
   ..\source\ti\devices\msp\peripherals\hw_adc12.h \
@@ -64,8 +64,11 @@
   ..\kernel\freertos\Source\portable\GCC\ARM_CM0\portmacro.h \
   ..\kernel\freertos\Source\include\mpu_wrappers.h \
   ..\kernel\freertos\Source\include\task.h \
-  ..\kernel\freertos\Source\include\list.h ..\drivers\oled.h \
-  ..\fonts\oled_data.h ..\utils\delay.h ..\app\gray_detection.h \
-  ..\drivers\pca9555.h ..\hardware\bsp\software_i2c.h ..\drivers\motor.h \
-  ..\drivers\encoder.h ..\kernel\freertos\Source\include\timers.h \
-  ..\app\motor_controller.h ..\utils\log.h ..\hardware\bsp\uart.h
+  ..\kernel\freertos\Source\include\list.h ..\application\drivers\oled.h \
+  ..\application\fonts\oled_data.h ..\application\utils\delay.h \
+  ..\application\app\gray_detection.h ..\application\drivers\pca9555.h \
+  ..\application\hardware\bsp\software_i2c.h \
+  ..\application\drivers\motor.h ..\application\drivers\encoder.h \
+  ..\kernel\freertos\Source\include\timers.h \
+  ..\application\app\motor_controller.h ..\application\utils\log.h \
+  ..\application\hardware\bsp\uart.h

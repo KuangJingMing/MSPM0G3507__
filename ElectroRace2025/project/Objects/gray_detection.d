@@ -1,6 +1,6 @@
-./objects/gray_detection.o: ..\app\gray_detection.c ..\drivers\pca9555.h \
-  ..\project\ti_msp_dl_config.h ..\source\ti\devices\msp\msp.h \
-  ..\source\ti\devices\DeviceFamily.h \
+./objects/gray_detection.o: ..\application\app\gray_detection.c \
+  ..\application\drivers\pca9555.h ..\project\ti_msp_dl_config.h \
+  ..\source\ti\devices\msp\msp.h ..\source\ti\devices\DeviceFamily.h \
   ..\source\ti\devices\msp\m0p\mspm0g350x.h \
   ..\source\third_party\CMSIS\Core\Include\core_cm0plus.h \
   ..\source\ti\devices\msp\peripherals\hw_adc12.h \
@@ -55,6 +55,8 @@
   ..\source\ti\driverlib\dl_uart.h ..\source\ti\driverlib\dl_uart_main.h \
   ..\source\ti\driverlib\dl_vref.h ..\source\ti\driverlib\dl_wwdt.h \
   ..\source\ti\driverlib\m0p\dl_interrupt.h \
-  ..\source\ti\driverlib\m0p\dl_systick.h ..\hardware\bsp\software_i2c.h \
-  ..\utils\delay.h ..\app\gray_detection.h ..\utils\log_config.h \
-  ..\utils\log.h ..\hardware\bsp\uart.h
+  ..\source\ti\driverlib\m0p\dl_systick.h \
+  ..\application\hardware\bsp\software_i2c.h \
+  ..\application\utils\delay.h ..\application\app\gray_detection.h \
+  ..\application\utils\log_config.h ..\application\utils\log.h \
+  ..\application\hardware\bsp\uart.h

@@ -1,1 +1,2 @@
-./objects/oled_data.o: ..\fonts\oled_data.c ..\fonts\oled_data.h
+./objects/oled_data.o: ..\application\fonts\oled_data.c \
+  ..\application\fonts\oled_data.h

@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>__MSPM0G3507__</Define>
               <Undefine></Undefine>
-              <IncludePath>..\project;..\source;..\source\third_party\CMSIS\Core\Include;..\kernel\freertos\Source\include;..\kernel\freertos\Source\portable\GCC\ARM_CM0;..\kernel\freertos\builds\LP_MSPM0G3507\release;..\drivers;..\hardware\bsp;..\utils;..\fonts;..\app;..\user;..\math;..\app\fusion</IncludePath>
+              <IncludePath>..\project;..\source;..\source\third_party\CMSIS\Core\Include;..\kernel\freertos\Source\include;..\kernel\freertos\Source\portable\GCC\ARM_CM0;..\kernel\freertos\builds\LP_MSPM0G3507\release;..\application\app;..\application\app\fusion;..\application\drivers;..\application\fonts;..\application\hardware\bsp;..\application\include;..\application\math;..\application\user;..\application\utils</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -407,12 +407,12 @@
             <File>
               <FileName>delay.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\utils\delay.c</FilePath>
+              <FilePath>..\application\utils\delay.c</FilePath>
             </File>
             <File>
               <FileName>log.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\utils\log.c</FilePath>
+              <FilePath>..\application\utils\log.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -422,7 +422,7 @@
             <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\user\main.c</FilePath>
+              <FilePath>..\application\user\main.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -430,74 +430,39 @@
           <GroupName>drivers</GroupName>
           <Files>
             <File>
-              <FileName>motor.c</FileName>
+              <FileName>eeprom.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\drivers\motor.c</FilePath>
-            </File>
-            <File>
-              <FileName>oled.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\drivers\oled.c</FilePath>
-            </File>
-            <File>
-              <FileName>pca9555.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\drivers\pca9555.c</FilePath>
+              <FilePath>..\application\drivers\eeprom.c</FilePath>
             </File>
             <File>
               <FileName>encoder.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\drivers\encoder.c</FilePath>
+              <FilePath>..\application\drivers\encoder.c</FilePath>
             </File>
             <File>
               <FileName>icm20608.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\drivers\icm20608.c</FilePath>
+              <FilePath>..\application\drivers\icm20608.c</FilePath>
             </File>
             <File>
-              <FileName>eeprom.c</FileName>
+              <FileName>motor.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\drivers\eeprom.c</FilePath>
+              <FilePath>..\application\drivers\motor.c</FilePath>
+            </File>
+            <File>
+              <FileName>oled.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\drivers\oled.c</FilePath>
+            </File>
+            <File>
+              <FileName>pca9555.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\drivers\pca9555.c</FilePath>
             </File>
             <File>
               <FileName>w25qxx.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\drivers\w25qxx.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>hardware/bsp</GroupName>
-          <Files>
-            <File>
-              <FileName>software_i2c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\hardware\bsp\software_i2c.c</FilePath>
-            </File>
-            <File>
-              <FileName>hardware_i2c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\hardware\bsp\hardware_i2c.c</FilePath>
-            </File>
-            <File>
-              <FileName>uart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\hardware\bsp\uart.c</FilePath>
-            </File>
-            <File>
-              <FileName>spi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\hardware\bsp\spi.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>fonts</GroupName>
-          <Files>
-            <File>
-              <FileName>oled_data.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\fonts\oled_data.c</FilePath>
+              <FilePath>..\application\drivers\w25qxx.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -507,12 +472,87 @@
             <File>
               <FileName>gray_detection.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\app\gray_detection.c</FilePath>
+              <FilePath>..\application\app\gray_detection.c</FilePath>
             </File>
             <File>
               <FileName>motor_controller.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\app\motor_controller.c</FilePath>
+              <FilePath>..\application\app\motor_controller.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>app/fusion</GroupName>
+          <Files>
+            <File>
+              <FileName>FusionAhrs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\app\fusion\FusionAhrs.c</FilePath>
+            </File>
+            <File>
+              <FileName>FusionCompass.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\app\fusion\FusionCompass.c</FilePath>
+            </File>
+            <File>
+              <FileName>FusionOffset.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\app\fusion\FusionOffset.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>hardware/bsp</GroupName>
+          <Files>
+            <File>
+              <FileName>hardware_i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\hardware\bsp\hardware_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>software_i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\hardware\bsp\software_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\hardware\bsp\spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\hardware\bsp\uart.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>math</GroupName>
+          <Files>
+            <File>
+              <FileName>filter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\math\filter.c</FilePath>
+            </File>
+            <File>
+              <FileName>sensor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\math\sensor.c</FilePath>
+            </File>
+            <File>
+              <FileName>wp_math.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\math\wp_math.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>fonts</GroupName>
+          <Files>
+            <File>
+              <FileName>oled_data.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\fonts\oled_data.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -523,46 +563,6 @@
               <FileName>README.md</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\README.md</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>math</GroupName>
-          <Files>
-            <File>
-              <FileName>wp_math.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\math\wp_math.c</FilePath>
-            </File>
-            <File>
-              <FileName>sensor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\math\sensor.c</FilePath>
-            </File>
-            <File>
-              <FileName>filter.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\math\filter.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>app/fusion</GroupName>
-          <Files>
-            <File>
-              <FileName>FusionAhrs.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\app\fusion\FusionAhrs.c</FilePath>
-            </File>
-            <File>
-              <FileName>FusionCompass.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\app\fusion\FusionCompass.c</FilePath>
-            </File>
-            <File>
-              <FileName>FusionOffset.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\app\fusion\FusionOffset.c</FilePath>
             </File>
           </Files>
         </Group>

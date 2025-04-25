@@ -116,6 +116,107 @@ Section Cross References
     main.o(.text.main) refers to tasks.o(.text.vTaskStartScheduler) for vTaskStartScheduler
     main.o(.text.main) refers to motor_controller.o(.text.DisplayTask) for DisplayTask
     main.o(.ARM.exidx.text.main) refers to main.o(.text.main) for [Anonymous Symbol]
+    eeprom.o(.text.ReadFlashParameterALL) refers to w25qxx.o(.text.W25QXX_Read_f) for W25QXX_Read_f
+    eeprom.o(.ARM.exidx.text.ReadFlashParameterALL) refers to eeprom.o(.text.ReadFlashParameterALL) for [Anonymous Symbol]
+    eeprom.o(.text.ReadFlashParameterOne) refers to w25qxx.o(.text.W25QXX_Read_f) for W25QXX_Read_f
+    eeprom.o(.ARM.exidx.text.ReadFlashParameterOne) refers to eeprom.o(.text.ReadFlashParameterOne) for [Anonymous Symbol]
+    eeprom.o(.text.ReadFlashParameterTwo) refers to w25qxx.o(.text.W25QXX_Read_f) for W25QXX_Read_f
+    eeprom.o(.ARM.exidx.text.ReadFlashParameterTwo) refers to eeprom.o(.text.ReadFlashParameterTwo) for [Anonymous Symbol]
+    eeprom.o(.text.ReadFlashParameterThree) refers to w25qxx.o(.text.W25QXX_Read_f) for W25QXX_Read_f
+    eeprom.o(.ARM.exidx.text.ReadFlashParameterThree) refers to eeprom.o(.text.ReadFlashParameterThree) for [Anonymous Symbol]
+    eeprom.o(.text.WriteFlashParameter) refers to w25qxx.o(.text.W25QXX_Write_f) for W25QXX_Write_f
+    eeprom.o(.text.WriteFlashParameter) refers to eeprom.o(.bss.eeprom_write_data) for [Anonymous Symbol]
+    eeprom.o(.ARM.exidx.text.WriteFlashParameter) refers to eeprom.o(.text.WriteFlashParameter) for [Anonymous Symbol]
+    eeprom.o(.text.WriteFlashParameter_Two) refers to w25qxx.o(.text.W25QXX_Write_f) for W25QXX_Write_f
+    eeprom.o(.text.WriteFlashParameter_Two) refers to eeprom.o(.bss.eeprom_write_data) for [Anonymous Symbol]
+    eeprom.o(.ARM.exidx.text.WriteFlashParameter_Two) refers to eeprom.o(.text.WriteFlashParameter_Two) for [Anonymous Symbol]
+    eeprom.o(.text.WriteFlashParameter_Three) refers to w25qxx.o(.text.W25QXX_Write_f) for W25QXX_Write_f
+    eeprom.o(.text.WriteFlashParameter_Three) refers to eeprom.o(.bss.eeprom_write_data) for [Anonymous Symbol]
+    eeprom.o(.ARM.exidx.text.WriteFlashParameter_Three) refers to eeprom.o(.text.WriteFlashParameter_Three) for [Anonymous Symbol]
+    eeprom.o(.text.flight_read_flash_full) refers to w25qxx.o(.text.W25QXX_Read_f) for W25QXX_Read_f
+    eeprom.o(.text.flight_read_flash_full) refers to eeprom.o(.data.Flight_Params) for Flight_Params
+    eeprom.o(.ARM.exidx.text.flight_read_flash_full) refers to eeprom.o(.text.flight_read_flash_full) for [Anonymous Symbol]
+    encoder.o(.text.SpeedTimerCallback) refers to queue.o(.text.xQueueSemaphoreTake) for xQueueSemaphoreTake
+    encoder.o(.text.SpeedTimerCallback) refers to queue.o(.text.xQueueGenericSend) for xQueueGenericSend
+    encoder.o(.text.SpeedTimerCallback) refers to fflti.o(.text) for __aeabi_i2f
+    encoder.o(.text.SpeedTimerCallback) refers to fdiv.o(.text) for __aeabi_fdiv
+    encoder.o(.text.SpeedTimerCallback) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    encoder.o(.text.SpeedTimerCallback) refers to encoder.o(.bss.xMotorCountMutex) for xMotorCountMutex
+    encoder.o(.text.SpeedTimerCallback) refers to encoder.o(.bss.left_motor_period_cnt) for left_motor_period_cnt
+    encoder.o(.text.SpeedTimerCallback) refers to encoder.o(.bss.right_motor_period_cnt) for right_motor_period_cnt
+    encoder.o(.text.SpeedTimerCallback) refers to encoder.o(.data.NEncoder) for NEncoder
+    encoder.o(.text.SpeedTimerCallback) refers to encoder.o(.data.trackless_motor) for trackless_motor
+    encoder.o(.ARM.exidx.text.SpeedTimerCallback) refers to encoder.o(.text.SpeedTimerCallback) for [Anonymous Symbol]
+    encoder.o(.text.Encoder_init) refers to queue.o(.text.xQueueCreateMutex) for xQueueCreateMutex
+    encoder.o(.text.Encoder_init) refers to timers.o(.text.xTimerCreate) for xTimerCreate
+    encoder.o(.text.Encoder_init) refers to tasks.o(.text.xTaskGetTickCount) for xTaskGetTickCount
+    encoder.o(.text.Encoder_init) refers to timers.o(.text.xTimerGenericCommand) for xTimerGenericCommand
+    encoder.o(.text.Encoder_init) refers to encoder.o(.bss.xMotorCountMutex) for xMotorCountMutex
+    encoder.o(.text.Encoder_init) refers to encoder.o(.text.SpeedTimerCallback) for SpeedTimerCallback
+    encoder.o(.text.Encoder_init) refers to encoder.o(.bss.xSpeedTimer) for xSpeedTimer
+    encoder.o(.ARM.exidx.text.Encoder_init) refers to encoder.o(.text.Encoder_init) for [Anonymous Symbol]
+    encoder.o(.text.QEI0_IRQHandler) refers to queue.o(.text.xQueueReceiveFromISR) for xQueueReceiveFromISR
+    encoder.o(.text.QEI0_IRQHandler) refers to queue.o(.text.xQueueGiveFromISR) for xQueueGiveFromISR
+    encoder.o(.text.QEI0_IRQHandler) refers to encoder.o(.bss.D_State) for D_State
+    encoder.o(.text.QEI0_IRQHandler) refers to encoder.o(.bss.xMotorCountMutex) for xMotorCountMutex
+    encoder.o(.text.QEI0_IRQHandler) refers to encoder.o(.bss.left_motor_period_cnt) for left_motor_period_cnt
+    encoder.o(.ARM.exidx.text.QEI0_IRQHandler) refers to encoder.o(.text.QEI0_IRQHandler) for [Anonymous Symbol]
+    encoder.o(.text.QEI1_IRQHandler) refers to queue.o(.text.xQueueReceiveFromISR) for xQueueReceiveFromISR
+    encoder.o(.text.QEI1_IRQHandler) refers to queue.o(.text.xQueueGiveFromISR) for xQueueGiveFromISR
+    encoder.o(.text.QEI1_IRQHandler) refers to encoder.o(.bss.D_State) for D_State
+    encoder.o(.text.QEI1_IRQHandler) refers to encoder.o(.bss.xMotorCountMutex) for xMotorCountMutex
+    encoder.o(.text.QEI1_IRQHandler) refers to encoder.o(.bss.right_motor_period_cnt) for right_motor_period_cnt
+    encoder.o(.ARM.exidx.text.QEI1_IRQHandler) refers to encoder.o(.text.QEI1_IRQHandler) for [Anonymous Symbol]
+    encoder.o(.text.GROUP1_IRQHandler) refers to queue.o(.text.xQueueReceiveFromISR) for xQueueReceiveFromISR
+    encoder.o(.text.GROUP1_IRQHandler) refers to queue.o(.text.xQueueGiveFromISR) for xQueueGiveFromISR
+    encoder.o(.text.GROUP1_IRQHandler) refers to encoder.o(.bss.D_State) for D_State
+    encoder.o(.text.GROUP1_IRQHandler) refers to encoder.o(.bss.xMotorCountMutex) for xMotorCountMutex
+    encoder.o(.text.GROUP1_IRQHandler) refers to encoder.o(.bss.left_motor_period_cnt) for left_motor_period_cnt
+    encoder.o(.text.GROUP1_IRQHandler) refers to encoder.o(.bss.right_motor_period_cnt) for right_motor_period_cnt
+    encoder.o(.ARM.exidx.text.GROUP1_IRQHandler) refers to encoder.o(.text.GROUP1_IRQHandler) for [Anonymous Symbol]
+    encoder.o(.text.get_left_motor_speed) refers to encoder.o(.data.NEncoder) for NEncoder
+    encoder.o(.ARM.exidx.text.get_left_motor_speed) refers to encoder.o(.text.get_left_motor_speed) for [Anonymous Symbol]
+    encoder.o(.text.get_right_motor_speed) refers to encoder.o(.data.NEncoder) for NEncoder
+    encoder.o(.ARM.exidx.text.get_right_motor_speed) refers to encoder.o(.text.get_right_motor_speed) for [Anonymous Symbol]
+    icm20608.o(.text.ICM206xx_Init) refers to hardware_i2c.o(.text.single_writei2c) for single_writei2c
+    icm20608.o(.text.ICM206xx_Init) refers to delay.o(.text.delay_ms) for delay_ms
+    icm20608.o(.text.ICM206xx_Init) refers to hardware_i2c.o(.text.single_readi2c) for single_readi2c
+    icm20608.o(.text.ICM206xx_Init) refers to log.o(.text.LOG_E) for LOG_E
+    icm20608.o(.text.ICM206xx_Init) refers to log.o(.text.LOG_I) for LOG_I
+    icm20608.o(.text.ICM206xx_Init) refers to icm20608.o(.data.IMU_ID) for [Anonymous Symbol]
+    icm20608.o(.text.ICM206xx_Init) refers to icm20608.o(.bss.icm_read_check) for [Anonymous Symbol]
+    icm20608.o(.ARM.exidx.text.ICM206xx_Init) refers to icm20608.o(.text.ICM206xx_Init) for [Anonymous Symbol]
+    icm20608.o(.text.ICM206xx_Read_Data) refers to hardware_i2c.o(.text.i2creadnbyte) for i2creadnbyte
+    icm20608.o(.text.ICM206xx_Read_Data) refers to fflti.o(.text) for __aeabi_i2f
+    icm20608.o(.text.ICM206xx_Read_Data) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    icm20608.o(.text.ICM206xx_Read_Data) refers to fdiv.o(.text) for __aeabi_fdiv
+    icm20608.o(.text.ICM206xx_Read_Data) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    icm20608.o(.text.ICM206xx_Read_Data) refers to icm20608.o(.data.IMU_ID) for [Anonymous Symbol]
+    icm20608.o(.ARM.exidx.text.ICM206xx_Read_Data) refers to icm20608.o(.text.ICM206xx_Read_Data) for [Anonymous Symbol]
+    icm20608.o(.text.imu_calibration_params_init) refers to eeprom.o(.text.ReadFlashParameterOne) for ReadFlashParameterOne
+    icm20608.o(.text.imu_calibration_params_init) refers to sensor.o(.bss.smartcar_imu) for smartcar_imu
+    icm20608.o(.ARM.exidx.text.imu_calibration_params_init) refers to icm20608.o(.text.imu_calibration_params_init) for [Anonymous Symbol]
+    icm20608.o(.text.imu_calibration) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
+    icm20608.o(.text.imu_calibration) refers to fcmp.o(i._fgr) for __aeabi_fcmpgt
+    icm20608.o(.text.imu_calibration) refers to fflti.o(.text) for __aeabi_ui2f
+    icm20608.o(.text.imu_calibration) refers to fdiv.o(.text) for __aeabi_fdiv
+    icm20608.o(.text.imu_calibration) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    icm20608.o(.text.imu_calibration) refers to wp_math.o(.text.safe_sqrt) for safe_sqrt
+    icm20608.o(.text.imu_calibration) refers to eeprom.o(.text.WriteFlashParameter_Three) for WriteFlashParameter_Three
+    icm20608.o(.text.imu_calibration) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    icm20608.o(.text.imu_calibration) refers to sensor.o(.bss.smartcar_imu) for smartcar_imu
+    icm20608.o(.text.imu_calibration) refers to icm20608.o(.bss.imu_calibration.last_gyro.0) for [Anonymous Symbol]
+    icm20608.o(.text.imu_calibration) refers to icm20608.o(.bss.imu_calibration.last_gyro.1) for [Anonymous Symbol]
+    icm20608.o(.text.imu_calibration) refers to icm20608.o(.bss.imu_calibration.last_gyro.2) for [Anonymous Symbol]
+    icm20608.o(.text.imu_calibration) refers to icm20608.o(.bss.imu_calibration.gyro_sum.0) for [Anonymous Symbol]
+    icm20608.o(.text.imu_calibration) refers to icm20608.o(.bss.imu_calibration.gyro_sum.1) for [Anonymous Symbol]
+    icm20608.o(.text.imu_calibration) refers to icm20608.o(.bss.imu_calibration.gyro_sum.2) for [Anonymous Symbol]
+    icm20608.o(.text.imu_calibration) refers to icm20608.o(.bss.imu_calibration.accel_sum.1) for [Anonymous Symbol]
+    icm20608.o(.text.imu_calibration) refers to icm20608.o(.bss.imu_calibration.accel_sum.2) for [Anonymous Symbol]
+    icm20608.o(.text.imu_calibration) refers to icm20608.o(.bss.imu_calibration.accel_sum.0) for [Anonymous Symbol]
+    icm20608.o(.text.imu_calibration) refers to icm20608.o(.bss.imu_calibration.cnt) for [Anonymous Symbol]
+    icm20608.o(.text.imu_calibration) refers to eeprom.o(.bss.Trackless_Params) for Trackless_Params
+    icm20608.o(.ARM.exidx.text.imu_calibration) refers to icm20608.o(.text.imu_calibration) for [Anonymous Symbol]
     motor.o(.text.Motor_Init) refers to dl_timer.o(.text.DL_Timer_setCaptureCompareValue) for DL_Timer_setCaptureCompareValue
     motor.o(.ARM.exidx.text.Motor_Init) refers to motor.o(.text.Motor_Init) for [Anonymous Symbol]
     motor.o(.text.Motor_Control) refers to dl_timer.o(.text.DL_Timer_setCaptureCompareValue) for DL_Timer_setCaptureCompareValue
@@ -200,107 +301,6 @@ Section Cross References
     oled.o(.ARM.exidx.text.OLED_Printf) refers to oled.o(.text.OLED_Printf) for [Anonymous Symbol]
     pca9555.o(.text.pca9555_read_bit12) refers to software_i2c.o(.text.SoftWareI2C_Read_Len) for SoftWareI2C_Read_Len
     pca9555.o(.ARM.exidx.text.pca9555_read_bit12) refers to pca9555.o(.text.pca9555_read_bit12) for [Anonymous Symbol]
-    encoder.o(.text.SpeedTimerCallback) refers to queue.o(.text.xQueueSemaphoreTake) for xQueueSemaphoreTake
-    encoder.o(.text.SpeedTimerCallback) refers to queue.o(.text.xQueueGenericSend) for xQueueGenericSend
-    encoder.o(.text.SpeedTimerCallback) refers to fflti.o(.text) for __aeabi_i2f
-    encoder.o(.text.SpeedTimerCallback) refers to fdiv.o(.text) for __aeabi_fdiv
-    encoder.o(.text.SpeedTimerCallback) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    encoder.o(.text.SpeedTimerCallback) refers to encoder.o(.bss.xMotorCountMutex) for xMotorCountMutex
-    encoder.o(.text.SpeedTimerCallback) refers to encoder.o(.bss.left_motor_period_cnt) for left_motor_period_cnt
-    encoder.o(.text.SpeedTimerCallback) refers to encoder.o(.bss.right_motor_period_cnt) for right_motor_period_cnt
-    encoder.o(.text.SpeedTimerCallback) refers to encoder.o(.data.NEncoder) for NEncoder
-    encoder.o(.text.SpeedTimerCallback) refers to encoder.o(.data.trackless_motor) for trackless_motor
-    encoder.o(.ARM.exidx.text.SpeedTimerCallback) refers to encoder.o(.text.SpeedTimerCallback) for [Anonymous Symbol]
-    encoder.o(.text.Encoder_init) refers to queue.o(.text.xQueueCreateMutex) for xQueueCreateMutex
-    encoder.o(.text.Encoder_init) refers to timers.o(.text.xTimerCreate) for xTimerCreate
-    encoder.o(.text.Encoder_init) refers to tasks.o(.text.xTaskGetTickCount) for xTaskGetTickCount
-    encoder.o(.text.Encoder_init) refers to timers.o(.text.xTimerGenericCommand) for xTimerGenericCommand
-    encoder.o(.text.Encoder_init) refers to encoder.o(.bss.xMotorCountMutex) for xMotorCountMutex
-    encoder.o(.text.Encoder_init) refers to encoder.o(.text.SpeedTimerCallback) for SpeedTimerCallback
-    encoder.o(.text.Encoder_init) refers to encoder.o(.bss.xSpeedTimer) for xSpeedTimer
-    encoder.o(.ARM.exidx.text.Encoder_init) refers to encoder.o(.text.Encoder_init) for [Anonymous Symbol]
-    encoder.o(.text.QEI0_IRQHandler) refers to queue.o(.text.xQueueReceiveFromISR) for xQueueReceiveFromISR
-    encoder.o(.text.QEI0_IRQHandler) refers to queue.o(.text.xQueueGiveFromISR) for xQueueGiveFromISR
-    encoder.o(.text.QEI0_IRQHandler) refers to encoder.o(.bss.D_State) for D_State
-    encoder.o(.text.QEI0_IRQHandler) refers to encoder.o(.bss.xMotorCountMutex) for xMotorCountMutex
-    encoder.o(.text.QEI0_IRQHandler) refers to encoder.o(.bss.left_motor_period_cnt) for left_motor_period_cnt
-    encoder.o(.ARM.exidx.text.QEI0_IRQHandler) refers to encoder.o(.text.QEI0_IRQHandler) for [Anonymous Symbol]
-    encoder.o(.text.QEI1_IRQHandler) refers to queue.o(.text.xQueueReceiveFromISR) for xQueueReceiveFromISR
-    encoder.o(.text.QEI1_IRQHandler) refers to queue.o(.text.xQueueGiveFromISR) for xQueueGiveFromISR
-    encoder.o(.text.QEI1_IRQHandler) refers to encoder.o(.bss.D_State) for D_State
-    encoder.o(.text.QEI1_IRQHandler) refers to encoder.o(.bss.xMotorCountMutex) for xMotorCountMutex
-    encoder.o(.text.QEI1_IRQHandler) refers to encoder.o(.bss.right_motor_period_cnt) for right_motor_period_cnt
-    encoder.o(.ARM.exidx.text.QEI1_IRQHandler) refers to encoder.o(.text.QEI1_IRQHandler) for [Anonymous Symbol]
-    encoder.o(.text.GROUP1_IRQHandler) refers to queue.o(.text.xQueueReceiveFromISR) for xQueueReceiveFromISR
-    encoder.o(.text.GROUP1_IRQHandler) refers to queue.o(.text.xQueueGiveFromISR) for xQueueGiveFromISR
-    encoder.o(.text.GROUP1_IRQHandler) refers to encoder.o(.bss.D_State) for D_State
-    encoder.o(.text.GROUP1_IRQHandler) refers to encoder.o(.bss.xMotorCountMutex) for xMotorCountMutex
-    encoder.o(.text.GROUP1_IRQHandler) refers to encoder.o(.bss.left_motor_period_cnt) for left_motor_period_cnt
-    encoder.o(.text.GROUP1_IRQHandler) refers to encoder.o(.bss.right_motor_period_cnt) for right_motor_period_cnt
-    encoder.o(.ARM.exidx.text.GROUP1_IRQHandler) refers to encoder.o(.text.GROUP1_IRQHandler) for [Anonymous Symbol]
-    encoder.o(.text.get_left_motor_speed) refers to encoder.o(.data.NEncoder) for NEncoder
-    encoder.o(.ARM.exidx.text.get_left_motor_speed) refers to encoder.o(.text.get_left_motor_speed) for [Anonymous Symbol]
-    encoder.o(.text.get_right_motor_speed) refers to encoder.o(.data.NEncoder) for NEncoder
-    encoder.o(.ARM.exidx.text.get_right_motor_speed) refers to encoder.o(.text.get_right_motor_speed) for [Anonymous Symbol]
-    icm20608.o(.text.ICM206xx_Init) refers to hardware_i2c.o(.text.single_writei2c) for single_writei2c
-    icm20608.o(.text.ICM206xx_Init) refers to delay.o(.text.delay_ms) for delay_ms
-    icm20608.o(.text.ICM206xx_Init) refers to hardware_i2c.o(.text.single_readi2c) for single_readi2c
-    icm20608.o(.text.ICM206xx_Init) refers to log.o(.text.LOG_E) for LOG_E
-    icm20608.o(.text.ICM206xx_Init) refers to log.o(.text.LOG_I) for LOG_I
-    icm20608.o(.text.ICM206xx_Init) refers to icm20608.o(.data.IMU_ID) for [Anonymous Symbol]
-    icm20608.o(.text.ICM206xx_Init) refers to icm20608.o(.bss.icm_read_check) for [Anonymous Symbol]
-    icm20608.o(.ARM.exidx.text.ICM206xx_Init) refers to icm20608.o(.text.ICM206xx_Init) for [Anonymous Symbol]
-    icm20608.o(.text.ICM206xx_Read_Data) refers to hardware_i2c.o(.text.i2creadnbyte) for i2creadnbyte
-    icm20608.o(.text.ICM206xx_Read_Data) refers to fflti.o(.text) for __aeabi_i2f
-    icm20608.o(.text.ICM206xx_Read_Data) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    icm20608.o(.text.ICM206xx_Read_Data) refers to fdiv.o(.text) for __aeabi_fdiv
-    icm20608.o(.text.ICM206xx_Read_Data) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    icm20608.o(.text.ICM206xx_Read_Data) refers to icm20608.o(.data.IMU_ID) for [Anonymous Symbol]
-    icm20608.o(.ARM.exidx.text.ICM206xx_Read_Data) refers to icm20608.o(.text.ICM206xx_Read_Data) for [Anonymous Symbol]
-    icm20608.o(.text.imu_calibration_params_init) refers to eeprom.o(.text.ReadFlashParameterOne) for ReadFlashParameterOne
-    icm20608.o(.text.imu_calibration_params_init) refers to sensor.o(.bss.smartcar_imu) for smartcar_imu
-    icm20608.o(.ARM.exidx.text.imu_calibration_params_init) refers to icm20608.o(.text.imu_calibration_params_init) for [Anonymous Symbol]
-    icm20608.o(.text.imu_calibration) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
-    icm20608.o(.text.imu_calibration) refers to fcmp.o(i._fgr) for __aeabi_fcmpgt
-    icm20608.o(.text.imu_calibration) refers to fflti.o(.text) for __aeabi_ui2f
-    icm20608.o(.text.imu_calibration) refers to fdiv.o(.text) for __aeabi_fdiv
-    icm20608.o(.text.imu_calibration) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    icm20608.o(.text.imu_calibration) refers to wp_math.o(.text.safe_sqrt) for safe_sqrt
-    icm20608.o(.text.imu_calibration) refers to eeprom.o(.text.WriteFlashParameter_Three) for WriteFlashParameter_Three
-    icm20608.o(.text.imu_calibration) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    icm20608.o(.text.imu_calibration) refers to sensor.o(.bss.smartcar_imu) for smartcar_imu
-    icm20608.o(.text.imu_calibration) refers to icm20608.o(.bss.imu_calibration.last_gyro.0) for [Anonymous Symbol]
-    icm20608.o(.text.imu_calibration) refers to icm20608.o(.bss.imu_calibration.last_gyro.1) for [Anonymous Symbol]
-    icm20608.o(.text.imu_calibration) refers to icm20608.o(.bss.imu_calibration.last_gyro.2) for [Anonymous Symbol]
-    icm20608.o(.text.imu_calibration) refers to icm20608.o(.bss.imu_calibration.gyro_sum.0) for [Anonymous Symbol]
-    icm20608.o(.text.imu_calibration) refers to icm20608.o(.bss.imu_calibration.gyro_sum.1) for [Anonymous Symbol]
-    icm20608.o(.text.imu_calibration) refers to icm20608.o(.bss.imu_calibration.gyro_sum.2) for [Anonymous Symbol]
-    icm20608.o(.text.imu_calibration) refers to icm20608.o(.bss.imu_calibration.accel_sum.1) for [Anonymous Symbol]
-    icm20608.o(.text.imu_calibration) refers to icm20608.o(.bss.imu_calibration.accel_sum.2) for [Anonymous Symbol]
-    icm20608.o(.text.imu_calibration) refers to icm20608.o(.bss.imu_calibration.accel_sum.0) for [Anonymous Symbol]
-    icm20608.o(.text.imu_calibration) refers to icm20608.o(.bss.imu_calibration.cnt) for [Anonymous Symbol]
-    icm20608.o(.text.imu_calibration) refers to eeprom.o(.bss.Trackless_Params) for Trackless_Params
-    icm20608.o(.ARM.exidx.text.imu_calibration) refers to icm20608.o(.text.imu_calibration) for [Anonymous Symbol]
-    eeprom.o(.text.ReadFlashParameterALL) refers to w25qxx.o(.text.W25QXX_Read_f) for W25QXX_Read_f
-    eeprom.o(.ARM.exidx.text.ReadFlashParameterALL) refers to eeprom.o(.text.ReadFlashParameterALL) for [Anonymous Symbol]
-    eeprom.o(.text.ReadFlashParameterOne) refers to w25qxx.o(.text.W25QXX_Read_f) for W25QXX_Read_f
-    eeprom.o(.ARM.exidx.text.ReadFlashParameterOne) refers to eeprom.o(.text.ReadFlashParameterOne) for [Anonymous Symbol]
-    eeprom.o(.text.ReadFlashParameterTwo) refers to w25qxx.o(.text.W25QXX_Read_f) for W25QXX_Read_f
-    eeprom.o(.ARM.exidx.text.ReadFlashParameterTwo) refers to eeprom.o(.text.ReadFlashParameterTwo) for [Anonymous Symbol]
-    eeprom.o(.text.ReadFlashParameterThree) refers to w25qxx.o(.text.W25QXX_Read_f) for W25QXX_Read_f
-    eeprom.o(.ARM.exidx.text.ReadFlashParameterThree) refers to eeprom.o(.text.ReadFlashParameterThree) for [Anonymous Symbol]
-    eeprom.o(.text.WriteFlashParameter) refers to w25qxx.o(.text.W25QXX_Write_f) for W25QXX_Write_f
-    eeprom.o(.text.WriteFlashParameter) refers to eeprom.o(.bss.eeprom_write_data) for [Anonymous Symbol]
-    eeprom.o(.ARM.exidx.text.WriteFlashParameter) refers to eeprom.o(.text.WriteFlashParameter) for [Anonymous Symbol]
-    eeprom.o(.text.WriteFlashParameter_Two) refers to w25qxx.o(.text.W25QXX_Write_f) for W25QXX_Write_f
-    eeprom.o(.text.WriteFlashParameter_Two) refers to eeprom.o(.bss.eeprom_write_data) for [Anonymous Symbol]
-    eeprom.o(.ARM.exidx.text.WriteFlashParameter_Two) refers to eeprom.o(.text.WriteFlashParameter_Two) for [Anonymous Symbol]
-    eeprom.o(.text.WriteFlashParameter_Three) refers to w25qxx.o(.text.W25QXX_Write_f) for W25QXX_Write_f
-    eeprom.o(.text.WriteFlashParameter_Three) refers to eeprom.o(.bss.eeprom_write_data) for [Anonymous Symbol]
-    eeprom.o(.ARM.exidx.text.WriteFlashParameter_Three) refers to eeprom.o(.text.WriteFlashParameter_Three) for [Anonymous Symbol]
-    eeprom.o(.text.flight_read_flash_full) refers to w25qxx.o(.text.W25QXX_Read_f) for W25QXX_Read_f
-    eeprom.o(.text.flight_read_flash_full) refers to eeprom.o(.data.Flight_Params) for Flight_Params
-    eeprom.o(.ARM.exidx.text.flight_read_flash_full) refers to eeprom.o(.text.flight_read_flash_full) for [Anonymous Symbol]
     w25qxx.o(.text.w25qxx_gpio_init) refers to delay.o(.text.delay_us) for delay_us
     w25qxx.o(.text.w25qxx_gpio_init) refers to delay.o(.text.delay_ms) for delay_ms
     w25qxx.o(.text.w25qxx_gpio_init) refers to w25qxx.o(.text.W25Q64_readID) for W25Q64_readID
@@ -343,67 +343,6 @@ Section Cross References
     w25qxx.o(.text.Resume_Factory_Setting) refers to w25qxx.o(.text.W25QXX_Erase_Chip) for W25QXX_Erase_Chip
     w25qxx.o(.text.Resume_Factory_Setting) refers to w25qxx.o(.text.W25Q64_erase_sector) for W25Q64_erase_sector
     w25qxx.o(.ARM.exidx.text.Resume_Factory_Setting) refers to w25qxx.o(.text.Resume_Factory_Setting) for [Anonymous Symbol]
-    software_i2c.o(.ARM.exidx.text.SoftwareI2C_Init) refers to software_i2c.o(.text.SoftwareI2C_Init) for [Anonymous Symbol]
-    software_i2c.o(.ARM.exidx.text.SoftwareI2C_SDA_OUT) refers to software_i2c.o(.text.SoftwareI2C_SDA_OUT) for [Anonymous Symbol]
-    software_i2c.o(.text.SoftwareI2C_SDA_IN) refers to delay.o(.text.delay_us) for delay_us
-    software_i2c.o(.ARM.exidx.text.SoftwareI2C_SDA_IN) refers to software_i2c.o(.text.SoftwareI2C_SDA_IN) for [Anonymous Symbol]
-    software_i2c.o(.text.SoftwareI2C_WriteSCL) refers to delay.o(.text.delay_us) for delay_us
-    software_i2c.o(.ARM.exidx.text.SoftwareI2C_WriteSCL) refers to software_i2c.o(.text.SoftwareI2C_WriteSCL) for [Anonymous Symbol]
-    software_i2c.o(.text.SoftwareI2C_WriteSDA) refers to delay.o(.text.delay_us) for delay_us
-    software_i2c.o(.ARM.exidx.text.SoftwareI2C_WriteSDA) refers to software_i2c.o(.text.SoftwareI2C_WriteSDA) for [Anonymous Symbol]
-    software_i2c.o(.text.SoftwareI2C_ReadSDA) refers to delay.o(.text.delay_us) for delay_us
-    software_i2c.o(.ARM.exidx.text.SoftwareI2C_ReadSDA) refers to software_i2c.o(.text.SoftwareI2C_ReadSDA) for [Anonymous Symbol]
-    software_i2c.o(.text.SoftwareI2C_Start) refers to delay.o(.text.delay_us) for delay_us
-    software_i2c.o(.ARM.exidx.text.SoftwareI2C_Start) refers to software_i2c.o(.text.SoftwareI2C_Start) for [Anonymous Symbol]
-    software_i2c.o(.text.SoftwareI2C_Stop) refers to delay.o(.text.delay_us) for delay_us
-    software_i2c.o(.ARM.exidx.text.SoftwareI2C_Stop) refers to software_i2c.o(.text.SoftwareI2C_Stop) for [Anonymous Symbol]
-    software_i2c.o(.text.SoftwareI2C_SendByte) refers to delay.o(.text.delay_us) for delay_us
-    software_i2c.o(.ARM.exidx.text.SoftwareI2C_SendByte) refers to software_i2c.o(.text.SoftwareI2C_SendByte) for [Anonymous Symbol]
-    software_i2c.o(.text.SoftwareI2C_ReceiveByte) refers to delay.o(.text.delay_us) for delay_us
-    software_i2c.o(.ARM.exidx.text.SoftwareI2C_ReceiveByte) refers to software_i2c.o(.text.SoftwareI2C_ReceiveByte) for [Anonymous Symbol]
-    software_i2c.o(.text.SoftwareI2C_SendAck) refers to delay.o(.text.delay_us) for delay_us
-    software_i2c.o(.ARM.exidx.text.SoftwareI2C_SendAck) refers to software_i2c.o(.text.SoftwareI2C_SendAck) for [Anonymous Symbol]
-    software_i2c.o(.text.SoftwareI2C_ReceiveAck) refers to delay.o(.text.delay_us) for delay_us
-    software_i2c.o(.ARM.exidx.text.SoftwareI2C_ReceiveAck) refers to software_i2c.o(.text.SoftwareI2C_ReceiveAck) for [Anonymous Symbol]
-    software_i2c.o(.text.SoftwareI2C_WaitAck) refers to delay.o(.text.delay_us) for delay_us
-    software_i2c.o(.text.SoftwareI2C_WaitAck) refers to aeabi_sdivfast.o(.text_divfast) for __aeabi_uidiv
-    software_i2c.o(.text.SoftwareI2C_WaitAck) refers to software_i2c.o(.text.SoftwareI2C_Stop) for SoftwareI2C_Stop
-    software_i2c.o(.ARM.exidx.text.SoftwareI2C_WaitAck) refers to software_i2c.o(.text.SoftwareI2C_WaitAck) for [Anonymous Symbol]
-    software_i2c.o(.text.SoftWareI2C_Write_Len) refers to software_i2c.o(.text.SoftwareI2C_Start) for SoftwareI2C_Start
-    software_i2c.o(.text.SoftWareI2C_Write_Len) refers to software_i2c.o(.text.SoftwareI2C_SendByte) for SoftwareI2C_SendByte
-    software_i2c.o(.text.SoftWareI2C_Write_Len) refers to software_i2c.o(.text.SoftwareI2C_WaitAck) for SoftwareI2C_WaitAck
-    software_i2c.o(.text.SoftWareI2C_Write_Len) refers to software_i2c.o(.text.SoftwareI2C_Stop) for SoftwareI2C_Stop
-    software_i2c.o(.ARM.exidx.text.SoftWareI2C_Write_Len) refers to software_i2c.o(.text.SoftWareI2C_Write_Len) for [Anonymous Symbol]
-    software_i2c.o(.text.SoftWareI2C_Read_Len) refers to software_i2c.o(.text.SoftwareI2C_Start) for SoftwareI2C_Start
-    software_i2c.o(.text.SoftWareI2C_Read_Len) refers to software_i2c.o(.text.SoftwareI2C_SendByte) for SoftwareI2C_SendByte
-    software_i2c.o(.text.SoftWareI2C_Read_Len) refers to software_i2c.o(.text.SoftwareI2C_WaitAck) for SoftwareI2C_WaitAck
-    software_i2c.o(.text.SoftWareI2C_Read_Len) refers to software_i2c.o(.text.SoftwareI2C_ReceiveByte) for SoftwareI2C_ReceiveByte
-    software_i2c.o(.text.SoftWareI2C_Read_Len) refers to software_i2c.o(.text.SoftwareI2C_SendAck) for SoftwareI2C_SendAck
-    software_i2c.o(.text.SoftWareI2C_Read_Len) refers to software_i2c.o(.text.SoftwareI2C_Stop) for SoftwareI2C_Stop
-    software_i2c.o(.ARM.exidx.text.SoftWareI2C_Read_Len) refers to software_i2c.o(.text.SoftWareI2C_Read_Len) for [Anonymous Symbol]
-    hardware_i2c.o(.text.I2C_WriteReg) refers to rt_memcpy.o(.text) for __aeabi_memcpy
-    hardware_i2c.o(.text.I2C_WriteReg) refers to dl_i2c.o(.text.DL_I2C_fillControllerTXFIFO) for DL_I2C_fillControllerTXFIFO
-    hardware_i2c.o(.text.I2C_WriteReg) refers to dl_i2c.o(.text.DL_I2C_flushControllerTXFIFO) for DL_I2C_flushControllerTXFIFO
-    hardware_i2c.o(.ARM.exidx.text.I2C_WriteReg) refers to hardware_i2c.o(.text.I2C_WriteReg) for [Anonymous Symbol]
-    hardware_i2c.o(.text.I2C_ReadReg) refers to dl_i2c.o(.text.DL_I2C_fillControllerTXFIFO) for DL_I2C_fillControllerTXFIFO
-    hardware_i2c.o(.text.I2C_ReadReg) refers to dl_i2c.o(.text.DL_I2C_flushControllerTXFIFO) for DL_I2C_flushControllerTXFIFO
-    hardware_i2c.o(.ARM.exidx.text.I2C_ReadReg) refers to hardware_i2c.o(.text.I2C_ReadReg) for [Anonymous Symbol]
-    hardware_i2c.o(.text.single_writei2c) refers to dl_i2c.o(.text.DL_I2C_fillControllerTXFIFO) for DL_I2C_fillControllerTXFIFO
-    hardware_i2c.o(.text.single_writei2c) refers to dl_i2c.o(.text.DL_I2C_flushControllerTXFIFO) for DL_I2C_flushControllerTXFIFO
-    hardware_i2c.o(.ARM.exidx.text.single_writei2c) refers to hardware_i2c.o(.text.single_writei2c) for [Anonymous Symbol]
-    hardware_i2c.o(.text.single_readi2c) refers to hardware_i2c.o(.text.I2C_ReadReg) for I2C_ReadReg
-    hardware_i2c.o(.ARM.exidx.text.single_readi2c) refers to hardware_i2c.o(.text.single_readi2c) for [Anonymous Symbol]
-    hardware_i2c.o(.text.i2creadnbyte) refers to hardware_i2c.o(.text.I2C_ReadReg) for I2C_ReadReg
-    hardware_i2c.o(.ARM.exidx.text.i2creadnbyte) refers to hardware_i2c.o(.text.i2creadnbyte) for [Anonymous Symbol]
-    uart.o(.text.usart_send_bytes) refers to dl_uart.o(.text.DL_UART_transmitDataBlocking) for DL_UART_transmitDataBlocking
-    uart.o(.ARM.exidx.text.usart_send_bytes) refers to uart.o(.text.usart_send_bytes) for [Anonymous Symbol]
-    uart.o(.text.usart_printf) refers to vsnprintf.o(.text) for vsnprintf
-    uart.o(.text.usart_printf) refers to strlen.o(.text) for strlen
-    uart.o(.text.usart_printf) refers to dl_uart.o(.text.DL_UART_transmitDataBlocking) for DL_UART_transmitDataBlocking
-    uart.o(.ARM.exidx.text.usart_printf) refers to uart.o(.text.usart_printf) for [Anonymous Symbol]
-    spi.o(.ARM.exidx.text.SPI_WriteByte) refers to spi.o(.text.SPI_WriteByte) for [Anonymous Symbol]
-    spi.o(.ARM.exidx.text.SPI_LCD_WrDat) refers to spi.o(.text.SPI_LCD_WrDat) for [Anonymous Symbol]
-    spi.o(.ARM.exidx.text.SPI_LCD_WrCmd) refers to spi.o(.text.SPI_LCD_WrCmd) for [Anonymous Symbol]
     gray_detection.o(.text.Gray_Detection_Init) refers to software_i2c.o(.text.SoftwareI2C_Init) for SoftwareI2C_Init
     gray_detection.o(.text.Gray_Detection_Init) refers to gray_detection.o(.data.pca9555_i2c) for pca9555_i2c
     gray_detection.o(.ARM.exidx.text.Gray_Detection_Init) refers to gray_detection.o(.text.Gray_Detection_Init) for [Anonymous Symbol]
@@ -442,92 +381,6 @@ Section Cross References
     motor_controller.o(.text.DisplayTask) refers to motor_controller.o(.bss.temperature) for [Anonymous Symbol]
     motor_controller.o(.text.DisplayTask) refers to sensor.o(.bss.smartcar_imu) for smartcar_imu
     motor_controller.o(.ARM.exidx.text.DisplayTask) refers to motor_controller.o(.text.DisplayTask) for [Anonymous Symbol]
-    wp_math.o(.text.constrain_float) refers to fcmp.o(i._fls) for __aeabi_fcmplt
-    wp_math.o(.text.constrain_float) refers to fcmp.o(i._fgr) for __aeabi_fcmpgt
-    wp_math.o(.text.constrain_float) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    wp_math.o(.text.constrain_float) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    wp_math.o(.ARM.exidx.text.constrain_float) refers to wp_math.o(.text.constrain_float) for [Anonymous Symbol]
-    wp_math.o(.text.sq) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    wp_math.o(.ARM.exidx.text.sq) refers to wp_math.o(.text.sq) for [Anonymous Symbol]
-    wp_math.o(.text.safe_sqrt) refers to sqrtf.o(i.sqrtf) for sqrtf
-    wp_math.o(.ARM.exidx.text.safe_sqrt) refers to wp_math.o(.text.safe_sqrt) for [Anonymous Symbol]
-    wp_math.o(.text.invSqrt) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    wp_math.o(.text.invSqrt) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    wp_math.o(.ARM.exidx.text.invSqrt) refers to wp_math.o(.text.invSqrt) for [Anonymous Symbol]
-    wp_math.o(.text.FastSinCos) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    wp_math.o(.text.FastSinCos) refers to ffixi.o(.text) for __aeabi_f2iz
-    wp_math.o(.text.FastSinCos) refers to fcmp.o(i._fls) for __aeabi_fcmplt
-    wp_math.o(.text.FastSinCos) refers to fflti.o(.text) for __aeabi_i2f
-    wp_math.o(.text.FastSinCos) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
-    wp_math.o(.text.FastSinCos) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    wp_math.o(.text.FastSinCos) refers to wp_math.o(.rodata.sinTable) for sinTable
-    wp_math.o(.ARM.exidx.text.FastSinCos) refers to wp_math.o(.text.FastSinCos) for [Anonymous Symbol]
-    wp_math.o(.text.FastSin) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    wp_math.o(.text.FastSin) refers to ffixi.o(.text) for __aeabi_f2iz
-    wp_math.o(.text.FastSin) refers to fcmp.o(i._fls) for __aeabi_fcmplt
-    wp_math.o(.text.FastSin) refers to fflti.o(.text) for __aeabi_i2f
-    wp_math.o(.text.FastSin) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
-    wp_math.o(.text.FastSin) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    wp_math.o(.text.FastSin) refers to wp_math.o(.rodata.sinTable) for sinTable
-    wp_math.o(.ARM.exidx.text.FastSin) refers to wp_math.o(.text.FastSin) for [Anonymous Symbol]
-    wp_math.o(.text.FastCos) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    wp_math.o(.text.FastCos) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    wp_math.o(.text.FastCos) refers to ffixi.o(.text) for __aeabi_f2iz
-    wp_math.o(.text.FastCos) refers to fcmp.o(i._fls) for __aeabi_fcmplt
-    wp_math.o(.text.FastCos) refers to fflti.o(.text) for __aeabi_i2f
-    wp_math.o(.text.FastCos) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
-    wp_math.o(.text.FastCos) refers to wp_math.o(.rodata.sinTable) for sinTable
-    wp_math.o(.ARM.exidx.text.FastCos) refers to wp_math.o(.text.FastCos) for [Anonymous Symbol]
-    wp_math.o(.text.FastSqrtI) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    wp_math.o(.text.FastSqrtI) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    wp_math.o(.ARM.exidx.text.FastSqrtI) refers to wp_math.o(.text.FastSqrtI) for [Anonymous Symbol]
-    wp_math.o(.text.FastSqrt) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    wp_math.o(.text.FastSqrt) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    wp_math.o(.ARM.exidx.text.FastSqrt) refers to wp_math.o(.text.FastSqrt) for [Anonymous Symbol]
-    wp_math.o(.ARM.exidx.text.constrain_int16) refers to wp_math.o(.text.constrain_int16) for [Anonymous Symbol]
-    sensor.o(.text.vector3f_sub) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
-    sensor.o(.ARM.exidx.text.vector3f_sub) refers to sensor.o(.text.vector3f_sub) for [Anonymous Symbol]
-    sensor.o(.text.kalman_filter) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    sensor.o(.text.kalman_filter) refers to fdiv.o(.text) for __aeabi_fdiv
-    sensor.o(.text.kalman_filter) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
-    sensor.o(.text.kalman_filter) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    sensor.o(.text.kalman_filter) refers to sensor.o(.bss.kalman_filter.init) for [Anonymous Symbol]
-    sensor.o(.text.kalman_filter) refers to sensor.o(.bss.kalman_filter.x) for [Anonymous Symbol]
-    sensor.o(.text.kalman_filter) refers to sensor.o(.data.kalman_filter.P) for [Anonymous Symbol]
-    sensor.o(.ARM.exidx.text.kalman_filter) refers to sensor.o(.text.kalman_filter) for [Anonymous Symbol]
-    sensor.o(.text.imu_data_sampling) refers to filter.o(.text.set_cutoff_frequency) for set_cutoff_frequency
-    sensor.o(.text.imu_data_sampling) refers to icm20608.o(.text.ICM206xx_Read_Data) for ICM206xx_Read_Data
-    sensor.o(.text.imu_data_sampling) refers to filter.o(.text.LPButterworth) for LPButterworth
-    sensor.o(.text.imu_data_sampling) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
-    sensor.o(.text.imu_data_sampling) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    sensor.o(.text.imu_data_sampling) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    sensor.o(.text.imu_data_sampling) refers to icm20608.o(.text.imu_calibration) for imu_calibration
-    sensor.o(.text.imu_data_sampling) refers to wp_math.o(.text.invSqrt) for invSqrt
-    sensor.o(.text.imu_data_sampling) refers to f2d.o(.text) for __aeabi_f2d
-    sensor.o(.text.imu_data_sampling) refers to atan.o(i.atan) for atan
-    sensor.o(.text.imu_data_sampling) refers to dmul.o(.text) for __aeabi_dmul
-    sensor.o(.text.imu_data_sampling) refers to d2f.o(.text) for __aeabi_d2f
-    sensor.o(.text.imu_data_sampling) refers to fdiv.o(.text) for __aeabi_fdiv
-    sensor.o(.text.imu_data_sampling) refers to sensor.o(.bss.smartcar_imu) for smartcar_imu
-    sensor.o(.text.imu_data_sampling) refers to sensor.o(.bss.gyro_lpf_param) for gyro_lpf_param
-    sensor.o(.text.imu_data_sampling) refers to sensor.o(.bss.accel_lpf_param) for accel_lpf_param
-    sensor.o(.text.imu_data_sampling) refers to sensor.o(.bss.gyro_filter_buf) for gyro_filter_buf
-    sensor.o(.text.imu_data_sampling) refers to sensor.o(.bss.accel_filter_buf) for accel_filter_buf
-    sensor.o(.text.imu_data_sampling) refers to sensor.o(.bss.kalman_filter.init) for [Anonymous Symbol]
-    sensor.o(.text.imu_data_sampling) refers to sensor.o(.bss.kalman_filter.x) for [Anonymous Symbol]
-    sensor.o(.text.imu_data_sampling) refers to sensor.o(.data.kalman_filter.P) for [Anonymous Symbol]
-    sensor.o(.ARM.exidx.text.imu_data_sampling) refers to sensor.o(.text.imu_data_sampling) for [Anonymous Symbol]
-    filter.o(.text.LPButterworth) refers to fcmp.o(i._feq) for __aeabi_fcmpeq
-    filter.o(.text.LPButterworth) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    filter.o(.text.LPButterworth) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    filter.o(.text.LPButterworth) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
-    filter.o(.ARM.exidx.text.LPButterworth) refers to filter.o(.text.LPButterworth) for [Anonymous Symbol]
-    filter.o(.text.set_cutoff_frequency) refers to fdiv.o(.text) for __aeabi_fdiv
-    filter.o(.text.set_cutoff_frequency) refers to tanf.o(i.tanf) for tanf
-    filter.o(.text.set_cutoff_frequency) refers to fcmp.o(i._fleq) for __aeabi_fcmple
-    filter.o(.text.set_cutoff_frequency) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
-    filter.o(.text.set_cutoff_frequency) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
-    filter.o(.ARM.exidx.text.set_cutoff_frequency) refers to filter.o(.text.set_cutoff_frequency) for [Anonymous Symbol]
     fusionahrs.o(.text.FusionAhrsInitialise) refers to fusionahrs.o(.text.FusionAhrsSetSettings) for FusionAhrsSetSettings
     fusionahrs.o(.ARM.exidx.text.FusionAhrsInitialise) refers to fusionahrs.o(.text.FusionAhrsInitialise) for [Anonymous Symbol]
     fusionahrs.o(.text.FusionAhrsSetSettings) refers to fcmp.o(i._feq) for __aeabi_fcmpeq
@@ -601,6 +454,153 @@ Section Cross References
     fusionoffset.o(.text.FusionOffsetUpdate) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
     fusionoffset.o(.text.FusionOffsetUpdate) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
     fusionoffset.o(.ARM.exidx.text.FusionOffsetUpdate) refers to fusionoffset.o(.text.FusionOffsetUpdate) for [Anonymous Symbol]
+    hardware_i2c.o(.text.I2C_WriteReg) refers to rt_memcpy.o(.text) for __aeabi_memcpy
+    hardware_i2c.o(.text.I2C_WriteReg) refers to dl_i2c.o(.text.DL_I2C_fillControllerTXFIFO) for DL_I2C_fillControllerTXFIFO
+    hardware_i2c.o(.text.I2C_WriteReg) refers to dl_i2c.o(.text.DL_I2C_flushControllerTXFIFO) for DL_I2C_flushControllerTXFIFO
+    hardware_i2c.o(.ARM.exidx.text.I2C_WriteReg) refers to hardware_i2c.o(.text.I2C_WriteReg) for [Anonymous Symbol]
+    hardware_i2c.o(.text.I2C_ReadReg) refers to dl_i2c.o(.text.DL_I2C_fillControllerTXFIFO) for DL_I2C_fillControllerTXFIFO
+    hardware_i2c.o(.text.I2C_ReadReg) refers to dl_i2c.o(.text.DL_I2C_flushControllerTXFIFO) for DL_I2C_flushControllerTXFIFO
+    hardware_i2c.o(.ARM.exidx.text.I2C_ReadReg) refers to hardware_i2c.o(.text.I2C_ReadReg) for [Anonymous Symbol]
+    hardware_i2c.o(.text.single_writei2c) refers to dl_i2c.o(.text.DL_I2C_fillControllerTXFIFO) for DL_I2C_fillControllerTXFIFO
+    hardware_i2c.o(.text.single_writei2c) refers to dl_i2c.o(.text.DL_I2C_flushControllerTXFIFO) for DL_I2C_flushControllerTXFIFO
+    hardware_i2c.o(.ARM.exidx.text.single_writei2c) refers to hardware_i2c.o(.text.single_writei2c) for [Anonymous Symbol]
+    hardware_i2c.o(.text.single_readi2c) refers to hardware_i2c.o(.text.I2C_ReadReg) for I2C_ReadReg
+    hardware_i2c.o(.ARM.exidx.text.single_readi2c) refers to hardware_i2c.o(.text.single_readi2c) for [Anonymous Symbol]
+    hardware_i2c.o(.text.i2creadnbyte) refers to hardware_i2c.o(.text.I2C_ReadReg) for I2C_ReadReg
+    hardware_i2c.o(.ARM.exidx.text.i2creadnbyte) refers to hardware_i2c.o(.text.i2creadnbyte) for [Anonymous Symbol]
+    software_i2c.o(.ARM.exidx.text.SoftwareI2C_Init) refers to software_i2c.o(.text.SoftwareI2C_Init) for [Anonymous Symbol]
+    software_i2c.o(.ARM.exidx.text.SoftwareI2C_SDA_OUT) refers to software_i2c.o(.text.SoftwareI2C_SDA_OUT) for [Anonymous Symbol]
+    software_i2c.o(.text.SoftwareI2C_SDA_IN) refers to delay.o(.text.delay_us) for delay_us
+    software_i2c.o(.ARM.exidx.text.SoftwareI2C_SDA_IN) refers to software_i2c.o(.text.SoftwareI2C_SDA_IN) for [Anonymous Symbol]
+    software_i2c.o(.text.SoftwareI2C_WriteSCL) refers to delay.o(.text.delay_us) for delay_us
+    software_i2c.o(.ARM.exidx.text.SoftwareI2C_WriteSCL) refers to software_i2c.o(.text.SoftwareI2C_WriteSCL) for [Anonymous Symbol]
+    software_i2c.o(.text.SoftwareI2C_WriteSDA) refers to delay.o(.text.delay_us) for delay_us
+    software_i2c.o(.ARM.exidx.text.SoftwareI2C_WriteSDA) refers to software_i2c.o(.text.SoftwareI2C_WriteSDA) for [Anonymous Symbol]
+    software_i2c.o(.text.SoftwareI2C_ReadSDA) refers to delay.o(.text.delay_us) for delay_us
+    software_i2c.o(.ARM.exidx.text.SoftwareI2C_ReadSDA) refers to software_i2c.o(.text.SoftwareI2C_ReadSDA) for [Anonymous Symbol]
+    software_i2c.o(.text.SoftwareI2C_Start) refers to delay.o(.text.delay_us) for delay_us
+    software_i2c.o(.ARM.exidx.text.SoftwareI2C_Start) refers to software_i2c.o(.text.SoftwareI2C_Start) for [Anonymous Symbol]
+    software_i2c.o(.text.SoftwareI2C_Stop) refers to delay.o(.text.delay_us) for delay_us
+    software_i2c.o(.ARM.exidx.text.SoftwareI2C_Stop) refers to software_i2c.o(.text.SoftwareI2C_Stop) for [Anonymous Symbol]
+    software_i2c.o(.text.SoftwareI2C_SendByte) refers to delay.o(.text.delay_us) for delay_us
+    software_i2c.o(.ARM.exidx.text.SoftwareI2C_SendByte) refers to software_i2c.o(.text.SoftwareI2C_SendByte) for [Anonymous Symbol]
+    software_i2c.o(.text.SoftwareI2C_ReceiveByte) refers to delay.o(.text.delay_us) for delay_us
+    software_i2c.o(.ARM.exidx.text.SoftwareI2C_ReceiveByte) refers to software_i2c.o(.text.SoftwareI2C_ReceiveByte) for [Anonymous Symbol]
+    software_i2c.o(.text.SoftwareI2C_SendAck) refers to delay.o(.text.delay_us) for delay_us
+    software_i2c.o(.ARM.exidx.text.SoftwareI2C_SendAck) refers to software_i2c.o(.text.SoftwareI2C_SendAck) for [Anonymous Symbol]
+    software_i2c.o(.text.SoftwareI2C_ReceiveAck) refers to delay.o(.text.delay_us) for delay_us
+    software_i2c.o(.ARM.exidx.text.SoftwareI2C_ReceiveAck) refers to software_i2c.o(.text.SoftwareI2C_ReceiveAck) for [Anonymous Symbol]
+    software_i2c.o(.text.SoftwareI2C_WaitAck) refers to delay.o(.text.delay_us) for delay_us
+    software_i2c.o(.text.SoftwareI2C_WaitAck) refers to aeabi_sdivfast.o(.text_divfast) for __aeabi_uidiv
+    software_i2c.o(.text.SoftwareI2C_WaitAck) refers to software_i2c.o(.text.SoftwareI2C_Stop) for SoftwareI2C_Stop
+    software_i2c.o(.ARM.exidx.text.SoftwareI2C_WaitAck) refers to software_i2c.o(.text.SoftwareI2C_WaitAck) for [Anonymous Symbol]
+    software_i2c.o(.text.SoftWareI2C_Write_Len) refers to software_i2c.o(.text.SoftwareI2C_Start) for SoftwareI2C_Start
+    software_i2c.o(.text.SoftWareI2C_Write_Len) refers to software_i2c.o(.text.SoftwareI2C_SendByte) for SoftwareI2C_SendByte
+    software_i2c.o(.text.SoftWareI2C_Write_Len) refers to software_i2c.o(.text.SoftwareI2C_WaitAck) for SoftwareI2C_WaitAck
+    software_i2c.o(.text.SoftWareI2C_Write_Len) refers to software_i2c.o(.text.SoftwareI2C_Stop) for SoftwareI2C_Stop
+    software_i2c.o(.ARM.exidx.text.SoftWareI2C_Write_Len) refers to software_i2c.o(.text.SoftWareI2C_Write_Len) for [Anonymous Symbol]
+    software_i2c.o(.text.SoftWareI2C_Read_Len) refers to software_i2c.o(.text.SoftwareI2C_Start) for SoftwareI2C_Start
+    software_i2c.o(.text.SoftWareI2C_Read_Len) refers to software_i2c.o(.text.SoftwareI2C_SendByte) for SoftwareI2C_SendByte
+    software_i2c.o(.text.SoftWareI2C_Read_Len) refers to software_i2c.o(.text.SoftwareI2C_WaitAck) for SoftwareI2C_WaitAck
+    software_i2c.o(.text.SoftWareI2C_Read_Len) refers to software_i2c.o(.text.SoftwareI2C_ReceiveByte) for SoftwareI2C_ReceiveByte
+    software_i2c.o(.text.SoftWareI2C_Read_Len) refers to software_i2c.o(.text.SoftwareI2C_SendAck) for SoftwareI2C_SendAck
+    software_i2c.o(.text.SoftWareI2C_Read_Len) refers to software_i2c.o(.text.SoftwareI2C_Stop) for SoftwareI2C_Stop
+    software_i2c.o(.ARM.exidx.text.SoftWareI2C_Read_Len) refers to software_i2c.o(.text.SoftWareI2C_Read_Len) for [Anonymous Symbol]
+    spi.o(.ARM.exidx.text.SPI_WriteByte) refers to spi.o(.text.SPI_WriteByte) for [Anonymous Symbol]
+    spi.o(.ARM.exidx.text.SPI_LCD_WrDat) refers to spi.o(.text.SPI_LCD_WrDat) for [Anonymous Symbol]
+    spi.o(.ARM.exidx.text.SPI_LCD_WrCmd) refers to spi.o(.text.SPI_LCD_WrCmd) for [Anonymous Symbol]
+    uart.o(.text.usart_send_bytes) refers to dl_uart.o(.text.DL_UART_transmitDataBlocking) for DL_UART_transmitDataBlocking
+    uart.o(.ARM.exidx.text.usart_send_bytes) refers to uart.o(.text.usart_send_bytes) for [Anonymous Symbol]
+    uart.o(.text.usart_printf) refers to vsnprintf.o(.text) for vsnprintf
+    uart.o(.text.usart_printf) refers to strlen.o(.text) for strlen
+    uart.o(.text.usart_printf) refers to dl_uart.o(.text.DL_UART_transmitDataBlocking) for DL_UART_transmitDataBlocking
+    uart.o(.ARM.exidx.text.usart_printf) refers to uart.o(.text.usart_printf) for [Anonymous Symbol]
+    filter.o(.text.LPButterworth) refers to fcmp.o(i._feq) for __aeabi_fcmpeq
+    filter.o(.text.LPButterworth) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    filter.o(.text.LPButterworth) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    filter.o(.text.LPButterworth) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
+    filter.o(.ARM.exidx.text.LPButterworth) refers to filter.o(.text.LPButterworth) for [Anonymous Symbol]
+    filter.o(.text.set_cutoff_frequency) refers to fdiv.o(.text) for __aeabi_fdiv
+    filter.o(.text.set_cutoff_frequency) refers to tanf.o(i.tanf) for tanf
+    filter.o(.text.set_cutoff_frequency) refers to fcmp.o(i._fleq) for __aeabi_fcmple
+    filter.o(.text.set_cutoff_frequency) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    filter.o(.text.set_cutoff_frequency) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    filter.o(.ARM.exidx.text.set_cutoff_frequency) refers to filter.o(.text.set_cutoff_frequency) for [Anonymous Symbol]
+    sensor.o(.text.vector3f_sub) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
+    sensor.o(.ARM.exidx.text.vector3f_sub) refers to sensor.o(.text.vector3f_sub) for [Anonymous Symbol]
+    sensor.o(.text.kalman_filter) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    sensor.o(.text.kalman_filter) refers to fdiv.o(.text) for __aeabi_fdiv
+    sensor.o(.text.kalman_filter) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
+    sensor.o(.text.kalman_filter) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    sensor.o(.text.kalman_filter) refers to sensor.o(.bss.kalman_filter.init) for [Anonymous Symbol]
+    sensor.o(.text.kalman_filter) refers to sensor.o(.bss.kalman_filter.x) for [Anonymous Symbol]
+    sensor.o(.text.kalman_filter) refers to sensor.o(.data.kalman_filter.P) for [Anonymous Symbol]
+    sensor.o(.ARM.exidx.text.kalman_filter) refers to sensor.o(.text.kalman_filter) for [Anonymous Symbol]
+    sensor.o(.text.imu_data_sampling) refers to filter.o(.text.set_cutoff_frequency) for set_cutoff_frequency
+    sensor.o(.text.imu_data_sampling) refers to icm20608.o(.text.ICM206xx_Read_Data) for ICM206xx_Read_Data
+    sensor.o(.text.imu_data_sampling) refers to filter.o(.text.LPButterworth) for LPButterworth
+    sensor.o(.text.imu_data_sampling) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
+    sensor.o(.text.imu_data_sampling) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    sensor.o(.text.imu_data_sampling) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    sensor.o(.text.imu_data_sampling) refers to icm20608.o(.text.imu_calibration) for imu_calibration
+    sensor.o(.text.imu_data_sampling) refers to wp_math.o(.text.invSqrt) for invSqrt
+    sensor.o(.text.imu_data_sampling) refers to f2d.o(.text) for __aeabi_f2d
+    sensor.o(.text.imu_data_sampling) refers to atan.o(i.atan) for atan
+    sensor.o(.text.imu_data_sampling) refers to dmul.o(.text) for __aeabi_dmul
+    sensor.o(.text.imu_data_sampling) refers to d2f.o(.text) for __aeabi_d2f
+    sensor.o(.text.imu_data_sampling) refers to fdiv.o(.text) for __aeabi_fdiv
+    sensor.o(.text.imu_data_sampling) refers to sensor.o(.bss.smartcar_imu) for smartcar_imu
+    sensor.o(.text.imu_data_sampling) refers to sensor.o(.bss.gyro_lpf_param) for gyro_lpf_param
+    sensor.o(.text.imu_data_sampling) refers to sensor.o(.bss.accel_lpf_param) for accel_lpf_param
+    sensor.o(.text.imu_data_sampling) refers to sensor.o(.bss.gyro_filter_buf) for gyro_filter_buf
+    sensor.o(.text.imu_data_sampling) refers to sensor.o(.bss.accel_filter_buf) for accel_filter_buf
+    sensor.o(.text.imu_data_sampling) refers to sensor.o(.bss.kalman_filter.init) for [Anonymous Symbol]
+    sensor.o(.text.imu_data_sampling) refers to sensor.o(.bss.kalman_filter.x) for [Anonymous Symbol]
+    sensor.o(.text.imu_data_sampling) refers to sensor.o(.data.kalman_filter.P) for [Anonymous Symbol]
+    sensor.o(.ARM.exidx.text.imu_data_sampling) refers to sensor.o(.text.imu_data_sampling) for [Anonymous Symbol]
+    wp_math.o(.text.constrain_float) refers to fcmp.o(i._fls) for __aeabi_fcmplt
+    wp_math.o(.text.constrain_float) refers to fcmp.o(i._fgr) for __aeabi_fcmpgt
+    wp_math.o(.text.constrain_float) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    wp_math.o(.text.constrain_float) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    wp_math.o(.ARM.exidx.text.constrain_float) refers to wp_math.o(.text.constrain_float) for [Anonymous Symbol]
+    wp_math.o(.text.sq) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    wp_math.o(.ARM.exidx.text.sq) refers to wp_math.o(.text.sq) for [Anonymous Symbol]
+    wp_math.o(.text.safe_sqrt) refers to sqrtf.o(i.sqrtf) for sqrtf
+    wp_math.o(.ARM.exidx.text.safe_sqrt) refers to wp_math.o(.text.safe_sqrt) for [Anonymous Symbol]
+    wp_math.o(.text.invSqrt) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    wp_math.o(.text.invSqrt) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    wp_math.o(.ARM.exidx.text.invSqrt) refers to wp_math.o(.text.invSqrt) for [Anonymous Symbol]
+    wp_math.o(.text.FastSinCos) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    wp_math.o(.text.FastSinCos) refers to ffixi.o(.text) for __aeabi_f2iz
+    wp_math.o(.text.FastSinCos) refers to fcmp.o(i._fls) for __aeabi_fcmplt
+    wp_math.o(.text.FastSinCos) refers to fflti.o(.text) for __aeabi_i2f
+    wp_math.o(.text.FastSinCos) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
+    wp_math.o(.text.FastSinCos) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    wp_math.o(.text.FastSinCos) refers to wp_math.o(.rodata.sinTable) for sinTable
+    wp_math.o(.ARM.exidx.text.FastSinCos) refers to wp_math.o(.text.FastSinCos) for [Anonymous Symbol]
+    wp_math.o(.text.FastSin) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    wp_math.o(.text.FastSin) refers to ffixi.o(.text) for __aeabi_f2iz
+    wp_math.o(.text.FastSin) refers to fcmp.o(i._fls) for __aeabi_fcmplt
+    wp_math.o(.text.FastSin) refers to fflti.o(.text) for __aeabi_i2f
+    wp_math.o(.text.FastSin) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
+    wp_math.o(.text.FastSin) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    wp_math.o(.text.FastSin) refers to wp_math.o(.rodata.sinTable) for sinTable
+    wp_math.o(.ARM.exidx.text.FastSin) refers to wp_math.o(.text.FastSin) for [Anonymous Symbol]
+    wp_math.o(.text.FastCos) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    wp_math.o(.text.FastCos) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    wp_math.o(.text.FastCos) refers to ffixi.o(.text) for __aeabi_f2iz
+    wp_math.o(.text.FastCos) refers to fcmp.o(i._fls) for __aeabi_fcmplt
+    wp_math.o(.text.FastCos) refers to fflti.o(.text) for __aeabi_i2f
+    wp_math.o(.text.FastCos) refers to faddsub.o(x$fpl$fsub) for __aeabi_fsub
+    wp_math.o(.text.FastCos) refers to wp_math.o(.rodata.sinTable) for sinTable
+    wp_math.o(.ARM.exidx.text.FastCos) refers to wp_math.o(.text.FastCos) for [Anonymous Symbol]
+    wp_math.o(.text.FastSqrtI) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    wp_math.o(.text.FastSqrtI) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    wp_math.o(.ARM.exidx.text.FastSqrtI) refers to wp_math.o(.text.FastSqrtI) for [Anonymous Symbol]
+    wp_math.o(.text.FastSqrt) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
+    wp_math.o(.text.FastSqrt) refers to faddsub.o(x$fpl$fadd) for __aeabi_fadd
+    wp_math.o(.ARM.exidx.text.FastSqrt) refers to wp_math.o(.text.FastSqrt) for [Anonymous Symbol]
+    wp_math.o(.ARM.exidx.text.constrain_int16) refers to wp_math.o(.text.constrain_int16) for [Anonymous Symbol]
     dl_common.o(.ARM.exidx.text.DL_Common_delayCycles) refers to dl_common.o(.text.DL_Common_delayCycles) for [Anonymous Symbol]
     dl_i2c.o(.ARM.exidx.text.DL_I2C_setClockConfig) refers to dl_i2c.o(.text.DL_I2C_setClockConfig) for [Anonymous Symbol]
     dl_i2c.o(.ARM.exidx.text.DL_I2C_getClockConfig) refers to dl_i2c.o(.text.DL_I2C_getClockConfig) for [Anonymous Symbol]
@@ -1938,6 +1938,39 @@ Removing Unused input sections from the image.
     Removing main.o(.text), (0 bytes).
     Removing main.o(.ARM.exidx.text.main), (8 bytes).
     Removing main.o(.ARM.use_no_argv), (4 bytes).
+    Removing eeprom.o(.text), (0 bytes).
+    Removing eeprom.o(.text.ReadFlashParameterALL), (18 bytes).
+    Removing eeprom.o(.ARM.exidx.text.ReadFlashParameterALL), (8 bytes).
+    Removing eeprom.o(.ARM.exidx.text.ReadFlashParameterOne), (8 bytes).
+    Removing eeprom.o(.text.ReadFlashParameterTwo), (30 bytes).
+    Removing eeprom.o(.ARM.exidx.text.ReadFlashParameterTwo), (8 bytes).
+    Removing eeprom.o(.text.ReadFlashParameterThree), (48 bytes).
+    Removing eeprom.o(.ARM.exidx.text.ReadFlashParameterThree), (8 bytes).
+    Removing eeprom.o(.text.WriteFlashParameter), (24 bytes).
+    Removing eeprom.o(.ARM.exidx.text.WriteFlashParameter), (8 bytes).
+    Removing eeprom.o(.text.WriteFlashParameter_Two), (32 bytes).
+    Removing eeprom.o(.ARM.exidx.text.WriteFlashParameter_Two), (8 bytes).
+    Removing eeprom.o(.ARM.exidx.text.WriteFlashParameter_Three), (8 bytes).
+    Removing eeprom.o(.text.flight_read_flash_full), (80 bytes).
+    Removing eeprom.o(.ARM.exidx.text.flight_read_flash_full), (8 bytes).
+    Removing eeprom.o(.data.Flight_Params), (1804 bytes).
+    Removing encoder.o(.text), (0 bytes).
+    Removing encoder.o(.ARM.exidx.text.SpeedTimerCallback), (8 bytes).
+    Removing encoder.o(.ARM.exidx.text.Encoder_init), (8 bytes).
+    Removing encoder.o(.text.QEI0_IRQHandler), (104 bytes).
+    Removing encoder.o(.ARM.exidx.text.QEI0_IRQHandler), (8 bytes).
+    Removing encoder.o(.text.QEI1_IRQHandler), (104 bytes).
+    Removing encoder.o(.ARM.exidx.text.QEI1_IRQHandler), (8 bytes).
+    Removing encoder.o(.ARM.exidx.text.GROUP1_IRQHandler), (8 bytes).
+    Removing encoder.o(.text.get_left_motor_speed), (12 bytes).
+    Removing encoder.o(.ARM.exidx.text.get_left_motor_speed), (8 bytes).
+    Removing encoder.o(.text.get_right_motor_speed), (12 bytes).
+    Removing encoder.o(.ARM.exidx.text.get_right_motor_speed), (8 bytes).
+    Removing icm20608.o(.text), (0 bytes).
+    Removing icm20608.o(.ARM.exidx.text.ICM206xx_Init), (8 bytes).
+    Removing icm20608.o(.ARM.exidx.text.ICM206xx_Read_Data), (8 bytes).
+    Removing icm20608.o(.ARM.exidx.text.imu_calibration_params_init), (8 bytes).
+    Removing icm20608.o(.ARM.exidx.text.imu_calibration), (8 bytes).
     Removing motor.o(.text), (0 bytes).
     Removing motor.o(.ARM.exidx.text.Motor_Init), (8 bytes).
     Removing motor.o(.text.Motor_Control), (140 bytes).
@@ -1996,39 +2029,6 @@ Removing Unused input sections from the image.
     Removing pca9555.o(.text), (0 bytes).
     Removing pca9555.o(.text.pca9555_read_bit12), (48 bytes).
     Removing pca9555.o(.ARM.exidx.text.pca9555_read_bit12), (8 bytes).
-    Removing encoder.o(.text), (0 bytes).
-    Removing encoder.o(.ARM.exidx.text.SpeedTimerCallback), (8 bytes).
-    Removing encoder.o(.ARM.exidx.text.Encoder_init), (8 bytes).
-    Removing encoder.o(.text.QEI0_IRQHandler), (104 bytes).
-    Removing encoder.o(.ARM.exidx.text.QEI0_IRQHandler), (8 bytes).
-    Removing encoder.o(.text.QEI1_IRQHandler), (104 bytes).
-    Removing encoder.o(.ARM.exidx.text.QEI1_IRQHandler), (8 bytes).
-    Removing encoder.o(.ARM.exidx.text.GROUP1_IRQHandler), (8 bytes).
-    Removing encoder.o(.text.get_left_motor_speed), (12 bytes).
-    Removing encoder.o(.ARM.exidx.text.get_left_motor_speed), (8 bytes).
-    Removing encoder.o(.text.get_right_motor_speed), (12 bytes).
-    Removing encoder.o(.ARM.exidx.text.get_right_motor_speed), (8 bytes).
-    Removing icm20608.o(.text), (0 bytes).
-    Removing icm20608.o(.ARM.exidx.text.ICM206xx_Init), (8 bytes).
-    Removing icm20608.o(.ARM.exidx.text.ICM206xx_Read_Data), (8 bytes).
-    Removing icm20608.o(.ARM.exidx.text.imu_calibration_params_init), (8 bytes).
-    Removing icm20608.o(.ARM.exidx.text.imu_calibration), (8 bytes).
-    Removing eeprom.o(.text), (0 bytes).
-    Removing eeprom.o(.text.ReadFlashParameterALL), (18 bytes).
-    Removing eeprom.o(.ARM.exidx.text.ReadFlashParameterALL), (8 bytes).
-    Removing eeprom.o(.ARM.exidx.text.ReadFlashParameterOne), (8 bytes).
-    Removing eeprom.o(.text.ReadFlashParameterTwo), (30 bytes).
-    Removing eeprom.o(.ARM.exidx.text.ReadFlashParameterTwo), (8 bytes).
-    Removing eeprom.o(.text.ReadFlashParameterThree), (48 bytes).
-    Removing eeprom.o(.ARM.exidx.text.ReadFlashParameterThree), (8 bytes).
-    Removing eeprom.o(.text.WriteFlashParameter), (24 bytes).
-    Removing eeprom.o(.ARM.exidx.text.WriteFlashParameter), (8 bytes).
-    Removing eeprom.o(.text.WriteFlashParameter_Two), (32 bytes).
-    Removing eeprom.o(.ARM.exidx.text.WriteFlashParameter_Two), (8 bytes).
-    Removing eeprom.o(.ARM.exidx.text.WriteFlashParameter_Three), (8 bytes).
-    Removing eeprom.o(.text.flight_read_flash_full), (80 bytes).
-    Removing eeprom.o(.ARM.exidx.text.flight_read_flash_full), (8 bytes).
-    Removing eeprom.o(.data.Flight_Params), (1804 bytes).
     Removing w25qxx.o(.text), (0 bytes).
     Removing w25qxx.o(.text.w25qxx_gpio_init), (144 bytes).
     Removing w25qxx.o(.ARM.exidx.text.w25qxx_gpio_init), (8 bytes).
@@ -2067,6 +2067,47 @@ Removing Unused input sections from the image.
     Removing w25qxx.o(.text.Resume_Factory_Setting), (14 bytes).
     Removing w25qxx.o(.ARM.exidx.text.Resume_Factory_Setting), (8 bytes).
     Removing w25qxx.o(.bss.w25qxx_id), (2 bytes).
+    Removing gray_detection.o(.text), (0 bytes).
+    Removing gray_detection.o(.ARM.exidx.text.Gray_Detection_Init), (8 bytes).
+    Removing gray_detection.o(.text.Gray_ReadData), (160 bytes).
+    Removing gray_detection.o(.ARM.exidx.text.Gray_ReadData), (8 bytes).
+    Removing gray_detection.o(.bss.gray_datas), (12 bytes).
+    Removing motor_controller.o(.text), (0 bytes).
+    Removing motor_controller.o(.ARM.exidx.text.QuaternionToEulerAngles), (8 bytes).
+    Removing motor_controller.o(.ARM.exidx.text.DisplayTask), (8 bytes).
+    Removing fusionahrs.o(.text), (0 bytes).
+    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsInitialise), (8 bytes).
+    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsSetSettings), (8 bytes).
+    Removing fusionahrs.o(.text.FusionAhrsReset), (68 bytes).
+    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsReset), (8 bytes).
+    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsUpdate), (8 bytes).
+    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsSetHeading), (8 bytes).
+    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsUpdateNoMagnetometer), (8 bytes).
+    Removing fusionahrs.o(.text.FusionAhrsUpdateExternalHeading), (188 bytes).
+    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsUpdateExternalHeading), (8 bytes).
+    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsGetQuaternion), (8 bytes).
+    Removing fusionahrs.o(.text.FusionAhrsGetLinearAcceleration), (156 bytes).
+    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsGetLinearAcceleration), (8 bytes).
+    Removing fusionahrs.o(.text.FusionAhrsGetEarthAcceleration), (376 bytes).
+    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsGetEarthAcceleration), (8 bytes).
+    Removing fusionahrs.o(.text.FusionAhrsGetInternalStates), (328 bytes).
+    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsGetInternalStates), (8 bytes).
+    Removing fusionahrs.o(.text.FusionAhrsGetFlags), (54 bytes).
+    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsGetFlags), (8 bytes).
+    Removing fusioncompass.o(.text), (0 bytes).
+    Removing fusioncompass.o(.ARM.exidx.text.FusionCompassCalculateHeading), (8 bytes).
+    Removing fusionoffset.o(.text), (0 bytes).
+    Removing fusionoffset.o(.text.FusionOffsetInitialise), (52 bytes).
+    Removing fusionoffset.o(.ARM.exidx.text.FusionOffsetInitialise), (8 bytes).
+    Removing fusionoffset.o(.text.FusionOffsetUpdate), (200 bytes).
+    Removing fusionoffset.o(.ARM.exidx.text.FusionOffsetUpdate), (8 bytes).
+    Removing hardware_i2c.o(.text), (0 bytes).
+    Removing hardware_i2c.o(.text.I2C_WriteReg), (196 bytes).
+    Removing hardware_i2c.o(.ARM.exidx.text.I2C_WriteReg), (8 bytes).
+    Removing hardware_i2c.o(.ARM.exidx.text.I2C_ReadReg), (8 bytes).
+    Removing hardware_i2c.o(.ARM.exidx.text.single_writei2c), (8 bytes).
+    Removing hardware_i2c.o(.ARM.exidx.text.single_readi2c), (8 bytes).
+    Removing hardware_i2c.o(.ARM.exidx.text.i2creadnbyte), (8 bytes).
     Removing software_i2c.o(.text), (0 bytes).
     Removing software_i2c.o(.ARM.exidx.text.SoftwareI2C_Init), (8 bytes).
     Removing software_i2c.o(.text.SoftwareI2C_SDA_OUT), (32 bytes).
@@ -2097,35 +2138,34 @@ Removing Unused input sections from the image.
     Removing software_i2c.o(.ARM.exidx.text.SoftWareI2C_Write_Len), (8 bytes).
     Removing software_i2c.o(.text.SoftWareI2C_Read_Len), (154 bytes).
     Removing software_i2c.o(.ARM.exidx.text.SoftWareI2C_Read_Len), (8 bytes).
-    Removing hardware_i2c.o(.text), (0 bytes).
-    Removing hardware_i2c.o(.text.I2C_WriteReg), (196 bytes).
-    Removing hardware_i2c.o(.ARM.exidx.text.I2C_WriteReg), (8 bytes).
-    Removing hardware_i2c.o(.ARM.exidx.text.I2C_ReadReg), (8 bytes).
-    Removing hardware_i2c.o(.ARM.exidx.text.single_writei2c), (8 bytes).
-    Removing hardware_i2c.o(.ARM.exidx.text.single_readi2c), (8 bytes).
-    Removing hardware_i2c.o(.ARM.exidx.text.i2creadnbyte), (8 bytes).
-    Removing uart.o(.text), (0 bytes).
-    Removing uart.o(.text.usart_send_bytes), (28 bytes).
-    Removing uart.o(.ARM.exidx.text.usart_send_bytes), (8 bytes).
-    Removing uart.o(.ARM.exidx.text.usart_printf), (8 bytes).
     Removing spi.o(.text), (0 bytes).
     Removing spi.o(.text.SPI_WriteByte), (28 bytes).
     Removing spi.o(.ARM.exidx.text.SPI_WriteByte), (8 bytes).
     Removing spi.o(.ARM.exidx.text.SPI_LCD_WrDat), (8 bytes).
     Removing spi.o(.ARM.exidx.text.SPI_LCD_WrCmd), (8 bytes).
-    Removing oled_data.o(.text), (0 bytes).
-    Removing oled_data.o(.rodata.F6x8), (552 bytes).
-    Removing oled_data.o(.rodata.F8X16), (1504 bytes).
-    Removing oled_data.o(.rodata.Hzk), (192 bytes).
-    Removing oled_data.o(.data.BMP1), (128 bytes).
-    Removing gray_detection.o(.text), (0 bytes).
-    Removing gray_detection.o(.ARM.exidx.text.Gray_Detection_Init), (8 bytes).
-    Removing gray_detection.o(.text.Gray_ReadData), (160 bytes).
-    Removing gray_detection.o(.ARM.exidx.text.Gray_ReadData), (8 bytes).
-    Removing gray_detection.o(.bss.gray_datas), (12 bytes).
-    Removing motor_controller.o(.text), (0 bytes).
-    Removing motor_controller.o(.ARM.exidx.text.QuaternionToEulerAngles), (8 bytes).
-    Removing motor_controller.o(.ARM.exidx.text.DisplayTask), (8 bytes).
+    Removing uart.o(.text), (0 bytes).
+    Removing uart.o(.text.usart_send_bytes), (28 bytes).
+    Removing uart.o(.ARM.exidx.text.usart_send_bytes), (8 bytes).
+    Removing uart.o(.ARM.exidx.text.usart_printf), (8 bytes).
+    Removing filter.o(.text), (0 bytes).
+    Removing filter.o(.text.LPButterworth), (324 bytes).
+    Removing filter.o(.ARM.exidx.text.LPButterworth), (8 bytes).
+    Removing filter.o(.text.set_cutoff_frequency), (180 bytes).
+    Removing filter.o(.ARM.exidx.text.set_cutoff_frequency), (8 bytes).
+    Removing sensor.o(.text), (0 bytes).
+    Removing sensor.o(.text.vector3f_sub), (46 bytes).
+    Removing sensor.o(.ARM.exidx.text.vector3f_sub), (8 bytes).
+    Removing sensor.o(.text.kalman_filter), (144 bytes).
+    Removing sensor.o(.ARM.exidx.text.kalman_filter), (8 bytes).
+    Removing sensor.o(.text.imu_data_sampling), (600 bytes).
+    Removing sensor.o(.ARM.exidx.text.imu_data_sampling), (8 bytes).
+    Removing sensor.o(.bss.kalman_filter.init), (1 bytes).
+    Removing sensor.o(.bss.kalman_filter.x), (4 bytes).
+    Removing sensor.o(.data.kalman_filter.P), (4 bytes).
+    Removing sensor.o(.bss.gyro_lpf_param), (24 bytes).
+    Removing sensor.o(.bss.accel_lpf_param), (24 bytes).
+    Removing sensor.o(.bss.gyro_filter_buf), (72 bytes).
+    Removing sensor.o(.bss.accel_filter_buf), (72 bytes).
     Removing wp_math.o(.text), (0 bytes).
     Removing wp_math.o(.text.constrain_float), (80 bytes).
     Removing wp_math.o(.ARM.exidx.text.constrain_float), (8 bytes).
@@ -2147,51 +2187,11 @@ Removing Unused input sections from the image.
     Removing wp_math.o(.text.constrain_int16), (26 bytes).
     Removing wp_math.o(.ARM.exidx.text.constrain_int16), (8 bytes).
     Removing wp_math.o(.rodata.sinTable), (2052 bytes).
-    Removing sensor.o(.text), (0 bytes).
-    Removing sensor.o(.text.vector3f_sub), (46 bytes).
-    Removing sensor.o(.ARM.exidx.text.vector3f_sub), (8 bytes).
-    Removing sensor.o(.text.kalman_filter), (144 bytes).
-    Removing sensor.o(.ARM.exidx.text.kalman_filter), (8 bytes).
-    Removing sensor.o(.text.imu_data_sampling), (600 bytes).
-    Removing sensor.o(.ARM.exidx.text.imu_data_sampling), (8 bytes).
-    Removing sensor.o(.bss.kalman_filter.init), (1 bytes).
-    Removing sensor.o(.bss.kalman_filter.x), (4 bytes).
-    Removing sensor.o(.data.kalman_filter.P), (4 bytes).
-    Removing sensor.o(.bss.gyro_lpf_param), (24 bytes).
-    Removing sensor.o(.bss.accel_lpf_param), (24 bytes).
-    Removing sensor.o(.bss.gyro_filter_buf), (72 bytes).
-    Removing sensor.o(.bss.accel_filter_buf), (72 bytes).
-    Removing filter.o(.text), (0 bytes).
-    Removing filter.o(.text.LPButterworth), (324 bytes).
-    Removing filter.o(.ARM.exidx.text.LPButterworth), (8 bytes).
-    Removing filter.o(.text.set_cutoff_frequency), (180 bytes).
-    Removing filter.o(.ARM.exidx.text.set_cutoff_frequency), (8 bytes).
-    Removing fusionahrs.o(.text), (0 bytes).
-    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsInitialise), (8 bytes).
-    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsSetSettings), (8 bytes).
-    Removing fusionahrs.o(.text.FusionAhrsReset), (68 bytes).
-    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsReset), (8 bytes).
-    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsUpdate), (8 bytes).
-    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsSetHeading), (8 bytes).
-    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsUpdateNoMagnetometer), (8 bytes).
-    Removing fusionahrs.o(.text.FusionAhrsUpdateExternalHeading), (188 bytes).
-    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsUpdateExternalHeading), (8 bytes).
-    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsGetQuaternion), (8 bytes).
-    Removing fusionahrs.o(.text.FusionAhrsGetLinearAcceleration), (156 bytes).
-    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsGetLinearAcceleration), (8 bytes).
-    Removing fusionahrs.o(.text.FusionAhrsGetEarthAcceleration), (376 bytes).
-    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsGetEarthAcceleration), (8 bytes).
-    Removing fusionahrs.o(.text.FusionAhrsGetInternalStates), (328 bytes).
-    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsGetInternalStates), (8 bytes).
-    Removing fusionahrs.o(.text.FusionAhrsGetFlags), (54 bytes).
-    Removing fusionahrs.o(.ARM.exidx.text.FusionAhrsGetFlags), (8 bytes).
-    Removing fusioncompass.o(.text), (0 bytes).
-    Removing fusioncompass.o(.ARM.exidx.text.FusionCompassCalculateHeading), (8 bytes).
-    Removing fusionoffset.o(.text), (0 bytes).
-    Removing fusionoffset.o(.text.FusionOffsetInitialise), (52 bytes).
-    Removing fusionoffset.o(.ARM.exidx.text.FusionOffsetInitialise), (8 bytes).
-    Removing fusionoffset.o(.text.FusionOffsetUpdate), (200 bytes).
-    Removing fusionoffset.o(.ARM.exidx.text.FusionOffsetUpdate), (8 bytes).
+    Removing oled_data.o(.text), (0 bytes).
+    Removing oled_data.o(.rodata.F6x8), (552 bytes).
+    Removing oled_data.o(.rodata.F8X16), (1504 bytes).
+    Removing oled_data.o(.rodata.Hzk), (192 bytes).
+    Removing oled_data.o(.data.BMP1), (128 bytes).
     Removing dl_common.o(.text), (0 bytes).
     Removing dl_common.o(.ARM.exidx.text.DL_Common_delayCycles), (8 bytes).
     Removing dl_i2c.o(.text), (0 bytes).
@@ -4213,30 +4213,30 @@ Memory Map of the image
     0x000027c8   0x000027c8   0x00000012   Code   RO          748    .text.DL_UART_setClockConfig  driverlib.a(dl_uart.o)
     0x000027da   0x000027da   0x00000002   PAD
     0x000027dc   0x000027dc   0x00000014   Code   RO          760    .text.DL_UART_transmitDataBlocking  driverlib.a(dl_uart.o)
-    0x000027f0   0x000027f0   0x00000134   Code   RO          420    .text.DisplayTask   motor_controller.o
-    0x00002924   0x00002924   0x00000078   Code   RO          179    .text.Encoder_init  encoder.o
-    0x0000299c   0x0000299c   0x00000010   Code   RO          511    .text.FusionAhrsGetQuaternion  fusionahrs.o
-    0x000029ac   0x000029ac   0x00000058   Code   RO          497    .text.FusionAhrsInitialise  fusionahrs.o
-    0x00002a04   0x00002a04   0x00000100   Code   RO          505    .text.FusionAhrsSetHeading  fusionahrs.o
-    0x00002b04   0x00002b04   0x000000a8   Code   RO          499    .text.FusionAhrsSetSettings  fusionahrs.o
-    0x00002bac   0x00002bac   0x00000714   Code   RO          503    .text.FusionAhrsUpdate  fusionahrs.o
-    0x000032c0   0x000032c0   0x0000011a   Code   RO          507    .text.FusionAhrsUpdateNoMagnetometer  fusionahrs.o
+    0x000027f0   0x000027f0   0x00000134   Code   RO          329    .text.DisplayTask   motor_controller.o
+    0x00002924   0x00002924   0x00000078   Code   RO          126    .text.Encoder_init  encoder.o
+    0x0000299c   0x0000299c   0x00000010   Code   RO          357    .text.FusionAhrsGetQuaternion  fusionahrs.o
+    0x000029ac   0x000029ac   0x00000058   Code   RO          343    .text.FusionAhrsInitialise  fusionahrs.o
+    0x00002a04   0x00002a04   0x00000100   Code   RO          351    .text.FusionAhrsSetHeading  fusionahrs.o
+    0x00002b04   0x00002b04   0x000000a8   Code   RO          345    .text.FusionAhrsSetSettings  fusionahrs.o
+    0x00002bac   0x00002bac   0x00000714   Code   RO          349    .text.FusionAhrsUpdate  fusionahrs.o
+    0x000032c0   0x000032c0   0x0000011a   Code   RO          353    .text.FusionAhrsUpdateNoMagnetometer  fusionahrs.o
     0x000033da   0x000033da   0x00000002   PAD
-    0x000033dc   0x000033dc   0x0000019c   Code   RO          529    .text.FusionCompassCalculateHeading  fusioncompass.o
-    0x00003578   0x00003578   0x000000f8   Code   RO          185    .text.GROUP1_IRQHandler  encoder.o
-    0x00003670   0x00003670   0x00000010   Code   RO          404    .text.Gray_Detection_Init  gray_detection.o
-    0x00003680   0x00003680   0x000000f8   Code   RO          353    .text.I2C_ReadReg   hardware_i2c.o
-    0x00003778   0x00003778   0x00000200   Code   RO          206    .text.ICM206xx_Init  icm20608.o
-    0x00003978   0x00003978   0x00000194   Code   RO          208    .text.ICM206xx_Read_Data  icm20608.o
+    0x000033dc   0x000033dc   0x0000019c   Code   RO          375    .text.FusionCompassCalculateHeading  fusioncompass.o
+    0x00003578   0x00003578   0x000000f8   Code   RO          132    .text.GROUP1_IRQHandler  encoder.o
+    0x00003670   0x00003670   0x00000010   Code   RO          313    .text.Gray_Detection_Init  gray_detection.o
+    0x00003680   0x00003680   0x000000f8   Code   RO          398    .text.I2C_ReadReg   hardware_i2c.o
+    0x00003778   0x00003778   0x00000200   Code   RO          153    .text.ICM206xx_Init  icm20608.o
+    0x00003978   0x00003978   0x00000194   Code   RO          155    .text.ICM206xx_Read_Data  icm20608.o
     0x00003b0c   0x00003b0c   0x00000048   Code   RO           75    .text.LOG_E         log.o
     0x00003b54   0x00003b54   0x00000044   Code   RO           71    .text.LOG_I         log.o
-    0x00003b98   0x00003b98   0x0000003c   Code   RO           97    .text.Motor_Init    motor.o
-    0x00003bd4   0x00003bd4   0x0000007c   Code   RO          115    .text.OLED_Init     oled.o
+    0x00003b98   0x00003b98   0x0000003c   Code   RO          181    .text.Motor_Init    motor.o
+    0x00003bd4   0x00003bd4   0x0000007c   Code   RO          199    .text.OLED_Init     oled.o
     0x00003c50   0x00003c50   0x00000044   Code   RO         1123    .text.PendSV_Handler  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
-    0x00003c94   0x00003c94   0x00000160   Code   RO          418    .text.QuaternionToEulerAngles  motor_controller.o
-    0x00003df4   0x00003df4   0x00000010   Code   RO          236    .text.ReadFlashParameterOne  eeprom.o
-    0x00003e04   0x00003e04   0x00000028   Code   RO          385    .text.SPI_LCD_WrCmd  spi.o
-    0x00003e2c   0x00003e2c   0x0000002c   Code   RO          383    .text.SPI_LCD_WrDat  spi.o
+    0x00003c94   0x00003c94   0x00000160   Code   RO          327    .text.QuaternionToEulerAngles  motor_controller.o
+    0x00003df4   0x00003df4   0x00000010   Code   RO           99    .text.ReadFlashParameterOne  eeprom.o
+    0x00003e04   0x00003e04   0x00000028   Code   RO          456    .text.SPI_LCD_WrCmd  spi.o
+    0x00003e2c   0x00003e2c   0x0000002c   Code   RO          454    .text.SPI_LCD_WrDat  spi.o
     0x00003e58   0x00003e58   0x00000002   Code   RO         1103    .text.SVC_Handler   freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
     0x00003e5a   0x00003e5a   0x00000002   PAD
     0x00003e5c   0x00003e5c   0x000000e0   Code   RO            6    .text.SYSCFG_DL_GPIO_init  ti_msp_dl_config.o
@@ -4249,8 +4249,8 @@ Memory Map of the image
     0x00004144   0x00004144   0x00000060   Code   RO           18    .text.SYSCFG_DL_UART_DEBUG_init  ti_msp_dl_config.o
     0x000041a4   0x000041a4   0x00000048   Code   RO            2    .text.SYSCFG_DL_init  ti_msp_dl_config.o
     0x000041ec   0x000041ec   0x00000070   Code   RO            4    .text.SYSCFG_DL_initPower  ti_msp_dl_config.o
-    0x0000425c   0x0000425c   0x0000002c   Code   RO          313    .text.SoftwareI2C_Init  software_i2c.o
-    0x00004288   0x00004288   0x000000e4   Code   RO          177    .text.SpeedTimerCallback  encoder.o
+    0x0000425c   0x0000425c   0x0000002c   Code   RO          414    .text.SoftwareI2C_Init  software_i2c.o
+    0x00004288   0x00004288   0x000000e4   Code   RO          124    .text.SpeedTimerCallback  encoder.o
     0x0000436c   0x0000436c   0x00000024   Code   RO         1125    .text.SysTick_Handler  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
     0x00004390   0x00004390   0x00000174   Code   RO          273    .text.W25Q64_erase_sector  w25qxx.o
     0x00004504   0x00004504   0x000000d8   Code   RO          283    .text.W25Q64_read   w25qxx.o
@@ -4260,13 +4260,13 @@ Memory Map of the image
     0x0000476c   0x0000476c   0x0000014c   Code   RO          289    .text.W25QXX_Write  w25qxx.o
     0x000048b8   0x000048b8   0x0000002e   Code   RO          299    .text.W25QXX_Write_f  w25qxx.o
     0x000048e6   0x000048e6   0x00000002   PAD
-    0x000048e8   0x000048e8   0x00000024   Code   RO          246    .text.WriteFlashParameter_Three  eeprom.o
+    0x000048e8   0x000048e8   0x00000024   Code   RO          109    .text.WriteFlashParameter_Three  eeprom.o
     0x0000490c   0x0000490c   0x0000004a   Code   RO           59    .text.delay_ms      delay.o
     0x00004956   0x00004956   0x00000002   PAD
     0x00004958   0x00004958   0x00000048   Code   RO          934    .text.eTaskConfirmSleepModeStatus  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x000049a0   0x000049a0   0x00000008   Code   RO          359    .text.i2creadnbyte  hardware_i2c.o
-    0x000049a8   0x000049a8   0x00000218   Code   RO          212    .text.imu_calibration  icm20608.o
-    0x00004bc0   0x00004bc0   0x000000ec   Code   RO          210    .text.imu_calibration_params_init  icm20608.o
+    0x000049a0   0x000049a0   0x00000008   Code   RO          404    .text.i2creadnbyte  hardware_i2c.o
+    0x000049a8   0x000049a8   0x00000218   Code   RO          159    .text.imu_calibration  icm20608.o
+    0x00004bc0   0x00004bc0   0x000000ec   Code   RO          157    .text.imu_calibration_params_init  icm20608.o
     0x00004cac   0x00004cac   0x00000040   Code   RO           88    .text.main          main.o
     0x00004cec   0x00004cec   0x00000114   Code   RO          854    .text.prvAddNewTaskToReadyList  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
     0x00004e00   0x00004e00   0x000000fc   Code   RO          884    .text.prvIdleTask   freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
@@ -4281,11 +4281,11 @@ Memory Map of the image
     0x000053b0   0x000053b0   0x00000170   Code   RO         1071    .text.pvPortMalloc  freertos_builds_LP_MSPM0G3507_release_keil.lib(heap_4.o)
     0x00005520   0x00005520   0x00000018   Code   RO          954    .text.pvTaskIncrementMutexHeldCount  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
     0x00005538   0x00005538   0x00000024   Code   RO         1099    .text.pxPortInitialiseStack  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
-    0x0000555c   0x0000555c   0x00000018   Code   RO          438    .text.safe_sqrt     wp_math.o
-    0x00005574   0x00005574   0x00000018   Code   RO          357    .text.single_readi2c  hardware_i2c.o
-    0x0000558c   0x0000558c   0x000000b4   Code   RO          355    .text.single_writei2c  hardware_i2c.o
+    0x0000555c   0x0000555c   0x00000018   Code   RO          516    .text.safe_sqrt     wp_math.o
+    0x00005574   0x00005574   0x00000018   Code   RO          402    .text.single_readi2c  hardware_i2c.o
+    0x0000558c   0x0000558c   0x000000b4   Code   RO          400    .text.single_writei2c  hardware_i2c.o
     0x00005640   0x00005640   0x00000008   Code   RO         1119    .text.ulSetInterruptMaskFromISR  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
-    0x00005648   0x00005648   0x00000046   Code   RO          371    .text.usart_printf  uart.o
+    0x00005648   0x00005648   0x00000046   Code   RO          468    .text.usart_printf  uart.o
     0x0000568e   0x0000568e   0x00000020   Code   RO         1061    .text.uxListRemove  freertos_builds_LP_MSPM0G3507_release_keil.lib(list.o)
     0x000056ae   0x000056ae   0x00000002   PAD
     0x000056b0   0x000056b0   0x00000018   Code   RO         1149    .text.vApplicationGetIdleTaskMemory  freertos_builds_LP_MSPM0G3507_release_keil.lib(staticallocs_freertos.o)
@@ -4411,38 +4411,38 @@ Memory Map of the image
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20200000   0x00007fc8   0x00000001   Data   RW          214    .data.IMU_ID        icm20608.o
+    0x20200000   0x00007fc8   0x00000001   Data   RW          161    .data.IMU_ID        icm20608.o
     0x20200001   0x00007fc9   0x00000003   PAD
-    0x20200004   0x00007fcc   0x00000018   Data   RW          193    .data.NEncoder      encoder.o
-    0x2020001c   0x00007fe4   0x00000020   Data   RW          408    .data.pca9555_i2c   gray_detection.o
-    0x2020003c   0x00008004   0x00000008   Data   RW          194    .data.trackless_motor  encoder.o
+    0x20200004   0x00007fcc   0x00000018   Data   RW          140    .data.NEncoder      encoder.o
+    0x2020001c   0x00007fe4   0x00000020   Data   RW          317    .data.pca9555_i2c   gray_detection.o
+    0x2020003c   0x00008004   0x00000008   Data   RW          141    .data.trackless_motor  encoder.o
     0x20200044   0x0000800c   0x00000004   Data   RW         1129    .data.uxCriticalNesting  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
     0x20200048        -       0x00000060   Zero   RW         1478    .bss                c_p.l(libspace.o)
-    0x202000a8        -       0x00000002   Zero   RW          197    .bss.D_State        encoder.o
+    0x202000a8        -       0x00000002   Zero   RW          144    .bss.D_State        encoder.o
     0x202000aa   0x00008010   0x00000002   PAD
-    0x202000ac        -       0x0000070c   Zero   RW          252    .bss.Trackless_Params  eeprom.o
+    0x202000ac        -       0x0000070c   Zero   RW          115    .bss.Trackless_Params  eeprom.o
     0x202007b8        -       0x00001000   Zero   RW          304    .bss.W25QXX_BUFFER  w25qxx.o
-    0x202017b8        -       0x0000000c   Zero   RW          424    .bss.accel          motor_controller.o
-    0x202017c4        -       0x00000064   Zero   RW          422    .bss.ahrs           motor_controller.o
-    0x20201828        -       0x0000000c   Zero   RW          250    .bss.eeprom_write_data  eeprom.o
+    0x202017b8        -       0x0000000c   Zero   RW          333    .bss.accel          motor_controller.o
+    0x202017c4        -       0x00000064   Zero   RW          331    .bss.ahrs           motor_controller.o
+    0x20201828        -       0x0000000c   Zero   RW          113    .bss.eeprom_write_data  eeprom.o
     0x20201834        -       0x000000bc   Zero   RW           26    .bss.gMotor_PWM1Backup  ti_msp_dl_config.o
     0x202018f0        -       0x00000028   Zero   RW           28    .bss.gSPI_0Backup   ti_msp_dl_config.o
     0x20201918        -       0x000000bc   Zero   RW           27    .bss.gTIMER_delayBackup  ti_msp_dl_config.o
-    0x202019d4        -       0x0000000c   Zero   RW          423    .bss.gyro           motor_controller.o
-    0x202019e0        -       0x00000005   Zero   RW          215    .bss.icm_read_check  icm20608.o
+    0x202019d4        -       0x0000000c   Zero   RW          332    .bss.gyro           motor_controller.o
+    0x202019e0        -       0x00000005   Zero   RW          162    .bss.icm_read_check  icm20608.o
     0x202019e5   0x00008010   0x00000003   PAD
-    0x202019e8        -       0x00000004   Zero   RW          220    .bss.imu_calibration.accel_sum.0  icm20608.o
-    0x202019ec        -       0x00000004   Zero   RW          221    .bss.imu_calibration.accel_sum.1  icm20608.o
-    0x202019f0        -       0x00000004   Zero   RW          222    .bss.imu_calibration.accel_sum.2  icm20608.o
-    0x202019f4        -       0x00000002   Zero   RW          216    .bss.imu_calibration.cnt  icm20608.o
+    0x202019e8        -       0x00000004   Zero   RW          167    .bss.imu_calibration.accel_sum.0  icm20608.o
+    0x202019ec        -       0x00000004   Zero   RW          168    .bss.imu_calibration.accel_sum.1  icm20608.o
+    0x202019f0        -       0x00000004   Zero   RW          169    .bss.imu_calibration.accel_sum.2  icm20608.o
+    0x202019f4        -       0x00000002   Zero   RW          163    .bss.imu_calibration.cnt  icm20608.o
     0x202019f6   0x00008010   0x00000002   PAD
-    0x202019f8        -       0x00000004   Zero   RW          223    .bss.imu_calibration.gyro_sum.0  icm20608.o
-    0x202019fc        -       0x00000004   Zero   RW          224    .bss.imu_calibration.gyro_sum.1  icm20608.o
-    0x20201a00        -       0x00000004   Zero   RW          225    .bss.imu_calibration.gyro_sum.2  icm20608.o
-    0x20201a04        -       0x00000004   Zero   RW          217    .bss.imu_calibration.last_gyro.0  icm20608.o
-    0x20201a08        -       0x00000004   Zero   RW          218    .bss.imu_calibration.last_gyro.1  icm20608.o
-    0x20201a0c        -       0x00000004   Zero   RW          219    .bss.imu_calibration.last_gyro.2  icm20608.o
-    0x20201a10        -       0x00000004   Zero   RW          191    .bss.left_motor_period_cnt  encoder.o
+    0x202019f8        -       0x00000004   Zero   RW          170    .bss.imu_calibration.gyro_sum.0  icm20608.o
+    0x202019fc        -       0x00000004   Zero   RW          171    .bss.imu_calibration.gyro_sum.1  icm20608.o
+    0x20201a00        -       0x00000004   Zero   RW          172    .bss.imu_calibration.gyro_sum.2  icm20608.o
+    0x20201a04        -       0x00000004   Zero   RW          164    .bss.imu_calibration.last_gyro.0  icm20608.o
+    0x20201a08        -       0x00000004   Zero   RW          165    .bss.imu_calibration.last_gyro.1  icm20608.o
+    0x20201a0c        -       0x00000004   Zero   RW          166    .bss.imu_calibration.last_gyro.2  icm20608.o
+    0x20201a10        -       0x00000004   Zero   RW          138    .bss.left_motor_period_cnt  encoder.o
     0x20201a14        -       0x000000f0   Zero   RW         1044    .bss.prvCheckForValidListAndQueue.ucStaticTimerQueueStorage  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
     0x20201b04        -       0x00000050   Zero   RW         1043    .bss.prvCheckForValidListAndQueue.xStaticTimerQueue  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
     0x20201b54        -       0x00000004   Zero   RW         1040    .bss.prvSampleTimeNow.xLastTime  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
@@ -4453,9 +4453,9 @@ Memory Map of the image
     0x20201b68        -       0x00000004   Zero   RW          980    .bss.pxOverflowDelayedTaskList  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
     0x20201b6c        -       0x00000004   Zero   RW         1039    .bss.pxOverflowTimerList  freertos_builds_LP_MSPM0G3507_release_keil.lib(timers.o)
     0x20201b70        -       0x000000c8   Zero   RW          982    .bss.pxReadyTasksLists  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x20201c38        -       0x00000004   Zero   RW          192    .bss.right_motor_period_cnt  encoder.o
-    0x20201c3c        -       0x00000188   Zero   RW          472    .bss.smartcar_imu   sensor.o
-    0x20201dc4        -       0x00000004   Zero   RW          425    .bss.temperature    motor_controller.o
+    0x20201c38        -       0x00000004   Zero   RW          139    .bss.right_motor_period_cnt  encoder.o
+    0x20201c3c        -       0x00000188   Zero   RW          499    .bss.smartcar_imu   sensor.o
+    0x20201dc4        -       0x00000004   Zero   RW          334    .bss.temperature    motor_controller.o
     0x20201dc8        -       0x00000c00   Zero   RW         1090    .bss.ucHeap         freertos_builds_LP_MSPM0G3507_release_keil.lib(heap_4.o)
     0x202029c8        -       0x00000001   Zero   RW         1132    .bss.ulStoppedTimerCompensation  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
     0x202029c9   0x00008010   0x00000003   PAD
@@ -4481,7 +4481,7 @@ Memory Map of the image
     0x20202f08        -       0x00000001   Zero   RW         1131    .bss.xMaximumPossibleSuppressedTicks  freertos_builds_LP_MSPM0G3507_release_keil.lib(port.o)
     0x20202f09   0x00008010   0x00000003   PAD
     0x20202f0c        -       0x00000004   Zero   RW         1087    .bss.xMinimumEverFreeBytesRemaining  freertos_builds_LP_MSPM0G3507_release_keil.lib(heap_4.o)
-    0x20202f10        -       0x00000004   Zero   RW          195    .bss.xMotorCountMutex  encoder.o
+    0x20202f10        -       0x00000004   Zero   RW          142    .bss.xMotorCountMutex  encoder.o
     0x20202f14        -       0x00000004   Zero   RW          985    .bss.xNextTaskUnblockTime  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
     0x20202f18        -       0x00000004   Zero   RW          989    .bss.xNumOfOverflows  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
     0x20202f1c        -       0x00000004   Zero   RW         1088    .bss.xNumberOfSuccessfulAllocations  freertos_builds_LP_MSPM0G3507_release_keil.lib(heap_4.o)
@@ -4489,7 +4489,7 @@ Memory Map of the image
     0x20202f24        -       0x00000004   Zero   RW          988    .bss.xPendedTicks   freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
     0x20202f28        -       0x00000014   Zero   RW          986    .bss.xPendingReadyList  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
     0x20202f3c        -       0x00000004   Zero   RW          976    .bss.xSchedulerRunning  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
-    0x20202f40        -       0x00000004   Zero   RW          196    .bss.xSpeedTimer    encoder.o
+    0x20202f40        -       0x00000004   Zero   RW          143    .bss.xSpeedTimer    encoder.o
     0x20202f44        -       0x00000008   Zero   RW         1086    .bss.xStart         freertos_builds_LP_MSPM0G3507_release_keil.lib(heap_4.o)
     0x20202f4c        -       0x00000014   Zero   RW          981    .bss.xSuspendedTaskList  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
     0x20202f60        -       0x00000014   Zero   RW          973    .bss.xTasksWaitingTermination  freertos_builds_LP_MSPM0G3507_release_keil.lib(tasks.o)
@@ -4525,30 +4525,30 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-        74          0          0          0          0       2488   delay.o
-        52          4          0          0       1816       3510   eeprom.o
-       596        100          0         32         18       8602   encoder.o
-      2622         72          0          0          0      12056   fusionahrs.o
-       412         16          0          0          0       2404   fusioncompass.o
-        16          4          0         32          0       3918   gray_detection.o
-       460         40          0          0          0       8476   hardware_i2c.o
-      1688        124          0          1         43       5537   icm20608.o
-       140         28         15          0          0       4212   log.o
-        64         16          0          0          0        671   main.o
-        60          8          0          0          0       4107   motor.o
-       660         84          0          0        128       3193   motor_controller.o
-       124         28          0          0          0      19993   oled.o
-         0          0          0          0        392       3729   sensor.o
-        44          8          0          0          0      17244   software_i2c.o
-        84          8          0          0          0       6157   spi.o
+        74          0          0          0          0       2512   delay.o
+        52          4          0          0       1816       3534   eeprom.o
+       596        100          0         32         18       8626   encoder.o
+      2622         72          0          0          0      12080   fusionahrs.o
+       412         16          0          0          0       2428   fusioncompass.o
+        16          4          0         32          0       3954   gray_detection.o
+       460         40          0          0          0       8500   hardware_i2c.o
+      1688        124          0          1         43       5561   icm20608.o
+       140         28         15          0          0       4236   log.o
+        64         16          0          0          0        695   main.o
+        60          8          0          0          0       4131   motor.o
+       660         84          0          0        128       3241   motor_controller.o
+       124         28          0          0          0      20029   oled.o
+         0          0          0          0        392       3765   sensor.o
+        44          8          0          0          0      17268   software_i2c.o
+        84          8          0          0          0       6181   spi.o
         44         18        192          0        256        716   startup_mspm0g350x_uvision.o
       1024        224         71          0        416      32652   ti_msp_dl_config.o
-        70          0          0          0          0       3593   uart.o
-      1364         20          0          0       4096      27222   w25qxx.o
-        24          4          0          0          0       4172   wp_math.o
+        70          0          0          0          0       3617   uart.o
+      1364         20          0          0       4096      27246   w25qxx.o
+        24          4          0          0          0       4196   wp_math.o
 
     ----------------------------------------------------------------------
-      9630        806        316         68       7172     174652   Object Totals
+      9630        806        316         68       7172     175168   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          8          0          6          3          7          0   (incl. Padding)
 
@@ -4707,8 +4707,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     31732       2042        976         72      12352     347559   Grand Totals
-     31732       2042        976         72      12352     347559   ELF Image Totals
+     31732       2042        976         72      12352     348075   Grand Totals
+     31732       2042        976         72      12352     348075   ELF Image Totals
      31732       2042        976         72          0          0   ROM Totals
 
 ==============================================================================

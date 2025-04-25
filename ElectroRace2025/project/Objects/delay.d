@@ -1,6 +1,6 @@
-./objects/delay.o: ..\utils\delay.c ..\utils\delay.h \
-  ..\project\ti_msp_dl_config.h ..\source\ti\devices\msp\msp.h \
-  ..\source\ti\devices\DeviceFamily.h \
+./objects/delay.o: ..\application\utils\delay.c \
+  ..\application\utils\delay.h ..\project\ti_msp_dl_config.h \
+  ..\source\ti\devices\msp\msp.h ..\source\ti\devices\DeviceFamily.h \
   ..\source\ti\devices\msp\m0p\mspm0g350x.h \
   ..\source\third_party\CMSIS\Core\Include\core_cm0plus.h \
   ..\source\ti\devices\msp\peripherals\hw_adc12.h \

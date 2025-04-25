@@ -1,3 +1,4 @@
-./objects/fusionahrs.o: ..\app\fusion\FusionAhrs.c \
-  ..\app\fusion\FusionAhrs.h ..\app\fusion\FusionMath.h \
-  ..\app\fusion\FusionCompass.h
+./objects/fusionahrs.o: ..\application\app\fusion\FusionAhrs.c \
+  ..\application\app\fusion\FusionAhrs.h \
+  ..\application\app\fusion\FusionMath.h \
+  ..\application\app\fusion\FusionCompass.h

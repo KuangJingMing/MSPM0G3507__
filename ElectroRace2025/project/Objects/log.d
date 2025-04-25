@@ -1,6 +1,6 @@
-./objects/log.o: ..\utils\log.c ..\utils\log.h ..\hardware\bsp\uart.h \
-  ..\project\ti_msp_dl_config.h ..\source\ti\devices\msp\msp.h \
-  ..\source\ti\devices\DeviceFamily.h \
+./objects/log.o: ..\application\utils\log.c ..\application\utils\log.h \
+  ..\application\hardware\bsp\uart.h ..\project\ti_msp_dl_config.h \
+  ..\source\ti\devices\msp\msp.h ..\source\ti\devices\DeviceFamily.h \
   ..\source\ti\devices\msp\m0p\mspm0g350x.h \
   ..\source\third_party\CMSIS\Core\Include\core_cm0plus.h \
   ..\source\ti\devices\msp\peripherals\hw_adc12.h \
