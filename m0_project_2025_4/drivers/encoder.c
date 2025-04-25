@@ -37,7 +37,7 @@ typedef struct {
 
 TracklessMotor trackless_motor = {
     .pulse_num_per_circle = 570.0f, 
-    .wheel_radius_cm = 3.0f     
+    .wheel_radius_cm = 3.5f     
 };
 
 // 定义互斥锁，用于保护脉冲计数变量
@@ -80,8 +80,8 @@ void SpeedTimerCallback(TimerHandle_t xTimer)
 void Encoder_init(void)
 {
     // 初始化编码器中断
-    NVIC_ClearPendingIRQ(ENCOPER_INT_IRQN);
-    NVIC_EnableIRQ(ENCOPER_INT_IRQN);
+    NVIC_ClearPendingIRQ(ENCODER_INT_IRQN);
+    NVIC_EnableIRQ(ENCODER_INT_IRQN);
     
     // 创建互斥锁
     xMotorCountMutex = xSemaphoreCreateMutex();
@@ -104,7 +104,7 @@ void Encoder_init(void)
 
 void QEI0_IRQHandler(void)
 {
-    D_State[0] = DL_GPIO_readPins(ENCOPER_PORT, ENCOPER_D1_PIN);
+    D_State[0] = DL_GPIO_readPins(ENCODER_PORT, ENCODER_D1_PIN);
     // 在中断中使用ISR版本的互斥锁函数
     BaseType_t xHigherPriorityTaskWoken = pdFALSE;
     if (xSemaphoreTakeFromISR(xMotorCountMutex, &xHigherPriorityTaskWoken) == pdTRUE) {
@@ -121,7 +121,7 @@ void QEI0_IRQHandler(void)
 
 void QEI1_IRQHandler(void)
 {
-    D_State[1] = DL_GPIO_readPins(ENCOPER_PORT, ENCOPER_D2_PIN);
+    D_State[1] = DL_GPIO_readPins(ENCODER_PORT, ENCODER_D2_PIN);
     // 在中断中使用ISR版本的互斥锁函数
     BaseType_t xHigherPriorityTaskWoken = pdFALSE;
     if (xSemaphoreTakeFromISR(xMotorCountMutex, &xHigherPriorityTaskWoken) == pdTRUE) {
@@ -139,14 +139,14 @@ void QEI1_IRQHandler(void)
 void GROUP1_IRQHandler(void)
 {
     if (DL_Interrupt_getStatusGroup(DL_INTERRUPT_GROUP_1, DL_INTERRUPT_GROUP1_GPIOB)) {
-        if (DL_GPIO_getEnabledInterruptStatus(ENCOPER_PORT, ENCOPER_P1_PIN)) {
+        if (DL_GPIO_getEnabledInterruptStatus(ENCODER_PORT, ENCODER_P1_PIN)) {
             QEI0_IRQHandler();
-            DL_GPIO_clearInterruptStatus(ENCOPER_PORT, ENCOPER_P1_PIN);
+            DL_GPIO_clearInterruptStatus(ENCODER_PORT, ENCODER_P1_PIN);
         }
 
-        if (DL_GPIO_getEnabledInterruptStatus(ENCOPER_PORT, ENCOPER_P2_PIN)) {
+        if (DL_GPIO_getEnabledInterruptStatus(ENCODER_PORT, ENCODER_P2_PIN)) {
             QEI1_IRQHandler();
-            DL_GPIO_clearInterruptStatus(ENCOPER_PORT, ENCOPER_P2_PIN);
+            DL_GPIO_clearInterruptStatus(ENCODER_PORT, ENCODER_P2_PIN);
         }
         DL_Interrupt_clearGroup(DL_INTERRUPT_GROUP_1, DL_INTERRUPT_GROUP1_GPIOB);
     }

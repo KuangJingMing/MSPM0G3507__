@@ -16,9 +16,9 @@ int main(void)
     Motor_Init(); // 电机初始化
     Encoder_init(); // 编码器初始化（包括 FreeRTOS 软件定时器）
     // 设置初始电机速度
-    Motor_Control(1200, 1200);
+//    Motor_Control(1200, 1200);
     // 创建显示任务
-    xTaskCreate(DisplayTask, "DisplayTask", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, NULL);
+    xTaskCreate(DisplayTask, "DisplayTask", configMINIMAL_STACK_SIZE * 4, NULL, tskIDLE_PRIORITY + 1, NULL);
     // 启动 FreeRTOS 调度器
     vTaskStartScheduler();
 

@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>__MSPM0G3507__</Define>
               <Undefine></Undefine>
-              <IncludePath>..\project;..\source;..\source\third_party\CMSIS\Core\Include;..\kernel\freertos\Source\include;..\kernel\freertos\Source\portable\GCC\ARM_CM0;..\kernel\freertos\builds\LP_MSPM0G3507\release;..\drivers;..\hardware\bsp;..\utils;..\fonts;..\app;..\user</IncludePath>
+              <IncludePath>..\project;..\source;..\source\third_party\CMSIS\Core\Include;..\kernel\freertos\Source\include;..\kernel\freertos\Source\portable\GCC\ARM_CM0;..\kernel\freertos\builds\LP_MSPM0G3507\release;..\drivers;..\hardware\bsp;..\utils;..\fonts;..\app;..\user;..\math;..\app\fusion</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -449,6 +449,21 @@
               <FileType>1</FileType>
               <FilePath>..\drivers\encoder.c</FilePath>
             </File>
+            <File>
+              <FileName>icm20608.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\drivers\icm20608.c</FilePath>
+            </File>
+            <File>
+              <FileName>eeprom.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\drivers\eeprom.c</FilePath>
+            </File>
+            <File>
+              <FileName>w25qxx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\drivers\w25qxx.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -458,6 +473,11 @@
               <FileName>software_i2c.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\hardware\bsp\software_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>hardware_i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\hardware\bsp\hardware_i2c.c</FilePath>
             </File>
             <File>
               <FileName>uart.c</FileName>
@@ -503,6 +523,46 @@
               <FileName>README.md</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\README.md</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>math</GroupName>
+          <Files>
+            <File>
+              <FileName>wp_math.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\math\wp_math.c</FilePath>
+            </File>
+            <File>
+              <FileName>sensor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\math\sensor.c</FilePath>
+            </File>
+            <File>
+              <FileName>filter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\math\filter.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>app/fusion</GroupName>
+          <Files>
+            <File>
+              <FileName>FusionAhrs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\fusion\FusionAhrs.c</FilePath>
+            </File>
+            <File>
+              <FileName>FusionCompass.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\fusion\FusionCompass.c</FilePath>
+            </File>
+            <File>
+              <FileName>FusionOffset.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\fusion\FusionOffset.c</FilePath>
             </File>
           </Files>
         </Group>

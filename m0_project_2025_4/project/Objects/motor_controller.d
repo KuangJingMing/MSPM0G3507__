@@ -67,5 +67,7 @@
   ..\fonts\oled_data.h ..\utils\delay.h \
   ..\kernel\freertos\Source\include\task.h \
   ..\kernel\freertos\Source\include\list.h \
-  ..\kernel\freertos\Source\include\timers.h ..\utils\log.h \
-  ..\hardware\bsp\uart.h
+  ..\kernel\freertos\Source\include\timers.h ..\drivers\icm20608.h \
+  ..\drivers\imu_data_type.h ..\math\sensor.h ..\utils\log_config.h \
+  ..\utils\log.h ..\hardware\bsp\uart.h ..\app\fusion\FusionAhrs.h \
+  ..\app\fusion\FusionMath.h

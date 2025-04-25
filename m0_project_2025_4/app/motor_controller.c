@@ -1,32 +1,111 @@
 #include "motor_controller.h"
+#include "icm20608.h"
+#include "delay.h"
+#include "sensor.h"
+#include "log_config.h"
 #include "log.h"
-//#include "log_config.h"
+#include "FusionAhrs.h" // ??AHRS???
+#include <math.h>
 
-// 任务函数：用于读取速度并更新 OLED 显示
- void DisplayTask(void *pvParameters)
+static vector3f gyro, accel;
+static float temperature;
+static FusionAhrs ahrs; // AHRS?????
+
+/**
+ * @brief ??????????(??:?)
+ * @param q ??????
+ * @param roll ?????(?)
+ * @param pitch ?????(?)
+ * @param yaw ?????(?)
+ */
+void QuaternionToEulerAngles(FusionQuaternion q, float *roll, float *pitch, float *yaw) {
+    float qw = q.element.w;
+    float qx = q.element.x;
+    float qy = q.element.y;
+    float qz = q.element.z;
+
+    // Roll (x-axis rotation)
+    float sinr_cosp = 2.0f * (qw * qx + qy * qz);
+    float cosr_cosp = 1.0f - 2.0f * (qx * qx + qy * qy);
+    *roll = atan2f(sinr_cosp, cosr_cosp);
+
+    // Pitch (y-axis rotation)
+    float sinp = 2.0f * (qw * qy - qz * qx);
+    if (fabsf(sinp) >= 1.0f) {
+        *pitch = copysignf(M_PI / 2.0f, sinp); // ??????,??90?
+    } else {
+        *pitch = asinf(sinp);
+    }
+
+    // Yaw (z-axis rotation)
+    float siny_cosp = 2.0f * (qw * qz + qx * qy);
+    float cosy_cosp = 1.0f - 2.0f * (qy * qy + qz * qz);
+    *yaw = atan2f(siny_cosp, cosy_cosp);
+
+    // ????????
+    *roll = (*roll) * (180.0f / M_PI);
+    *pitch = (*pitch) * (180.0f / M_PI);
+    *yaw = (*yaw) * (180.0f / M_PI);
+}
+
+// ????:?????????OLED??,??????????????
+void DisplayTask(void *pvParameters)
 {
-    float right_speed, left_speed;
-    const TickType_t xDelay = pdMS_TO_TICKS(20); // 每 20ms 更新一次显示
-    static int log_counter = 0; // 用于降低日志输出频率的计数器
-    const int log_frequency = 50; // 每 50 次循环输出一次日志（即 50 * 20ms = 1000ms，即每秒输出一次）
+    // 1. ???IMU
+    if(ICM206xx_Init() != 0) {
+        log_e("IMU init failed");
+        vTaskDelete(NULL); // ??????
+    }
+    
+    // 2. ???????(?EEPROM??)
+    imu_calibration_params_init();
+
+    // 3. ???AHRS??
+    FusionAhrsInitialise(&ahrs);
 
     for (;;) {
-        // 获取左右电机速度
-        right_speed = get_right_motor_speed();
-        left_speed = get_left_motor_speed();
+        // 4. ?????????
+        ICM206xx_Read_Data(&gyro, &accel, &temperature);
 
-        // 更新 OLED 显示
-        OLED_Showdecimal(0, 0, right_speed, 4, 2, 16, 1);
-        OLED_Showdecimal(1, 3, left_speed, 4, 2, 16, 1);
+        // 5. ???????????????(????)
+        imu_calibration(&gyro, &accel);
 
-        // 每隔一定次数输出一次日志，避免过于频繁
-        log_counter++;
-        if (log_counter >= log_frequency) {
-            LOG_I("DisplayTask - Left Motor Speed: %.3f m/s, Right Motor Speed: %.3f m/s", left_speed, right_speed);
-            log_counter = 0; // 重置计数器
-        }
+        // 6. ????????????????(?????)
+        vector3f corrected_gyro;
+        corrected_gyro.x = gyro.x - smartcar_imu.gyro_offset.x;
+        corrected_gyro.y = gyro.y - smartcar_imu.gyro_offset.y;
+        corrected_gyro.z = gyro.z - smartcar_imu.gyro_offset.z;
 
-        // 任务延迟 20ms
-        vTaskDelay(xDelay);
+        vector3f corrected_accel;
+        corrected_accel.x = accel.x - smartcar_imu.accel_offset.x;
+        corrected_accel.y = accel.y - smartcar_imu.accel_offset.y;
+        corrected_accel.z = accel.z - smartcar_imu.accel_offset.z;
+        FusionVector fusion_gyro = {
+            .axis.x = corrected_gyro.x,
+            .axis.y = corrected_gyro.y,
+            .axis.z = corrected_gyro.z
+        };
+        FusionVector fusion_accel = {
+            .axis.x = corrected_accel.x,
+            .axis.y = corrected_accel.y,
+            .axis.z = corrected_accel.z
+        };
+        FusionVector fusion_mag = FUSION_VECTOR_ZERO; // ???????,?????
+
+        // 8. ??AHRS??(???????300ms,?0.3s)
+        float deltaTime = 0.3f; // ????,??:?
+        FusionAhrsUpdateNoMagnetometer(&ahrs, fusion_gyro, fusion_accel, deltaTime);
+
+        // 9. ?????????(??)
+        FusionQuaternion quaternion = FusionAhrsGetQuaternion(&ahrs);
+
+        // 10. ??????????
+        float roll, pitch, yaw;
+        QuaternionToEulerAngles(quaternion, &roll, &pitch, &yaw);
+
+        log_i("roll=%.2f pitch=%.2f yaw=%.2f", 
+              roll, pitch, yaw);
+
+        delay_ms(300);
     }
 }

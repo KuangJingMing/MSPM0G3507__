@@ -13,5 +13,4 @@
 #include "timers.h"
 #include "motor_controller.h"
 
-
 #endif // COMMON_H
