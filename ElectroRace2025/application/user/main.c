@@ -21,7 +21,6 @@ int main(void)
     SYSCFG_DL_init();
 		embedfire_protocol_receive_init();
     gray_detection_init();
-    OLED_Init();
     // OLED_Test(); // 如果不需要测试，可以注释掉
     Encoder_init(); // 编码器初始化（包括 FreeRTOS 软件定时器）
 		motor_init();
