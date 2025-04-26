@@ -515,11 +515,6 @@
               <FilePath>..\application\hardware\drivers\icm20608.c</FilePath>
             </File>
             <File>
-              <FileName>motor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\hardware\drivers\motor.c</FilePath>
-            </File>
-            <File>
               <FileName>oled.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\application\hardware\drivers\oled.c</FilePath>
@@ -533,6 +528,16 @@
               <FileName>w25qxx.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\application\hardware\drivers\w25qxx.c</FilePath>
+            </File>
+            <File>
+              <FileName>motor_l298n.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\hardware\drivers\motor_l298n.c</FilePath>
+            </File>
+            <File>
+              <FileName>motor_tb6612.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\hardware\drivers\motor_tb6612.c</FilePath>
             </File>
           </Files>
         </Group>

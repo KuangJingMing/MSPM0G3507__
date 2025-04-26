@@ -1,111 +1,41 @@
 #include "motor_controller.h"
-#include "icm20608.h"
-#include "delay.h"
-#include "sensor.h"
-#include "log_config.h"
-#include "log.h"
-#include "FusionAhrs.h" // ??AHRS???
-#include <math.h>
 
-static vector3f gyro, accel;
-static float temperature;
-static FusionAhrs ahrs; // AHRS?????
+extern motorHardWareInterface l298n_interface; // 具体的 L298N 实现接口
+extern motorHardWareInterface tb6612_interface;
 
-/**
- * @brief ??????????(??:?)
- * @param q ??????
- * @param roll ?????(?)
- * @param pitch ?????(?)
- * @param yaw ?????(?)
- */
-void QuaternionToEulerAngles(FusionQuaternion q, float *roll, float *pitch, float *yaw) {
-    float qw = q.element.w;
-    float qx = q.element.x;
-    float qy = q.element.y;
-    float qz = q.element.z;
+// 定义外部可访问的配置结构体实例
+// 在应用层初始化时填充这些配置
+MotorSystemConfig g_motor_system_config = {
+    .motor_type = MOTOR_TYPE_TWO_WHEEL, // 默认两轮
+    .max_pwm_value = 3000, // 默认最大 PWM 值
 
-    // Roll (x-axis rotation)
-    float sinr_cosp = 2.0f * (qw * qx + qy * qz);
-    float cosr_cosp = 1.0f - 2.0f * (qx * qx + qy * qy);
-    *roll = atan2f(sinr_cosp, cosr_cosp);
-
-    // Pitch (y-axis rotation)
-    float sinp = 2.0f * (qw * qy - qz * qx);
-    if (fabsf(sinp) >= 1.0f) {
-        *pitch = copysignf(M_PI / 2.0f, sinp); // ??????,??90?
-    } else {
-        *pitch = asinf(sinp);
+    .motors = {
+        // 配置前左电机 (根据你的实际硬件连接和 DL 库配置)
+        [MOTOR_FRONT_LEFT] = {
+            .enabled = true, // 默认启用
+            .timer_instance = (GPTIMER_Regs*) Motor_PWM1_INST, // 定时器实例指针
+            .cc_reverse_pwm_index = DL_TIMER_CC_0_INDEX, // 反向 PWM 通道索引
+            .cc_forward_pwm_index = DL_TIMER_CC_1_INDEX, // 正向 PWM 通道索引
+        },
+        // 配置前右电机 (根据你的实际硬件连接和 DL 库配置)
+        [MOTOR_FRONT_RIGHT] = {
+            .enabled = true, // 默认启用
+            .timer_instance = (GPTIMER_Regs*) Motor_PWM2_INST,
+            .cc_reverse_pwm_index = DL_TIMER_CC_1_INDEX,
+            .cc_forward_pwm_index = DL_TIMER_CC_0_INDEX,
+        },
     }
+};
 
-    // Yaw (z-axis rotation)
-    float siny_cosp = 2.0f * (qw * qz + qx * qy);
-    float cosy_cosp = 1.0f - 2.0f * (qy * qy + qz * qz);
-    *yaw = atan2f(siny_cosp, cosy_cosp);
 
-    // ????????
-    *roll = (*roll) * (180.0f / M_PI);
-    *pitch = (*pitch) * (180.0f / M_PI);
-    *yaw = (*yaw) * (180.0f / M_PI);
+void motor_init(void) {
+	l298n_interface.enable_all_motor(&g_motor_system_config);
 }
 
-// ????:?????????OLED??,??????????????
-void DisplayTask(void *pvParameters)
-{
-    // 1. ???IMU
-    if(ICM206xx_Init() != 0) {
-        log_e("IMU init failed");
-        vTaskDelete(NULL); // ??????
-    }
-    
-    // 2. ???????(?EEPROM??)
-    imu_calibration_params_init();
+void motor_set_pwm(MotorID id, int pwm) {
+	l298n_interface.set_pwms(&g_motor_system_config, id, pwm);
+}
 
-    // 3. ???AHRS??
-    FusionAhrsInitialise(&ahrs);
-
-    for (;;) {
-        // 4. ?????????
-        ICM206xx_Read_Data(&gyro, &accel, &temperature);
-
-        // 5. ???????????????(????)
-        imu_calibration(&gyro, &accel);
-
-        // 6. ????????????????(?????)
-        vector3f corrected_gyro;
-        corrected_gyro.x = gyro.x - smartcar_imu.gyro_offset.x;
-        corrected_gyro.y = gyro.y - smartcar_imu.gyro_offset.y;
-        corrected_gyro.z = gyro.z - smartcar_imu.gyro_offset.z;
-
-        vector3f corrected_accel;
-        corrected_accel.x = accel.x - smartcar_imu.accel_offset.x;
-        corrected_accel.y = accel.y - smartcar_imu.accel_offset.y;
-        corrected_accel.z = accel.z - smartcar_imu.accel_offset.z;
-        FusionVector fusion_gyro = {
-            .axis.x = corrected_gyro.x,
-            .axis.y = corrected_gyro.y,
-            .axis.z = corrected_gyro.z
-        };
-        FusionVector fusion_accel = {
-            .axis.x = corrected_accel.x,
-            .axis.y = corrected_accel.y,
-            .axis.z = corrected_accel.z
-        };
-        FusionVector fusion_mag = FUSION_VECTOR_ZERO; // ???????,?????
-
-        // 8. ??AHRS??(???????300ms,?0.3s)
-        float deltaTime = 0.3f; // ????,??:?
-        FusionAhrsUpdateNoMagnetometer(&ahrs, fusion_gyro, fusion_accel, deltaTime);
-
-        // 9. ?????????(??)
-        FusionQuaternion quaternion = FusionAhrsGetQuaternion(&ahrs);
-
-        // 10. ??????????
-        float roll, pitch, yaw;
-        QuaternionToEulerAngles(quaternion, &roll, &pitch, &yaw);
-
-        log_i("roll=%.2f pitch=%.2f yaw=%.2f", 
-              roll, pitch, yaw);
-
-        delay_ms(300);
-    }
+void motor_stop(void) {
+	l298n_interface.enable_all_motor(&g_motor_system_config);
 }

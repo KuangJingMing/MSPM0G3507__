@@ -70,7 +70,7 @@
   ..\application\app\gray_detection.h \
   ..\application\hardware\drivers\pca9555.h \
   ..\application\hardware\bsp\software_i2c.h \
-  ..\application\hardware\drivers\motor.h \
+  ..\application\hardware\drivers\motor_hardware.h \
   ..\application\hardware\drivers\encoder.h \
   ..\kernel\freertos\Source\include\timers.h \
   ..\application\app\motor_controller.h \

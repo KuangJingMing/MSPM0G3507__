@@ -4,7 +4,7 @@
 #include "log_config.h"
 #include "log.h"
 
-SoftwareI2C pca9555_i2c = {
+static SoftwareI2C pca9555_i2c = {
 	  .sclPort = PCA9555_PORT,
     .sdaPort = PCA9555_PORT,
     .sclPin = PCA9555_SCL1_PIN,
@@ -17,11 +17,11 @@ SoftwareI2C pca9555_i2c = {
 
 uint8_t gray_datas[12] = {0};
 
-void Gray_Detection_Init(void) {
+void gray_detection_init(void) {
 	SoftwareI2C_Init(&pca9555_i2c);
 }
 
-void Gray_ReadData(void) {
+void gray_read_data(void) {
     uint16_t pca_data = pca9555_read_bit12(&pca9555_i2c, PCA9555_ADDR);
 	
     // 将 16 位数据按位压入 gray_datas 数组（只取低 12 位）

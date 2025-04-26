@@ -1,6 +1,7 @@
-./objects/motor.o: ..\application\hardware\drivers\motor.c \
-  ..\application\hardware\drivers\motor.h ..\project\ti_msp_dl_config.h \
-  ..\source\ti\devices\msp\msp.h ..\source\ti\devices\DeviceFamily.h \
+./objects/motor_l298n.o: ..\application\hardware\drivers\motor_l298n.c \
+  ..\application\hardware\drivers\motor_hardware.h \
+  ..\project\ti_msp_dl_config.h ..\source\ti\devices\msp\msp.h \
+  ..\source\ti\devices\DeviceFamily.h \
   ..\source\ti\devices\msp\m0p\mspm0g350x.h \
   ..\source\third_party\CMSIS\Core\Include\core_cm0plus.h \
   ..\source\ti\devices\msp\peripherals\hw_adc12.h \

@@ -17,13 +17,13 @@ int main(void)
 {
     // 系统和硬件初始化
     SYSCFG_DL_init();
-    Gray_Detection_Init();
+    gray_detection_init();
     OLED_Init();
     // OLED_Test(); // 如果不需要测试，可以注释掉
-    Motor_Init(); // 电机初始化
     Encoder_init(); // 编码器初始化（包括 FreeRTOS 软件定时器）
-    // 设置初始电机速度
-//    Motor_Control(1200, 1200);
+		motor_init();
+		motor_set_pwm(MOTOR_FRONT_LEFT, -1500);
+		motor_set_pwm(MOTOR_FRONT_RIGHT, -1500);
     // 创建显示任务
     xTaskCreate(TestTask, "TestTask", configMINIMAL_STACK_SIZE * 4, NULL, tskIDLE_PRIORITY + 1, NULL);
     // 启动 FreeRTOS 调度器

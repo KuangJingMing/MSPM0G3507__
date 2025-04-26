@@ -3,7 +3,7 @@
 
 #include "pca9555.h"
 
-void Gray_Detection_Init(void);
-void Gray_ReadData(void);
+void gray_detection_init(void);
+void gray_read_data(void);
 
 #endif 
