@@ -1,8 +1,24 @@
 #include "embedfire_protocol.h"
+#include "ti_msp_dl_config.h"
 
 //==============================================================================
 // 协议接收状态机和处理 (RX方向)
 //==============================================================================
+void UART_DEBUG_INST_IRQHandler(void) {
+		uint8_t uart_data;
+    switch( DL_UART_getPendingInterrupt(UART_DEBUG_INST) )
+    {
+        case DL_UART_IIDX_RX://如果是接收中断
+            //接发送过来的数据保存在变量中
+            uart_data = DL_UART_Main_receiveData(UART_DEBUG_INST);
+						protocol_receive_byte(uart_data);
+            break;
+        
+        default://其他的串口中断
+            break;
+		}
+}
+
 // 接收状态机的枚举
 typedef enum {
     STATE_WAITING_FOR_HEADER_BYTE0, // 等待包头第一个字节 0x53
@@ -12,6 +28,7 @@ typedef enum {
     STATE_RECEIVING_HEADER_DATA,    // 接收包头以外的固定头部数据 (通道、长度、指令)
     STATE_RECEIVING_PAYLOAD,        // 接收数据负载和校验和
 } ReceiveState;
+
 static ReceiveState rx_state = STATE_WAITING_FOR_HEADER_BYTE0;
 // 接收缓冲区
 // 缓冲区大小需要能容纳最大可能的接收数据包，包括校验和
@@ -21,6 +38,7 @@ static size_t rx_buffer_index = 0;
 static uint32_t expected_packet_length = 0; // 使用 uint32_t 存储包长度
 // 回调函数结构体变量
 static ProtocolRxCallbacks rx_callbacks = {0}; // 初始化为零，所有指针为NULL
+
 // 回调函数注册函数实现
 void protocol_register_rx_callbacks(const ProtocolRxCallbacks* callbacks) {
     if (callbacks) {
@@ -30,6 +48,10 @@ void protocol_register_rx_callbacks(const ProtocolRxCallbacks* callbacks) {
         memset(&rx_callbacks, 0, sizeof(ProtocolRxCallbacks));
     }
 }
+void embedfire_protocol_receive_init(void) {
+	NVIC_EnableIRQ(UART_DEBUG_INST_INT_IRQN);
+}
+
 /**
  * @brief 根据接收到的完整数据包处理指令.
  * @param packet_data: 完整数据包的起始地址.

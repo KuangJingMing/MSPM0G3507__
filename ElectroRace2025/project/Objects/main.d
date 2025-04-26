@@ -78,4 +78,4 @@
   ..\application\hardware\bsp\uart_driver.h \
   ..\application\include\global_config.h \
   ..\application\app\communication\serialplot_protocol.h \
-  ..\application\utils\log.h
+  ..\application\utils\log_config.h ..\application\utils\log.h
