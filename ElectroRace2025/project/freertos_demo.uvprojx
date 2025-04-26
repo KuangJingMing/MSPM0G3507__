@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>__MSPM0G3507__</Define>
               <Undefine></Undefine>
-              <IncludePath>..\project;..\source;..\source\third_party\CMSIS\Core\Include;..\kernel\freertos\Source\include;..\kernel\freertos\Source\portable\GCC\ARM_CM0;..\kernel\freertos\builds\LP_MSPM0G3507\release;..\application\app;..\application\app\fusion;..\application\drivers;..\application\fonts;..\application\hardware\bsp;..\application\include;..\application\math;..\application\user;..\application\utils</IncludePath>
+              <IncludePath>..\project;..\source;..\source\third_party\CMSIS\Core\Include;..\kernel\freertos\Source\include;..\kernel\freertos\Source\portable\GCC\ARM_CM0;..\kernel\freertos\builds\LP_MSPM0G3507\release;..\application\app;..\application\app\fusion;..\application\app\communication;..\application\hardware\drivers;..\application\hardware\bsp;..\application\fonts;..\application\include;..\application\math;..\application\user;..\application\utils</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -385,14 +385,14 @@
           <GroupName>include</GroupName>
           <Files>
             <File>
-              <FileName>common_types.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\application\include\common_types.h</FilePath>
-            </File>
-            <File>
               <FileName>global_config.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\application\include\global_config.h</FilePath>
+            </File>
+            <File>
+              <FileName>common_include.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\application\include\common_include.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -454,6 +454,11 @@
               <FileType>1</FileType>
               <FilePath>..\application\app\communication\embedfire_protocol_send.c</FilePath>
             </File>
+            <File>
+              <FileName>serialplot_protocol.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\app\communication\serialplot_protocol.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -492,42 +497,42 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>drivers</GroupName>
+          <GroupName>hardware/drivers</GroupName>
           <Files>
             <File>
               <FileName>eeprom.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\drivers\eeprom.c</FilePath>
+              <FilePath>..\application\hardware\drivers\eeprom.c</FilePath>
             </File>
             <File>
               <FileName>encoder.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\drivers\encoder.c</FilePath>
+              <FilePath>..\application\hardware\drivers\encoder.c</FilePath>
             </File>
             <File>
               <FileName>icm20608.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\drivers\icm20608.c</FilePath>
+              <FilePath>..\application\hardware\drivers\icm20608.c</FilePath>
             </File>
             <File>
               <FileName>motor.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\drivers\motor.c</FilePath>
+              <FilePath>..\application\hardware\drivers\motor.c</FilePath>
             </File>
             <File>
               <FileName>oled.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\drivers\oled.c</FilePath>
+              <FilePath>..\application\hardware\drivers\oled.c</FilePath>
             </File>
             <File>
               <FileName>pca9555.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\drivers\pca9555.c</FilePath>
+              <FilePath>..\application\hardware\drivers\pca9555.c</FilePath>
             </File>
             <File>
               <FileName>w25qxx.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\drivers\w25qxx.c</FilePath>
+              <FilePath>..\application\hardware\drivers\w25qxx.c</FilePath>
             </File>
           </Files>
         </Group>

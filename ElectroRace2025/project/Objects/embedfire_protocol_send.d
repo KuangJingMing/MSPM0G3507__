@@ -59,4 +59,5 @@
   ..\source\ti\driverlib\dl_vref.h ..\source\ti\driverlib\dl_wwdt.h \
   ..\source\ti\driverlib\m0p\dl_interrupt.h \
   ..\source\ti\driverlib\m0p\dl_systick.h \
-  ..\application\include\global_config.h
+  ..\application\include\global_config.h \
+  ..\application\utils\log_config.h ..\application\utils\log.h

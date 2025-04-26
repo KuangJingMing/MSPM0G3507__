@@ -1,6 +1,7 @@
 ./objects/gray_detection.o: ..\application\app\gray_detection.c \
-  ..\application\drivers\pca9555.h ..\project\ti_msp_dl_config.h \
-  ..\source\ti\devices\msp\msp.h ..\source\ti\devices\DeviceFamily.h \
+  ..\application\hardware\drivers\pca9555.h \
+  ..\project\ti_msp_dl_config.h ..\source\ti\devices\msp\msp.h \
+  ..\source\ti\devices\DeviceFamily.h \
   ..\source\ti\devices\msp\m0p\mspm0g350x.h \
   ..\source\third_party\CMSIS\Core\Include\core_cm0plus.h \
   ..\source\ti\devices\msp\peripherals\hw_adc12.h \

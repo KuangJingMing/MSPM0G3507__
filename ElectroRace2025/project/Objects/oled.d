@@ -1,7 +1,8 @@
-./objects/oled.o: ..\application\drivers\oled.c \
-  ..\application\drivers\oled.h ..\application\fonts\oled_data.h \
-  ..\application\utils\delay.h ..\project\ti_msp_dl_config.h \
-  ..\source\ti\devices\msp\msp.h ..\source\ti\devices\DeviceFamily.h \
+./objects/oled.o: ..\application\hardware\drivers\oled.c \
+  ..\application\hardware\drivers\oled.h \
+  ..\application\fonts\oled_data.h ..\application\utils\delay.h \
+  ..\project\ti_msp_dl_config.h ..\source\ti\devices\msp\msp.h \
+  ..\source\ti\devices\DeviceFamily.h \
   ..\source\ti\devices\msp\m0p\mspm0g350x.h \
   ..\source\third_party\CMSIS\Core\Include\core_cm0plus.h \
   ..\source\ti\devices\msp\peripherals\hw_adc12.h \

@@ -1,6 +1,8 @@
 ./objects/sensor.o: ..\application\math\sensor.c \
-  ..\application\math\sensor.h ..\application\drivers\imu_data_type.h \
-  ..\application\math\filter.h ..\application\drivers\icm20608.h \
+  ..\application\math\sensor.h \
+  ..\application\hardware\drivers\imu_data_type.h \
+  ..\application\math\filter.h \
+  ..\application\hardware\drivers\icm20608.h \
   ..\project\ti_msp_dl_config.h ..\source\ti\devices\msp\msp.h \
   ..\source\ti\devices\DeviceFamily.h \
   ..\source\ti\devices\msp\m0p\mspm0g350x.h \

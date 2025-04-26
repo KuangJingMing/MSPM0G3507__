@@ -155,9 +155,7 @@ SYSCONFIG_WEAK void SYSCFG_DL_GPIO_init(void)
 
     DL_GPIO_initDigitalOutput(PCA9555_SDA1_IOMUX);
 
-    DL_GPIO_initDigitalInputFeatures(OLED_SCL2_IOMUX,
-		 DL_GPIO_INVERSION_DISABLE, DL_GPIO_RESISTOR_NONE,
-		 DL_GPIO_HYSTERESIS_DISABLE, DL_GPIO_WAKEUP_DISABLE);
+    DL_GPIO_initDigitalInput(OLED_SCL2_IOMUX);
 
     DL_GPIO_initDigitalOutput(OLED_SDA2_IOMUX);
 
@@ -167,25 +165,17 @@ SYSCONFIG_WEAK void SYSCFG_DL_GPIO_init(void)
 
     DL_GPIO_initDigitalOutput(PORTB_CS_IOMUX);
 
-    DL_GPIO_initDigitalInputFeatures(ENCODER_D1_IOMUX,
-		 DL_GPIO_INVERSION_DISABLE, DL_GPIO_RESISTOR_NONE,
-		 DL_GPIO_HYSTERESIS_DISABLE, DL_GPIO_WAKEUP_DISABLE);
-
-    DL_GPIO_initDigitalInputFeatures(ENCODER_D2_IOMUX,
-		 DL_GPIO_INVERSION_DISABLE, DL_GPIO_RESISTOR_NONE,
-		 DL_GPIO_HYSTERESIS_DISABLE, DL_GPIO_WAKEUP_DISABLE);
-
-    DL_GPIO_initDigitalInputFeatures(ENCODER_P1_IOMUX,
-		 DL_GPIO_INVERSION_DISABLE, DL_GPIO_RESISTOR_NONE,
-		 DL_GPIO_HYSTERESIS_DISABLE, DL_GPIO_WAKEUP_DISABLE);
-
-    DL_GPIO_initDigitalInputFeatures(ENCODER_P2_IOMUX,
-		 DL_GPIO_INVERSION_DISABLE, DL_GPIO_RESISTOR_NONE,
-		 DL_GPIO_HYSTERESIS_DISABLE, DL_GPIO_WAKEUP_DISABLE);
-
     DL_GPIO_initDigitalOutputFeatures(PORTB_W25Q64_CS_IOMUX,
 		 DL_GPIO_INVERSION_DISABLE, DL_GPIO_RESISTOR_PULL_UP,
 		 DL_GPIO_DRIVE_STRENGTH_LOW, DL_GPIO_HIZ_DISABLE);
+
+    DL_GPIO_initDigitalInput(ENCODER_D1_IOMUX);
+
+    DL_GPIO_initDigitalInput(ENCODER_D2_IOMUX);
+
+    DL_GPIO_initDigitalInput(ENCODER_P1_IOMUX);
+
+    DL_GPIO_initDigitalInput(ENCODER_P2_IOMUX);
 
     DL_GPIO_clearPins(PCA9555_PORT, PCA9555_SCL1_PIN |
 		PCA9555_SDA1_PIN);
@@ -252,9 +242,6 @@ SYSCONFIG_WEAK void SYSCFG_DL_Motor_PWM1_init(void) {
     DL_TimerA_initPWMMode(
         Motor_PWM1_INST, (DL_TimerA_PWMConfig *) &gMotor_PWM1Config);
 
-    // Set Counter control to the smallest CC index being used
-    DL_TimerA_setCounterControl(Motor_PWM1_INST,DL_TIMER_CZC_CCCTL0_ZCOND,DL_TIMER_CAC_CCCTL0_ACOND,DL_TIMER_CLC_CCCTL0_LCOND);
-
     DL_TimerA_setCaptureCompareOutCtl(Motor_PWM1_INST, DL_TIMER_CC_OCTL_INIT_VAL_LOW,
 		DL_TIMER_CC_OCTL_INV_OUT_DISABLED, DL_TIMER_CC_OCTL_SRC_FUNCVAL,
 		DL_TIMERA_CAPTURE_COMPARE_0_INDEX);
@@ -291,7 +278,6 @@ static const DL_TimerG_ClockConfig gMotor_PWM2ClockConfig = {
 static const DL_TimerG_PWMConfig gMotor_PWM2Config = {
     .pwmMode = DL_TIMER_PWM_MODE_EDGE_ALIGN_UP,
     .period = 3000,
-    .isTimerWithFourCC = false,
     .startTimer = DL_TIMER_START,
 };
 
@@ -302,9 +288,6 @@ SYSCONFIG_WEAK void SYSCFG_DL_Motor_PWM2_init(void) {
 
     DL_TimerG_initPWMMode(
         Motor_PWM2_INST, (DL_TimerG_PWMConfig *) &gMotor_PWM2Config);
-
-    // Set Counter control to the smallest CC index being used
-    DL_TimerG_setCounterControl(Motor_PWM2_INST,DL_TIMER_CZC_CCCTL0_ZCOND,DL_TIMER_CAC_CCCTL0_ACOND,DL_TIMER_CLC_CCCTL0_LCOND);
 
     DL_TimerG_setCaptureCompareOutCtl(Motor_PWM2_INST, DL_TIMER_CC_OCTL_INIT_VAL_LOW,
 		DL_TIMER_CC_OCTL_INV_OUT_DISABLED, DL_TIMER_CC_OCTL_SRC_FUNCVAL,
@@ -425,6 +408,12 @@ SYSCONFIG_WEAK void SYSCFG_DL_UART_DEBUG_init(void)
     DL_UART_Main_setOversampling(UART_DEBUG_INST, DL_UART_OVERSAMPLING_RATE_16X);
     DL_UART_Main_setBaudRateDivisor(UART_DEBUG_INST, UART_DEBUG_IBRD_32_MHZ_115200_BAUD, UART_DEBUG_FBRD_32_MHZ_115200_BAUD);
 
+
+    /* Configure Interrupts */
+    DL_UART_Main_enableInterrupt(UART_DEBUG_INST,
+                                 DL_UART_MAIN_INTERRUPT_RX);
+    /* Setting the Interrupt Priority */
+    NVIC_SetPriority(UART_DEBUG_INST_INT_IRQN, 1);
 
 
     DL_UART_Main_enable(UART_DEBUG_INST);

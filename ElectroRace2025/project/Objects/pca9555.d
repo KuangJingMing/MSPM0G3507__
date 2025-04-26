@@ -1,6 +1,7 @@
-./objects/pca9555.o: ..\application\drivers\pca9555.c \
-  ..\application\drivers\pca9555.h ..\project\ti_msp_dl_config.h \
-  ..\source\ti\devices\msp\msp.h ..\source\ti\devices\DeviceFamily.h \
+./objects/pca9555.o: ..\application\hardware\drivers\pca9555.c \
+  ..\application\hardware\drivers\pca9555.h \
+  ..\project\ti_msp_dl_config.h ..\source\ti\devices\msp\msp.h \
+  ..\source\ti\devices\DeviceFamily.h \
   ..\source\ti\devices\msp\m0p\mspm0g350x.h \
   ..\source\third_party\CMSIS\Core\Include\core_cm0plus.h \
   ..\source\ti\devices\msp\peripherals\hw_adc12.h \

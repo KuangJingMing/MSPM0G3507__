@@ -1,4 +1,4 @@
-./objects/w25qxx.o: ..\application\drivers\w25qxx.c \
+./objects/w25qxx.o: ..\application\hardware\drivers\w25qxx.c \
   ..\project\ti_msp_dl_config.h ..\source\ti\devices\msp\msp.h \
   ..\source\ti\devices\DeviceFamily.h \
   ..\source\ti\devices\msp\m0p\mspm0g350x.h \
@@ -56,4 +56,4 @@
   ..\source\ti\driverlib\dl_vref.h ..\source\ti\driverlib\dl_wwdt.h \
   ..\source\ti\driverlib\m0p\dl_interrupt.h \
   ..\source\ti\driverlib\m0p\dl_systick.h ..\application\utils\delay.h \
-  ..\application\drivers\w25qxx.h
+  ..\application\hardware\drivers\w25qxx.h

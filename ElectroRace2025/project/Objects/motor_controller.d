@@ -1,5 +1,6 @@
 ./objects/motor_controller.o: ..\application\app\motor_controller.c \
-  ..\application\app\motor_controller.h ..\application\drivers\encoder.h \
+  ..\application\app\motor_controller.h \
+  ..\application\hardware\drivers\encoder.h \
   ..\project\ti_msp_dl_config.h ..\source\ti\devices\msp\msp.h \
   ..\source\ti\devices\DeviceFamily.h \
   ..\source\ti\devices\msp\m0p\mspm0g350x.h \
@@ -64,14 +65,15 @@
   ..\kernel\freertos\Source\include\deprecated_definitions.h \
   ..\kernel\freertos\Source\portable\GCC\ARM_CM0\portmacro.h \
   ..\kernel\freertos\Source\include\mpu_wrappers.h \
-  ..\application\drivers\oled.h ..\application\fonts\oled_data.h \
-  ..\application\utils\delay.h ..\kernel\freertos\Source\include\task.h \
+  ..\application\hardware\drivers\oled.h \
+  ..\application\fonts\oled_data.h ..\application\utils\delay.h \
+  ..\kernel\freertos\Source\include\task.h \
   ..\kernel\freertos\Source\include\list.h \
   ..\kernel\freertos\Source\include\timers.h \
-  ..\application\drivers\icm20608.h \
-  ..\application\drivers\imu_data_type.h ..\application\math\sensor.h \
-  ..\application\utils\log_config.h ..\application\utils\log.h \
-  ..\application\hardware\bsp\uart_driver.h \
+  ..\application\hardware\drivers\icm20608.h \
+  ..\application\hardware\drivers\imu_data_type.h \
+  ..\application\math\sensor.h ..\application\utils\log_config.h \
+  ..\application\utils\log.h ..\application\hardware\bsp\uart_driver.h \
   ..\application\include\global_config.h \
   ..\application\app\fusion\FusionAhrs.h \
   ..\application\app\fusion\FusionMath.h

@@ -1,10 +1,17 @@
-#include "common_types.h"
+#include "common_include.h"
 #include "log.h"
 #include "FreeRTOS.h"
 #include "task.h"
 #include "timers.h"
 #include "encoder.h" // 假设这是你的编码器头文件
 
+
+void TestTask(void *arg) {
+	for ( ; ; ) {
+		serialplot_send_multi_data(1, 15.0f);
+		delay_ms(100);
+	}
+}
 
 int main(void)
 {
@@ -18,7 +25,7 @@ int main(void)
     // 设置初始电机速度
 //    Motor_Control(1200, 1200);
     // 创建显示任务
-    xTaskCreate(DisplayTask, "DisplayTask", configMINIMAL_STACK_SIZE * 4, NULL, tskIDLE_PRIORITY + 1, NULL);
+    xTaskCreate(TestTask, "TestTask", configMINIMAL_STACK_SIZE * 4, NULL, tskIDLE_PRIORITY + 1, NULL);
     // 启动 FreeRTOS 调度器
     vTaskStartScheduler();
 

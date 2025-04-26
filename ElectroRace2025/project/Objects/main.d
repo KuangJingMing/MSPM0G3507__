@@ -1,5 +1,5 @@
 ./objects/main.o: ..\application\user\main.c \
-  ..\application\include\common_types.h ..\project\ti_msp_dl_config.h \
+  ..\application\include\common_include.h ..\project\ti_msp_dl_config.h \
   ..\source\ti\devices\msp\msp.h ..\source\ti\devices\DeviceFamily.h \
   ..\source\ti\devices\msp\m0p\mspm0g350x.h \
   ..\source\third_party\CMSIS\Core\Include\core_cm0plus.h \
@@ -64,12 +64,18 @@
   ..\kernel\freertos\Source\portable\GCC\ARM_CM0\portmacro.h \
   ..\kernel\freertos\Source\include\mpu_wrappers.h \
   ..\kernel\freertos\Source\include\task.h \
-  ..\kernel\freertos\Source\include\list.h ..\application\drivers\oled.h \
+  ..\kernel\freertos\Source\include\list.h \
+  ..\application\hardware\drivers\oled.h \
   ..\application\fonts\oled_data.h ..\application\utils\delay.h \
-  ..\application\app\gray_detection.h ..\application\drivers\pca9555.h \
+  ..\application\app\gray_detection.h \
+  ..\application\hardware\drivers\pca9555.h \
   ..\application\hardware\bsp\software_i2c.h \
-  ..\application\drivers\motor.h ..\application\drivers\encoder.h \
+  ..\application\hardware\drivers\motor.h \
+  ..\application\hardware\drivers\encoder.h \
   ..\kernel\freertos\Source\include\timers.h \
-  ..\application\app\motor_controller.h ..\application\utils\log.h \
+  ..\application\app\motor_controller.h \
+  ..\application\app\communication\embedfire_protocol.h \
   ..\application\hardware\bsp\uart_driver.h \
-  ..\application\include\global_config.h
+  ..\application\include\global_config.h \
+  ..\application\app\communication\serialplot_protocol.h \
+  ..\application\utils\log.h

@@ -6,6 +6,7 @@
 ".\objects\motor_controller.o"
 ".\objects\embedfire_protocol_receive.o"
 ".\objects\embedfire_protocol_send.o"
+".\objects\serialplot_protocol.o"
 ".\objects\fusionahrs.o"
 ".\objects\fusioncompass.o"
 ".\objects\fusionoffset.o"

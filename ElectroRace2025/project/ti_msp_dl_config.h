@@ -41,7 +41,6 @@
 #define ti_msp_dl_config_h
 
 #define CONFIG_MSPM0G350X
-#define CONFIG_MSPM0G3505
 
 #if defined(__ti_version__) || defined(__TI_COMPILER_VERSION__)
 #define SYSCONFIG_WEAK __attribute__((weak))
@@ -142,7 +141,6 @@ extern "C" {
 
 /* Defines for UART_DEBUG */
 #define UART_DEBUG_INST                                                    UART0
-#define UART_DEBUG_INST_FREQUENCY                                       32000000
 #define UART_DEBUG_INST_IRQHandler                              UART0_IRQHandler
 #define UART_DEBUG_INST_INT_IRQN                                  UART0_INT_IRQn
 #define GPIO_UART_DEBUG_RX_PORT                                            GPIOA
@@ -210,6 +208,9 @@ extern "C" {
 /* Defines for CS: GPIOB.20 with pinCMx 48 on package pin 19 */
 #define PORTB_CS_PIN                                            (DL_GPIO_PIN_20)
 #define PORTB_CS_IOMUX                                           (IOMUX_PINCM48)
+/* Defines for W25Q64_CS: GPIOB.25 with pinCMx 56 on package pin 27 */
+#define PORTB_W25Q64_CS_PIN                                     (DL_GPIO_PIN_25)
+#define PORTB_W25Q64_CS_IOMUX                                    (IOMUX_PINCM56)
 /* Port definition for Pin Group ENCODER */
 #define ENCODER_PORT                                                     (GPIOB)
 
@@ -230,9 +231,6 @@ extern "C" {
 #define ENCODER_P2_IIDX                                      (DL_GPIO_IIDX_DIO5)
 #define ENCODER_P2_PIN                                           (DL_GPIO_PIN_5)
 #define ENCODER_P2_IOMUX                                         (IOMUX_PINCM18)
-/* Defines for W25Q64_CS: GPIOB.25 with pinCMx 56 on package pin 27 */
-#define PORTB_W25Q64_CS_PIN                                     (DL_GPIO_PIN_25)
-#define PORTB_W25Q64_CS_IOMUX                                    (IOMUX_PINCM56)
 
 /* clang-format on */
 
