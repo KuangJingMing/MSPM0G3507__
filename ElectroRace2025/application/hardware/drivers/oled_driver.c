@@ -4,7 +4,7 @@
  *  Created on: 2022年7月24日
  *      Author: Unicorn_Li
  */
-#include "oled.h"
+#include "oled_driver.h"
 #include "freertos.h"
 #include "task.h"
 
@@ -12,11 +12,9 @@ u8g2_t u8g2;
 
 uint8_t SPI_WriteByte(uint8_t Byte)
 {
-  while (DL_SPI_isBusy(SPI_0_INST))
-    ;
+  while (DL_SPI_isBusy(SPI_0_INST));
   DL_SPI_transmitData8(SPI_0_INST, Byte);
-  while (DL_SPI_isRXFIFOEmpty(SPI_0_INST))
-    ;
+  while (DL_SPI_isRXFIFOEmpty(SPI_0_INST));
   // while(RESET == spi_i2s_flag_get(SPIx, SPI_FLAG_RBNE));
   return DL_SPI_receiveData8(SPI_0_INST);
 }
@@ -69,13 +67,10 @@ uint8_t u8g2_gpio_and_delay_mspm0(U8X8_UNUSED u8x8_t *u8x8,
   return 1;
 }
 
-void vOLEDOpeningAnimation()
+void show_oled_opening_animation(void)
 {
-    u8g2_Init();
-
     float angle = 0.0f;
     uint32_t startTime = xTaskGetTickCount();
-
     do {
         u8g2_ClearBuffer(&u8g2);
 
@@ -152,25 +147,17 @@ void vOLEDOpeningAnimation()
             u8g2_DrawPixel(&u8g2, 5+i, y);
             u8g2_DrawPixel(&u8g2, 5+i, 63); //下沿也补齐
         }
-
         u8g2_SendBuffer(&u8g2);
-
         angle += 0.2f;
         vTaskDelay(pdMS_TO_TICKS(50)); // 20FPS
-
-    } while((xTaskGetTickCount() - startTime) * portTICK_PERIOD_MS < 3000);
-
+    } while((xTaskGetTickCount() - startTime) * portTICK_PERIOD_MS < 2000);
     u8g2_ClearBuffer(&u8g2);
     u8g2_SendBuffer(&u8g2);
 }
 
 void u8g2_Init(void)
 {
-
   u8g2_Setup_ssd1306_128x64_noname_f(&u8g2, U8G2_R0, u8x8_byte_3wire_hw_spi, u8g2_gpio_and_delay_mspm0);
-
   u8g2_InitDisplay(&u8g2);     // 根据所选的芯片进行初始化工作，初始化完成后，显示器处于关闭状态
-  u8g2_SetPowerSave(&u8g2, 0); // 打开显示器\
-	
-
+  u8g2_SetPowerSave(&u8g2, 0); // 打开显示器
 }

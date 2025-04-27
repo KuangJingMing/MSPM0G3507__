@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>__MSPM0G3507__</Define>
               <Undefine></Undefine>
-              <IncludePath>..\project;..\source;..\source\third_party\CMSIS\Core\Include;..\kernel\freertos\Source\include;..\kernel\freertos\Source\portable\GCC\ARM_CM0;..\kernel\freertos\builds\LP_MSPM0G3507\release;..\application\app;..\application\app\fusion;..\application\app\communication;..\application\hardware\drivers;..\application\hardware\bsp;..\application\fonts;..\application\include;..\application\math;..\application\user;..\application\utils;..\source\third_party\u8g2</IncludePath>
+              <IncludePath>..\project;..\source;..\source\third_party\CMSIS\Core\Include;..\kernel\freertos\Source\include;..\kernel\freertos\Source\portable\GCC\ARM_CM0;..\kernel\freertos\builds\LP_MSPM0G3507\release;..\application\app;..\application\app\fusion;..\application\app\communication;..\application\hardware\drivers;..\application\hardware\bsp;..\application\include;..\application\math;..\application\user;..\application\utils;..\source\third_party\u8g2</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -430,9 +430,9 @@
           <GroupName>app</GroupName>
           <Files>
             <File>
-              <FileName>gray_detection.c</FileName>
+              <FileName>button_user.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\app\gray_detection.c</FilePath>
+              <FilePath>..\application\app\button_user.c</FilePath>
             </File>
             <File>
               <FileName>motor_user.c</FileName>
@@ -440,9 +440,14 @@
               <FilePath>..\application\app\motor_user.c</FilePath>
             </File>
             <File>
-              <FileName>button_user.c</FileName>
+              <FileName>gray_detection.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\app\button_user.c</FilePath>
+              <FilePath>..\application\app\gray_detection.c</FilePath>
+            </File>
+            <File>
+              <FileName>oled_menu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\app\oled_menu.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -520,11 +525,6 @@
               <FilePath>..\application\hardware\drivers\icm20608.c</FilePath>
             </File>
             <File>
-              <FileName>oled.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\hardware\drivers\oled.c</FilePath>
-            </File>
-            <File>
               <FileName>pca9555.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\application\hardware\drivers\pca9555.c</FilePath>
@@ -548,6 +548,11 @@
               <FileName>multi_button.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\application\hardware\drivers\multi_button.c</FilePath>
+            </File>
+            <File>
+              <FileName>oled_driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\hardware\drivers\oled_driver.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -593,16 +598,6 @@
               <FileName>fast_math.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\application\math\fast_math.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>fonts</GroupName>
-          <Files>
-            <File>
-              <FileName>oled_data.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\fonts\oled_data.c</FilePath>
             </File>
           </Files>
         </Group>

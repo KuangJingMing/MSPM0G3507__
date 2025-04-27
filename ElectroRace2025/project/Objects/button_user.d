@@ -69,7 +69,4 @@
   ..\kernel\freertos\Source\include\list.h \
   ..\kernel\freertos\Source\include\timers.h ..\application\utils\log.h \
   ..\application\hardware\bsp\uart_driver.h \
-  ..\application\include\global_config.h \
-  ..\application\hardware\drivers\oled.h ..\application\utils\delay.h \
-  ..\application\hardware\bsp\spi.h ..\source\third_party\u8g2\u8g2.h \
-  ..\source\third_party\u8g2\u8x8.h
+  ..\application\include\global_config.h

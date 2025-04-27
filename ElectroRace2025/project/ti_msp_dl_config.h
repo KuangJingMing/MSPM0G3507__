@@ -41,6 +41,7 @@
 #define ti_msp_dl_config_h
 
 #define CONFIG_MSPM0G350X
+#define CONFIG_MSPM0G3507
 
 #if defined(__ti_version__) || defined(__TI_COMPILER_VERSION__)
 #define SYSCONFIG_WEAK __attribute__((weak))
@@ -141,6 +142,7 @@ extern "C" {
 
 /* Defines for UART_DEBUG */
 #define UART_DEBUG_INST                                                    UART0
+#define UART_DEBUG_INST_FREQUENCY                                       32000000
 #define UART_DEBUG_INST_IRQHandler                              UART0_IRQHandler
 #define UART_DEBUG_INST_INT_IRQN                                  UART0_INT_IRQn
 #define GPIO_UART_DEBUG_RX_PORT                                            GPIOA
@@ -225,22 +227,24 @@ extern "C" {
 #define ENCODER_P2_IIDX                                      (DL_GPIO_IIDX_DIO5)
 #define ENCODER_P2_PIN                                           (DL_GPIO_PIN_5)
 #define ENCODER_P2_IOMUX                                         (IOMUX_PINCM18)
-/* Defines for PIN_0: GPIOA.18 with pinCMx 40 on package pin 11 */
-#define GPIO_KEY_PIN_0_PORT                                              (GPIOA)
-#define GPIO_KEY_PIN_0_PIN                                      (DL_GPIO_PIN_18)
-#define GPIO_KEY_PIN_0_IOMUX                                     (IOMUX_PINCM40)
-/* Defines for PIN_1: GPIOB.21 with pinCMx 49 on package pin 20 */
-#define GPIO_KEY_PIN_1_PORT                                              (GPIOB)
-#define GPIO_KEY_PIN_1_PIN                                      (DL_GPIO_PIN_21)
-#define GPIO_KEY_PIN_1_IOMUX                                     (IOMUX_PINCM49)
-/* Defines for PIN_2: GPIOB.23 with pinCMx 51 on package pin 22 */
-#define GPIO_KEY_PIN_2_PORT                                              (GPIOB)
-#define GPIO_KEY_PIN_2_PIN                                      (DL_GPIO_PIN_23)
-#define GPIO_KEY_PIN_2_IOMUX                                     (IOMUX_PINCM51)
-/* Defines for PIN_3: GPIOB.24 with pinCMx 52 on package pin 23 */
-#define GPIO_KEY_PIN_3_PORT                                              (GPIOB)
-#define GPIO_KEY_PIN_3_PIN                                      (DL_GPIO_PIN_24)
-#define GPIO_KEY_PIN_3_IOMUX                                     (IOMUX_PINCM52)
+/* Port definition for Pin Group GPIO_KEY */
+#define GPIO_KEY_PORT                                                    (GPIOB)
+
+/* Defines for PIN_0: GPIOB.12 with pinCMx 29 on package pin 64 */
+#define GPIO_KEY_PIN_0_PIN                                      (DL_GPIO_PIN_12)
+#define GPIO_KEY_PIN_0_IOMUX                                     (IOMUX_PINCM29)
+/* Defines for PIN_1: GPIOB.8 with pinCMx 25 on package pin 60 */
+#define GPIO_KEY_PIN_1_PIN                                       (DL_GPIO_PIN_8)
+#define GPIO_KEY_PIN_1_IOMUX                                     (IOMUX_PINCM25)
+/* Defines for PIN_2: GPIOB.9 with pinCMx 26 on package pin 61 */
+#define GPIO_KEY_PIN_2_PIN                                       (DL_GPIO_PIN_9)
+#define GPIO_KEY_PIN_2_IOMUX                                     (IOMUX_PINCM26)
+/* Defines for PIN_3: GPIOB.10 with pinCMx 27 on package pin 62 */
+#define GPIO_KEY_PIN_3_PIN                                      (DL_GPIO_PIN_10)
+#define GPIO_KEY_PIN_3_IOMUX                                     (IOMUX_PINCM27)
+/* Defines for PIN_4: GPIOB.11 with pinCMx 28 on package pin 63 */
+#define GPIO_KEY_PIN_4_PIN                                      (DL_GPIO_PIN_11)
+#define GPIO_KEY_PIN_4_IOMUX                                     (IOMUX_PINCM28)
 
 /* clang-format on */
 

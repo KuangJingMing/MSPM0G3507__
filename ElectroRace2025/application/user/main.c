@@ -1,29 +1,20 @@
 #include "common_include.h"
 #include "log_config.h"
 #include "log.h"
-#include "button_user.h"
 
-void vOLEDTask(void *pvParameters)
-{
-	user_button_init();
-	button_timer_init();
-	button_timer_start();
-	vOLEDOpeningAnimation();
-	for ( ; ; ) {
-		delay_ms(1);
-	}
+void init_task(void *pvParameters) {
+	create_oled_menu();
+	vTaskDelete(NULL);
 }
 
 int main(void)
 {
-    // 系统和硬件初始化
-    SYSCFG_DL_init();
-    // 创建显示任务
-		xTaskCreate(vOLEDTask, "OLED", 512, NULL, tskIDLE_PRIORITY+1, NULL);
-    // 启动 FreeRTOS 调度器
-    vTaskStartScheduler();
-    while (1) {
-    }
+    SYSCFG_DL_init(); // 系统和硬件初始化
+		xTaskCreate(init_task, "init_task", 512, NULL, tskIDLE_PRIORITY + 2, NULL);
+		vTaskStartScheduler();
 
+    while (1) {
+    
+		}
     return 0;
 }

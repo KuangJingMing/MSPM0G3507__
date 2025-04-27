@@ -15,7 +15,7 @@
 #define OLED_CS_Set()  DL_GPIO_setPins(OLED_SPI_PORT, OLED_SPI_CS_OLED_PIN)
 
 void u8g2_Init(void);
-void vOLEDOpeningAnimation(void);
+void show_oled_opening_animation(void);
 
 extern u8g2_t u8g2;
 
