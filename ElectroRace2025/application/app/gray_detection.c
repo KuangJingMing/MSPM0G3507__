@@ -15,7 +15,7 @@ static SoftwareI2C pca9555_i2c = {
 	  .timeout_us = 1000          // 超时时间
 };
 
-uint8_t gray_datas[12] = {0};
+static uint8_t gray_datas[12] = {0};
 
 void gray_detection_init(void) {
 	SoftwareI2C_Init(&pca9555_i2c);

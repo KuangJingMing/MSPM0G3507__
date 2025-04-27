@@ -135,7 +135,7 @@ Section Cross References
     gray_detection.o(.text.gray_read_data) refers to pca9555.o(.text.pca9555_read_bit12) for pca9555_read_bit12
     gray_detection.o(.text.gray_read_data) refers to log.o(.text.LOG_I) for LOG_I
     gray_detection.o(.text.gray_read_data) refers to gray_detection.o(.data.pca9555_i2c) for [Anonymous Symbol]
-    gray_detection.o(.text.gray_read_data) refers to gray_detection.o(.bss.gray_datas) for gray_datas
+    gray_detection.o(.text.gray_read_data) refers to gray_detection.o(.bss.gray_datas) for [Anonymous Symbol]
     gray_detection.o(.ARM.exidx.text.gray_read_data) refers to gray_detection.o(.text.gray_read_data) for [Anonymous Symbol]
     oled_menu.o(.text.select_next) refers to oled_menu.o(.bss.current_index) for [Anonymous Symbol]
     oled_menu.o(.text.select_next) refers to oled_menu.o(.bss.window_start_index) for [Anonymous Symbol]
@@ -2652,8 +2652,8 @@ Removing Unused input sections from the image.
     Removing gray_detection.o(.ARM.exidx.text.gray_detection_init), (8 bytes).
     Removing gray_detection.o(.text.gray_read_data), (160 bytes).
     Removing gray_detection.o(.ARM.exidx.text.gray_read_data), (8 bytes).
-    Removing gray_detection.o(.bss.gray_datas), (12 bytes).
     Removing gray_detection.o(.data.pca9555_i2c), (32 bytes).
+    Removing gray_detection.o(.bss.gray_datas), (12 bytes).
     Removing oled_menu.o(.text), (0 bytes).
     Removing oled_menu.o(.text.select_next), (60 bytes).
     Removing oled_menu.o(.ARM.exidx.text.select_next), (8 bytes).

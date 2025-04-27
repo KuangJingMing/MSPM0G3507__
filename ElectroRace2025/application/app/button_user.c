@@ -8,8 +8,10 @@
 
 #include "log.h"
 
-struct Button btn1, btn2, btn3, btn4, btn5;
 #define BUTTON_SCAN_PERIOD_MS 5
+
+struct Button btn1, btn2, btn3, btn4, btn5;
+
 static TimerHandle_t xButtonTimer = NULL; // 软件定时器句柄
 
 uint8_t read_button_GPIO(uint8_t button_id) {

@@ -81,5 +81,4 @@
   ..\application\app\communication\serialplot_protocol.h \
   ..\application\app\button_user.h \
   ..\application\hardware\drivers\multi_button.h \
-  ..\application\app\oled_menu.h ..\application\utils\log_config.h \
-  ..\application\utils\log.h
+  ..\application\app\oled_menu.h ..\application\utils\log.h
