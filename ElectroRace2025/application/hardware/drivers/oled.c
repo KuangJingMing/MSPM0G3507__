@@ -69,11 +69,6 @@ uint8_t u8g2_gpio_and_delay_mspm0(U8X8_UNUSED u8x8_t *u8x8,
   return 1;
 }
 
-#include "u8g2.h"
-// #include <math.h>
-#include "FreeRTOS.h"
-#include "task.h"
-
 void vOLEDOpeningAnimation()
 {
     u8g2_Init();

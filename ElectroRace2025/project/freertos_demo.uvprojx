@@ -435,9 +435,14 @@
               <FilePath>..\application\app\gray_detection.c</FilePath>
             </File>
             <File>
-              <FileName>motor_controller.c</FileName>
+              <FileName>motor_user.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\app\motor_controller.c</FilePath>
+              <FilePath>..\application\app\motor_user.c</FilePath>
+            </File>
+            <File>
+              <FileName>button_user.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\app\button_user.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -538,6 +543,11 @@
               <FileName>motor_tb6612.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\application\hardware\drivers\motor_tb6612.c</FilePath>
+            </File>
+            <File>
+              <FileName>multi_button.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\hardware\drivers\multi_button.c</FilePath>
             </File>
           </Files>
         </Group>

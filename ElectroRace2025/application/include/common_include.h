@@ -11,7 +11,7 @@
 #include "motor_hardware.h"
 #include "encoder.h"
 #include "timers.h"
-#include "motor_controller.h"
+#include "motor_user.h"
 #include "embedfire_protocol.h"
 #include "serialplot_protocol.h"
 

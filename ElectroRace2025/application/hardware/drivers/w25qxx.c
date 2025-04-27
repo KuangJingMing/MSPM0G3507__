@@ -5,8 +5,8 @@
 
 #define spi_miss_up_wait_cnt 5000//500
 
-#define W25Q64_CS_1   DL_GPIO_setPins(PORTB_PORT,   PORTB_W25Q64_CS_PIN)    //PB25
-#define W25Q64_CS_0   DL_GPIO_clearPins(PORTB_PORT,   PORTB_W25Q64_CS_PIN)
+#define W25Q64_CS_1   DL_GPIO_setPins(W25Q64_SPI_PORT,   W25Q64_SPI_CS_W25Q64_PIN)    //PB25
+#define W25Q64_CS_0   DL_GPIO_clearPins(W25Q64_SPI_PORT,   W25Q64_SPI_CS_W25Q64_PIN)
 
 uint16_t w25qxx_id = 0;
 void W25QXX_PowerDown(void);

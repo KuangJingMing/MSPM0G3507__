@@ -1,9 +1,12 @@
 #include "common_include.h"
 #include "log_config.h"
 #include "log.h"
+#include "button_user.h"
 
 void vOLEDTask(void *pvParameters)
 {
+	button_timer_init();
+	button_timer_start();
 	vOLEDOpeningAnimation();
 	for ( ; ; ) {
 		delay_ms(1);

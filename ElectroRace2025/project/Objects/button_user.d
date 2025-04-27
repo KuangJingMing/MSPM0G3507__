@@ -1,6 +1,8 @@
-./objects/main.o: ..\application\user\main.c \
-  ..\application\include\common_include.h ..\project\ti_msp_dl_config.h \
-  ..\source\ti\devices\msp\msp.h ..\source\ti\devices\DeviceFamily.h \
+./objects/button_user.o: ..\application\app\button_user.c \
+  ..\application\app\button_user.h \
+  ..\application\hardware\drivers\multi_button.h \
+  ..\project\ti_msp_dl_config.h ..\source\ti\devices\msp\msp.h \
+  ..\source\ti\devices\DeviceFamily.h \
   ..\source\ti\devices\msp\m0p\mspm0g350x.h \
   ..\source\third_party\CMSIS\Core\Include\core_cm0plus.h \
   ..\source\ti\devices\msp\peripherals\hw_adc12.h \
@@ -65,18 +67,6 @@
   ..\kernel\freertos\Source\include\mpu_wrappers.h \
   ..\kernel\freertos\Source\include\task.h \
   ..\kernel\freertos\Source\include\list.h \
-  ..\application\hardware\drivers\oled.h ..\application\utils\delay.h \
-  ..\application\hardware\bsp\spi.h ..\source\third_party\u8g2\u8g2.h \
-  ..\source\third_party\u8g2\u8x8.h ..\application\app\gray_detection.h \
-  ..\application\hardware\drivers\pca9555.h \
-  ..\application\hardware\bsp\software_i2c.h \
-  ..\application\hardware\drivers\motor_hardware.h \
-  ..\application\hardware\drivers\encoder.h \
-  ..\kernel\freertos\Source\include\timers.h \
-  ..\application\app\motor_user.h \
-  ..\application\app\communication\embedfire_protocol.h \
+  ..\kernel\freertos\Source\include\timers.h ..\application\utils\log.h \
   ..\application\hardware\bsp\uart_driver.h \
-  ..\application\include\global_config.h \
-  ..\application\app\communication\serialplot_protocol.h \
-  ..\application\utils\log_config.h ..\application\utils\log.h \
-  ..\application\app\button_user.h
+  ..\application\include\global_config.h
