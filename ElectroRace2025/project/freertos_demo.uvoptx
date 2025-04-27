@@ -168,17 +168,12 @@
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>gDelayCounter</ItemText>
+          <ItemText>window_start_index</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>fault</ItemText>
-        </Ww>
-        <Ww>
-          <count>2</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>DL_GPIO_readPins</ItemText>
+          <ItemText>current_index</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>

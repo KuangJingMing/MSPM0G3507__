@@ -8,7 +8,7 @@
 
 #include "log.h"
 
-#define BUTTON_SCAN_PERIOD_MS 5
+#define BUTTON_SCAN_PERIOD_MS 30
 
 struct Button btn1, btn2, btn3, btn4, btn5;
 
