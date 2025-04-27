@@ -744,6 +744,16 @@
               <FileType>1</FileType>
               <FilePath>..\source\third_party\u8g2\csrc\u8x8_capture.c</FilePath>
             </File>
+            <File>
+              <FileName>u8g2_fonts.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\source\third_party\u8g2\csrc\u8g2_fonts.c</FilePath>
+            </File>
+            <File>
+              <FileName>u8x8_fonts.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\source\third_party\u8g2\csrc\u8x8_fonts.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

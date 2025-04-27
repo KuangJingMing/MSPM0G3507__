@@ -65,9 +65,9 @@
   ..\kernel\freertos\Source\include\mpu_wrappers.h \
   ..\kernel\freertos\Source\include\task.h \
   ..\kernel\freertos\Source\include\list.h \
-  ..\application\hardware\drivers\oled.h \
-  ..\application\fonts\oled_data.h ..\application\utils\delay.h \
-  ..\application\app\gray_detection.h \
+  ..\application\hardware\drivers\oled.h ..\application\utils\delay.h \
+  ..\application\hardware\bsp\spi.h ..\source\third_party\u8g2\u8g2.h \
+  ..\source\third_party\u8g2\u8x8.h ..\application\app\gray_detection.h \
   ..\application\hardware\drivers\pca9555.h \
   ..\application\hardware\bsp\software_i2c.h \
   ..\application\hardware\drivers\motor_hardware.h \
