@@ -5,6 +5,7 @@
 
 void vOLEDTask(void *pvParameters)
 {
+	user_button_init();
 	button_timer_init();
 	button_timer_start();
 	vOLEDOpeningAnimation();

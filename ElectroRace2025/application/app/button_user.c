@@ -7,6 +7,7 @@
 #include "timers.h"
 
 #include "log.h"
+#include "oled.h"
 
 struct Button btn1, btn2, btn3, btn4;
 #define BUTTON_SCAN_PERIOD_MS 5
@@ -18,12 +19,6 @@ typedef enum {
 	BUTTON_ID2,
 	BUTTON_ID3,
 } BUTTON_ID;
-
-
-#include "oled.h"
-
-// 假定全局变量
-extern u8g2_t u8g2;
 
 void btn_single_click_callback(void* btn)
 {
@@ -51,16 +46,16 @@ uint8_t read_button_GPIO(uint8_t button_id) {
 	switch(button_id)
 	{
 		case BUTTON_ID0:
-			return DL_GPIO_readPins(GPIO_KEY_PIN_0_PORT, GPIO_KEY_PIN_0_PIN);
+			return DL_GPIO_readPins(GPIO_KEY_PIN_0_PORT, GPIO_KEY_PIN_0_PIN) == 0 ? 0 : 1;
 			break;
 		case BUTTON_ID1:
-			return DL_GPIO_readPins(GPIO_KEY_PIN_1_PORT, GPIO_KEY_PIN_1_PIN);
+			return DL_GPIO_readPins(GPIO_KEY_PIN_1_PORT, GPIO_KEY_PIN_1_PIN) == 0 ? 0 : 1;
 			break;
 		case BUTTON_ID2:
-			return DL_GPIO_readPins(GPIO_KEY_PIN_2_PORT, GPIO_KEY_PIN_2_PIN);
+			return DL_GPIO_readPins(GPIO_KEY_PIN_2_PORT, GPIO_KEY_PIN_2_PIN) == 0 ? 0 : 1;
 			break;
 		case BUTTON_ID3:
-			return DL_GPIO_readPins(GPIO_KEY_PIN_3_PORT, GPIO_KEY_PIN_3_PIN);
+			return DL_GPIO_readPins(GPIO_KEY_PIN_3_PORT, GPIO_KEY_PIN_3_PIN) == 0 ? 0 : 1;
 			break;
 		default:
 			return 0;
