@@ -180,6 +180,12 @@ extern "C" {
 
 
 
+/* Port definition for Pin Group W25Q64_SPI */
+#define W25Q64_SPI_PORT                                                  (GPIOB)
+
+/* Defines for CS_W25Q64: GPIOB.25 with pinCMx 56 on package pin 27 */
+#define W25Q64_SPI_CS_W25Q64_PIN                                (DL_GPIO_PIN_25)
+#define W25Q64_SPI_CS_W25Q64_IOMUX                               (IOMUX_PINCM56)
 /* Port definition for Pin Group PCA9555 */
 #define PCA9555_PORT                                                     (GPIOA)
 
@@ -237,12 +243,6 @@ extern "C" {
 #define GPIO_KEY_PIN_3_PORT                                              (GPIOB)
 #define GPIO_KEY_PIN_3_PIN                                      (DL_GPIO_PIN_24)
 #define GPIO_KEY_PIN_3_IOMUX                                     (IOMUX_PINCM52)
-/* Port definition for Pin Group W25Q64_SPI */
-#define W25Q64_SPI_PORT                                                  (GPIOB)
-
-/* Defines for CS_W25Q64: GPIOB.25 with pinCMx 56 on package pin 27 */
-#define W25Q64_SPI_CS_W25Q64_PIN                                (DL_GPIO_PIN_25)
-#define W25Q64_SPI_CS_W25Q64_IOMUX                               (IOMUX_PINCM56)
 
 /* clang-format on */
 

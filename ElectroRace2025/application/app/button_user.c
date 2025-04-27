@@ -19,18 +19,32 @@ typedef enum {
 	BUTTON_ID3,
 } BUTTON_ID;
 
+
+#include "oled.h"
+
+// 假定全局变量
+extern u8g2_t u8g2;
+
 void btn_single_click_callback(void* btn)
 {
     struct Button* button = (struct Button*) btn;
+    char msg[2] = "1";  // 用于显示单字符
     if (button == &btn1) {
-			log_i("hello 1");
+        msg[0] = '1';
     } else if (button == &btn2) {
-			log_i("hello 2");
+        msg[0] = '2';
     } else if (button == &btn3) {
-			log_i("hello 3");
+        msg[0] = '3';
     } else if (button == &btn4) {
-			log_i("hello 4");
+        msg[0] = '4';
+    } else {
+        return;
     }
+
+    u8g2_ClearBuffer(&u8g2);
+    u8g2_SetFont(&u8g2, u8g2_font_ncenB24_tr);  // 选用中号字体
+    u8g2_DrawStr(&u8g2, 40, 32, msg);           // 居中或适合你屏幕偏移 
+    u8g2_SendBuffer(&u8g2);
 }
 
 uint8_t read_button_GPIO(uint8_t button_id) {
