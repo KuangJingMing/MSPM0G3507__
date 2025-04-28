@@ -7,71 +7,173 @@
 #include "oled_driver.h"
 #include "freertos.h"
 #include "task.h"
-#include "software_i2c.h"
 
 u8g2_t u8g2;
 
-uint8_t SPI_WriteByte(uint8_t Byte)
+#ifdef OLED_DRIVER_MODE_SPI
+
+// SPI 写字节函数
+uint8_t spi_write_byte(uint8_t byte)
 {
-  while (DL_SPI_isBusy(SPI_0_INST));
-  DL_SPI_transmitData8(SPI_0_INST, Byte);
-  while (DL_SPI_isRXFIFOEmpty(SPI_0_INST));
-  // while(RESET == spi_i2s_flag_get(SPIx, SPI_FLAG_RBNE));
-  return DL_SPI_receiveData8(SPI_0_INST);
+    // 等待 SPI 传输完成 (如果你使用的是阻塞模式的 transmitData8，这可能不需要)
+    while (DL_SPI_isBusy(SPI_0_INST));
+    DL_SPI_transmitData8(SPI_0_INST, byte);
+    // 等待接收 FIFO 非空，表示数据已接收 (对于纯发送可能不需要接收数据)
+    while(DL_SPI_isRXFIFOEmpty(SPI_0_INST));
+    // 返回接收到的数据 (如果不需要接收，可以返回 dummy 值)
+    return DL_SPI_receiveData8(SPI_0_INST); // 如果不需要接收，可以注释掉
+    return 0; // 返回 dummy 值
 }
 
-void oled_spi_init(void)
+// SPI 模式的 OLED 初始化
+void oled_spi_hardware_init(void)
 {
-  OLED_RST_Clr();
-  delay_ms(10);
-  OLED_RST_Set();
-  delay_ms(10);
-  OLED_CS_Set();
+    // 初始化 SPI 外设 (假设已经在其他地方完成)
+
+    // 复位 OLED
+    OLED_RST_Clr();
+    // 使用 FreeRTOS 延时，避免阻塞整个系统
+    vTaskDelay(pdMS_TO_TICKS(10));
+    OLED_RST_Set();
+    vTaskDelay(pdMS_TO_TICKS(10));
+
+    // 拉高 CS (根据硬件连接和时序要求调整)
+    OLED_CS_Set();
 }
 
-void oled_i2c_init(void)
+// U8g2 SPI 字节发送回调函数
+uint8_t u8x8_byte_3wire_hw_spi(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr)
 {
-    // 初始化 SCL 引脚 (GPIO_SPI_0_IOMUX_SCLK 对应的 GPIO 引脚) 为推挽输出
-    // SysConfig 中使用 DL_GPIO_initDigitalOutput(iomux_address) 初始化数字输出
-    // 我们使用 IOMUX 地址来确保使用的是正确的引脚
-    DL_GPIO_initDigitalOutput(GPIO_SPI_0_IOMUX_SCLK);
+    uint8_t *data_ptr = (uint8_t *)arg_ptr;
 
-    // 初始化 SDA 引脚 (GPIO_SPI_0_IOMUX_PICO 对应的 GPIO 引脚) 为推挽输出
-    DL_GPIO_initDigitalOutput(GPIO_SPI_0_IOMUX_PICO);
+    switch (msg)
+    {
+    case U8X8_MSG_BYTE_SEND:
+        // 通过 SPI 发送 arg_int 个字节数据
+        for (int i = 0; i < arg_int; i++)
+        {
+            spi_write_byte(*(data_ptr + i));
+        }
+        break;
 
-    // 设置 SCL 和 SDA 初始状态为高电平 (I2C空闲状态)
-    // SysConfig 中使用 DL_GPIO_setPins(port, pins) 来设置引脚高电平
-    DL_GPIO_setPins(GPIO_SPI_0_SCLK_PORT, GPIO_SPI_0_SCLK_PIN);
-    DL_GPIO_setPins(GPIO_SPI_0_PICO_PORT, GPIO_SPI_0_PICO_PIN);
+    case U8X8_MSG_BYTE_SET_DC:
+        // 设置 DC 引脚 (数据/命令)
+        if (arg_int)
+            OLED_DC_Set(); // 数据模式
+        else
+            OLED_DC_Clr(); // 命令模式
+        break;
 
-    // 使能 SCL 和 SDA 引脚输出
-    // SysConfig 中使用 DL_GPIO_enableOutput(port, pins) 来使能输出
-    DL_GPIO_enableOutput(GPIO_SPI_0_SCLK_PORT, GPIO_SPI_0_SCLK_PIN);
-    DL_GPIO_enableOutput(GPIO_SPI_0_PICO_PORT, GPIO_SPI_0_PICO_PIN);
+    case U8X8_MSG_BYTE_INIT:
+        // 初始化 SPI 硬件
+        oled_spi_hardware_init();
+        break;
 
-    // 您之前的代码中也有设置和使能输出的操作，这里只是参照SysConfig的风格重新组织
-    // 原来的代码中 DL_GPIO_initDigitalOutputFeatures(..., DL_GPIO_HIZ_ENABLE)
-    // 可能导致引脚行为不确定，去掉features版本直接使用DL_GPIO_initDigitalOutput
-    // 是更明确的推挽输出初始化方式，参照SysConfig生成代码。
+    case U8X8_MSG_BYTE_START_TRANSFER:
+        // 拉低 CS，开始传输
+        OLED_CS_Clr();
+        break;
+
+    case U8X8_MSG_BYTE_END_TRANSFER:
+        // 拉高 CS，结束传输
+        OLED_CS_Set();
+        break;
+
+    default:
+        return 0; // 未知消息
+    }
+    return 1; // 消息处理成功
 }
 
+// U8g2 SPI GPIO 和延时回调函数
+// 如果所有 GPIO 控制都在 u8x8_byte_3wire_hw_spi 中处理，这个函数可能只需要处理延时
+uint8_t u8g2_gpio_and_delay_mspm0(U8X8_UNUSED u8x8_t *u8x8,
+                                  U8X8_UNUSED uint8_t msg, U8X8_UNUSED uint8_t arg_int,
+                                  U8X8_UNUSED void *arg_ptr)
+{
+    switch (msg)
+    {
+        case U8X8_MSG_DELAY_MILLI:
+            // 毫秒延时，使用 FreeRTOS 的 vTaskDelay
+            vTaskDelay(pdMS_TO_TICKS(arg_int));
+            break;
+        case U8X8_MSG_DELAY_I2C:
+            // 微秒延时，使用你的 delay_us 函数
+            // 注意：在 FreeRTOS 中使用短时阻塞延时需要谨慎
+            delay_us(arg_int <= 2 ? 5 : 1);
+            break;
+        // 其他延时消息...
+
+        // 如果 SPI 模式有独立的 GPIO 控制消息，可以在这里处理
+        // 例如复位引脚
+        case U8X8_MSG_GPIO_RESET:
+             if (arg_int == 0)
+                OLED_RST_Clr();
+             else
+                OLED_RST_Set();
+            break;
+
+        default:
+            return 0; // 未知消息
+    }
+    return 1; // 消息处理成功
+}
+
+
+#endif // OLED_DRIVER_MODE_SPI
+
+#ifdef OLED_DRIVER_MODE_I2C
+
+// I2C 模式的 OLED 初始化 (GPIO 配置)
+void oled_i2c_hardware_init(void)
+{
+		DL_GPIO_initDigitalOutputFeatures(
+				OLED_I2C_SCL_IOMUX,          // 引脚 IOMUX 定义，复用 SPI 的 SCLK
+				DL_GPIO_INVERSION_DISABLE,      // 不反转
+				DL_GPIO_RESISTOR_PULL_UP,          // （I2C 通常需要外部上拉电阻）
+				DL_GPIO_DRIVE_STRENGTH_LOW,     // 驱动强度设为低（可根据硬件需求调整）
+				DL_GPIO_HIZ_ENABLE              // 启用高阻态，符合 I2C 开漏模式
+		);
+
+		// 配置 SDA 引脚 (复用 SPI 的 PICO 引脚)
+		DL_GPIO_initDigitalOutputFeatures(
+				OLED_I2C_SDA_IOMUX,          // 引脚 IOMUX 定义，复用 SPI 的 PICO
+				DL_GPIO_INVERSION_DISABLE,      // 不反转
+				DL_GPIO_RESISTOR_PULL_UP,          // （I2C 通常需要外部上拉电阻）
+				DL_GPIO_DRIVE_STRENGTH_LOW,     // 驱动强度设为低（可根据硬件需求调整）
+				DL_GPIO_HIZ_ENABLE              // 启用高阻态，符合 I2C 开漏模式
+		);
+
+    // 设置初始电平为高，以便模拟 I2C 空闲状态
+    DL_GPIO_setPins(OLED_I2C_SCL_PORT, OLED_I2C_SCL_PIN);
+    DL_GPIO_setPins(OLED_I2C_SDA_PORT, OLED_I2C_SDA_PIN);
+
+    // 启用输出功能
+    DL_GPIO_enableOutput(OLED_I2C_SCL_PORT, OLED_I2C_SCL_PIN);
+    DL_GPIO_enableOutput(OLED_I2C_SDA_PORT, OLED_I2C_SDA_PIN);
+}
+
+// U8g2 I2C GPIO 和延时回调函数
 uint8_t u8x8_gpio_and_delay_mspm0(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr)
 {
     switch (msg)
     {
     // 初始化GPIO
     case U8X8_MSG_GPIO_AND_DELAY_INIT:
-				oled_i2c_init();
+        // 初始化 I2C 相关的 GPIO
+        oled_i2c_hardware_init();
         break;
 
     // 毫秒延时
     case U8X8_MSG_DELAY_MILLI:
-				delay_ms(arg_int);
+        // 使用 FreeRTOS 的 vTaskDelay 进行毫秒延时
+        vTaskDelay(pdMS_TO_TICKS(arg_int));
         break;
 
-    // 10微秒延时
+    // I2C 总线延时 (通常用于时钟拉伸或数据稳定延时)
     case U8X8_MSG_DELAY_I2C:
-        delay_us(arg_int <= 2 ? 5 : 1);
+        // 使用你的微秒延时函数
+        delay_us(arg_int <= 2 ? 5 : 1); // 确保这里的延时足够长以满足 I2C 时序要求
         break;
 
     // I2C时钟信号控制
@@ -89,149 +191,42 @@ uint8_t u8x8_gpio_and_delay_mspm0(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, vo
         else
             OLED_SDA_Set();
         break;
-				
+
     // 以下是UI控制按钮，通常不需要实现
     case U8X8_MSG_GPIO_MENU_SELECT:
     case U8X8_MSG_GPIO_MENU_NEXT:
     case U8X8_MSG_GPIO_MENU_PREV:
     case U8X8_MSG_GPIO_MENU_HOME:
-        return 0;  // 返回0表示不支持
+        return 0; // 返回0表示不支持
     }
-    return 1;  // 未知消息时返回0
+    return 1; // 消息处理成功
 }
 
-uint8_t u8x8_byte_3wire_hw_spi(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr)
-{
-  uint8_t *p = (uint8_t *)arg_ptr;
-  switch (msg)
-  {
-  /*通过SPI发送arg_int个字节数据*/
-  case U8X8_MSG_BYTE_SEND:
-    for (int i = 0; i < arg_int; i++)
-      SPI_WriteByte((uint8_t)*(p + i));
-    break;
-  /*设置DC引脚，DC引脚控制发送的是数据还是命令*/
-  case U8X8_MSG_BYTE_SET_DC:
-    if (arg_int)
-      OLED_DC_Set();
-    else
-      OLED_DC_Clr();
-    break;
-  case U8X8_MSG_BYTE_INIT:
-    oled_spi_init();
-    break;
-  case U8X8_MSG_BYTE_START_TRANSFER:
-    OLED_CS_Clr(); // 拉低CS，开始传输
-    break;
-  case U8X8_MSG_BYTE_END_TRANSFER:
-    OLED_CS_Set(); // 拉高CS，结束传输
-    break;
-  default:
-    return 0;
-  }
-  return 1;
-}
+#endif // OLED_DRIVER_MODE_I2C
 
-uint8_t u8g2_gpio_and_delay_mspm0(U8X8_UNUSED u8x8_t *u8x8,
-                                  U8X8_UNUSED uint8_t msg, U8X8_UNUSED uint8_t arg_int,
-                                  U8X8_UNUSED void *arg_ptr)
-{
-  return 1;
-}
-
-void show_oled_opening_animation(void)
-{
-    float angle = 0.0f;
-    uint32_t startTime = xTaskGetTickCount();
-    do {
-        u8g2_ClearBuffer(&u8g2);
-
-        // 计算已过ms
-        uint32_t elapsedTime = (xTaskGetTickCount() - startTime) * portTICK_PERIOD_MS;
-
-        // 1. --- MSPM0 波浪主标题 + “高亮字母动画” ---
-        u8g2_SetFont(&u8g2, u8g2_font_inb16_mr);
-        const char* text = "MSPM0";
-        int textWidth = u8g2_GetStrWidth(&u8g2, text);
-
-        // 每一帧随机一个字符用白底黑字高亮
-        int highlight_i = ((int)(angle * 1.5f)) % 5;
-        for (int i = 0, x = 64 - textWidth/2; text[i] != '\0'; i++)
-        {
-            char c[2] = {text[i], '\0'};
-            int charWidth = u8g2_GetStrWidth(&u8g2, c);
-            int y = 30 + 8 * sinf(angle + i * 0.7f);
-            if(i == highlight_i) {
-                // 椭圆高亮底框
-                u8g2_SetDrawColor(&u8g2, 1);
-                u8g2_DrawBox(&u8g2, x-2, y-15, charWidth+4, 19);
-                u8g2_SetDrawColor(&u8g2, 0);
-                u8g2_DrawStr(&u8g2, x, y, c);
-                u8g2_SetDrawColor(&u8g2, 1);
-            } else {
-                u8g2_DrawStr(&u8g2, x, y, c);
-            }
-            x += charWidth;
-        }
-
-        // 2. --- 副标题 WELCOME，淡入 ---
-        uint32_t fadein = elapsedTime < 1500 ? elapsedTime : 1500;
-        float alpha = (float)fadein / 1500.f;
-        u8g2_SetFont(&u8g2, u8g2_font_profont12_tr);
-        const char* subtext = "Welcome";
-        int subw = u8g2_GetStrWidth(&u8g2, subtext);
-        // 点阵淡入，随机点分布
-        for(int i=0,x=64-subw/2;subtext[i]!='\0';i++) {
-            char c[2]={subtext[i],'\0'};
-            int cw = u8g2_GetStrWidth(&u8g2,c);
-            int y = 50 + 2*sinf(angle + i*0.5f);  //副标题也微微波动
-            // 字符显示点阵按alpha填补，制造淡入
-            if((i*13+y+(int)angle)%10 < (int)(10*alpha)) // 随机采样点数呈现淡入
-                u8g2_DrawStr(&u8g2,x,y,c);
-            x+=cw;
-        }
-
-        // 3. --- 顶部&底部波浪，交错+加星点 ---
-        for (int x = 0; x < 128; x++)
-        {
-            int y1 = 60 + 3 * sinf(angle + x * 0.09f);
-            u8g2_DrawPixel(&u8g2, x, y1);
-
-            // 底部点星星
-            if (((x*15 + (int)angle*8) % 113) == 0 && (elapsedTime%600)<400)
-                u8g2_DrawPixel(&u8g2, x, y1-2);
-
-            int y2 = 7 + 3 * sinf(angle + x * 0.1f + 3.14159f);
-            u8g2_DrawPixel(&u8g2, x, y2);
-
-            // 顶部点星星
-            if (((x*9+(int)angle*11)%127)==0 && (elapsedTime%700)<300)
-                u8g2_DrawPixel(&u8g2, x, y2+2);
-        }
-
-        // 4. --- 进度条波浪填充 ---
-        int bar_len = (elapsedTime * 118) / 3000;
-        if (bar_len > 118) bar_len = 118;
-        u8g2_DrawFrame(&u8g2, 5, 62, 118, 2);
-        // 用小波浪做进度条填充
-        for(int i=0;i<bar_len;i++) {
-            int y = 62 + (int)(sinf(angle+i*0.25f)*1.1f);
-            u8g2_DrawPixel(&u8g2, 5+i, y);
-            u8g2_DrawPixel(&u8g2, 5+i, 63); //下沿也补齐
-        }
-        u8g2_SendBuffer(&u8g2);
-        angle += 0.2f;
-        vTaskDelay(pdMS_TO_TICKS(50)); // 20FPS
-    } while((xTaskGetTickCount() - startTime) * portTICK_PERIOD_MS < 2000);
-    u8g2_ClearBuffer(&u8g2);
-    u8g2_SendBuffer(&u8g2);
-}
-
+// U8g2 初始化函数
 void u8g2_Init(void)
 {
-  //u8g2_Setup_ssd1306_128x64_noname_f(&u8g2, U8G2_R0, u8x8_byte_3wire_hw_spi, u8g2_gpio_and_delay_mspm0);
-	u8g2_Setup_ssd1306_i2c_128x64_noname_f(&u8g2, U8G2_R0, u8x8_byte_sw_i2c, &u8x8_gpio_and_delay_mspm0);
-  u8g2_InitDisplay(&u8g2);
-  u8g2_SetPowerSave(&u8g2, 0);
-	u8g2_ClearBuffer(&u8g2);
+    // 使用条件编译选择 SPI 或 I2C 驱动
+#ifdef OLED_DRIVER_MODE_SPI
+    // 初始化 U8g2，使用 SPI 驱动
+    u8g2_Setup_ssd1306_128x64_noname_f(&u8g2, U8G2_R0, u8x8_byte_3wire_hw_spi, u8g2_gpio_and_delay_mspm0);
+#endif
+
+#ifdef OLED_DRIVER_MODE_I2C
+		// 如果使用U8g2库提供的软件I2C，可以直接这样初始化：
+
+		u8x8_SetI2CAddress(&u8g2.u8x8, OLED_I2C_ADDRESS << 1); // I2C地址要左移一位
+
+		u8g2_Setup_ssd1306_i2c_128x64_noname_f(&u8g2, U8G2_R0, u8x8_byte_sw_i2c, u8x8_gpio_and_delay_mspm0);
+#endif
+
+    // 初始化显示屏（发送初始化命令）
+    u8g2_InitDisplay(&u8g2);
+
+    // 打开显示屏
+    u8g2_SetPowerSave(&u8g2, 0);
+
+    // 清空显示缓冲区
+    u8g2_ClearBuffer(&u8g2);
 }

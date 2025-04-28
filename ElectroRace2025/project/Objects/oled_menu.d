@@ -58,8 +58,8 @@
   ..\source\ti\driverlib\dl_vref.h ..\source\ti\driverlib\dl_wwdt.h \
   ..\source\ti\driverlib\m0p\dl_interrupt.h \
   ..\source\ti\driverlib\m0p\dl_systick.h \
-  ..\application\hardware\bsp\spi.h ..\source\third_party\u8g2\u8g2.h \
-  ..\source\third_party\u8g2\u8x8.h ..\application\app\button_user.h \
+  ..\source\third_party\u8g2\u8g2.h ..\source\third_party\u8g2\u8x8.h \
+  ..\application\app\button_user.h \
   ..\application\hardware\drivers\multi_button.h \
   ..\kernel\freertos\Source\include\FreeRTOS.h \
   ..\kernel\freertos\builds\LP_MSPM0G3507\release\FreeRTOSConfig.h \

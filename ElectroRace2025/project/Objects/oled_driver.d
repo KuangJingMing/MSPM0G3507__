@@ -57,8 +57,7 @@
   ..\source\ti\driverlib\dl_vref.h ..\source\ti\driverlib\dl_wwdt.h \
   ..\source\ti\driverlib\m0p\dl_interrupt.h \
   ..\source\ti\driverlib\m0p\dl_systick.h \
-  ..\application\hardware\bsp\spi.h ..\source\third_party\u8g2\u8g2.h \
-  ..\source\third_party\u8g2\u8x8.h \
+  ..\source\third_party\u8g2\u8g2.h ..\source\third_party\u8g2\u8x8.h \
   ..\kernel\freertos\Source\include\freertos.h \
   ..\kernel\freertos\builds\LP_MSPM0G3507\release\FreeRTOSConfig.h \
   ..\kernel\freertos\Source\include\projdefs.h \
@@ -67,5 +66,4 @@
   ..\kernel\freertos\Source\portable\GCC\ARM_CM0\portmacro.h \
   ..\kernel\freertos\Source\include\mpu_wrappers.h \
   ..\kernel\freertos\Source\include\task.h \
-  ..\kernel\freertos\Source\include\list.h \
-  ..\application\hardware\bsp\software_i2c.h
+  ..\kernel\freertos\Source\include\list.h
