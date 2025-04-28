@@ -130,8 +130,8 @@ void oled_i2c_hardware_init(void)
 		DL_GPIO_initDigitalOutputFeatures(
 				OLED_I2C_SCL_IOMUX,          // 引脚 IOMUX 定义，复用 SPI 的 SCLK
 				DL_GPIO_INVERSION_DISABLE,      // 不反转
-				DL_GPIO_RESISTOR_PULL_UP,          // （I2C 通常需要外部上拉电阻）
-				DL_GPIO_DRIVE_STRENGTH_LOW,     // 驱动强度设为低（可根据硬件需求调整）
+				DL_GPIO_RESISTOR_NONE,          // （I2C 通常需要外部上拉电阻）
+				DL_GPIO_DRIVE_STRENGTH_HIGH,     // 驱动强度设为低（可根据硬件需求调整）
 				DL_GPIO_HIZ_ENABLE              // 启用高阻态，符合 I2C 开漏模式
 		);
 
@@ -139,8 +139,8 @@ void oled_i2c_hardware_init(void)
 		DL_GPIO_initDigitalOutputFeatures(
 				OLED_I2C_SDA_IOMUX,          // 引脚 IOMUX 定义，复用 SPI 的 PICO
 				DL_GPIO_INVERSION_DISABLE,      // 不反转
-				DL_GPIO_RESISTOR_PULL_UP,          // （I2C 通常需要外部上拉电阻）
-				DL_GPIO_DRIVE_STRENGTH_LOW,     // 驱动强度设为低（可根据硬件需求调整）
+				DL_GPIO_RESISTOR_NONE,          // （I2C 通常需要外部上拉电阻）
+				DL_GPIO_DRIVE_STRENGTH_HIGH,     // 驱动强度设为低（可根据硬件需求调整）
 				DL_GPIO_HIZ_ENABLE              // 启用高阻态，符合 I2C 开漏模式
 		);
 
@@ -151,6 +151,13 @@ void oled_i2c_hardware_init(void)
     // 启用输出功能
     DL_GPIO_enableOutput(OLED_I2C_SCL_PORT, OLED_I2C_SCL_PIN);
     DL_GPIO_enableOutput(OLED_I2C_SDA_PORT, OLED_I2C_SDA_PIN);
+		
+		    // 复位 OLED
+    OLED_I2C_RST_Clr();
+    // 使用 FreeRTOS 延时，避免阻塞整个系统
+    vTaskDelay(pdMS_TO_TICKS(10));
+    OLED_I2C_RST_Set();
+    vTaskDelay(pdMS_TO_TICKS(10));
 }
 
 // U8g2 I2C GPIO 和延时回调函数
@@ -166,14 +173,13 @@ uint8_t u8x8_gpio_and_delay_mspm0(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, vo
 
     // 毫秒延时
     case U8X8_MSG_DELAY_MILLI:
-        // 使用 FreeRTOS 的 vTaskDelay 进行毫秒延时
-        vTaskDelay(pdMS_TO_TICKS(arg_int));
+				delay_ms(arg_int);
         break;
 
     // I2C 总线延时 (通常用于时钟拉伸或数据稳定延时)
     case U8X8_MSG_DELAY_I2C:
         // 使用你的微秒延时函数
-        delay_us(arg_int <= 2 ? 5 : 1); // 确保这里的延时足够长以满足 I2C 时序要求
+        //delay_us(arg_int <= 2 ? 5 : 1); // 确保这里的延时足够长以满足 I2C 时序要求
         break;
 
     // I2C时钟信号控制
@@ -191,14 +197,7 @@ uint8_t u8x8_gpio_and_delay_mspm0(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, vo
         else
             OLED_SDA_Set();
         break;
-
-    // 以下是UI控制按钮，通常不需要实现
-    case U8X8_MSG_GPIO_MENU_SELECT:
-    case U8X8_MSG_GPIO_MENU_NEXT:
-    case U8X8_MSG_GPIO_MENU_PREV:
-    case U8X8_MSG_GPIO_MENU_HOME:
-        return 0; // 返回0表示不支持
-    }
+		}
     return 1; // 消息处理成功
 }
 
@@ -214,11 +213,8 @@ void u8g2_Init(void)
 #endif
 
 #ifdef OLED_DRIVER_MODE_I2C
-		// 如果使用U8g2库提供的软件I2C，可以直接这样初始化：
-
-		u8x8_SetI2CAddress(&u8g2.u8x8, OLED_I2C_ADDRESS << 1); // I2C地址要左移一位
-
-		u8g2_Setup_ssd1306_i2c_128x64_noname_f(&u8g2, U8G2_R0, u8x8_byte_sw_i2c, u8x8_gpio_and_delay_mspm0);
+    // 初始化 U8g2，使用 I2C 驱动
+    u8g2_Setup_ssd1306_i2c_128x64_noname_f(&u8g2, U8G2_R0, u8x8_byte_sw_i2c, u8x8_gpio_and_delay_mspm0);
 #endif
 
     // 初始化显示屏（发送初始化命令）
@@ -230,3 +226,4 @@ void u8g2_Init(void)
     // 清空显示缓冲区
     u8g2_ClearBuffer(&u8g2);
 }
+

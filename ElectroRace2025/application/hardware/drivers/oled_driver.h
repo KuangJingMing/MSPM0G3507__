@@ -40,8 +40,8 @@
 #define OLED_I2C_SCL_IOMUX 	GPIO_SPI_0_IOMUX_SCLK
 #define OLED_I2C_SDA_IOMUX  GPIO_SPI_0_IOMUX_PICO
 
-// OLED I2C 地址，根据你的硬件设置调整
-#define OLED_I2C_ADDRESS    0x3C
+#define OLED_I2C_RST_PORT OLED_SPI_PORT 
+#define OLED_I2C_RST_PIN  OLED_SPI_RST_OLED_PIN
 
 #define OLED_SDA_Clr() DL_GPIO_clearPins(OLED_I2C_SDA_PORT, OLED_I2C_SDA_PIN)
 #define OLED_SDA_Set() DL_GPIO_setPins(OLED_I2C_SDA_PORT, OLED_I2C_SDA_PIN)
@@ -49,13 +49,8 @@
 #define OLED_SCL_Clr() DL_GPIO_clearPins(OLED_I2C_SCL_PORT, OLED_I2C_SCL_PIN)
 #define OLED_SCL_Set() DL_GPIO_setPins(OLED_I2C_SCL_PORT, OLED_I2C_SCL_PIN)
 
-// I2C 总线上的复位引脚 (如果你的 OLED 有独立的 I2C 复位引脚)
-// 如果没有独立的 I2C 复位引脚，则不需要定义和使用
-// #define OLED_I2C_RST_PORT ...
-// #define OLED_I2C_RST_PIN  ...
-
-// #define OLED_I2C_RST_Clr() DL_GPIO_clearPins(OLED_I2C_RST_PORT, OLED_I2C_RST_PIN)
-// #define OLED_I2C_RST_Set() DL_GPIO_setPins(OLED_I2C_RST_PORT, OLED_I2C_RST_PIN)
+#define OLED_I2C_RST_Clr() DL_GPIO_clearPins(OLED_I2C_RST_PORT, OLED_I2C_RST_PIN)
+#define OLED_I2C_RST_Set() DL_GPIO_setPins(OLED_I2C_RST_PORT, OLED_I2C_RST_PIN)
 
 #endif // OLED_DRIVER_MODE_I2C
 
