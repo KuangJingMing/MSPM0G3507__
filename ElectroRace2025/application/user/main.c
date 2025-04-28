@@ -3,7 +3,7 @@
 #include "log.h"
 
 void init_task(void *pvParameters) {
-	create_oled_menu();
+	menu_init();
 	vTaskDelete(NULL);
 }
 

@@ -1,5 +1,17 @@
-./objects/main.o: ..\application\user\main.c \
-  ..\application\include\common_include.h ..\project\ti_msp_dl_config.h \
+./objects/menu_logic.o: ..\application\app\u8g2_menu\menu_logic.c \
+  ..\application\app\u8g2_menu\menu_logic.h \
+  ..\kernel\freertos\Source\include\FreeRTOS.h \
+  ..\kernel\freertos\builds\LP_MSPM0G3507\release\FreeRTOSConfig.h \
+  ..\kernel\freertos\Source\include\projdefs.h \
+  ..\kernel\freertos\Source\include\portable.h \
+  ..\kernel\freertos\Source\include\deprecated_definitions.h \
+  ..\kernel\freertos\Source\portable\GCC\ARM_CM0\portmacro.h \
+  ..\kernel\freertos\Source\include\mpu_wrappers.h \
+  ..\kernel\freertos\Source\include\task.h \
+  ..\kernel\freertos\Source\include\list.h \
+  ..\kernel\freertos\Source\include\timers.h \
+  ..\application\hardware\drivers\oled_driver.h \
+  ..\application\utils\delay.h ..\project\ti_msp_dl_config.h \
   ..\source\ti\devices\msp\msp.h ..\source\ti\devices\DeviceFamily.h \
   ..\source\ti\devices\msp\m0p\mspm0g350x.h \
   ..\source\third_party\CMSIS\Core\Include\core_cm0plus.h \
@@ -56,28 +68,5 @@
   ..\source\ti\driverlib\dl_vref.h ..\source\ti\driverlib\dl_wwdt.h \
   ..\source\ti\driverlib\m0p\dl_interrupt.h \
   ..\source\ti\driverlib\m0p\dl_systick.h \
-  ..\kernel\freertos\Source\include\FreeRTOS.h \
-  ..\kernel\freertos\builds\LP_MSPM0G3507\release\FreeRTOSConfig.h \
-  ..\kernel\freertos\Source\include\projdefs.h \
-  ..\kernel\freertos\Source\include\portable.h \
-  ..\kernel\freertos\Source\include\deprecated_definitions.h \
-  ..\kernel\freertos\Source\portable\GCC\ARM_CM0\portmacro.h \
-  ..\kernel\freertos\Source\include\mpu_wrappers.h \
-  ..\kernel\freertos\Source\include\task.h \
-  ..\kernel\freertos\Source\include\list.h \
-  ..\application\hardware\drivers\oled_driver.h \
-  ..\application\utils\delay.h ..\source\third_party\u8g2\u8g2.h \
-  ..\source\third_party\u8g2\u8x8.h ..\application\app\gray_detection.h \
-  ..\application\hardware\drivers\pca9555.h \
-  ..\application\hardware\bsp\software_i2c.h \
-  ..\application\hardware\drivers\motor_hardware.h \
-  ..\application\hardware\drivers\encoder.h \
-  ..\kernel\freertos\Source\include\timers.h \
-  ..\application\app\motor_user.h \
-  ..\application\app\communication\embedfire_protocol.h \
-  ..\application\hardware\bsp\uart_driver.h \
-  ..\application\include\global_config.h \
-  ..\application\app\communication\serialplot_protocol.h \
-  ..\application\app\button_user.h \
-  ..\application\hardware\drivers\multi_button.h \
-  ..\application\app\u8g2_menu\menu_user.h ..\application\utils\log.h
+  ..\source\third_party\u8g2\u8g2.h ..\source\third_party\u8g2\u8x8.h \
+  ..\application\app\u8g2_menu\menu_ui.h

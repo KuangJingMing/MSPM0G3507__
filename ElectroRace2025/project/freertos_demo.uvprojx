@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>__MSPM0G3507__</Define>
               <Undefine></Undefine>
-              <IncludePath>..\project;..\source;..\source\third_party\CMSIS\Core\Include;..\kernel\freertos\Source\include;..\kernel\freertos\Source\portable\GCC\ARM_CM0;..\kernel\freertos\builds\LP_MSPM0G3507\release;..\application\app;..\application\app\fusion;..\application\app\communication;..\application\hardware\drivers;..\application\hardware\bsp;..\application\include;..\application\math;..\application\user;..\application\utils;..\source\third_party\u8g2</IncludePath>
+              <IncludePath>..\project;..\source;..\source\third_party\CMSIS\Core\Include;..\kernel\freertos\Source\include;..\kernel\freertos\Source\portable\GCC\ARM_CM0;..\kernel\freertos\builds\LP_MSPM0G3507\release;..\application\app;..\application\app\fusion;..\application\app\communication;..\application\hardware\drivers;..\application\hardware\bsp;..\application\include;..\application\math;..\application\user;..\application\utils;..\source\third_party\u8g2;..\application\app\u8g2_menu</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -444,10 +444,25 @@
               <FileType>1</FileType>
               <FilePath>..\application\app\gray_detection.c</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>app/u8g2_menu</GroupName>
+          <Files>
             <File>
-              <FileName>oled_menu.c</FileName>
+              <FileName>menu_user.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\app\oled_menu.c</FilePath>
+              <FilePath>..\application\app\u8g2_menu\menu_user.c</FilePath>
+            </File>
+            <File>
+              <FileName>menu_ui.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\app\u8g2_menu\menu_ui.c</FilePath>
+            </File>
+            <File>
+              <FileName>menu_logic.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\app\u8g2_menu\menu_logic.c</FilePath>
             </File>
           </Files>
         </Group>

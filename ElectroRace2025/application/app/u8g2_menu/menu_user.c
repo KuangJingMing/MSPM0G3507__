@@ -1,0 +1,116 @@
+#include "oled_driver.h"
+#include "menu_user.h"
+#include "button_user.h"
+#include "menu_logic.h"
+#include "menu_ui.h"
+#include "u8g2.h"
+
+static void run_task01_cb(void *arg) {
+    u8g2_ClearBuffer(&u8g2);
+    draw_centered_text("Running Task 01", 1);
+    u8g2_SendBuffer(&u8g2);
+}
+
+static void run_task02_cb(void *arg) {
+    u8g2_ClearBuffer(&u8g2);
+    draw_centered_text("Running Task 02", 1);
+    u8g2_SendBuffer(&u8g2);
+}
+
+static void run_task03_cb(void *arg) {
+    u8g2_ClearBuffer(&u8g2);
+    draw_centered_text("Running Task 03", 1);
+    u8g2_SendBuffer(&u8g2);
+}
+
+static void run_task04_cb(void *arg) {
+    u8g2_ClearBuffer(&u8g2);
+    draw_centered_text("Running Task 04", 1);
+    u8g2_SendBuffer(&u8g2);
+}
+
+static void view_variables_cb(void *arg) {
+		create_listening_variable_timer();
+		start_listening_variable_timer();
+}
+
+// 菜单节点定义和初始化示例
+static MenuNode menu_root;
+static MenuNode menu_run_tasks;
+static MenuNode menu_view_variables;
+static MenuNode set_pid_speed;
+static MenuNode set_pid_mileage;
+static MenuNode play_games;
+static MenuNode task01;
+static MenuNode task02;
+static MenuNode task03;
+static MenuNode task04;
+
+// 子节点数组
+static MenuNode *run_tasks_children[] = { &task01, &task02, &task03, &task04 };
+static MenuNode *root_children[] = { &menu_run_tasks, &menu_view_variables, &set_pid_speed, &set_pid_mileage, &play_games };
+
+// 初始化所有节点
+static void init_all_menu_nodes(void) {
+	// 初始化菜单节点，参数格式：节点指针, 名称, 回调函数, 菜单类型, 父节点, 子节点数量, 子节点数组
+	init_menu_node(&menu_root,           "Main Menu",        NULL,             MENU_TYPE_NORMAL,        NULL,            5, root_children);          // 根菜单
+	init_menu_node(&menu_run_tasks,      "Run Tasks",        NULL,             MENU_TYPE_NORMAL,        &menu_root,      4, run_tasks_children);     // 一级菜单：运行任务
+	init_menu_node(&menu_view_variables, "View Variables",   view_variables_cb,MENU_TYPE_VARIABLE_VIEW, &menu_root,      0, NULL);                  // 一级菜单：查看变量
+	init_menu_node(&set_pid_speed,       "Set Pid Speed",    NULL,             MENU_TYPE_NORMAL,        &menu_root,      0, NULL);                  // 一级菜单：设置PID速度
+	init_menu_node(&set_pid_mileage,     "Set Pid Mileage",  NULL,             MENU_TYPE_NORMAL,        &menu_root,      0, NULL);                  // 一级菜单：设置PID里程
+	init_menu_node(&play_games,          "Play Game",        NULL,             MENU_TYPE_NORMAL,        &menu_root,      0, NULL);                  // 一级菜单：玩游戏
+	init_menu_node(&task01,              "run Task01",       run_task01_cb,    MENU_TYPE_NORMAL,        &menu_run_tasks, 0, NULL);                // 二级菜单：任务1
+	init_menu_node(&task02,              "run Task02",       run_task02_cb,    MENU_TYPE_NORMAL,        &menu_run_tasks, 0, NULL);                // 二级菜单：任务2
+	init_menu_node(&task03,              "run Task03",       run_task03_cb,    MENU_TYPE_NORMAL,        &menu_run_tasks, 0, NULL);                // 二级菜单：任务3
+	init_menu_node(&task04,              "run Task04",       run_task04_cb,    MENU_TYPE_NORMAL,        &menu_run_tasks, 0, NULL);                // 二级菜单：任务4
+
+}
+
+
+float a, b, c, d;
+
+void menu_init(void) {
+
+	add_variable("VA1", &a);
+	add_variable("VA2", &b);
+	add_variable("VA3", &c);
+	add_variable("VA4", &d);
+	
+	init_all_menu_nodes();
+  user_button_init(&btn_single_click_callback, &btn_long_press_cb);    
+	create_oled_menu(&menu_root);
+}
+
+
+static inline void btn_single_click_callback(void* btn)
+{
+    struct Button* button = (struct Button*) btn;
+    if (button == &buttons[BUTTON_UP]) {  
+			select_previous();
+    } else if (button == &buttons[BUTTON_DOWN]) { 
+			select_next();
+    } else if (button == &buttons[BUTTON_LEFT]) {  
+			enter_current(); 
+    } else if (button == &buttons[BUTTON_RIGHT]) {
+			return_previous();
+    } else if (button == &buttons[BUTTON_MIDDLE]) {
+
+    }
+    NotifyMenuFromISR();
+}
+
+static inline void btn_long_press_cb(void *btn) {
+    static TickType_t last_trigger_time = 0;
+    TickType_t current_time = xTaskGetTickCount();
+    if (current_time - last_trigger_time >= pdMS_TO_TICKS(LONG_PRESS_INTERVAL)) { // 每100ms触发一次
+        struct Button* button = (struct Button*) btn;
+        if (button == &buttons[BUTTON_UP]) {
+            select_previous();
+        } else if (button == &buttons[BUTTON_DOWN]) {
+            select_next();
+        }
+        NotifyMenuFromISR();
+        last_trigger_time = current_time;
+    }
+}
+
