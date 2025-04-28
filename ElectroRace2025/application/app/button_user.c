@@ -8,13 +8,13 @@
 
 #include "log.h"
 
-#define BUTTON_SCAN_PERIOD_MS 30
+struct Button buttons[BUTTON_NUM]; //5个按键
 
-struct Button btn1, btn2, btn3, btn4, btn5;
+uint8_t button_ids[BUTTON_NUM] = {BUTTON_UP, BUTTON_DOWN, BUTTON_LEFT, BUTTON_RIGHT, BUTTON_MIDDLE};
 
 static TimerHandle_t xButtonTimer = NULL; // 软件定时器句柄
 
-uint8_t read_button_GPIO(uint8_t button_id) {
+static inline uint8_t read_button_GPIO(uint8_t button_id) {
 	switch(button_id)
 	{
 		case BUTTON_UP:
@@ -39,7 +39,6 @@ uint8_t read_button_GPIO(uint8_t button_id) {
 }
 
 
-
 // 软件定时器回调
 static void vButtonTimerCallback(TimerHandle_t xTimer)
 {
@@ -47,7 +46,7 @@ static void vButtonTimerCallback(TimerHandle_t xTimer)
 }
 
 // 定时器启动
-void button_timer_start(void)
+static void button_timer_start(void)
 {
     if (xButtonTimer != NULL) {
         xTimerStart(xButtonTimer, 0);
@@ -55,7 +54,7 @@ void button_timer_start(void)
 }
 
 // 定时器停止
-void button_timer_stop(void)
+static void button_timer_stop(void)
 {
     if (xButtonTimer != NULL) {
         xTimerStop(xButtonTimer, 0);
@@ -63,12 +62,12 @@ void button_timer_stop(void)
 }
 
 // 定时器初始化（一般只需调用一次即可）
-void button_timer_init(void)
+static void button_timer_init(void)
 {
     if (xButtonTimer == NULL) {
         xButtonTimer = xTimerCreate(
             "ButtonTimer",
-            pdMS_TO_TICKS(BUTTON_SCAN_PERIOD_MS),
+            pdMS_TO_TICKS(TICKS_INTERVAL),
             pdTRUE,
             NULL,
             vButtonTimerCallback
@@ -77,27 +76,20 @@ void button_timer_init(void)
 }
 
 
-void user_button_init(BtnCallback cb)
+void user_button_init(BtnCallback single_click_cb, BtnCallback long_press_cb)
 {
-    button_init(&btn1, read_button_GPIO, 0, BUTTON_UP); 
-    button_init(&btn2, read_button_GPIO, 0, BUTTON_DOWN);
-    button_init(&btn3, read_button_GPIO, 0, BUTTON_LEFT);
-    button_init(&btn4, read_button_GPIO, 0, BUTTON_RIGHT);
-		button_init(&btn5, read_button_GPIO, 0, BUTTON_MIDDLE);
-		
-    button_attach(&btn1, SINGLE_CLICK, cb);
-    button_attach(&btn2, SINGLE_CLICK, cb);
-    button_attach(&btn3, SINGLE_CLICK, cb);
-    button_attach(&btn4, SINGLE_CLICK, cb);
-		button_attach(&btn5, SINGLE_CLICK, cb);
-		
-    button_start(&btn1);
-    button_start(&btn2);
-    button_start(&btn3);
-    button_start(&btn4);
-		button_start(&btn5);
-		
-		button_timer_stop();
-		button_timer_init();
-		button_timer_start();
+    // 批量初始化和绑定事件
+    for (int i = 0; i < BUTTON_NUM; i++) {
+        button_init(&buttons[i], read_button_GPIO, 0, button_ids[i]);
+        button_attach(&buttons[i], SINGLE_CLICK, single_click_cb);
+        // 仅为前两个按钮绑定长按事件
+        if (i < 2) {
+            button_attach(&buttons[i], LONG_PRESS_HOLD, long_press_cb);
+        }
+        button_start(&buttons[i]);
+    }
+    
+    button_timer_stop();
+    button_timer_init();
+    button_timer_start();
 }

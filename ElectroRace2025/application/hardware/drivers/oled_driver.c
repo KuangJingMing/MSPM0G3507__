@@ -7,6 +7,7 @@
 #include "oled_driver.h"
 #include "freertos.h"
 #include "task.h"
+#include "software_i2c.h"
 
 u8g2_t u8g2;
 
@@ -26,6 +27,77 @@ void oled_spi_init(void)
   OLED_RST_Set();
   delay_ms(10);
   OLED_CS_Set();
+}
+
+void oled_i2c_init(void)
+{
+    // 初始化 SCL 引脚 (GPIO_SPI_0_IOMUX_SCLK 对应的 GPIO 引脚) 为推挽输出
+    // SysConfig 中使用 DL_GPIO_initDigitalOutput(iomux_address) 初始化数字输出
+    // 我们使用 IOMUX 地址来确保使用的是正确的引脚
+    DL_GPIO_initDigitalOutput(GPIO_SPI_0_IOMUX_SCLK);
+
+    // 初始化 SDA 引脚 (GPIO_SPI_0_IOMUX_PICO 对应的 GPIO 引脚) 为推挽输出
+    DL_GPIO_initDigitalOutput(GPIO_SPI_0_IOMUX_PICO);
+
+    // 设置 SCL 和 SDA 初始状态为高电平 (I2C空闲状态)
+    // SysConfig 中使用 DL_GPIO_setPins(port, pins) 来设置引脚高电平
+    DL_GPIO_setPins(GPIO_SPI_0_SCLK_PORT, GPIO_SPI_0_SCLK_PIN);
+    DL_GPIO_setPins(GPIO_SPI_0_PICO_PORT, GPIO_SPI_0_PICO_PIN);
+
+    // 使能 SCL 和 SDA 引脚输出
+    // SysConfig 中使用 DL_GPIO_enableOutput(port, pins) 来使能输出
+    DL_GPIO_enableOutput(GPIO_SPI_0_SCLK_PORT, GPIO_SPI_0_SCLK_PIN);
+    DL_GPIO_enableOutput(GPIO_SPI_0_PICO_PORT, GPIO_SPI_0_PICO_PIN);
+
+    // 您之前的代码中也有设置和使能输出的操作，这里只是参照SysConfig的风格重新组织
+    // 原来的代码中 DL_GPIO_initDigitalOutputFeatures(..., DL_GPIO_HIZ_ENABLE)
+    // 可能导致引脚行为不确定，去掉features版本直接使用DL_GPIO_initDigitalOutput
+    // 是更明确的推挽输出初始化方式，参照SysConfig生成代码。
+}
+
+uint8_t u8x8_gpio_and_delay_mspm0(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr)
+{
+    switch (msg)
+    {
+    // 初始化GPIO
+    case U8X8_MSG_GPIO_AND_DELAY_INIT:
+				oled_i2c_init();
+        break;
+
+    // 毫秒延时
+    case U8X8_MSG_DELAY_MILLI:
+				delay_ms(arg_int);
+        break;
+
+    // 10微秒延时
+    case U8X8_MSG_DELAY_I2C:
+        delay_us(arg_int <= 2 ? 5 : 1);
+        break;
+
+    // I2C时钟信号控制
+    case U8X8_MSG_GPIO_I2C_CLOCK:
+        if (arg_int == 0)
+            OLED_SCL_Clr();
+        else
+            OLED_SCL_Set();
+        break;
+
+    // I2C数据信号控制
+    case U8X8_MSG_GPIO_I2C_DATA:
+        if (arg_int == 0)
+            OLED_SDA_Clr();
+        else
+            OLED_SDA_Set();
+        break;
+				
+    // 以下是UI控制按钮，通常不需要实现
+    case U8X8_MSG_GPIO_MENU_SELECT:
+    case U8X8_MSG_GPIO_MENU_NEXT:
+    case U8X8_MSG_GPIO_MENU_PREV:
+    case U8X8_MSG_GPIO_MENU_HOME:
+        return 0;  // 返回0表示不支持
+    }
+    return 1;  // 未知消息时返回0
 }
 
 uint8_t u8x8_byte_3wire_hw_spi(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr)
@@ -157,7 +229,9 @@ void show_oled_opening_animation(void)
 
 void u8g2_Init(void)
 {
-  u8g2_Setup_ssd1306_128x64_noname_f(&u8g2, U8G2_R0, u8x8_byte_3wire_hw_spi, u8g2_gpio_and_delay_mspm0);
-  u8g2_InitDisplay(&u8g2);     // 根据所选的芯片进行初始化工作，初始化完成后，显示器处于关闭状态
-  u8g2_SetPowerSave(&u8g2, 0); // 打开显示器
+  //u8g2_Setup_ssd1306_128x64_noname_f(&u8g2, U8G2_R0, u8x8_byte_3wire_hw_spi, u8g2_gpio_and_delay_mspm0);
+	u8g2_Setup_ssd1306_i2c_128x64_noname_f(&u8g2, U8G2_R0, u8x8_byte_sw_i2c, &u8x8_gpio_and_delay_mspm0);
+  u8g2_InitDisplay(&u8g2);
+  u8g2_SetPowerSave(&u8g2, 0);
+	u8g2_ClearBuffer(&u8g2);
 }

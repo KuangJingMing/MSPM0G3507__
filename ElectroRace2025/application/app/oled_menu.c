@@ -5,34 +5,56 @@
 #include "task.h"
 #include "timers.h"
 #include "u8g2.h"
-#define MAX_INDEX_COUNT 4
+#include "stdio.h"
+#include "stdlib.h"
+
+
+typedef struct menu_variables_t {
+	const char *name;
+	float value;
+} menu_variables_t;
+
+#define SHOW_OPENING_ANIMATION 1 	// 是否显示开场动画 1 / 0
+#define MAX_INDEX_COUNT 4     		// 一次可以显示的最大窗口数量
+#define LONG_PRESS_COUNTER 5  		// 按键长按的频率 越少越快
 
 static void draw_centered_text(const char* text, uint8_t draw_border);
 static inline void btn_single_click_callback(void* btn);
+static inline void btn_long_press_cb(void *btn);
 static TaskHandle_t xOLEDTaskHandle = NULL;
+static void add_variable(const char *name, float val);
+static void create_listening_variable_timer(void);
+static void start_listening_variable_timer(void);
+static void stop_listening_variable_timer(void);
+static menu_variables_t menu_variables[MAX_INDEX_COUNT];
+static void draw_variables_menu(void);
 
-static void run_task01(void *arg) {
+static void run_task01_cb(void *arg) {
     u8g2_ClearBuffer(&u8g2);
     draw_centered_text("Running Task 01", 1);
     u8g2_SendBuffer(&u8g2);
 }
 
-static void run_task02(void *arg) {
+static void run_task02_cb(void *arg) {
     u8g2_ClearBuffer(&u8g2);
     draw_centered_text("Running Task 02", 1);
     u8g2_SendBuffer(&u8g2);
 }
 
-static void run_task03(void *arg) {
+static void run_task03_cb(void *arg) {
     u8g2_ClearBuffer(&u8g2);
     draw_centered_text("Running Task 03", 1);
     u8g2_SendBuffer(&u8g2);
 }
 
-static void run_task04(void *arg) {
+static void run_task04_cb(void *arg) {
     u8g2_ClearBuffer(&u8g2);
     draw_centered_text("Running Task 04", 1);
     u8g2_SendBuffer(&u8g2);
+}
+
+static void view_variables_cb(void *arg) {
+		start_listening_variable_timer();
 }
 
 // 简化菜单节点初始化函数
@@ -58,7 +80,7 @@ static MenuNode menu_root;
 
 // 第一级子菜单 (Level 1)
 static MenuNode menu_run_tasks;
-static MenuNode menu_show_status;
+static MenuNode menu_view_variables;
 static MenuNode set_pid_speed;
 static MenuNode set_pid_mileage;
 static MenuNode play_games;
@@ -81,7 +103,7 @@ static MenuNode *run_tasks_children[] = {
 // Level 1 子节点数组 (Main Menu 的子菜单)
 static MenuNode *root_children[] = {
     &menu_run_tasks,
-    &menu_show_status,
+    &menu_view_variables,
     &set_pid_speed,
     &set_pid_mileage,
     &play_games
@@ -109,9 +131,9 @@ static void init_all_menu_nodes(void) {
         .child_count = 4,
         .children = run_tasks_children
     });
-    init_menu_node(&menu_show_status, (MenuNodeConfig){
-        .name = "Show Status",
-        .callback = NULL,
+    init_menu_node(&menu_view_variables, (MenuNodeConfig){
+        .name = "View Variables",
+        .callback = view_variables_cb,
         .parent = &menu_root,
         .child_count = 0,
         .children = NULL
@@ -141,28 +163,28 @@ static void init_all_menu_nodes(void) {
     // Level 2: Run Tasks 的子菜单
     init_menu_node(&task01, (MenuNodeConfig){
         .name = "run Task01",
-        .callback = run_task01,
+        .callback = run_task01_cb,
         .parent = &menu_run_tasks,
         .child_count = 0,
         .children = NULL
     });
     init_menu_node(&task02, (MenuNodeConfig){
         .name = "run Task02",
-        .callback = run_task02,
+        .callback = run_task02_cb,
         .parent = &menu_run_tasks,
         .child_count = 0,
         .children = NULL
     });
     init_menu_node(&task03, (MenuNodeConfig){
         .name = "run Task03",
-        .callback = run_task03,
+        .callback = run_task03_cb,
         .parent = &menu_run_tasks,
         .child_count = 0,
         .children = NULL
     });
     init_menu_node(&task04, (MenuNodeConfig){
         .name = "run Task04",
-        .callback = run_task04,
+        .callback = run_task04_cb,
         .parent = &menu_run_tasks,
         .child_count = 0,
         .children = NULL
@@ -189,13 +211,39 @@ static void draw_centered_text(const char* text, uint8_t draw_border) {
     }
 }
 
+
+static void draw_variables_menu(void) {
+    u8g2_ClearBuffer(&u8g2);
+    u8g2_SetFont(&u8g2, u8g2_font_6x10_tr);
+
+    // 绘制标题
+    const char* title = "Variables";
+    uint8_t title_width = u8g2_GetStrWidth(&u8g2, title);
+    uint8_t title_x = (u8g2_GetDisplayWidth(&u8g2) - title_width) / 2;
+    u8g2_DrawStr(&u8g2, title_x, 8, title);
+
+    // 绘制变量列表
+    for (uint8_t i = 0; i < MAX_INDEX_COUNT; i++) {
+        if (menu_variables[i].name != NULL) {
+            char buffer[32];
+            snprintf(buffer, sizeof(buffer), "%s: %.2f", menu_variables[i].name, menu_variables[i].value);
+            u8g2_DrawStr(&u8g2, 10, 20 + i * MENU_LINE_HEIGHT, buffer);
+        }
+    }
+
+    u8g2_SendBuffer(&u8g2);
+}
+
 static void draw_menu(void) {	
     u8g2_ClearBuffer(&u8g2);
     // 设置字体为英文小字体
     u8g2_SetFont(&u8g2, u8g2_font_6x10_tr);
 
     // 检查当前界面类型
-    if (current_menu->child_count == 0 && current_menu->callback == NULL) {
+		
+		if (current_menu->callback != NULL) return; //如果当前的菜单有回调那么渲染的逻辑交给回调执行 
+		
+    if (current_menu->child_count == 0) {
         // 无子菜单且无回调，显示静态提示界面
         draw_centered_text("Nothing Here!", 1); // 1 表示绘制边框
     } else {
@@ -247,11 +295,21 @@ static void excute_callback(void) {
 	if (current_menu->callback != NULL) current_menu->callback(NULL);
 }
 
+float a = 1, b = 2, c = 3, d = 4;
+
 static void menu_init(void) {
 	u8g2_Init();
 	init_all_menu_nodes();
+	create_listening_variable_timer();
+	stop_listening_variable_timer();
+	add_variable("NAME1", a);
+	add_variable("NAME2", b);
+	add_variable("NAME3", c);
+	add_variable("NAME4", d);
+#if SHOW_OPENING_ANIMATION
   show_oled_opening_animation();
-  user_button_init(&btn_single_click_callback);    
+#endif
+  user_button_init(&btn_single_click_callback, &btn_long_press_cb);    
   draw_menu();
 }
 
@@ -286,28 +344,102 @@ static void vOLEDTask(void *pvParameters)
       ulTaskNotifyTake(pdTRUE, portMAX_DELAY); // 等待通知、收到自动清0
       draw_menu();
 			excute_callback();
+			if (current_menu == &menu_view_variables) {
+        draw_variables_menu();
+			} else {
+				stop_listening_variable_timer();
+			}
     }
 }
 
 void create_oled_menu(void) {
-    xTaskCreate(vOLEDTask, "OLED_MENU", 128, NULL, tskIDLE_PRIORITY + 1, &xOLEDTaskHandle);
+    xTaskCreate(vOLEDTask, "OLED_MENU", 512, NULL, tskIDLE_PRIORITY + 1, &xOLEDTaskHandle);
 }
 
 static inline void btn_single_click_callback(void* btn)
 {
     struct Button* button = (struct Button*) btn;
-    if (button == &btn1) {  			 //BUTTON_UP
+    if (button == &buttons[BUTTON_UP]) {  
 			select_previous();
-    } else if (button == &btn2) {  //BUTTON_DOWN
+    } else if (button == &buttons[BUTTON_DOWN]) { 
 			select_next();
-    } else if (button == &btn3) {  //BUTTON_LEFT
+    } else if (button == &buttons[BUTTON_LEFT]) {  
 			enter_current(); 
-    } else if (button == &btn4) {  //BUTTON_RIGHT
+    } else if (button == &buttons[BUTTON_RIGHT]) {
 			return_previous();
-    } else if (button == &btn5) {  //BUTTON_MIDDLE
+    } else if (button == &buttons[BUTTON_MIDDLE]) {
 
     }
 		BaseType_t xHigherPriorityTaskWoken = pdFALSE;
 		vTaskNotifyGiveFromISR(xOLEDTaskHandle, &xHigherPriorityTaskWoken);
 		portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+}
+
+static inline void btn_long_press_cb(void *btn) {
+		static uint32_t count = 0;
+		if ((++count % LONG_PRESS_COUNTER) != 0) return;
+    struct Button* button = (struct Button*) btn;
+		if (button == &buttons[BUTTON_UP]) {  
+			select_previous();
+    } else if (button == &buttons[BUTTON_DOWN]) { 
+			select_next();
+    } 
+		BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+		vTaskNotifyGiveFromISR(xOLEDTaskHandle, &xHigherPriorityTaskWoken);
+		portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+}
+
+static void add_variable(const char *name, float val) {
+    static uint8_t data_index = 0;
+    if (data_index < MAX_INDEX_COUNT) {
+        menu_variables[data_index].name = name;
+        menu_variables[data_index].value = val;
+        data_index++;
+    }
+}
+
+
+static TimerHandle_t xVariableUpdateTimer = NULL;
+#define VARIABLE_UPDATE_PERIOD_MS 1000  // 变量更新周期，1秒
+
+// 定时器回调函数，用于更新变量显示
+static void vVariableUpdateTimerCallback(TimerHandle_t xTimer) {
+    // 简单示例：更新变量值（你可以根据实际需求修改）
+		for (uint8_t i = 0; i < MAX_INDEX_COUNT; i++) {
+				if (menu_variables[i].name != NULL) {
+						// 生成一个 -1.0 到 1.0 的随机值
+						float random_value = ((float)rand() / RAND_MAX) * 2.0f - 1.0f;
+						menu_variables[i].value += random_value;
+				}
+		}
+		BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+		vTaskNotifyGiveFromISR(xOLEDTaskHandle, &xHigherPriorityTaskWoken);
+		portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+}
+
+// 创建定时器
+static void create_listening_variable_timer(void) {
+    if (xVariableUpdateTimer == NULL) {
+        xVariableUpdateTimer = xTimerCreate(
+            "VariableTimer",
+            pdMS_TO_TICKS(VARIABLE_UPDATE_PERIOD_MS),
+            pdTRUE,  // 自动重载，周期性触发
+            NULL,
+            vVariableUpdateTimerCallback
+        );
+    }
+}
+ 
+// 启动定时器
+static void start_listening_variable_timer(void) {
+    if (xVariableUpdateTimer != NULL) {
+        xTimerStart(xVariableUpdateTimer, 0);
+    }
+}
+
+// 停止定时器
+static void stop_listening_variable_timer(void) {
+    if (xVariableUpdateTimer != NULL) {
+        xTimerStop(xVariableUpdateTimer, 0);
+    }
 }

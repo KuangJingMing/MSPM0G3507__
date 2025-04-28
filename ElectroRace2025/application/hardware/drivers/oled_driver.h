@@ -14,6 +14,12 @@
 #define OLED_CS_Clr()  DL_GPIO_clearPins(OLED_SPI_PORT, OLED_SPI_CS_OLED_PIN)
 #define OLED_CS_Set()  DL_GPIO_setPins(OLED_SPI_PORT, OLED_SPI_CS_OLED_PIN)
 
+#define OLED_SDA_Clr() DL_GPIO_clearPins(GPIO_SPI_0_PICO_PORT, GPIO_SPI_0_PICO_PIN)
+#define OLED_SDA_Set() DL_GPIO_setPins(GPIO_SPI_0_PICO_PORT, GPIO_SPI_0_PICO_PIN)
+
+#define OLED_SCL_Clr() DL_GPIO_clearPins(GPIO_SPI_0_SCLK_PORT, GPIO_SPI_0_SCLK_PIN)
+#define OLED_SCL_Set() DL_GPIO_setPins(GPIO_SPI_0_SCLK_PORT, GPIO_SPI_0_SCLK_PIN)
+
 void u8g2_Init(void);
 void show_oled_opening_animation(void);
 

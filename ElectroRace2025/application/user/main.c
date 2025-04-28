@@ -10,7 +10,7 @@ void init_task(void *pvParameters) {
 int main(void)
 {
     SYSCFG_DL_init(); // 系统和硬件初始化
-		xTaskCreate(init_task, "init_task", 512, NULL, tskIDLE_PRIORITY + 2, NULL);
+		xTaskCreate(init_task, "init_task", 64, NULL, tskIDLE_PRIORITY + 2, NULL);
 		vTaskStartScheduler();
     while (1) {
     

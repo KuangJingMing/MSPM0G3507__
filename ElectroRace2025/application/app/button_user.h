@@ -3,6 +3,8 @@
 
 #include "multi_button.h"
 
+#define BUTTON_NUM 5
+
 typedef enum {
 	BUTTON_UP = 0,
 	BUTTON_DOWN,
@@ -11,9 +13,8 @@ typedef enum {
 	BUTTON_MIDDLE
 } BUTTON_ID;
 
+void user_button_init(BtnCallback single_click_cb, BtnCallback long_press_cb);
 
-void user_button_init(BtnCallback cb);
-
-extern struct Button btn1, btn2, btn3, btn4, btn5;
+extern struct Button buttons[BUTTON_NUM];
 
 #endif

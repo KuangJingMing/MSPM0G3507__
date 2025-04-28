@@ -74,8 +74,7 @@
 /* Smallest stack size allowed in words */
 #define configMINIMAL_STACK_SIZE ((unsigned short) 128)
 #define configMAX_TASK_NAME_LEN (12)
-#define configTOTAL_HEAP_SIZE ((size_t)(3 * 1024))
-
+#define configTOTAL_HEAP_SIZE ((size_t)(4 * 1024))
 /*
  * If static allocation is used (as well as timers, configUSE_TIMERS = 1),
  * two callback functions must be provided:
