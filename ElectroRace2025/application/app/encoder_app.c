@@ -93,8 +93,6 @@ void GROUP1_IRQHandler(void)
                 encoder_update(interrupt_iidx_to_encoder_instance[map_index]);
              }
         }
-        // 您不需要清除整个 GPIO 端口的中断标志，只需要清除触发的引脚标志即可
-        // DL_Interrupt_clearGroup(DL_INTERRUPT_GROUP_1, ENCODER_INT_IIDX); // 可以移除这行
     }
 }
 
