@@ -430,30 +430,30 @@
           <GroupName>app</GroupName>
           <Files>
             <File>
-              <FileName>button_user.c</FileName>
+              <FileName>button_app.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\app\button_user.c</FilePath>
+              <FilePath>..\application\app\button_app.c</FilePath>
             </File>
             <File>
-              <FileName>motor_user.c</FileName>
+              <FileName>encoder_app.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\app\motor_user.c</FilePath>
+              <FilePath>..\application\app\encoder_app.c</FilePath>
             </File>
             <File>
-              <FileName>gray_detection.c</FileName>
+              <FileName>gray_detection_app.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\app\gray_detection.c</FilePath>
+              <FilePath>..\application\app\gray_detection_app.c</FilePath>
+            </File>
+            <File>
+              <FileName>motor_app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\app\motor_app.c</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
           <GroupName>app/u8g2_menu</GroupName>
           <Files>
-            <File>
-              <FileName>menu_user.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\app\u8g2_menu\menu_user.c</FilePath>
-            </File>
             <File>
               <FileName>menu_ui.c</FileName>
               <FileType>1</FileType>
@@ -463,6 +463,11 @@
               <FileName>menu_logic.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\application\app\u8g2_menu\menu_logic.c</FilePath>
+            </File>
+            <File>
+              <FileName>menu_app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\app\u8g2_menu\menu_app.c</FilePath>
             </File>
           </Files>
         </Group>

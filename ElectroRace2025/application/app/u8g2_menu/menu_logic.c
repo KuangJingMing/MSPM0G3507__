@@ -71,7 +71,6 @@ void execute_callback(void) {
 
 // 定时器回调函数，用于更新变量显示
 void vVariableUpdateTimerCallback(TimerHandle_t xTimer) {
-    *menu_variables[1].val_ptr += 1;
     NotifyMenuFromISR();
 }
 

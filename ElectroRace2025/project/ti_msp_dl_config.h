@@ -41,7 +41,6 @@
 #define ti_msp_dl_config_h
 
 #define CONFIG_MSPM0G350X
-#define CONFIG_MSPM0G3507
 
 #if defined(__ti_version__) || defined(__TI_COMPILER_VERSION__)
 #define SYSCONFIG_WEAK __attribute__((weak))
@@ -142,7 +141,6 @@ extern "C" {
 
 /* Defines for UART_DEBUG */
 #define UART_DEBUG_INST                                                    UART0
-#define UART_DEBUG_INST_FREQUENCY                                       32000000
 #define UART_DEBUG_INST_IRQHandler                              UART0_IRQHandler
 #define UART_DEBUG_INST_INT_IRQN                                  UART0_INT_IRQn
 #define GPIO_UART_DEBUG_RX_PORT                                            GPIOA
@@ -207,26 +205,6 @@ extern "C" {
 /* Defines for CS_OLED: GPIOB.20 with pinCMx 48 on package pin 19 */
 #define OLED_SPI_CS_OLED_PIN                                    (DL_GPIO_PIN_20)
 #define OLED_SPI_CS_OLED_IOMUX                                   (IOMUX_PINCM48)
-/* Port definition for Pin Group ENCODER */
-#define ENCODER_PORT                                                     (GPIOB)
-
-/* Defines for D1: GPIOB.6 with pinCMx 23 on package pin 58 */
-#define ENCODER_D1_PIN                                           (DL_GPIO_PIN_6)
-#define ENCODER_D1_IOMUX                                         (IOMUX_PINCM23)
-/* Defines for D2: GPIOB.7 with pinCMx 24 on package pin 59 */
-#define ENCODER_D2_PIN                                           (DL_GPIO_PIN_7)
-#define ENCODER_D2_IOMUX                                         (IOMUX_PINCM24)
-/* Defines for P1: GPIOB.4 with pinCMx 17 on package pin 52 */
-// pins affected by this interrupt request:["P1","P2"]
-#define ENCODER_INT_IRQN                                        (GPIOB_INT_IRQn)
-#define ENCODER_INT_IIDX                        (DL_INTERRUPT_GROUP1_IIDX_GPIOB)
-#define ENCODER_P1_IIDX                                      (DL_GPIO_IIDX_DIO4)
-#define ENCODER_P1_PIN                                           (DL_GPIO_PIN_4)
-#define ENCODER_P1_IOMUX                                         (IOMUX_PINCM17)
-/* Defines for P2: GPIOB.5 with pinCMx 18 on package pin 53 */
-#define ENCODER_P2_IIDX                                      (DL_GPIO_IIDX_DIO5)
-#define ENCODER_P2_PIN                                           (DL_GPIO_PIN_5)
-#define ENCODER_P2_IOMUX                                         (IOMUX_PINCM18)
 /* Port definition for Pin Group GPIO_KEY */
 #define GPIO_KEY_PORT                                                    (GPIOB)
 
@@ -245,6 +223,28 @@ extern "C" {
 /* Defines for PIN_4: GPIOB.11 with pinCMx 28 on package pin 63 */
 #define GPIO_KEY_PIN_4_PIN                                      (DL_GPIO_PIN_11)
 #define GPIO_KEY_PIN_4_IOMUX                                     (IOMUX_PINCM28)
+/* Port definition for Pin Group ENCODER */
+#define ENCODER_PORT                                                     (GPIOB)
+
+/* Defines for M1: GPIOB.4 with pinCMx 17 on package pin 52 */
+// pins affected by this interrupt request:["M1","M2","M3","M4"]
+#define ENCODER_INT_IRQN                                        (GPIOB_INT_IRQn)
+#define ENCODER_INT_IIDX                        (DL_INTERRUPT_GROUP1_IIDX_GPIOB)
+#define ENCODER_M1_IIDX                                      (DL_GPIO_IIDX_DIO4)
+#define ENCODER_M1_PIN                                           (DL_GPIO_PIN_4)
+#define ENCODER_M1_IOMUX                                         (IOMUX_PINCM17)
+/* Defines for M2: GPIOB.5 with pinCMx 18 on package pin 53 */
+#define ENCODER_M2_IIDX                                      (DL_GPIO_IIDX_DIO5)
+#define ENCODER_M2_PIN                                           (DL_GPIO_PIN_5)
+#define ENCODER_M2_IOMUX                                         (IOMUX_PINCM18)
+/* Defines for M3: GPIOB.6 with pinCMx 23 on package pin 58 */
+#define ENCODER_M3_IIDX                                      (DL_GPIO_IIDX_DIO6)
+#define ENCODER_M3_PIN                                           (DL_GPIO_PIN_6)
+#define ENCODER_M3_IOMUX                                         (IOMUX_PINCM23)
+/* Defines for M4: GPIOB.7 with pinCMx 24 on package pin 59 */
+#define ENCODER_M4_IIDX                                      (DL_GPIO_IIDX_DIO7)
+#define ENCODER_M4_PIN                                           (DL_GPIO_PIN_7)
+#define ENCODER_M4_IOMUX                                         (IOMUX_PINCM24)
 
 /* clang-format on */
 

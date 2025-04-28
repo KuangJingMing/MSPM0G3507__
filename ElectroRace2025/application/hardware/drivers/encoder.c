@@ -1,163 +1,228 @@
-/*
- * encoder.c
- *    - Motor 1: P1 (Pulse) -> PB4 (Encoder_GPIO_Encoder_P1_PIN)
- *    - Motor 1: D1 (Direction) -> PB5 (Encoder_GPIO_Encoder_D1_PIN)
- *    - Motor 2: P2 (Pulse) -> PB6 (Encoder_GPIO_Encoder_P2_PIN)
- *    - Motor 2: D2 (Direction) -> PB7 (Encoder_GPIO_Encoder_D2_PIN)
+/* Encoder Library, for measuring quadrature encoded signals
+ * Based on the Arduino Encoder Library by Paul Stoffregen
+ *
+ * Copyright (c) 2011,2013 PJRC.COM, LLC - Paul Stoffregen <paul@pjrc.com>
+ *
+ * This version adapted for multi-platform C by Your Name Here
+ *
+ * Version 2.1 - Fix gpio_read_func access in encoder_update
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+0;
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
+ * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
 
 #include "encoder.h"
-#include "FreeRTOS.h"
-#include "timers.h"
-#include "semphr.h"
-//#include "log_config.h"
+#include <stddef.h> // For NULL
+#include <stdlib.h> // For malloc/free if dynamically allocating
 #include "log.h"
 
-// ¶¨ÒåÈ«¾Ö±äÁ¿
-int left_motor_period_cnt = 0;     // ×óµç»úÂö³å¼ÆÊý
-int right_motor_period_cnt = 0;    // ÓÒµç»úÂö³å¼ÆÊý
+// ç¼–ç å™¨æ›´æ–°å‡½æ•° (ç”±ä¸­æ–­æœåŠ¡ç¨‹åºæˆ–è½®è¯¢è°ƒç”¨)
+void encoder_update(void *arg) {
+    encoder_instance_t *instance = (encoder_instance_t *)arg;
+    encoder_manager_t* manager = instance->manager; // èŽ·å–æ‰€å±žçš„ç®¡ç†å™¨
 
-// ¶¨ÒåÈ«¾Ö±äÁ¿ NEncoder
-encoder NEncoder = {
-    .left_motor_period_ms = 20,
-    .right_motor_period_ms = 20,
-    .left_motor_speed_rpm = 0.0f,
-    .left_motor_speed_mps = 0.0f,    // ËÙ¶Èµ¥Î»¸ÄÎª m/s
-    .right_motor_speed_rpm = 0.0f,
-    .right_motor_speed_mps = 0.0f    // ËÙ¶Èµ¥Î»¸ÄÎª m/s
-};
+    // ä½¿ç”¨ç”¨æˆ·æä¾›çš„ GPIO è¯»å–å‡½æ•° (é€šè¿‡ç®¡ç†å™¨è®¿é—®)
+    uint8_t p1val = manager->gpio_read_func(instance->pin1_gpio_handle, instance->pin1_bitmask) ? 1 : 0;
+    uint8_t p2val = manager->gpio_read_func(instance->pin2_gpio_handle, instance->pin2_bitmask) ? 1 : 0;
 
-// ·½Ïò×´Ì¬Êý×é
-uint8_t D_State[2];
+    uint8_t current_state = instance->state & 3;
 
-typedef struct {
-    float pulse_num_per_circle; // Ã¿Ò»È¦µÄÂö³åÊý
-    float wheel_radius_cm;      // ÂÖ×ÓµÄ°ë¾¶£¬µ¥Î»Îª cm
-} TracklessMotor;
+    if (p1val) current_state |= 4;
+    if (p2val) current_state |= 8;
 
-TracklessMotor trackless_motor = {
-    .pulse_num_per_circle = 570.0f, 
-    .wheel_radius_cm = 3.5f     
-};
+    instance->state = (current_state >> 2);
 
-// ¶¨Òå»¥³âËø£¬ÓÃÓÚ±£»¤Âö³å¼ÆÊý±äÁ¿
-SemaphoreHandle_t xMotorCountMutex = NULL;
-
-// ¶¨ÒåÈí¼þ¶¨Ê±Æ÷¾ä±ú
-TimerHandle_t xSpeedTimer = NULL;
-
-// Èí¼þ¶¨Ê±Æ÷»Øµ÷º¯Êý
-void SpeedTimerCallback(TimerHandle_t xTimer)
-{
-    int temp_left_cnt = 0;
-    int temp_right_cnt = 0;
-    
-    // »ñÈ¡Âö³å¼ÆÊý£¬±£»¤¹²ÏíÊý¾Ý
-    if (xSemaphoreTake(xMotorCountMutex, portMAX_DELAY) == pdTRUE) {
-        temp_left_cnt = left_motor_period_cnt;
-        temp_right_cnt = right_motor_period_cnt;
-        left_motor_period_cnt = 0;  // ÖØÖÃ¼ÆÊý
-        right_motor_period_cnt = 0;
-        xSemaphoreGive(xMotorCountMutex);
-    }
-    
-    // ¸üÐÂ×óµç»úËÙ¶È
-    NEncoder.left_motor_period_ms = 20;
-    NEncoder.left_motor_speed_rpm = 60.0f * (temp_left_cnt / trackless_motor.pulse_num_per_circle) / (NEncoder.left_motor_period_ms * 0.001f);
-    // ËÙ¶Èµ¥Î»Îª m/s£¬ÂÖ×Ó°ë¾¶µ¥Î»Îª cm£¬×ªÎª m/s ÐèÒª³ýÒÔ 100
-    NEncoder.left_motor_speed_mps = (2.0f * 3.14f * trackless_motor.wheel_radius_cm * (NEncoder.left_motor_speed_rpm / 60.0f)) / 100.0f;
-    
-    // ¸üÐÂÓÒµç»úËÙ¶È
-    NEncoder.right_motor_period_ms = 20;
-    NEncoder.right_motor_speed_rpm = 60.0f * (temp_right_cnt / trackless_motor.pulse_num_per_circle) / (NEncoder.right_motor_period_ms * 0.001f);
-    // ËÙ¶Èµ¥Î»Îª m/s£¬ÂÖ×Ó°ë¾¶µ¥Î»Îª cm£¬×ªÎª m/s ÐèÒª³ýÒÔ 100
-    NEncoder.right_motor_speed_mps = (2.0f * 3.14f * trackless_motor.wheel_radius_cm * (NEncoder.right_motor_speed_rpm / 60.0f)) / 100.0f;
-    
-    // Ìí¼ÓÈÕÖ¾Êä³ö£¬¼ÇÂ¼×óÓÒµç»úËÙ¶È
-    log_i("Motor Speeds - Left: %.3f m/s, Right: %.3f m/s", NEncoder.left_motor_speed_mps, NEncoder.right_motor_speed_mps);
-}
-
-void Encoder_init(void)
-{
-    // ³õÊ¼»¯±àÂëÆ÷ÖÐ¶Ï
-    NVIC_ClearPendingIRQ(ENCODER_INT_IRQN);
-    NVIC_EnableIRQ(ENCODER_INT_IRQN);
-    
-    // ´´½¨»¥³âËø
-    xMotorCountMutex = xSemaphoreCreateMutex();
-    if (xMotorCountMutex == NULL) {
-        // ´íÎó´¦Àí£º»¥³âËø´´½¨Ê§°Ü
-        while (1);
-    }
-    
-    // ´´½¨²¢Æô¶¯Èí¼þ¶¨Ê±Æ÷£¬ÖÜÆÚ20ms
-    xSpeedTimer = xTimerCreate("SpeedTimer", pdMS_TO_TICKS(20), pdTRUE, NULL, SpeedTimerCallback);
-    if (xSpeedTimer == NULL) {
-        // ´íÎó´¦Àí£º¶¨Ê±Æ÷´´½¨Ê§°Ü
-        while (1);
-    }
-    if (xTimerStart(xSpeedTimer, 0) != pdPASS) {
-        // ´íÎó´¦Àí£º¶¨Ê±Æ÷Æô¶¯Ê§°Ü
-        while (1);
+    switch (current_state) {
+        case 1: case 7: case 8: case 14:
+            instance->position++;
+            return;
+        case 2: case 4: case 11: case 13:
+            instance->position--;
+            return;
+        case 3: case 12:
+            instance->position += 2;
+            return;
+        case 6: case 9:
+            instance->position -= 2;
+            return;
+        default:
+             // No change or invalid state
+             return;
     }
 }
 
-void QEI0_IRQHandler(void)
-{
-    D_State[0] = DL_GPIO_readPins(ENCODER_PORT, ENCODER_D1_PIN);
-    // ÔÚÖÐ¶ÏÖÐÊ¹ÓÃISR°æ±¾µÄ»¥³âËøº¯Êý
-    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-    if (xSemaphoreTakeFromISR(xMotorCountMutex, &xHigherPriorityTaskWoken) == pdTRUE) {
-        if (!D_State[0]) {
-            left_motor_period_cnt--;
+bool encoder_manager_init(
+    encoder_manager_t* manager,
+    const encoder_config_t* configs, uint8_t num_encoders,
+    encoder_gpio_read_func_t gpio_read_func,
+    encoder_attach_interrupt_func_t attach_interrupt_func,
+    encoder_enter_critical_func_t enter_critical_func,
+    encoder_exit_critical_func_t exit_critical_func
+) {
+    if (manager == NULL || configs == NULL || num_encoders == 0) {
+        log_e("Invalid arguments for encoder_manager_init.");
+        return false;
+    }
+
+    // å¯ä»¥é€‰æ‹©åŠ¨æ€åˆ†é…å†…å­˜ï¼Œæˆ–è€…ä½¿ç”¨é™æ€å…¨å±€æ•°ç»„
+    // è¿™é‡Œä¸ºäº†ç®€å•ï¼Œå‡è®¾ manager->encoders å·²ç»æŒ‡å‘ä¸€ä¸ªè¶³å¤Ÿå¤§çš„é™æ€æ•°ç»„
+    // å¦‚æžœéœ€è¦åŠ¨æ€åˆ†é…ï¼Œè¯·å–æ¶ˆæ³¨é‡Šä¸‹é¢çš„ä»£ç 
+    /*
+    manager->encoders = (encoder_instance_t*)malloc(num_encoders * sizeof(encoder_instance_t));
+    if (manager->encoders == NULL) {
+        log_e("Failed to allocate memory for encoder instances.");
+        return false;
+    }
+    */
+
+    manager->num_encoders = num_encoders;
+    manager->gpio_read_func = gpio_read_func;
+    manager->attach_interrupt_func = attach_interrupt_func;
+    manager->enter_critical_func = enter_critical_func;
+    manager->exit_critical_func = exit_critical_func;
+
+    for (uint8_t i = 0; i < num_encoders; ++i) {
+        manager->encoders[i].manager = manager; // è®¾ç½®æŒ‡å‘æ‰€å±žçš„ç®¡ç†å™¨
+        manager->encoders[i].pin1_gpio_handle = configs[i].pin1_gpio_handle;
+        manager->encoders[i].pin1_bitmask = configs[i].pin1_bitmask;
+        manager->encoders[i].pin2_gpio_handle = configs[i].pin2_gpio_handle;
+        manager->encoders[i].pin2_bitmask = configs[i].pin2_bitmask;
+        manager->encoders[i].pin1_handle = configs[i].pin1_handle;
+        manager->encoders[i].pin2_handle = configs[i].pin2_handle;
+        manager->encoders[i].position = 0;
+        manager->encoders[i].interrupts_in_use = 0;
+
+        // åœ¨åˆå§‹åŒ–æ—¶è¯»å–åˆå§‹çŠ¶æ€
+        // è€ƒè™‘æ·»åŠ ä¸€ä¸ªå»¶æ—¶ï¼Œè®©å¤–éƒ¨ç”µè·¯ç¨³å®š
+        // delayMicroseconds(2000); // å¦‚æžœéœ€è¦ï¼Œè¯·å®žçŽ°ä¸€ä¸ªå¹³å°æ— å…³çš„å»¶æ—¶å‡½æ•°
+
+        uint8_t s = 0;
+        if (manager->gpio_read_func(manager->encoders[i].pin1_gpio_handle, manager->encoders[i].pin1_bitmask)) s |= 1;
+        if (manager->gpio_read_func(manager->encoders[i].pin2_gpio_handle, manager->encoders[i].pin2_bitmask)) s |= 2;
+        manager->encoders[i].state = s;
+
+        // å°è¯•ä¸ºæ¯ä¸ªç¼–ç å™¨å®žä¾‹æŒ‚è½½ä¸­æ–­
+        if (manager->attach_interrupt_func != NULL) {
+            // ä¸º A ç›¸å¼•è„šæŒ‚è½½ä¸­æ–­
+            if (manager->attach_interrupt_func(manager->encoders[i].pin1_handle, encoder_update, &(manager->encoders[i]))) {
+                manager->encoders[i].interrupts_in_use++;
+            }
+            // ä¸º B ç›¸å¼•è„šæŒ‚è½½ä¸­æ–­
+            if (manager->attach_interrupt_func(manager->encoders[i].pin2_handle, encoder_update, &(manager->encoders[i]))) {
+                manager->encoders[i].interrupts_in_use++;
+            }
+            if (manager->encoders[i].interrupts_in_use < 2) {
+                 log_w("Encoder instance %u: Failed to attach interrupt to both pins. Will be polled.", i);
+            } else {
+                 log_i("Encoder instance %u: Interrupts attached to both pins.", i);
+            }
         } else {
-            left_motor_period_cnt++;
+             log_w("Encoder instance %u: No interrupt attach function provided. Will be polled.", i);
         }
-        xSemaphoreGiveFromISR(xMotorCountMutex, &xHigherPriorityTaskWoken);
     }
-    // Èç¹ûÓÐ¸ü¸ßÓÅÏÈ¼¶µÄÈÎÎñ±»»½ÐÑ£¬ÇëÇóÉÏÏÂÎÄÇÐ»»
-    portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+    log_i("Encoder manager initialized with %u encoders.", num_encoders);
+    return true;
 }
 
-void QEI1_IRQHandler(void)
-{
-    D_State[1] = DL_GPIO_readPins(ENCODER_PORT, ENCODER_D2_PIN);
-    // ÔÚÖÐ¶ÏÖÐÊ¹ÓÃISR°æ±¾µÄ»¥³âËøº¯Êý
-    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-    if (xSemaphoreTakeFromISR(xMotorCountMutex, &xHigherPriorityTaskWoken) == pdTRUE) {
-        if (!D_State[1]) {
-            right_motor_period_cnt++;
-        } else {
-            right_motor_period_cnt--;
-        }
-        xSemaphoreGiveFromISR(xMotorCountMutex, &xHigherPriorityTaskWoken);
+int32_t encoder_manager_read(encoder_manager_t* manager, uint8_t index) {
+    int32_t ret = 0;
+
+    if (manager == NULL || index >= manager->num_encoders) {
+        log_e("Invalid encoder index %u for read operation.", index);
+        return 0;
     }
-    // Èç¹ûÓÐ¸ü¸ßÓÅÏÈ¼¶µÄÈÎÎñ±»»½ÐÑ£¬ÇëÇóÉÏÏÂÎÄÇÐ»»
-    portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
-}
 
-void GROUP1_IRQHandler(void)
-{
-    if (DL_Interrupt_getStatusGroup(DL_INTERRUPT_GROUP_1, DL_INTERRUPT_GROUP1_GPIOB)) {
-        if (DL_GPIO_getEnabledInterruptStatus(ENCODER_PORT, ENCODER_P1_PIN)) {
-            QEI0_IRQHandler();
-            DL_GPIO_clearInterruptStatus(ENCODER_PORT, ENCODER_P1_PIN);
-        }
+    encoder_instance_t* instance = &manager->encoders[index];
 
-        if (DL_GPIO_getEnabledInterruptStatus(ENCODER_PORT, ENCODER_P2_PIN)) {
-            QEI1_IRQHandler();
-            DL_GPIO_clearInterruptStatus(ENCODER_PORT, ENCODER_P2_PIN);
+    // å¦‚æžœä¸­æ–­æœªä½¿ç”¨ï¼ˆä¾‹å¦‚ attach_interrupt_func ä¸º NULL æˆ–åªæŒ‚è½½æˆåŠŸä¸€æ ¹çº¿ï¼‰ï¼Œåˆ™éœ€è¦æ‰‹åŠ¨æ›´æ–°
+    if (instance->interrupts_in_use < 2) {
+        // è¿›å…¥ä¸´ç•ŒåŒºä¿æŠ¤å…±äº«èµ„æº
+        if (manager->enter_critical_func != NULL) {
+            manager->enter_critical_func();
         }
-        DL_Interrupt_clearGroup(DL_INTERRUPT_GROUP_1, DL_INTERRUPT_GROUP1_GPIOB);
+        // æ‰‹åŠ¨è°ƒç”¨æ›´æ–°å‡½æ•°
+        encoder_update(instance);
+        ret = instance->position;
+        // é€€å‡ºä¸´ç•ŒåŒº
+        if (manager->exit_critical_func != NULL) {
+            manager->exit_critical_func();
+        }
+    } else {
+        // å¦‚æžœä½¿ç”¨äº†ä¸­æ–­ï¼Œåªéœ€è¦ä¿æŠ¤å¯¹ position çš„è®¿é—®
+        // è¿›å…¥ä¸´ç•ŒåŒºä¿æŠ¤å…±äº«èµ„æº
+        if (manager->enter_critical_func != NULL) {
+            manager->enter_critical_func();
+        }
+        ret = instance->position;
+        // é€€å‡ºä¸´ç•ŒåŒº
+        if (manager->exit_critical_func != NULL) {
+            manager->exit_critical_func();
+        }
     }
+    return ret;
 }
 
-float get_left_motor_speed(void)
-{
-    return NEncoder.left_motor_speed_mps; // ·µ»ØËÙ¶È£¬µ¥Î»Îª m/s
-}
+int32_t encoder_manager_read_and_reset(encoder_manager_t* manager, uint8_t index) {
+    int32_t ret = 0;
 
-float get_right_motor_speed(void)
-{
-    return NEncoder.right_motor_speed_mps; // ·µ»ØËÙ¶È£¬µ¥Î»Îª m/s
+    if (manager == NULL || index >= manager->num_encoders) {
+        log_e("Invalid encoder index %u for read_and_reset operation.", index);
+        return 0;
+    }
+
+    encoder_instance_t* instance = &manager->encoders[index];
+
+    // è¿›å…¥ä¸´ç•ŒåŒºä¿æŠ¤å…±äº«èµ„æº
+    if (manager->enter_critical_func != NULL) {
+        manager->enter_critical_func();
+    }
+
+    // å¦‚æžœä¸­æ–­æœªä½¿ç”¨ï¼Œåˆ™éœ€è¦æ‰‹åŠ¨æ›´æ–°
+    if (instance->interrupts_in_use < 2) {
+        encoder_update(instance);
+    }
+
+    ret = instance->position;
+    instance->position = 0;
+
+    // é€€å‡ºä¸´ç•ŒåŒº
+    if (manager->exit_critical_func != NULL) {
+        manager->exit_critical_func();
+    }
+    return ret;
+ }
+
+void encoder_manager_write(encoder_manager_t* manager, uint8_t index, int32_t position) {
+    if (manager == NULL || index >= manager->num_encoders) {
+        log_e("Invalid encoder index %u for write operation.", index);
+        return;
+    }
+
+    encoder_instance_t* instance = &manager->encoders[index];
+
+    // è¿›å…¥ä¸´ç•ŒåŒºä¿æŠ¤å…±äº«èµ„æº
+    if (manager->enter_critical_func != NULL) {
+        manager->enter_critical_func();
+    }
+    instance->position = position;
+    // é€€å‡ºä¸´ç•ŒåŒº
+    if (manager->exit_critical_func != NULL) {
+        manager->exit_critical_func();
+    }
 }

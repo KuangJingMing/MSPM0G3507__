@@ -1,9 +1,8 @@
 /**
  * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
  * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
- * @cliArgs --device "MSPM0G350X" --part "Default" --package "LQFP-64(PM)" --product "mspm0_sdk@2.04.00.06"
- * @v2CliArgs --device "MSPM0G3507" --package "LQFP-64(PM)" --product "mspm0_sdk@2.04.00.06"
- * @versions {"tool":"1.23.1+4034"}
+ * @cliArgs --device "MSPM0G350X" --package "LQFP-64(PM)" --part "Default" --product "mspm0_sdk@2.01.00.03"
+ * @versions {"tool":"1.20.0+3587"}
  */
 
 /**
@@ -58,27 +57,33 @@ GPIO2.associatedPins[2].assignedPort = "PORTB";
 GPIO2.associatedPins[2].assignedPin  = "20";
 GPIO2.associatedPins[2].pin.$assign  = "PB20";
 
-GPIO3.port                                = "PORTB";
-GPIO3.$name                               = "ENCODER";
+GPIO3.port                          = "PORTB";
+GPIO3.$name                         = "ENCODER";
 GPIO3.associatedPins.create(4);
-GPIO3.associatedPins[0].direction         = "INPUT";
-GPIO3.associatedPins[0].polarity          = "RISE_FALL";
-GPIO3.associatedPins[0].interruptPriority = "2";
-GPIO3.associatedPins[0].$name             = "D1";
-GPIO3.associatedPins[0].assignedPin       = "6";
-GPIO3.associatedPins[1].$name             = "D2";
-GPIO3.associatedPins[1].assignedPin       = "7";
-GPIO3.associatedPins[1].direction         = "INPUT";
-GPIO3.associatedPins[2].$name             = "P1";
-GPIO3.associatedPins[2].assignedPin       = "4";
-GPIO3.associatedPins[2].direction         = "INPUT";
-GPIO3.associatedPins[2].interruptEn       = true;
-GPIO3.associatedPins[2].polarity          = "RISE";
-GPIO3.associatedPins[3].$name             = "P2";
-GPIO3.associatedPins[3].assignedPin       = "5";
-GPIO3.associatedPins[3].direction         = "INPUT";
-GPIO3.associatedPins[3].interruptEn       = true;
-GPIO3.associatedPins[3].polarity          = "RISE";
+GPIO3.associatedPins[0].$name       = "M1";
+GPIO3.associatedPins[0].assignedPin = "4";
+GPIO3.associatedPins[0].direction   = "INPUT";
+GPIO3.associatedPins[0].interruptEn = true;
+GPIO3.associatedPins[0].polarity    = "RISE_FALL";
+GPIO3.associatedPins[0].pin.$assign = "PB4";
+GPIO3.associatedPins[1].$name       = "M2";
+GPIO3.associatedPins[1].assignedPin = "5";
+GPIO3.associatedPins[1].direction   = "INPUT";
+GPIO3.associatedPins[1].interruptEn = true;
+GPIO3.associatedPins[1].polarity    = "RISE_FALL";
+GPIO3.associatedPins[1].pin.$assign = "PB5";
+GPIO3.associatedPins[2].$name       = "M3";
+GPIO3.associatedPins[2].assignedPin = "6";
+GPIO3.associatedPins[2].direction   = "INPUT";
+GPIO3.associatedPins[2].interruptEn = true;
+GPIO3.associatedPins[2].polarity    = "RISE_FALL";
+GPIO3.associatedPins[2].pin.$assign = "PB6";
+GPIO3.associatedPins[3].$name       = "M4";
+GPIO3.associatedPins[3].assignedPin = "7";
+GPIO3.associatedPins[3].direction   = "INPUT";
+GPIO3.associatedPins[3].interruptEn = true;
+GPIO3.associatedPins[3].polarity    = "RISE_FALL";
+GPIO3.associatedPins[3].pin.$assign = "PB7";
 
 GPIO4.$name                              = "GPIO_KEY";
 GPIO4.associatedPins.create(5);
@@ -176,13 +181,13 @@ SPI1.targetBitRate              = 1000000;
 SPI1.frameFormat                = "MOTO3";
 SPI1.phase                      = "1";
 SPI1.polarity                   = "1";
-SPI1.sclkPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric4";
-SPI1.mosiPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric5";
-SPI1.misoPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric6";
 SPI1.peripheral.$assign         = "SPI1";
 SPI1.peripheral.sclkPin.$assign = "PA17";
 SPI1.peripheral.mosiPin.$assign = "PB15";
 SPI1.peripheral.misoPin.$assign = "PA16";
+SPI1.sclkPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric4";
+SPI1.mosiPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric5";
+SPI1.misoPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric6";
 
 SYSCTL.clockTreeEn = true;
 
@@ -223,8 +228,4 @@ Board.peripheral.swclkPin.$suggestSolution   = "PA20";
 Board.peripheral.swdioPin.$suggestSolution   = "PA19";
 GPIO1.associatedPins[0].pin.$suggestSolution = "PA0";
 GPIO1.associatedPins[1].pin.$suggestSolution = "PA1";
-GPIO3.associatedPins[0].pin.$suggestSolution = "PB6";
-GPIO3.associatedPins[1].pin.$suggestSolution = "PB7";
-GPIO3.associatedPins[2].pin.$suggestSolution = "PB4";
-GPIO3.associatedPins[3].pin.$suggestSolution = "PB5";
 GPIO5.associatedPins[0].pin.$suggestSolution = "PB25";

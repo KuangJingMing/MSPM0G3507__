@@ -1,6 +1,5 @@
-./objects/encoder.o: ..\application\hardware\drivers\encoder.c \
-  ..\application\hardware\drivers\encoder.h ..\application\utils\log.h \
-  ..\application\hardware\bsp\uart_driver.h \
+./objects/gray_detection_app.o: ..\application\app\gray_detection_app.c \
+  ..\application\hardware\drivers\pca9555.h \
   ..\project\ti_msp_dl_config.h ..\source\ti\devices\msp\msp.h \
   ..\source\ti\devices\DeviceFamily.h \
   ..\source\ti\devices\msp\m0p\mspm0g350x.h \
@@ -58,4 +57,8 @@
   ..\source\ti\driverlib\dl_vref.h ..\source\ti\driverlib\dl_wwdt.h \
   ..\source\ti\driverlib\m0p\dl_interrupt.h \
   ..\source\ti\driverlib\m0p\dl_systick.h \
+  ..\application\hardware\bsp\software_i2c.h \
+  ..\application\utils\delay.h ..\application\app\gray_detection_app.h \
+  ..\application\utils\log_config.h ..\application\utils\log.h \
+  ..\application\hardware\bsp\uart_driver.h \
   ..\application\include\global_config.h

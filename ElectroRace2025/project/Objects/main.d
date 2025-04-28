@@ -67,17 +67,20 @@
   ..\kernel\freertos\Source\include\list.h \
   ..\application\hardware\drivers\oled_driver.h \
   ..\application\utils\delay.h ..\source\third_party\u8g2\u8g2.h \
-  ..\source\third_party\u8g2\u8x8.h ..\application\app\gray_detection.h \
+  ..\source\third_party\u8g2\u8x8.h \
+  ..\application\app\gray_detection_app.h \
   ..\application\hardware\drivers\pca9555.h \
   ..\application\hardware\bsp\software_i2c.h \
   ..\application\hardware\drivers\motor_hardware.h \
   ..\application\hardware\drivers\encoder.h \
   ..\kernel\freertos\Source\include\timers.h \
-  ..\application\app\motor_user.h \
+  ..\application\app\motor_app.h \
   ..\application\app\communication\embedfire_protocol.h \
   ..\application\hardware\bsp\uart_driver.h \
   ..\application\include\global_config.h \
   ..\application\app\communication\serialplot_protocol.h \
-  ..\application\app\button_user.h \
+  ..\application\app\button_app.h \
   ..\application\hardware\drivers\multi_button.h \
-  ..\application\app\u8g2_menu\menu_user.h ..\application\utils\log.h
+  ..\application\app\u8g2_menu\menu_app.h \
+  ..\application\app\encoder_app.h ..\application\utils\log_config.h \
+  ..\application\utils\log.h

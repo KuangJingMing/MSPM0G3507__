@@ -1,4 +1,4 @@
-#include "motor_user.h"
+#include "motor_app.h"
 
 extern motorHardWareInterface l298n_interface; // 具体的 L298N 实现接口
 extern motorHardWareInterface tb6612_interface;

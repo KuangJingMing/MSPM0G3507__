@@ -1,6 +1,6 @@
-./objects/encoder.o: ..\application\hardware\drivers\encoder.c \
-  ..\application\hardware\drivers\encoder.h ..\application\utils\log.h \
-  ..\application\hardware\bsp\uart_driver.h \
+./objects/motor_app.o: ..\application\app\motor_app.c \
+  ..\application\app\motor_app.h \
+  ..\application\hardware\drivers\motor_hardware.h \
   ..\project\ti_msp_dl_config.h ..\source\ti\devices\msp\msp.h \
   ..\source\ti\devices\DeviceFamily.h \
   ..\source\ti\devices\msp\m0p\mspm0g350x.h \
@@ -57,5 +57,4 @@
   ..\source\ti\driverlib\dl_uart.h ..\source\ti\driverlib\dl_uart_main.h \
   ..\source\ti\driverlib\dl_vref.h ..\source\ti\driverlib\dl_wwdt.h \
   ..\source\ti\driverlib\m0p\dl_interrupt.h \
-  ..\source\ti\driverlib\m0p\dl_systick.h \
-  ..\application\include\global_config.h
+  ..\source\ti\driverlib\m0p\dl_systick.h

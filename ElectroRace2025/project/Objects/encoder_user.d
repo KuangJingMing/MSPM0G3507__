@@ -1,6 +1,5 @@
-./objects/encoder.o: ..\application\hardware\drivers\encoder.c \
-  ..\application\hardware\drivers\encoder.h ..\application\utils\log.h \
-  ..\application\hardware\bsp\uart_driver.h \
+./objects/encoder_user.o: ..\application\app\encoder_user.c \
+  ..\application\hardware\drivers\encoder.h \
   ..\project\ti_msp_dl_config.h ..\source\ti\devices\msp\msp.h \
   ..\source\ti\devices\DeviceFamily.h \
   ..\source\ti\devices\msp\m0p\mspm0g350x.h \
@@ -58,4 +57,14 @@
   ..\source\ti\driverlib\dl_vref.h ..\source\ti\driverlib\dl_wwdt.h \
   ..\source\ti\driverlib\m0p\dl_interrupt.h \
   ..\source\ti\driverlib\m0p\dl_systick.h \
+  ..\kernel\freertos\Source\include\FreeRTOS.h \
+  ..\kernel\freertos\builds\LP_MSPM0G3507\release\FreeRTOSConfig.h \
+  ..\kernel\freertos\Source\include\projdefs.h \
+  ..\kernel\freertos\Source\include\portable.h \
+  ..\kernel\freertos\Source\include\deprecated_definitions.h \
+  ..\kernel\freertos\Source\portable\GCC\ARM_CM0\portmacro.h \
+  ..\kernel\freertos\Source\include\mpu_wrappers.h \
+  ..\kernel\freertos\Source\include\task.h \
+  ..\kernel\freertos\Source\include\list.h ..\application\utils\log.h \
+  ..\application\hardware\bsp\uart_driver.h \
   ..\application\include\global_config.h
