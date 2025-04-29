@@ -16,8 +16,7 @@ $cleanupPatterns = @(
     "JLinkSettings.ini",
     "*.lst",
     "syscfg_c.rov.xs",
-    "project/Objects/", # 清理整个 Objects directory
-    # "ElectroRace2025/kernel/freertos/builds/", # **不再清理 builds/ 目录本身，因为要保留**
+    "ElectroRace2025/project/Objects/", # 清理整个 Objects directory
     "ElectroRace2025/kernel/freertos/makefile",
     "ElectroRace2025/kernel/freertos/rov/",
     "ElectroRace2025/kernel/freertos/rov_theia/",
@@ -32,8 +31,6 @@ $cleanupPatterns = @(
     "ElectroRace2025/source/third_party/u8g2/csrc/*.o",
     "ElectroRace2025/source/third_party/u8g2/csrc/*.d",
     "ElectroRace2025/source/ti/driverlib/.meta/",
-    # "ElectroRace2025/source/ti/driverlib/lib/", # **不再清理整个 lib/ 目录，因为要保留一部分**
-    # 清理 lib/ 目录下的其他子目录，除了保留的 keil/m0p/mspm0g1x0x_g3x0x/
     "ElectroRace2025/source/ti/driverlib/lib/*/",
     "ElectroRace2025/source/ti/driverlib/lib/*/*/",
     "ElectroRace2025/source/ti/driverlib/*/*.o",
@@ -42,7 +39,6 @@ $cleanupPatterns = @(
     "ElectroRace2025/source/ti/driverlib/*/*/*.d",
     "ElectroRace2025/application/**/*.o",
     "ElectroRace2025/application/**/*.d",
-    # "ElectroRace2025/tools/", # **不再清理 tools/ 目录本身，因为要保留**
     "ElectroRace2025/tools/*.cfg", # 清理工具目录下的特定临时文件
     "ElectroRace2025/tools/*.bat",  # 清理工具目录下的特定临时文件
     "*.kjmsd", # 添加清理以.kjmsd结尾的文件
@@ -57,8 +53,6 @@ $keptToolsDirPathPrefix = Join-Path -Path $projectRoot -ChildPath "ElectroRace20
 
 # 需要保留的 DriverLib 库文件目录的完整路径前缀 (用于排除)
 $keptDriverLibKeilLibDirPathPrefix = Join-Path -Path $projectRoot -ChildPath "ElectroRace2025/source/ti/driverlib/lib/keil/m0p/mspm0g1x0x_g3x0x/"
-
-# 不需要清理 .sct 或 .syscfg 文件，所以不需要额外的排除列表
 
 Write-Host "开始清理项目中的临时文件..."
 
