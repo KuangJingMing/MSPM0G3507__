@@ -1,0 +1,85 @@
+# Ignore common build outputs in the project directory
+*.map
+# Removed: *.syscfg #不再忽略所有的.syscfg文件
+*.uvguix.*
+*.uvoptx
+JLinkLog.txt
+JLinkSettings.ini
+*.lst
+syscfg_c.rov.xs
+
+# Explicitly include the Keil project file to ensure it's not ignored
+!freertos_demo.uvprojx
+
+# Ignore the entire project Objects directory
+project/Objects/
+
+# --- FreeRTOS Rules ---
+# Keep the entire builds directory
+!/ElectroRace2025/kernel/freertos/builds/
+!/ElectroRace2025/kernel/freertos/builds/*
+!/ElectroRace2025/kernel/freertos/builds/*/*
+
+# Ignore FreeRTOS makefile
+/ElectroRace2025/kernel/freertos/makefile
+
+# Ignore FreeRTOS ROV and ROV_Theia directories
+/ElectroRace2025/kernel/freertos/rov/
+/ElectroRace2025/kernel/freertos/rov_theia/
+
+# Ignore FreeRTOS build outputs within portable directories (object and dependency files)
+/ElectroRace2025/kernel/freertos/Source/portable/*/*.o
+/ElectroRace2025/kernel/freertos/Source/portable/*/*.d
+/ElectroRace2025/kernel/freertos/Source/portable/*/*/*.o
+/ElectroRace2025/kernel/freertos/Source/portable/*/*/*.d
+
+# Ignore FreeRTOS build outputs within dpl directory (object and dependency files)
+/ElectroRace2025/kernel/freertos/dpl/*.o
+/ElectroRace2025/kernel/freertos/dpl/*.d
+
+# Ignore FreeRTOS build outputs within the main Source directory (object and dependency files)
+/ElectroRace2025/kernel/freertos/Source/*.o
+/ElectroRace2025/kernel/freertos/Source/*.d
+# --- End FreeRTOS Rules ---
+
+
+# Ignore third_party build outputs (object and dependency files)
+/ElectroRace2025/source/third_party/u8g2/csrc/*.o
+/ElectroRace2025/source/third_party/u8g2/csrc/*.d
+
+# --- DriverLib Rules ---
+# Ignore driverlib meta files
+/ElectroRace2025/source/ti/driverlib/.meta/
+
+# Keep the specific keil library directory
+!/ElectroRace2025/source/ti/driverlib/lib/keil/m0p/mspm0g1x0x_g3x0x/
+!/ElectroRace2025/source/ti/driverlib/lib/keil/m0p/mspm0g1x0x_g3x0x/*
+!/ElectroRace2025/source/ti/driverlib/lib/keil/m0p/mspm0g1x0x_g3x0x/*/*
+
+# Ignore other driverlib library directories
+/ElectroRace2025/source/ti/driverlib/lib/
+
+# Ignore driverlib build outputs (object and dependency files)
+/ElectroRace2025/source/ti/driverlib/*/*.o
+/ElectroRace2025/source/ti/driverlib/*/*.d
+/ElectroRace2025/source/ti/driverlib/*/*/*.o
+/ElectroRace2025/source/ti/driverlib/*/*/*.d
+# --- End DriverLib Rules ---
+
+# Ignore application build outputs (object and dependency files)
+/ElectroRace2025/application/**/*.o
+/ElectroRace2025/application/**/*.d
+
+# --- Tools Rules ---
+# Keep the entire tools directory
+!/ElectroRace2025/tools/
+!/ElectroRace2025/tools/*
+!/ElectroRace2025/tools/*/*
+# --- End Tools Rules ---
+
+# --- User-specific ignored files ---
+*.kjmsd
+# --- End User-specific ignored files ---
+
+# Ignore editor specific files
+.metadata/
