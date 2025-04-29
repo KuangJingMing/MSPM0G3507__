@@ -12,7 +12,7 @@ syscfg_c.rov.xs
 !freertos_demo.uvprojx
 
 # Ignore the entire project Objects directory
-project/Objects/
+/ElectroRace2025/project/Objects/
 
 # --- FreeRTOS Rules ---
 # Keep the entire builds directory
