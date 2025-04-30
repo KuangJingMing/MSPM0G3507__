@@ -29,7 +29,8 @@ void init_task(void *pvParameters) {
 int main(void)
 {
     SYSCFG_DL_init(); // 系统硬件初始化
-	xTaskCreate(encoder_print_task, "encoder_print_task", 256, NULL, tskIDLE_PRIORITY + 2, NULL);
+	menu_init();
+//	xTaskCreate(encoder_print_task, "encoder_print_task", 256, NULL, tskIDLE_PRIORITY + 2, NULL);
 		vTaskStartScheduler();
     while (1) {
     
