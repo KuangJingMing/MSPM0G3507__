@@ -5,7 +5,7 @@
 #include "stdarg.h"
 #include "stdio.h"
 #include "string.h"
-#include "global_config.h"
+#include "common_defines.h"
 
 typedef struct UsartUtil 
 {

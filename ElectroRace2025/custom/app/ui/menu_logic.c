@@ -10,7 +10,7 @@ static menu_variables_t menu_variables[MAX_INDEX_COUNT];
 
 void create_oled_menu(MenuNode *root) {
     current_menu = root;
-    xTaskCreate(vOLEDTask, "OLED_MENU", 512, NULL, tskIDLE_PRIORITY + 1, &xOLEDTaskHandle);
+    xTaskCreate(vOLEDTask, "OLED_MENU", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, &xOLEDTaskHandle);
 }
 void select_next(void)
 {

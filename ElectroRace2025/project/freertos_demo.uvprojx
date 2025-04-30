@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>__MSPM0G3507__</Define>
               <Undefine></Undefine>
-              <IncludePath>..\project;..\source;..\source\third_party\CMSIS\Core\Include;..\kernel\freertos\Source\include;..\kernel\freertos\Source\portable\GCC\ARM_CM0;..\kernel\freertos\builds\LP_MSPM0G3507\release;..\application\app;..\application\app\fusion;..\application\app\communication;..\application\hardware\drivers;..\application\hardware\bsp;..\application\include;..\application\math;..\application\user;..\application\utils;..\source\third_party\u8g2;..\application\app\u8g2_menu</IncludePath>
+              <IncludePath>..\project;..\source;..\source\third_party\CMSIS\Core\Include;..\kernel\freertos\Source\include;..\kernel\freertos\Source\portable\GCC\ARM_CM0;..\kernel\freertos\builds\LP_MSPM0G3507\release;..\custom\app\ui;..\custom\app\communication;..\custom\app\controller;..\custom\hardware\drivers;..\custom\hardware\bsp;..\custom\include;..\custom\math;..\custom\math\fusion;..\custom\user;..\custom\utils;..\source\third_party\u8g2</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -385,14 +385,19 @@
           <GroupName>include</GroupName>
           <Files>
             <File>
-              <FileName>global_config.h</FileName>
+              <FileName>common_defines.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\application\include\global_config.h</FilePath>
+              <FilePath>..\custom\include\common_defines.h</FilePath>
             </File>
             <File>
               <FileName>common_include.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\application\include\common_include.h</FilePath>
+              <FilePath>..\custom\include\common_include.h</FilePath>
+            </File>
+            <File>
+              <FileName>log_config.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\custom\include\log_config.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -402,7 +407,7 @@
             <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\user\main.c</FilePath>
+              <FilePath>..\custom\user\main.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -427,87 +432,67 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>app</GroupName>
-          <Files>
-            <File>
-              <FileName>button_app.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\app\button_app.c</FilePath>
-            </File>
-            <File>
-              <FileName>encoder_app.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\app\encoder_app.c</FilePath>
-            </File>
-            <File>
-              <FileName>gray_detection_app.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\app\gray_detection_app.c</FilePath>
-            </File>
-            <File>
-              <FileName>motor_app.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\app\motor_app.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>app/u8g2_menu</GroupName>
-          <Files>
-            <File>
-              <FileName>menu_ui.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\app\u8g2_menu\menu_ui.c</FilePath>
-            </File>
-            <File>
-              <FileName>menu_logic.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\app\u8g2_menu\menu_logic.c</FilePath>
-            </File>
-            <File>
-              <FileName>menu_app.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\app\u8g2_menu\menu_app.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>app/communication</GroupName>
           <Files>
             <File>
               <FileName>embedfire_protocol_receive.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\app\communication\embedfire_protocol_receive.c</FilePath>
+              <FilePath>..\custom\app\communication\embedfire_protocol_receive.c</FilePath>
             </File>
             <File>
               <FileName>embedfire_protocol_send.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\app\communication\embedfire_protocol_send.c</FilePath>
+              <FilePath>..\custom\app\communication\embedfire_protocol_send.c</FilePath>
             </File>
             <File>
               <FileName>serialplot_protocol.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\app\communication\serialplot_protocol.c</FilePath>
+              <FilePath>..\custom\app\communication\serialplot_protocol.c</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>app/fusion</GroupName>
+          <GroupName>app/controller</GroupName>
           <Files>
             <File>
-              <FileName>FusionAhrs.c</FileName>
+              <FileName>encoder_app.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\app\fusion\FusionAhrs.c</FilePath>
+              <FilePath>..\custom\app\controller\encoder_app.c</FilePath>
             </File>
             <File>
-              <FileName>FusionCompass.c</FileName>
+              <FileName>gray_detection_app.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\app\fusion\FusionCompass.c</FilePath>
+              <FilePath>..\custom\app\controller\gray_detection_app.c</FilePath>
             </File>
             <File>
-              <FileName>FusionOffset.c</FileName>
+              <FileName>motor_app.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\app\fusion\FusionOffset.c</FilePath>
+              <FilePath>..\custom\app\controller\motor_app.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>app/ui</GroupName>
+          <Files>
+            <File>
+              <FileName>button_app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\app\ui\button_app.c</FilePath>
+            </File>
+            <File>
+              <FileName>menu_app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\app\ui\menu_app.c</FilePath>
+            </File>
+            <File>
+              <FileName>menu_logic.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\app\ui\menu_logic.c</FilePath>
+            </File>
+            <File>
+              <FileName>menu_ui.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\app\ui\menu_ui.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -517,12 +502,12 @@
             <File>
               <FileName>delay.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\utils\delay.c</FilePath>
+              <FilePath>..\custom\utils\delay.c</FilePath>
             </File>
             <File>
               <FileName>log.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\utils\log.c</FilePath>
+              <FilePath>..\custom\utils\log.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -532,47 +517,47 @@
             <File>
               <FileName>eeprom.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\hardware\drivers\eeprom.c</FilePath>
+              <FilePath>..\custom\hardware\drivers\eeprom.c</FilePath>
             </File>
             <File>
               <FileName>encoder.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\hardware\drivers\encoder.c</FilePath>
+              <FilePath>..\custom\hardware\drivers\encoder.c</FilePath>
             </File>
             <File>
               <FileName>icm20608.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\hardware\drivers\icm20608.c</FilePath>
-            </File>
-            <File>
-              <FileName>pca9555.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\hardware\drivers\pca9555.c</FilePath>
-            </File>
-            <File>
-              <FileName>w25qxx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\hardware\drivers\w25qxx.c</FilePath>
+              <FilePath>..\custom\hardware\drivers\icm20608.c</FilePath>
             </File>
             <File>
               <FileName>motor_l298n.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\hardware\drivers\motor_l298n.c</FilePath>
+              <FilePath>..\custom\hardware\drivers\motor_l298n.c</FilePath>
             </File>
             <File>
               <FileName>motor_tb6612.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\hardware\drivers\motor_tb6612.c</FilePath>
+              <FilePath>..\custom\hardware\drivers\motor_tb6612.c</FilePath>
             </File>
             <File>
               <FileName>multi_button.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\hardware\drivers\multi_button.c</FilePath>
+              <FilePath>..\custom\hardware\drivers\multi_button.c</FilePath>
             </File>
             <File>
               <FileName>oled_driver.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\hardware\drivers\oled_driver.c</FilePath>
+              <FilePath>..\custom\hardware\drivers\oled_driver.c</FilePath>
+            </File>
+            <File>
+              <FileName>pca9555.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\hardware\drivers\pca9555.c</FilePath>
+            </File>
+            <File>
+              <FileName>w25qxx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\hardware\drivers\w25qxx.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -582,22 +567,17 @@
             <File>
               <FileName>hardware_i2c.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\hardware\bsp\hardware_i2c.c</FilePath>
+              <FilePath>..\custom\hardware\bsp\hardware_i2c.c</FilePath>
             </File>
             <File>
               <FileName>software_i2c.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\hardware\bsp\software_i2c.c</FilePath>
+              <FilePath>..\custom\hardware\bsp\software_i2c.c</FilePath>
             </File>
             <File>
               <FileName>uart_driver.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\hardware\bsp\uart_driver.c</FilePath>
-            </File>
-            <File>
-              <FileName>spi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\hardware\bsp\spi.c</FilePath>
+              <FilePath>..\custom\hardware\bsp\uart_driver.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -605,19 +585,14 @@
           <GroupName>math</GroupName>
           <Files>
             <File>
-              <FileName>filter.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\math\filter.c</FilePath>
-            </File>
-            <File>
-              <FileName>sensor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\application\math\sensor.c</FilePath>
-            </File>
-            <File>
               <FileName>fast_math.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\application\math\fast_math.c</FilePath>
+              <FilePath>..\custom\math\fast_math.c</FilePath>
+            </File>
+            <File>
+              <FileName>filter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\math\filter.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -628,6 +603,26 @@
               <FileName>README.md</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\README.md</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>math/fusion</GroupName>
+          <Files>
+            <File>
+              <FileName>FusionAhrs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\math\fusion\FusionAhrs.c</FilePath>
+            </File>
+            <File>
+              <FileName>FusionCompass.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\math\fusion\FusionCompass.c</FilePath>
+            </File>
+            <File>
+              <FileName>FusionOffset.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\math\fusion\FusionOffset.c</FilePath>
             </File>
           </Files>
         </Group>

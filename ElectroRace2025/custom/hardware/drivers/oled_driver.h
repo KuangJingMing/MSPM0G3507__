@@ -14,8 +14,8 @@
 
 
 // 驱动模式选择
-#define OLED_DRIVER_MODE_SPI
-//#define OLED_DRIVER_MODE_I2C
+//#define OLED_DRIVER_MODE_SPI
+#define OLED_DRIVER_MODE_I2C
 
 #ifdef OLED_DRIVER_MODE_SPI
 

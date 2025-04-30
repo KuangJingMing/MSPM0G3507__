@@ -1,5 +1,5 @@
-#ifndef BUTTON_USER_H__
-#define BUTTON_USER_H__
+#ifndef BUTTON_APP_H__
+#define BUTTON_APP_H__
 
 #include "multi_button.h"
 
