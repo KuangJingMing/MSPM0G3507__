@@ -1,6 +1,9 @@
 #ifndef __EEPFROM_H
 #define __EEPFROM_H
+
+
 #include "stdint.h"
+#include "stdbool.h"
 
 #define eeprom_mode 2
 

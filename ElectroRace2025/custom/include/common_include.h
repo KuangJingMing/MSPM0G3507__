@@ -17,5 +17,8 @@
 #include "button_app.h"
 #include "menu_app.h"
 #include "encoder_app.h"
+#include "icm20608.h"
+#include "w25qxx.h"
+#include "imu_app.h"
 
 #endif // COMMON_H

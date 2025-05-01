@@ -89,16 +89,6 @@ typedef struct
 	uint8_t online_flag;
 }mppm;
 
-typedef enum
-{
-	WHO_AM_I_MPU6050  =0x68,
-	WHO_AM_I_ICM20689 =0x98,
-	WHO_AM_I_ICM20608D=0xAE,
-	WHO_AM_I_ICM20608G=0xAF,
-	WHO_AM_I_ICM20602=0x12,
-}IMU_ID_READ;
-
-
 typedef struct
 {
 	int8_t left_encoder_dir_config,right_encoder_dir_config;//编码器方向配置
@@ -108,6 +98,20 @@ typedef struct
 	uint16_t servo_median_value1,servo_median_value2;
 }motor_config;
 
+typedef struct
+{
+	int16_t left_motor_cnt,right_motor_cnt;//单个采样周期内的脉冲数量
+	int8_t left_motor_dir,right_motor_dir; //运动方向
+	float left_motor_speed_rpm,right_motor_speed_rpm;//转速单位转每分钟
+	float left_motor_gyro_rps,right_motor_gyro_rps;//转速单位rad/s
+	float left_motor_speed_cmps,right_motor_speed_cmps;//转速c单位为cm/s
+	float left_motor_period_ms,right_motor_period_ms;
+	
+	int32_t left_motor_total_cnt,right_motor_total_cnt;
+	int32_t left_motor_period_cnt,right_motor_period_cnt;
+	uint8_t left_motor_cnt_clear,right_motor_cnt_clear;
+	
+}encoder;
 
 typedef struct
 {
@@ -232,7 +236,6 @@ typedef struct{
 	uint32_t cmd_vel_during_cnt;    //速度控制计数器
 	uint8_t cmd_vel_suspend_flag;   //控制中止标志位
 }nav_ctrl;
-
 
 #endif
 

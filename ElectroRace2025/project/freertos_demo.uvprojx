@@ -399,6 +399,11 @@
               <FileType>5</FileType>
               <FilePath>..\custom\include\log_config.h</FilePath>
             </File>
+            <File>
+              <FileName>data_type.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\custom\include\data_type.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -468,6 +473,11 @@
               <FileName>motor_app.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\custom\app\controller\motor_app.c</FilePath>
+            </File>
+            <File>
+              <FileName>imu_app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\app\controller\imu_app.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -1,7 +1,6 @@
 #include "ti_msp_dl_config.h"
-#include "delay.h"
 #include "w25qxx.h"
-
+#include "delay.h"
 
 #define spi_miss_up_wait_cnt 5000//500
 
@@ -18,8 +17,8 @@ void W25Q64_erase_sector(uint32_t addr);
 void w25qxx_gpio_init(void)
 {
   W25Q64_CS_1;
-	//W25QXX_Erase_Chip();
-	//W25Q64_erase_sector(0x00);
+//	W25QXX_Erase_Chip();
+//	W25Q64_erase_sector(0x00);
 
   W25QXX_PowerDown();
   delay_ms(10);
@@ -57,7 +56,6 @@ uint8_t spi_read_write_byte(uint8_t Byte)
   return DL_SPI_receiveData8(SPI_0_INST);  //清空接收FIFO中的数据
 #endif
 }
-
 
 
 

@@ -3,16 +3,6 @@
 
 #include "stdint.h"
 
-//#define GYRO_CALIBRATION_COFF 0.060976f  //2000
-//#define GYRO_CALIBRATION_COFF 0.030488f; //1000
-#define GYRO_CALIBRATION_COFF 0.0152672f;  //500
-
-// acceleration due to gravity in m/s/s
-#define GRAVITY_MSS 9.80665f
-#define GRAVITY_RAW 8192.0f
-#define RAW_TO_G     GRAVITY_MSS/GRAVITY_RAW
-#define G_TO_RAW  	 GRAVITY_RAW/GRAVITY_MSS
-
 #ifndef M_PI_F
  #define M_PI_F 3.141592653589793f
 #endif

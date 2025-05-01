@@ -16,7 +16,7 @@ typedef struct
 
 float LPButterworth(float curr_input,lpf_buf *buf,lpf_param *params);
 void set_cutoff_frequency(float sample_frequent, float cutoff_frequent,lpf_param *LPF);
-
+float kalman_filter(float angle,float gyro);
 
 #endif
 

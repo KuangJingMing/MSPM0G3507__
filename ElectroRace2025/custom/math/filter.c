@@ -91,3 +91,33 @@ void set_cutoff_frequency(float sample_frequent, float cutoff_frequent,lpf_param
   LPF->a[2] = (1.0f - 2.0f * cosf(M_PI_F / 4.0f) * ohm + ohm * ohm) / c;
 }
 
+
+/***************************************************
+函数名: float kalman_filter(float angle,float gyro)
+说明:	非矩阵卡尔曼滤波
+入口:	float angle-观测欧拉角
+			float gyro-角速度
+出口:	无
+备注:	无
+作者:	无名创新
+****************************************************/
+float kalman_filter(float angle,float gyro)
+{
+	static uint8_t init;
+	static float x=0; 
+	static float P=0.000001; 
+	static float Q=0.000001; 
+	static float R=0.35;//0.35 
+	static float k=0; //*************
+	if(init==0)
+	{
+		x=angle;
+		init=1;
+	}
+	x=x+gyro*0.005f; 
+	P=P+Q; 
+	k=P/(P+R); 
+	x=x+k*(angle-x);
+	P=(1-k)*P;
+	return x; 
+} 
