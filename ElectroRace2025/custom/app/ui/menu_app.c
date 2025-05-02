@@ -73,7 +73,7 @@ static void init_all_menu_nodes(void) {
 
 float a, b, c, d;
 
-void menu_init(void) {
+void menu_init_and_create(void) {
 
 	add_variable("VA1", &a);
 	add_variable("VA2", &b);

@@ -1,7 +1,12 @@
 #include "imu_app.h"
-#include "eeprom.h"
 #include "log_config.h"
 #include "log.h"
+#include <math.h>
+
+// 生成一个单精度浮点数 NaN 的宏，按照 IEEE 754 标准
+#define MY_NAN ( *(float *)(uint32_t[]){0x7FC00000} )
+#define sampling_frequent 200
+#define gyro_delta_dps  3.0f
 
 lpf_param accel_lpf_param,gyro_lpf_param;
 lpf_buf gyro_filter_buf[3],accel_filter_buf[3];
@@ -10,8 +15,6 @@ sensor smartcar_imu;
 FusionAhrs ahrs;
 FusionOffset offset;
 
-#define sampling_frequent 200
-#define gyro_delta_dps  3.0f
 
 
 /***************************************
@@ -24,10 +27,11 @@ FusionOffset offset;
 ***************************************/
 void imu_calibration_params_init(void)
 {
-	vector3f gyro_offset_temp;
-	ReadFlashParameterOne(GYRO_X_OFFSET,&gyro_offset_temp.x);
-	ReadFlashParameterOne(GYRO_Y_OFFSET,&gyro_offset_temp.y);
-	ReadFlashParameterOne(GYRO_Z_OFFSET,&gyro_offset_temp.z);	
+	vector3f gyro_offset_temp = {MY_NAN, MY_NAN, MY_NAN};
+		vector3f accel_offset_temp = {MY_NAN, MY_NAN, MY_NAN};
+//	ReadFlashParameterOne(GYRO_X_OFFSET,&gyro_offset_temp.x);
+//	ReadFlashParameterOne(GYRO_Y_OFFSET,&gyro_offset_temp.y);
+//	ReadFlashParameterOne(GYRO_Z_OFFSET,&gyro_offset_temp.z);	
 	if(isnan(gyro_offset_temp.x)==0
 		&&isnan(gyro_offset_temp.y)==0
 		 &&isnan(gyro_offset_temp.z)==0)//如果之前已经温度校准过，开机时直接用之前校准的数据 
@@ -47,10 +51,10 @@ void imu_calibration_params_init(void)
 	smartcar_imu.accel_scale.x=1.0f;
 	smartcar_imu.accel_scale.y=1.0f;
 	smartcar_imu.accel_scale.z=1.0f;
-	vector3f accel_offset_temp;
-	ReadFlashParameterOne(ACCEL_X_OFFSET,&accel_offset_temp.x);
-	ReadFlashParameterOne(ACCEL_Y_OFFSET,&accel_offset_temp.y);
-	ReadFlashParameterOne(ACCEL_Z_OFFSET,&accel_offset_temp.z);	
+
+//	ReadFlashParameterOne(ACCEL_X_OFFSET,&accel_offset_temp.x);
+//	ReadFlashParameterOne(ACCEL_Y_OFFSET,&accel_offset_temp.y);
+//	ReadFlashParameterOne(ACCEL_Z_OFFSET,&accel_offset_temp.z);	
 	if(isnan(accel_offset_temp.x)==0
 		&&isnan(accel_offset_temp.y)==0
 		 &&isnan(accel_offset_temp.z)==0)//如果之前已经温度校准过，开机时直接用之前校准的数据 
@@ -122,16 +126,16 @@ void imu_calibration(vector3f *gyro,vector3f *accel)
 		smartcar_imu.accel_offset.y =(accel_sum.y/cnt);
 		smartcar_imu.accel_offset.z =(accel_sum.z/cnt)-safe_sqrt(1-sq2(smartcar_imu.accel_offset.x)-sq2(smartcar_imu.accel_offset.y));
 			
-		WriteFlashParameter_Three(GYRO_X_OFFSET,
-															smartcar_imu.gyro_offset.x,
-															smartcar_imu.gyro_offset.y,
-															smartcar_imu.gyro_offset.z,
-															&Trackless_Params);		
-		WriteFlashParameter_Three(ACCEL_X_OFFSET,
-															smartcar_imu.accel_offset.x,
-															smartcar_imu.accel_offset.y,
-															smartcar_imu.accel_offset.z,
-															&Trackless_Params);	
+//		WriteFlashParameter_Three(GYRO_X_OFFSET,
+//															smartcar_imu.gyro_offset.x,
+//															smartcar_imu.gyro_offset.y,
+//															smartcar_imu.gyro_offset.z,
+//															&Trackless_Params);		
+//		WriteFlashParameter_Three(ACCEL_X_OFFSET,
+//															smartcar_imu.accel_offset.x,
+//															smartcar_imu.accel_offset.y,
+//															smartcar_imu.accel_offset.z,
+//															&Trackless_Params);	
 		
 		gyro_sum.x=0;
 		gyro_sum.y=0;

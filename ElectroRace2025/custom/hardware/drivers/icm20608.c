@@ -100,8 +100,6 @@ uint8_t ICM206xx_Init(void)//ICM20689≥ı ºªØ
 			fault=1;
 		}			
 	}
-	delay_ms(500);
-	imu_calibration_params_init();	
 	return fault;
 }
 

@@ -26,7 +26,6 @@ void SoftwareI2C_SDA_OUT(SoftwareI2C* i2c) {
 // Set SDA as input
 void SoftwareI2C_SDA_IN(SoftwareI2C* i2c) {
     if (i2c == NULL) return;
-		SET_PIN(i2c->sdaPort, i2c->sdaPin);
 		delay_us(i2c->delay_us);
     INIT_INPUT(i2c->sdaIOMUX);
 }

@@ -18,7 +18,9 @@
 #include "menu_app.h"
 #include "encoder_app.h"
 #include "icm20608.h"
-#include "w25qxx.h"
 #include "imu_app.h"
+#include "driver_at24cxx.h" // LibDriver AT24CXX
+#include "driver_at24cxx_interface.h"
+#include "tests.h"
 
 #endif // COMMON_H

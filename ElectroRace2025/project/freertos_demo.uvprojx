@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>__MSPM0G3507__</Define>
               <Undefine></Undefine>
-              <IncludePath>..\project;..\source;..\source\third_party\CMSIS\Core\Include;..\kernel\freertos\Source\include;..\kernel\freertos\Source\portable\GCC\ARM_CM0;..\kernel\freertos\builds\LP_MSPM0G3507\release;..\custom\app\ui;..\custom\app\communication;..\custom\app\controller;..\custom\hardware\drivers;..\custom\hardware\bsp;..\custom\include;..\custom\math;..\custom\math\fusion;..\custom\user;..\custom\utils;..\source\third_party\u8g2</IncludePath>
+              <IncludePath>..\project;..\source;..\source\third_party\CMSIS\Core\Include;..\kernel\freertos\Source\include;..\kernel\freertos\Source\portable\GCC\ARM_CM0;..\kernel\freertos\builds\LP_MSPM0G3507\release;..\custom\app\ui;..\custom\app\communication;..\custom\app\controller;..\custom\hardware\drivers;..\custom\hardware\bsp;..\custom\include;..\custom\math;..\custom\math\fusion;..\custom\user;..\custom\utils;..\source\third_party\u8g2;..\custom\tests</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -413,6 +413,16 @@
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\custom\user\main.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>tests</GroupName>
+          <Files>
+            <File>
+              <FileName>at24c16_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\tests\at24c16_test.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -525,11 +535,6 @@
           <GroupName>hardware/drivers</GroupName>
           <Files>
             <File>
-              <FileName>eeprom.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\custom\hardware\drivers\eeprom.c</FilePath>
-            </File>
-            <File>
               <FileName>encoder.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\custom\hardware\drivers\encoder.c</FilePath>
@@ -565,9 +570,24 @@
               <FilePath>..\custom\hardware\drivers\pca9555.c</FilePath>
             </File>
             <File>
-              <FileName>w25qxx.c</FileName>
+              <FileName>driver_at24cxx.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\custom\hardware\drivers\w25qxx.c</FilePath>
+              <FilePath>..\custom\hardware\drivers\driver_at24cxx.c</FilePath>
+            </File>
+            <File>
+              <FileName>driver_at24cxx_interface.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\hardware\drivers\driver_at24cxx_interface.c</FilePath>
+            </File>
+            <File>
+              <FileName>beep.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\hardware\drivers\beep.c</FilePath>
+            </File>
+            <File>
+              <FileName>rgb_led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\hardware\drivers\rgb_led.c</FilePath>
             </File>
           </Files>
         </Group>
