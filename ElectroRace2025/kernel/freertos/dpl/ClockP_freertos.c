@@ -41,8 +41,8 @@
 #include <FreeRTOS.h>
 #include <timers.h>
 
-#include <ti/drivers/dpl/ClockP.h>
-#include <ti/drivers/dpl/HwiP.h>
+#include <ClockP.h>
+#include <HwiP.h>
 
 #define FREERTOS_TICKPERIOD_US (1000000 / configTICK_RATE_HZ)
 

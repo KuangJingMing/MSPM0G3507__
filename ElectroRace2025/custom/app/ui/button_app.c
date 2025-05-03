@@ -38,44 +38,6 @@ static inline uint8_t read_button_GPIO(uint8_t button_id) {
 	}
 }
 
-
-// 软件定时器回调
-static void vButtonTimerCallback(TimerHandle_t xTimer)
-{
-    button_ticks();
-}
-
-// 定时器启动
-static void button_timer_start(void)
-{
-    if (xButtonTimer != NULL) {
-        xTimerStart(xButtonTimer, 0);
-    }
-}
-
-// 定时器停止
-static void button_timer_stop(void)
-{
-    if (xButtonTimer != NULL) {
-        xTimerStop(xButtonTimer, 0);
-    }
-}
-
-// 定时器初始化（一般只需调用一次即可）
-static void button_timer_init(void)
-{
-    if (xButtonTimer == NULL) {
-        xButtonTimer = xTimerCreate(
-            "ButtonTimer",
-            pdMS_TO_TICKS(TICKS_INTERVAL),
-            pdTRUE,
-            NULL,
-            vButtonTimerCallback
-        );
-    }
-}
-
-
 void user_button_init(BtnCallback single_click_cb, BtnCallback long_press_cb)
 {
     // 批量初始化和绑定事件
@@ -88,8 +50,4 @@ void user_button_init(BtnCallback single_click_cb, BtnCallback long_press_cb)
         }
         button_start(&buttons[i]);
     }
-    
-    button_timer_stop();
-    button_timer_init();
-    button_timer_start();
 }

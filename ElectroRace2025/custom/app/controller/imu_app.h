@@ -17,7 +17,7 @@ void simulation_pwm_init(void);
 void simulation_pwm_output(void);
 void imu_temperature_ctrl(void);
 
-extern sensor smartcar_imu;
+extern imu_data_t smartcar_imu;
 
 /***************************************************
 º¯ÊýÃû: vector3f_sub(vector3f a,vector3f b,vector3f *c)

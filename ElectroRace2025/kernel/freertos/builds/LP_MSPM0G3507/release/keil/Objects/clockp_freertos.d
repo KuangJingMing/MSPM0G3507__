@@ -10,5 +10,4 @@
   ..\..\..\..\..\..\kernel\freertos\Source\include\timers.h \
   ..\..\..\..\..\..\kernel\freertos\Source\include\task.h \
   ..\..\..\..\..\..\kernel\freertos\Source\include\list.h \
-  ..\..\..\..\..\..\source\ti\drivers\dpl\ClockP.h \
-  ..\..\..\..\..\..\source\ti\drivers\dpl\HwiP.h
+  ..\..\..\..\dpl\Inc\ClockP.h ..\..\..\..\dpl\Inc\HwiP.h

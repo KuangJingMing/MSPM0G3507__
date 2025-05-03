@@ -1,6 +1,6 @@
 ./objects/taskp_freertos.o: \
   ..\..\..\..\..\..\kernel\freertos\dpl\TaskP_freertos.c \
-  ..\..\..\..\..\..\source\ti\drivers\dpl\TaskP.h \
+  ..\..\..\..\dpl\Inc\TaskP.h \
   ..\..\..\..\..\..\kernel\freertos\Source\include\FreeRTOS.h \
   ..\FreeRTOSConfig.h \
   ..\..\..\..\..\..\kernel\freertos\Source\include\projdefs.h \

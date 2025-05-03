@@ -89,13 +89,13 @@ uint8_t ICM206xx_Init(void)//ICM20689≥ı ºªØ
 			icm_read_check[4]=single_readi2c(I2C_0_INST,imu_address,0x1D);
 			for(uint8_t i=0;i<5;i++)
 			{
-				if(icm_read_check[i]!=icm_read_register[i]) fault=1;
+				if(icm_read_check[i]!=icm_read_register[i]) fault = 1;
 			}	
 		}
 		break;
 		default:
 		{
-			fault=1;
+			fault = 1;
 		}			
 	}
 	return fault;

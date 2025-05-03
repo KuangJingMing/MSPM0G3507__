@@ -34,9 +34,9 @@
  *  ======== SemaphoreP_freertos.c ========
  */
 
-#include <ti/drivers/dpl/SemaphoreP.h>
-#include <ti/drivers/dpl/ClockP.h>
-#include <ti/drivers/dpl/HwiP.h>
+#include <SemaphoreP.h>
+#include <ClockP.h>
+#include <HwiP.h>
 
 #include <FreeRTOS.h>
 #include <semphr.h>

@@ -1,16 +1,15 @@
 #include "menu_logic.h"
 #include "menu_ui.h"
-
-#define VARIABLE_UPDATE_PERIOD_MS 1000  // 变量更新周期，1秒
+#include "common_defines.h"
+#include "timer_task_notification.h"
 
 static TaskHandle_t xOLEDTaskHandle;
-static TimerHandle_t xVariableUpdateTimer = NULL;
 static MenuNode *current_menu;
 static menu_variables_t menu_variables[MAX_INDEX_COUNT];
 
 void create_oled_menu(MenuNode *root) {
     current_menu = root;
-    xTaskCreate(vOLEDTask, "OLED_MENU", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, &xOLEDTaskHandle);
+    xTaskCreate(vOLEDTask, "OLED_MENU", configMINIMAL_STACK_SIZE * 2, NULL, tskIDLE_PRIORITY + 1, &xOLEDTaskHandle);
 }
 void select_next(void)
 {
@@ -47,9 +46,9 @@ void add_variable(const char *name, float *val_ptr) {
 void vOLEDTask(void *pvParameters)
 {
 		u8g2_Init();
-		#if SHOW_OPENING_ANIMATION
-			show_oled_opening_animation();
-		#endif
+#if SHOW_OPENING_ANIMATION
+		show_oled_opening_animation();
+#endif
 		draw_menu(current_menu);
     for ( ; ; ) {
       ulTaskNotifyTake(pdTRUE, portMAX_DELAY); // 等待通知、收到自动清0
@@ -68,37 +67,14 @@ void execute_callback(void) {
 }
 
 
-
-// 定时器回调函数，用于更新变量显示
-void vVariableUpdateTimerCallback(TimerHandle_t xTimer) {
-    NotifyMenuFromISR();
-}
-
-// 创建定时器
-void create_listening_variable_timer(void) {
-    if (xVariableUpdateTimer == NULL) {
-        xVariableUpdateTimer = xTimerCreate(
-            "VariableTimer",
-            pdMS_TO_TICKS(VARIABLE_UPDATE_PERIOD_MS),
-            pdTRUE,  // 自动重载，周期性触发
-            NULL,
-            vVariableUpdateTimerCallback
-        );
-    }
-}
- 
 // 启动定时器
 void start_listening_variable_timer(void) {
-    if (xVariableUpdateTimer != NULL) {
-        xTimerStart(xVariableUpdateTimer, 0);
-    }
+	enable_periodic_task(EVENT_MENU_VAR_UPDATE);
 }
 
 // 停止定时器
 void stop_listening_variable_timer(void) {
-    if (xVariableUpdateTimer != NULL) {
-        xTimerStop(xVariableUpdateTimer, 0);
-    }
+	disable_periodic_task(EVENT_MENU_VAR_UPDATE);
 }
 
 /**

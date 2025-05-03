@@ -72,9 +72,10 @@
 /* Constants that describe the hardware and memory usage. */
 #define configCPU_CLOCK_HZ ((unsigned long) 32000000)
 /* Smallest stack size allowed in words */
-#define configMINIMAL_STACK_SIZE ((unsigned short) 256)
+#define configMINIMAL_STACK_SIZE ((unsigned short) 128)
 #define configMAX_TASK_NAME_LEN (12)
-#define configTOTAL_HEAP_SIZE ((size_t)(4 * 1024))
+#define configTOTAL_HEAP_SIZE ((size_t)(8 * 1024))
+
 /*
  * If static allocation is used (as well as timers, configUSE_TIMERS = 1),
  * two callback functions must be provided:
@@ -113,7 +114,7 @@
 /* Constants that define which hook (callback) functions should be used. */
 #define configUSE_IDLE_HOOK 0
 #define configUSE_TICK_HOOK 0
-#define configUSE_MALLOC_FAILED_HOOK 0
+#define configUSE_MALLOC_FAILED_HOOK 1
 
 /* Constants provided for debugging and optimisation assistance. */
 /*

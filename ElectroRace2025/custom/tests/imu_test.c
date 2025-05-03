@@ -8,6 +8,7 @@
 void imu_init(void) {
     while (ICM206xx_Init()){}
     imu_calibration_params_init();
+		simulation_pwm_init();
 }
 
 void imu_task(void *arg) {
@@ -40,18 +41,19 @@ void imu_task(void *arg) {
         // IMU 数据处理和姿态更新
         imu_data_sampling();
         trackless_ahrs_update();
-        temperature_state_check();
-
+        simulation_pwm_output();
+				imu_temperature_ctrl();
+				alert_ticks();
         // 获取当前时间（使用 FreeRTOS 函数）
         uint32_t now = xTaskGetTickCount();
 
         // 每500ms输出一次Euler角
         if (now - print_timer >= pdMS_TO_TICKS(500)) { // 同样使用宏转换
             print_timer = now;
-            log_i("Euler angles (deg): Roll=%.2f, Pitch=%.2f, Yaw=%.2f\r\n",
+            log_i("Euler angles (deg): Roll=%.2f, Pitch=%.2f, Yaw=%.2f Temp = %.2f\r\n",
                    smartcar_imu.rpy_deg[_ROL],
                    smartcar_imu.rpy_deg[_PIT],
-                   smartcar_imu.rpy_deg[_YAW]);
+                   smartcar_imu.rpy_deg[_YAW], smartcar_imu.temperature_filter);
         }
 
         // 注意：使用 vTaskDelayUntil 后，就不需要额外的 vTaskDelay 了。

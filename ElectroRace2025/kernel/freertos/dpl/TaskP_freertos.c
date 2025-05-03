@@ -33,7 +33,7 @@
  *  ======== TaskP_freertos.c ========
  */
 
-#include <ti/drivers/dpl/TaskP.h>
+#include <TaskP.h>
 
 #include <FreeRTOS.h>
 #include <task.h>

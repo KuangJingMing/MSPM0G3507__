@@ -1,6 +1,6 @@
 ./objects/mutexp_freertos.o: \
   ..\..\..\..\..\..\kernel\freertos\dpl\MutexP_freertos.c \
-  ..\..\..\..\..\..\source\ti\drivers\dpl\MutexP.h \
+  ..\..\..\..\dpl\Inc\MutexP.h \
   ..\..\..\..\..\..\kernel\freertos\Source\include\FreeRTOS.h \
   ..\FreeRTOSConfig.h \
   ..\..\..\..\..\..\kernel\freertos\Source\include\projdefs.h \

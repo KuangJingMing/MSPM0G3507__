@@ -256,6 +256,21 @@ extern "C" {
 /* Defines for EPM_SCL: GPIOA.31 with pinCMx 6 on package pin 39 */
 #define EPM_EPM_SCL_PIN                                         (DL_GPIO_PIN_31)
 #define EPM_EPM_SCL_IOMUX                                         (IOMUX_PINCM6)
+/* Defines for R: GPIOB.26 with pinCMx 57 on package pin 28 */
+#define PORTB_R_PIN                                             (DL_GPIO_PIN_26)
+#define PORTB_R_IOMUX                                            (IOMUX_PINCM57)
+/* Defines for G: GPIOB.27 with pinCMx 58 on package pin 29 */
+#define PORTB_G_PIN                                             (DL_GPIO_PIN_27)
+#define PORTB_G_IOMUX                                            (IOMUX_PINCM58)
+/* Defines for B: GPIOB.22 with pinCMx 50 on package pin 21 */
+#define PORTB_B_PIN                                             (DL_GPIO_PIN_22)
+#define PORTB_B_IOMUX                                            (IOMUX_PINCM50)
+/* Port definition for Pin Group PORTA */
+#define PORTA_PORT                                                       (GPIOA)
+
+/* Defines for BEEP: GPIOA.27 with pinCMx 60 on package pin 31 */
+#define PORTA_BEEP_PIN                                          (DL_GPIO_PIN_27)
+#define PORTA_BEEP_IOMUX                                         (IOMUX_PINCM60)
 
 /* clang-format on */
 

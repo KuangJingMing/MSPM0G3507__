@@ -2,6 +2,8 @@
 #ifndef COMMON_INCLUDE_H
 #define COMMON_INCLUDE_H
 
+#include "FreeRTOSConfig.h"
+
 #include <stdio.h>
 #include "ti_msp_dl_config.h"
 #include "FreeRTOS.h"
@@ -22,5 +24,11 @@
 #include "driver_at24cxx.h" // LibDriver AT24CXX
 #include "tests.h"
 #include "eeprom_parameter.h"
+#include "beep.h"
+#include "rgb_led.h"
+#include "alert.h"
+#include "timer_task_notification.h"
+#include "periodic_event_task.h"
+#include "menu_logic.h"
 
 #endif // COMMON_H

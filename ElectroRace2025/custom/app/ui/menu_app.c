@@ -30,7 +30,6 @@ static void run_task04_cb(void *arg) {
 }
 
 static void view_variables_cb(void *arg) {
-		create_listening_variable_timer();
 		start_listening_variable_timer();
 }
 

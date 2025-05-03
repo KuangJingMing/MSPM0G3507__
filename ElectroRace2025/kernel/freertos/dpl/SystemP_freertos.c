@@ -40,7 +40,7 @@
 #include <string.h>
 #include <stdarg.h>
 
-#include <ti/drivers/dpl/SystemP.h>
+#include <SystemP.h>
 
 /* -----------------------------------------------------------------------------
  *  Constants and macros

@@ -314,7 +314,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>0</Optim>
+            <Optim>3</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -414,6 +414,16 @@
               <FileType>1</FileType>
               <FilePath>..\custom\user\main.c</FilePath>
             </File>
+            <File>
+              <FileName>periodic_event_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\user\periodic_event_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>timer_task_notification.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\user\timer_task_notification.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -474,11 +484,6 @@
               <FileType>1</FileType>
               <FilePath>..\custom\app\communication\serialplot_protocol.c</FilePath>
             </File>
-            <File>
-              <FileName>eeprom_parameter.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\custom\app\communication\eeprom_parameter.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -503,6 +508,16 @@
               <FileName>imu_app.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\custom\app\controller\imu_app.c</FilePath>
+            </File>
+            <File>
+              <FileName>eeprom_parameter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\app\controller\eeprom_parameter.c</FilePath>
+            </File>
+            <File>
+              <FileName>alert.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\app\controller\alert.c</FilePath>
             </File>
           </Files>
         </Group>

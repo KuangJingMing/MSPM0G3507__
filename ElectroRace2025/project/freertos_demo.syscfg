@@ -17,6 +17,7 @@ const GPIO3         = GPIO.addInstance();
 const GPIO4         = GPIO.addInstance();
 const GPIO5         = GPIO.addInstance();
 const GPIO6         = GPIO.addInstance();
+const GPIO7         = GPIO.addInstance();
 const I2C           = scripting.addModule("/ti/driverlib/I2C", {}, false);
 const I2C1          = I2C.addInstance();
 const PWM           = scripting.addModule("/ti/driverlib/PWM", {}, false);
@@ -130,10 +131,29 @@ GPIO5.associatedPins[1].assignedPort = "PORTA";
 GPIO5.associatedPins[1].assignedPin  = "31";
 
 GPIO6.$name                          = "PORTB";
+GPIO6.associatedPins.create(4);
 GPIO6.associatedPins[0].assignedPort = "PORTB";
 GPIO6.associatedPins[0].assignedPin  = "0";
 GPIO6.associatedPins[0].$name        = "HEATER";
 GPIO6.associatedPins[0].pin.$assign  = "PB0";
+GPIO6.associatedPins[1].$name        = "R";
+GPIO6.associatedPins[1].assignedPort = "PORTB";
+GPIO6.associatedPins[1].assignedPin  = "26";
+GPIO6.associatedPins[1].pin.$assign  = "PB26";
+GPIO6.associatedPins[2].$name        = "G";
+GPIO6.associatedPins[2].assignedPort = "PORTB";
+GPIO6.associatedPins[2].assignedPin  = "27";
+GPIO6.associatedPins[2].pin.$assign  = "PB27";
+GPIO6.associatedPins[3].$name        = "B";
+GPIO6.associatedPins[3].assignedPort = "PORTB";
+GPIO6.associatedPins[3].assignedPin  = "22";
+GPIO6.associatedPins[3].pin.$assign  = "PB22";
+
+GPIO7.$name                          = "PORTA";
+GPIO7.associatedPins[0].$name        = "BEEP";
+GPIO7.associatedPins[0].assignedPort = "PORTA";
+GPIO7.associatedPins[0].assignedPin  = "27";
+GPIO7.associatedPins[0].pin.$assign  = "PA27";
 
 I2C1.$name                           = "I2C_0";
 I2C1.basicEnableController           = true;

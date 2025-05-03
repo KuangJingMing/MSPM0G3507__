@@ -1,22 +1,24 @@
 #include "imu_app.h"
 #include "log_config.h"
 #include "log.h"
+#include "rgb_led.h"
+#include "beep.h"
+#include "alert.h"
 #include <math.h>
 
 // 生成一个单精度浮点数 NaN 的宏，按照 IEEE 754 标准
 #define MY_NAN ( *(float *)(uint32_t[]){0x7FC00000} )
 #define sampling_frequent 200
 #define gyro_delta_dps  3.0f
-#define temperature_ctrl_enable 0
+#define temperature_ctrl_enable 1
 
-lpf_param accel_lpf_param,gyro_lpf_param;
-lpf_buf gyro_filter_buf[3],accel_filter_buf[3];
-
-sensor smartcar_imu;
-FusionAhrs ahrs;
-FusionOffset offset;
+imu_data_t smartcar_imu;
 
 
+static lpf_param accel_lpf_param,gyro_lpf_param;
+static lpf_buf gyro_filter_buf[3],accel_filter_buf[3];
+static FusionAhrs ahrs;
+static FusionOffset offset;
 
 /***************************************
 函数名:	void imu_calibration_params_init(void)
@@ -28,19 +30,19 @@ FusionOffset offset;
 ***************************************/
 void imu_calibration_params_init(void)
 {
-//	vector3f gyro_offset_temp = {MY_NAN, MY_NAN, MY_NAN};
-//	vector3f accel_offset_temp = {MY_NAN, MY_NAN, MY_NAN};
-	
-	vector3f gyro_offset_temp = {-0.502767801, -0.376522154, 0.250806689};
-	vector3f accel_offset_temp = {-0.185732797, -0.0094138002, 0.00534683466};
+	vector3f gyro_offset_temp = {MY_NAN, MY_NAN, MY_NAN};
+	vector3f accel_offset_temp = {MY_NAN, MY_NAN, MY_NAN};
+
+//	vector3f gyro_offset_temp = {-0.502767801, -0.376522154, 0.250806689};
+//	vector3f accel_offset_temp = {-0.185732797, -0.0094138002, 0.00534683466};
 
 	
-	ReadFlashParameterOne(GYRO_X_OFFSET,&gyro_offset_temp.x);
-	ReadFlashParameterOne(GYRO_Y_OFFSET,&gyro_offset_temp.y);
-	ReadFlashParameterOne(GYRO_Z_OFFSET,&gyro_offset_temp.z);		
-	ReadFlashParameterOne(ACCEL_X_OFFSET,&accel_offset_temp.x);
-	ReadFlashParameterOne(ACCEL_Y_OFFSET,&accel_offset_temp.y);
-	ReadFlashParameterOne(ACCEL_Z_OFFSET,&accel_offset_temp.z);
+//	ReadFlashParameterOne(GYRO_X_OFFSET,&gyro_offset_temp.x);
+//	ReadFlashParameterOne(GYRO_Y_OFFSET,&gyro_offset_temp.y);
+//	ReadFlashParameterOne(GYRO_Z_OFFSET,&gyro_offset_temp.z);		
+//	ReadFlashParameterOne(ACCEL_X_OFFSET,&accel_offset_temp.x);
+//	ReadFlashParameterOne(ACCEL_Y_OFFSET,&accel_offset_temp.y);
+//	ReadFlashParameterOne(ACCEL_Z_OFFSET,&accel_offset_temp.z);
 	
 	if(isnan(gyro_offset_temp.x)==0
 		&&isnan(gyro_offset_temp.y)==0
@@ -247,6 +249,8 @@ void trackless_ahrs_update(void)
 							.recoveryTriggerPeriod = 5 * sampling_frequent, /* 5 seconds */
 			};
 			FusionAhrsSetSettings(&ahrs, &settings);
+			set_alert_count(3);
+			start_alert();
 		}		
 	}
 

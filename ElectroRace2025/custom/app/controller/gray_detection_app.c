@@ -12,8 +12,6 @@ static sw_i2c_t pca9555_i2c = {
     .sdaIOMUX = PCA9555_SDA1_IOMUX,
 };
 
-
-
 void gray_detection_init(void) {
 	SOFT_IIC_Init(&pca9555_i2c);
 }

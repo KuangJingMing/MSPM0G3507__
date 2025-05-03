@@ -1,6 +1,6 @@
 ./objects/hwipmspm0_freertos.o: \
   ..\..\..\..\..\..\kernel\freertos\dpl\HwiPMSPM0_freertos.c \
-  ..\..\..\..\..\..\source\ti\drivers\dpl\HwiP.h \
+  ..\..\..\..\dpl\Inc\HwiP.h \
   ..\..\..\..\..\..\kernel\freertos\Source\include\FreeRTOS.h \
   ..\FreeRTOSConfig.h \
   ..\..\..\..\..\..\kernel\freertos\Source\include\projdefs.h \
