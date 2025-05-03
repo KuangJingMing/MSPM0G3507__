@@ -314,7 +314,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>2</Optim>
+            <Optim>0</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -424,6 +424,16 @@
               <FileType>1</FileType>
               <FilePath>..\custom\tests\at24c16_test.c</FilePath>
             </File>
+            <File>
+              <FileName>imu_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\tests\imu_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>gray_detection_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\tests\gray_detection_test.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -463,6 +473,11 @@
               <FileName>serialplot_protocol.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\custom\app\communication\serialplot_protocol.c</FilePath>
+            </File>
+            <File>
+              <FileName>eeprom_parameter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\app\communication\eeprom_parameter.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -575,11 +590,6 @@
               <FilePath>..\custom\hardware\drivers\driver_at24cxx.c</FilePath>
             </File>
             <File>
-              <FileName>driver_at24cxx_interface.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\custom\hardware\drivers\driver_at24cxx_interface.c</FilePath>
-            </File>
-            <File>
               <FileName>beep.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\custom\hardware\drivers\beep.c</FilePath>
@@ -600,14 +610,14 @@
               <FilePath>..\custom\hardware\bsp\hardware_i2c.c</FilePath>
             </File>
             <File>
-              <FileName>software_i2c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\custom\hardware\bsp\software_i2c.c</FilePath>
-            </File>
-            <File>
               <FileName>uart_driver.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\custom\hardware\bsp\uart_driver.c</FilePath>
+            </File>
+            <File>
+              <FileName>sw_i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\hardware\bsp\sw_i2c.c</FilePath>
             </File>
           </Files>
         </Group>

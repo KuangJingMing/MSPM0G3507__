@@ -16,9 +16,9 @@ const GPIO2         = GPIO.addInstance();
 const GPIO3         = GPIO.addInstance();
 const GPIO4         = GPIO.addInstance();
 const GPIO5         = GPIO.addInstance();
+const GPIO6         = GPIO.addInstance();
 const I2C           = scripting.addModule("/ti/driverlib/I2C", {}, false);
 const I2C1          = I2C.addInstance();
-const I2C2          = I2C.addInstance();
 const PWM           = scripting.addModule("/ti/driverlib/PWM", {}, false);
 const PWM1          = PWM.addInstance();
 const PWM2          = PWM.addInstance();
@@ -38,11 +38,11 @@ const ProjectConfig = scripting.addModule("/ti/project_config/ProjectConfig");
 GPIO1.$name                          = "PCA9555";
 GPIO1.associatedPins.create(2);
 GPIO1.associatedPins[0].assignedPort = "PORTA";
-GPIO1.associatedPins[0].assignedPin  = "0";
 GPIO1.associatedPins[0].$name        = "SCL1";
+GPIO1.associatedPins[0].assignedPin  = "8";
 GPIO1.associatedPins[1].assignedPort = "PORTA";
-GPIO1.associatedPins[1].assignedPin  = "1";
 GPIO1.associatedPins[1].$name        = "SDA1";
+GPIO1.associatedPins[1].assignedPin  = "9";
 
 GPIO2.$name                          = "OLED_SPI";
 GPIO2.associatedPins.create(3);
@@ -120,12 +120,20 @@ GPIO4.associatedPins[4].direction        = "INPUT";
 GPIO4.associatedPins[4].internalResistor = "PULL_UP";
 GPIO4.associatedPins[4].pin.$assign      = "PB11";
 
-GPIO5.$name                          = "W25Q64_SPI";
-GPIO5.associatedPins[0].$name        = "CS_W25Q64";
-GPIO5.associatedPins[0].assignedPort = "PORTB";
-GPIO5.associatedPins[0].assignedPin  = "25";
-GPIO5.associatedPins[0].initialValue = "SET";
-GPIO5.associatedPins[0].pin.$assign  = "PB25";
+GPIO5.$name                          = "EPM";
+GPIO5.associatedPins.create(2);
+GPIO5.associatedPins[0].assignedPort = "PORTA";
+GPIO5.associatedPins[0].assignedPin  = "28";
+GPIO5.associatedPins[0].$name        = "EPM_SDA";
+GPIO5.associatedPins[1].$name        = "EPM_SCL";
+GPIO5.associatedPins[1].assignedPort = "PORTA";
+GPIO5.associatedPins[1].assignedPin  = "31";
+
+GPIO6.$name                          = "PORTB";
+GPIO6.associatedPins[0].assignedPort = "PORTB";
+GPIO6.associatedPins[0].assignedPin  = "0";
+GPIO6.associatedPins[0].$name        = "HEATER";
+GPIO6.associatedPins[0].pin.$assign  = "PB0";
 
 I2C1.$name                           = "I2C_0";
 I2C1.basicEnableController           = true;
@@ -136,16 +144,6 @@ I2C1.peripheral.sdaPin.$assign       = "PA30";
 I2C1.peripheral.sclPin.$assign       = "PA29";
 I2C1.sdaPinConfig.$name              = "ti_driverlib_gpio_GPIOPinGeneric9";
 I2C1.sclPinConfig.$name              = "ti_driverlib_gpio_GPIOPinGeneric10";
-
-I2C2.$name                           = "I2C_1";
-I2C2.basicEnableController           = true;
-I2C2.basicControllerStandardBusSpeed = "FastPlus";
-I2C2.basicControllerBusSpeed         = 800000;
-I2C2.peripheral.$assign              = "I2C0";
-I2C2.peripheral.sdaPin.$assign       = "PA28";
-I2C2.peripheral.sclPin.$assign       = "PA31";
-I2C2.sdaPinConfig.$name              = "ti_driverlib_gpio_GPIOPinGeneric11";
-I2C2.sclPinConfig.$name              = "ti_driverlib_gpio_GPIOPinGeneric12";
 
 PWM1.$name                              = "Motor_PWM1";
 PWM1.timerStartTimer                    = true;
@@ -239,5 +237,7 @@ scripting.suppress("Project Configuration File generation is disabled for this p
 Board.peripheral.$suggestSolution            = "DEBUGSS";
 Board.peripheral.swclkPin.$suggestSolution   = "PA20";
 Board.peripheral.swdioPin.$suggestSolution   = "PA19";
-GPIO1.associatedPins[0].pin.$suggestSolution = "PA0";
-GPIO1.associatedPins[1].pin.$suggestSolution = "PA1";
+GPIO1.associatedPins[0].pin.$suggestSolution = "PA8";
+GPIO1.associatedPins[1].pin.$suggestSolution = "PA9";
+GPIO5.associatedPins[0].pin.$suggestSolution = "PA28";
+GPIO5.associatedPins[1].pin.$suggestSolution = "PA31";

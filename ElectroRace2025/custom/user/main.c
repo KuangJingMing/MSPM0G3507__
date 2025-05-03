@@ -5,15 +5,15 @@
 
 
 void system_init(void) {
-    SYSCFG_DL_init();
+  SYSCFG_DL_init();
 }
 
 void user_init(void) {
-    menu_init_and_create();
+  menu_init_and_create();
 }
 
 void test_task_init_and_create(void) {
-
+	imu_task_create();
 }
 
 int main(void) {

@@ -2,109 +2,50 @@
 #include "tests.h"
 #include "log_config.h"
 #include "log.h"
+#include <math.h> // For fabs
 
-// 要写入和读取的数据长度
-#define TEST_DATA_LEN 8 // 减少数据量，简化测试
-// 要写入和读取的 EEPROM 地址
-#define TEST_START_ADDR 0x0000 // 限制在 0x0000-0x00FF 范围内
+#define ARRAY_SIZE 6
+#define FLOAT_EPSILON 1e-6
 
-static uint8_t tx_buf[TEST_DATA_LEN];
-static uint8_t rx_buf[TEST_DATA_LEN];
-// 定义一个全局的 AT24CXX 句柄
-static at24cxx_handle_t at24cxx_handle;
+float eeprom_write[ARRAY_SIZE] = {2, 2, 3, 5, 6, 2};
+float eeprom_read[ARRAY_SIZE] = {0};
 
-/**
- * @brief 单次测试 AT24CXX 的函数
- */
 void at24cxx_single_test(void)
 {
-    uint8_t res;
-    uint32_t i;
+    log_i("EEPROM unit test start");
 
-    log_i("Starting AT24CXX single test...");
+    AT24CXX_Init();
+    log_i("AT24CXX initialization done");
 
-    // 1. 填充 AT24CXX 句柄结构体
-    DRIVER_AT24CXX_LINK_INIT(&at24cxx_handle, at24cxx_handle_t); // 清零句柄结构体
-    at24cxx_handle.debug_print = at24cxx_interface_debug_print;
-    at24cxx_handle.iic_init = at24cxx_interface_iic_init;
-    at24cxx_handle.iic_deinit = at24cxx_interface_iic_deinit;
-    at24cxx_handle.iic_read = at24cxx_interface_iic_read;
-    at24cxx_handle.iic_write = at24cxx_interface_iic_write;
-    at24cxx_handle.iic_read_address16 = at24cxx_interface_iic_read_address16;
-    at24cxx_handle.iic_write_address16 = at24cxx_interface_iic_write_address16;
-    at24cxx_handle.delay_ms = at24cxx_interface_delay_ms;
+    // Data write
+    WriteFlashParameter(0, eeprom_write[0]);
+    WriteFlashParameter_Two(1, eeprom_write[1], eeprom_write[2]);
+    WriteFlashParameter_Three(3, eeprom_write[3], eeprom_write[4], eeprom_write[5]);
+    
+    // Data read
+    ReadFlashParameterThree(0, &eeprom_read[0], &eeprom_read[1], &eeprom_read[2]);
+    ReadFlashParameterTwo(3, &eeprom_read[3], &eeprom_read[4]);
+    ReadFlashParameterOne(5, &eeprom_read[5]);
 
-    // 确保设置 I2C 地址
-    at24cxx_handle.iic_addr = 0xA0; // A0, A1, A2 接地时的写地址
-    log_i("I2C address set to 0xA0 (8-bit write address).");
-
-    // 2. 设置芯片类型
-    res = at24cxx_set_type(&at24cxx_handle, AT24C16);
-    if (res != 0) {
-        log_e("AT24CXX set type failed.");
-        return;
-    }
-    log_i("AT24CXX set type success (AT24C16).");
-
-    // 3. 初始化 AT24C16 驱动
-    res = at24cxx_init(&at24cxx_handle);
-    if (res != 0) {
-        log_e("AT24CXX driver init failed. Test aborted.");
-        return;
-    }
-    log_i("AT24CXX driver init success.");
-
-    // 4. 准备测试数据
-    memset(tx_buf, 0x00, sizeof(tx_buf));
-    for (i = 0; i < TEST_DATA_LEN; i++) {
-        tx_buf[i] = (uint8_t)(i + 1); // 示例数据：1, 2, 3, ...
-    }
-    log_i("Prepare data to write:");
-    for (i = 0; i < TEST_DATA_LEN; i++) {
-        log_i("tx_buf[%lu] = 0x%02X", i, tx_buf[i]);
-    }
-
-    // 5. 写入数据到 EEPROM
-    log_i("Writing data to EEPROM at address 0x%04X, length=%d...", TEST_START_ADDR, TEST_DATA_LEN);
-    res = at24cxx_write(&at24cxx_handle, TEST_START_ADDR, tx_buf, TEST_DATA_LEN);
-    if (res != 0) {
-        log_e("AT24CXX driver write failed.");
-    } else {
-        log_i("AT24CXX driver write success.");
-    }
-
-    // 6. 等待写周期完成
-    at24cxx_interface_delay_ms(10); // 增加写周期延迟到 20ms
-    log_i("Waiting 20ms for write cycle to complete.");
-
-    // 7. 读取数据进行验证
-    memset(rx_buf, 0x00, sizeof(rx_buf));
-    log_i("Reading data from EEPROM at address 0x%04X, length=%d...", TEST_START_ADDR, TEST_DATA_LEN);
-    res = at24cxx_read(&at24cxx_handle, TEST_START_ADDR, rx_buf, TEST_DATA_LEN);
-    if (res != 0) {
-        log_e("AT24CXX driver read failed.");
-    } else {
-        log_i("AT24CXX driver read success.");
-        log_i("Data read from EEPROM:");
-        for (i = 0; i < TEST_DATA_LEN; i++) {
-            log_i("rx_buf[%lu] = 0x%02X", i, rx_buf[i]);
-        }
-
-        // 验证数据是否一致
-        if (memcmp(tx_buf, rx_buf, TEST_DATA_LEN) == 0) {
-            log_i("Write and read data match. Test passed!");
+    // Compare results
+    int error_count = 0;
+    for(int i = 0; i < ARRAY_SIZE; ++i) {
+        if (fabs(eeprom_write[i] - eeprom_read[i]) < FLOAT_EPSILON) {
+            log_i("Compare OK: eeprom_write[%d]=%f, eeprom_read[%d]=%f", i, eeprom_write[i], i, eeprom_read[i]);
         } else {
-            log_e("Write and read data mismatch. Test failed!");
+            log_e("Compare FAIL: eeprom_write[%d]=%f, eeprom_read[%d]=%f", i, eeprom_write[i], i, eeprom_read[i]);
+            error_count++;
         }
     }
 
-    // 8. 去初始化
-    res = at24cxx_deinit(&at24cxx_handle);
-    if (res != 0) {
-        log_e("AT24CXX driver deinit failed.");
+    if(error_count == 0) {
+        log_i("EEPROM read/write comparison passed for all items");
     } else {
-        log_i("AT24CXX driver deinit success.");
+        log_e("EEPROM read/write comparison failed: %d mismatches", error_count);
     }
 
-    log_i("AT24CXX single test completed.");
+    log_i("EEPROM unit test complete, enter endless loop and wait.");
+    while (1) {
+        // Endless loop
+    }
 }

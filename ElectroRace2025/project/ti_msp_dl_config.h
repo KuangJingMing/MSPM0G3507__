@@ -139,20 +139,6 @@ extern "C" {
 #define GPIO_I2C_0_IOMUX_SCL                                      (IOMUX_PINCM4)
 #define GPIO_I2C_0_IOMUX_SCL_FUNC                       IOMUX_PINCM4_PF_I2C1_SCL
 
-/* Defines for I2C_1 */
-#define I2C_1_INST                                                          I2C0
-#define I2C_1_INST_IRQHandler                                    I2C0_IRQHandler
-#define I2C_1_INST_INT_IRQN                                        I2C0_INT_IRQn
-#define I2C_1_BUS_SPEED_HZ                                                800000
-#define GPIO_I2C_1_SDA_PORT                                                GPIOA
-#define GPIO_I2C_1_SDA_PIN                                        DL_GPIO_PIN_28
-#define GPIO_I2C_1_IOMUX_SDA                                      (IOMUX_PINCM3)
-#define GPIO_I2C_1_IOMUX_SDA_FUNC                       IOMUX_PINCM3_PF_I2C0_SDA
-#define GPIO_I2C_1_SCL_PORT                                                GPIOA
-#define GPIO_I2C_1_SCL_PIN                                        DL_GPIO_PIN_31
-#define GPIO_I2C_1_IOMUX_SCL                                      (IOMUX_PINCM6)
-#define GPIO_I2C_1_IOMUX_SCL_FUNC                       IOMUX_PINCM6_PF_I2C0_SCL
-
 
 /* Defines for UART_DEBUG */
 #define UART_DEBUG_INST                                                    UART0
@@ -194,21 +180,21 @@ extern "C" {
 
 
 
-/* Port definition for Pin Group W25Q64_SPI */
-#define W25Q64_SPI_PORT                                                  (GPIOB)
+/* Port definition for Pin Group PORTB */
+#define PORTB_PORT                                                       (GPIOB)
 
-/* Defines for CS_W25Q64: GPIOB.25 with pinCMx 56 on package pin 27 */
-#define W25Q64_SPI_CS_W25Q64_PIN                                (DL_GPIO_PIN_25)
-#define W25Q64_SPI_CS_W25Q64_IOMUX                               (IOMUX_PINCM56)
+/* Defines for HEATER: GPIOB.0 with pinCMx 12 on package pin 47 */
+#define PORTB_HEATER_PIN                                         (DL_GPIO_PIN_0)
+#define PORTB_HEATER_IOMUX                                       (IOMUX_PINCM12)
 /* Port definition for Pin Group PCA9555 */
 #define PCA9555_PORT                                                     (GPIOA)
 
-/* Defines for SCL1: GPIOA.0 with pinCMx 1 on package pin 33 */
-#define PCA9555_SCL1_PIN                                         (DL_GPIO_PIN_0)
-#define PCA9555_SCL1_IOMUX                                        (IOMUX_PINCM1)
-/* Defines for SDA1: GPIOA.1 with pinCMx 2 on package pin 34 */
-#define PCA9555_SDA1_PIN                                         (DL_GPIO_PIN_1)
-#define PCA9555_SDA1_IOMUX                                        (IOMUX_PINCM2)
+/* Defines for SCL1: GPIOA.8 with pinCMx 19 on package pin 54 */
+#define PCA9555_SCL1_PIN                                         (DL_GPIO_PIN_8)
+#define PCA9555_SCL1_IOMUX                                       (IOMUX_PINCM19)
+/* Defines for SDA1: GPIOA.9 with pinCMx 20 on package pin 55 */
+#define PCA9555_SDA1_PIN                                         (DL_GPIO_PIN_9)
+#define PCA9555_SDA1_IOMUX                                       (IOMUX_PINCM20)
 /* Port definition for Pin Group OLED_SPI */
 #define OLED_SPI_PORT                                                    (GPIOB)
 
@@ -261,6 +247,15 @@ extern "C" {
 /* Defines for PIN_4: GPIOB.11 with pinCMx 28 on package pin 63 */
 #define GPIO_KEY_PIN_4_PIN                                      (DL_GPIO_PIN_11)
 #define GPIO_KEY_PIN_4_IOMUX                                     (IOMUX_PINCM28)
+/* Port definition for Pin Group EPM */
+#define EPM_PORT                                                         (GPIOA)
+
+/* Defines for EPM_SDA: GPIOA.28 with pinCMx 3 on package pin 35 */
+#define EPM_EPM_SDA_PIN                                         (DL_GPIO_PIN_28)
+#define EPM_EPM_SDA_IOMUX                                         (IOMUX_PINCM3)
+/* Defines for EPM_SCL: GPIOA.31 with pinCMx 6 on package pin 39 */
+#define EPM_EPM_SCL_PIN                                         (DL_GPIO_PIN_31)
+#define EPM_EPM_SCL_IOMUX                                         (IOMUX_PINCM6)
 
 /* clang-format on */
 
@@ -272,7 +267,6 @@ void SYSCFG_DL_Motor_PWM1_init(void);
 void SYSCFG_DL_Motor_PWM2_init(void);
 void SYSCFG_DL_TIMER_delay_init(void);
 void SYSCFG_DL_I2C_0_init(void);
-void SYSCFG_DL_I2C_1_init(void);
 void SYSCFG_DL_UART_DEBUG_init(void);
 void SYSCFG_DL_SPI_0_init(void);
 

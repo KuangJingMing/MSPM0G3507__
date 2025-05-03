@@ -3,7 +3,8 @@
 
 #include <stdint.h>
 #include "ti_msp_dl_config.h"
-#include "software_i2c.h"
+#include "sw_i2c.h"
+
 #include "delay.h"
 
 /* Status definitions */
@@ -43,6 +44,6 @@
 #define GPIO_7 0x80
 
 /* Function prototypes */
-uint16_t pca9555_read_bit12(SoftwareI2C* i2c, uint8_t slave_num);
+uint16_t pca9555_read_bit12(sw_i2c_t* i2c, uint8_t slave_num);
 
 #endif /* __PCA9555_H__ */

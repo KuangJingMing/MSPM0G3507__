@@ -3,10 +3,11 @@
 #include "log.h"
 #include <math.h>
 
-// Éú³ÉÒ»¸öµ¥¾«¶È¸¡µãÊı NaN µÄºê£¬°´ÕÕ IEEE 754 ±ê×¼
+// ç”Ÿæˆä¸€ä¸ªå•ç²¾åº¦æµ®ç‚¹æ•° NaN çš„å®ï¼ŒæŒ‰ç…§ IEEE 754 æ ‡å‡†
 #define MY_NAN ( *(float *)(uint32_t[]){0x7FC00000} )
 #define sampling_frequent 200
 #define gyro_delta_dps  3.0f
+#define temperature_ctrl_enable 0
 
 lpf_param accel_lpf_param,gyro_lpf_param;
 lpf_buf gyro_filter_buf[3],accel_filter_buf[3];
@@ -18,23 +19,32 @@ FusionOffset offset;
 
 
 /***************************************
-º¯ÊıÃû:	void imu_calibration_params_init(void)
-ËµÃ÷: ¼ÓËÙ¶È¼Æ/ÍÓÂİÒÇ±ê¶¨Êı¾İ³õÊ¼»¯
-Èë¿Ú:	ÎŞ
-³ö¿Ú:	ÎŞ
-±¸×¢:	ÏÈ´Óeeprom¶ÁÈ¡Êı¾İ,ÈôÊı¾İ²»´æÔÚ£¬µÈ´ıÎÂ¶È¾ÍÎ»ºóÔÙ±ê¶¨
-×÷Õß:	ÎŞÃû´´ĞÂ
+å‡½æ•°å:	void imu_calibration_params_init(void)
+è¯´æ˜: åŠ é€Ÿåº¦è®¡/é™€èºä»ªæ ‡å®šæ•°æ®åˆå§‹åŒ–
+å…¥å£:	æ— 
+å‡ºå£:	æ— 
+å¤‡æ³¨:	å…ˆä»eepromè¯»å–æ•°æ®,è‹¥æ•°æ®ä¸å­˜åœ¨ï¼Œç­‰å¾…æ¸©åº¦å°±ä½åå†æ ‡å®š
+ä½œè€…:	æ— ååˆ›æ–°
 ***************************************/
 void imu_calibration_params_init(void)
 {
-	vector3f gyro_offset_temp = {MY_NAN, MY_NAN, MY_NAN};
-		vector3f accel_offset_temp = {MY_NAN, MY_NAN, MY_NAN};
-//	ReadFlashParameterOne(GYRO_X_OFFSET,&gyro_offset_temp.x);
-//	ReadFlashParameterOne(GYRO_Y_OFFSET,&gyro_offset_temp.y);
-//	ReadFlashParameterOne(GYRO_Z_OFFSET,&gyro_offset_temp.z);	
+//	vector3f gyro_offset_temp = {MY_NAN, MY_NAN, MY_NAN};
+//	vector3f accel_offset_temp = {MY_NAN, MY_NAN, MY_NAN};
+	
+	vector3f gyro_offset_temp = {-0.502767801, -0.376522154, 0.250806689};
+	vector3f accel_offset_temp = {-0.185732797, -0.0094138002, 0.00534683466};
+
+	
+	ReadFlashParameterOne(GYRO_X_OFFSET,&gyro_offset_temp.x);
+	ReadFlashParameterOne(GYRO_Y_OFFSET,&gyro_offset_temp.y);
+	ReadFlashParameterOne(GYRO_Z_OFFSET,&gyro_offset_temp.z);		
+	ReadFlashParameterOne(ACCEL_X_OFFSET,&accel_offset_temp.x);
+	ReadFlashParameterOne(ACCEL_Y_OFFSET,&accel_offset_temp.y);
+	ReadFlashParameterOne(ACCEL_Z_OFFSET,&accel_offset_temp.z);
+	
 	if(isnan(gyro_offset_temp.x)==0
 		&&isnan(gyro_offset_temp.y)==0
-		 &&isnan(gyro_offset_temp.z)==0)//Èç¹ûÖ®Ç°ÒÑ¾­ÎÂ¶ÈĞ£×¼¹ı£¬¿ª»úÊ±Ö±½ÓÓÃÖ®Ç°Ğ£×¼µÄÊı¾İ 
+		 &&isnan(gyro_offset_temp.z)==0)//å¦‚æœä¹‹å‰å·²ç»æ¸©åº¦æ ¡å‡†è¿‡ï¼Œå¼€æœºæ—¶ç›´æ¥ç”¨ä¹‹å‰æ ¡å‡†çš„æ•°æ® 
 	{
 		smartcar_imu.gyro_offset.x=gyro_offset_temp.x;
 		smartcar_imu.gyro_offset.y=gyro_offset_temp.y;
@@ -47,17 +57,14 @@ void imu_calibration_params_init(void)
 		smartcar_imu.gyro_offset.y=0;
 		smartcar_imu.gyro_offset.z=0;
 	}
-	//´ıÎÂ¶ÈÎÈ¶¨ºó£¬×Ô¶¯Ğ£×¼ÍÓÂİÒÇÁãÆ«
+	//å¾…æ¸©åº¦ç¨³å®šåï¼Œè‡ªåŠ¨æ ¡å‡†é™€èºä»ªé›¶å
 	smartcar_imu.accel_scale.x=1.0f;
 	smartcar_imu.accel_scale.y=1.0f;
 	smartcar_imu.accel_scale.z=1.0f;
 
-//	ReadFlashParameterOne(ACCEL_X_OFFSET,&accel_offset_temp.x);
-//	ReadFlashParameterOne(ACCEL_Y_OFFSET,&accel_offset_temp.y);
-//	ReadFlashParameterOne(ACCEL_Z_OFFSET,&accel_offset_temp.z);	
 	if(isnan(accel_offset_temp.x)==0
 		&&isnan(accel_offset_temp.y)==0
-		 &&isnan(accel_offset_temp.z)==0)//Èç¹ûÖ®Ç°ÒÑ¾­ÎÂ¶ÈĞ£×¼¹ı£¬¿ª»úÊ±Ö±½ÓÓÃÖ®Ç°Ğ£×¼µÄÊı¾İ 
+		 &&isnan(accel_offset_temp.z)==0)//å¦‚æœä¹‹å‰å·²ç»æ¸©åº¦æ ¡å‡†è¿‡ï¼Œå¼€æœºæ—¶ç›´æ¥ç”¨ä¹‹å‰æ ¡å‡†çš„æ•°æ® 
 	{
 		smartcar_imu.accel_offset.x=accel_offset_temp.x;
 		smartcar_imu.accel_offset.y=accel_offset_temp.y;
@@ -70,17 +77,20 @@ void imu_calibration_params_init(void)
 		smartcar_imu.accel_offset.y=0;
 		smartcar_imu.accel_offset.z=0;
 	}	
-} 
+	if (smartcar_imu.imu_cal_flag) {
+	
+	}
+}
 
 
 
 /***************************************
-º¯ÊıÃû:	void imu_calibration(vector3f *gyro,vector3f *accel)
-ËµÃ÷: ¼ÓËÙ¶È¼Æ/ÍÓÂİÒÇ±ê¶¨
-Èë¿Ú:	ÎŞ
-³ö¿Ú:	ÎŞ
-±¸×¢:	ÎŞ
-×÷Õß:	ÎŞÃû´´ĞÂ
+å‡½æ•°å:	void imu_calibration(vector3f *gyro,vector3f *accel)
+è¯´æ˜: åŠ é€Ÿåº¦è®¡/é™€èºä»ªæ ‡å®š
+å…¥å£:	æ— 
+å‡ºå£:	æ— 
+å¤‡æ³¨:	æ— 
+ä½œè€…:	æ— ååˆ›æ–°
 ***************************************/
 void imu_calibration(vector3f *gyro,vector3f *accel)
 {
@@ -116,26 +126,24 @@ void imu_calibration(vector3f *gyro,vector3f *accel)
 	last_gyro.y=gyro->y;
 	last_gyro.z=gyro->z;
 
-	if(cnt>=400)//³ÖĞøÂú×ã2s
+	if(cnt>=400)//æŒç»­æ»¡è¶³2s
 	{
-		smartcar_imu.gyro_offset.x =(gyro_sum.x/cnt);//µÃµ½±ê¶¨Æ«ÒÆ
+		smartcar_imu.gyro_offset.x =(gyro_sum.x/cnt);//å¾—åˆ°æ ‡å®šåç§»
 		smartcar_imu.gyro_offset.y =(gyro_sum.y/cnt);
 		smartcar_imu.gyro_offset.z =(gyro_sum.z/cnt);
 		
-		smartcar_imu.accel_offset.x =(accel_sum.x/cnt);//µÃµ½±ê¶¨Æ«ÒÆ
+		smartcar_imu.accel_offset.x =(accel_sum.x/cnt);//å¾—åˆ°æ ‡å®šåç§»
 		smartcar_imu.accel_offset.y =(accel_sum.y/cnt);
 		smartcar_imu.accel_offset.z =(accel_sum.z/cnt)-safe_sqrt(1-sq2(smartcar_imu.accel_offset.x)-sq2(smartcar_imu.accel_offset.y));
 			
-//		WriteFlashParameter_Three(GYRO_X_OFFSET,
-//															smartcar_imu.gyro_offset.x,
-//															smartcar_imu.gyro_offset.y,
-//															smartcar_imu.gyro_offset.z,
-//															&Trackless_Params);		
-//		WriteFlashParameter_Three(ACCEL_X_OFFSET,
-//															smartcar_imu.accel_offset.x,
-//															smartcar_imu.accel_offset.y,
-//															smartcar_imu.accel_offset.z,
-//															&Trackless_Params);	
+		WriteFlashParameter_Three(GYRO_X_OFFSET,
+															smartcar_imu.gyro_offset.x,
+															smartcar_imu.gyro_offset.y,
+															smartcar_imu.gyro_offset.z);		
+		WriteFlashParameter_Three(ACCEL_X_OFFSET,
+															smartcar_imu.accel_offset.x,
+															smartcar_imu.accel_offset.y,
+															smartcar_imu.accel_offset.z);	
 		
 		gyro_sum.x=0;
 		gyro_sum.y=0;
@@ -151,62 +159,62 @@ void imu_calibration(vector3f *gyro,vector3f *accel)
 }
 
 /***************************************************
-º¯ÊıÃû: void imu_data_sampling(void)
-ËµÃ÷:	IMUÊı¾İ²ÉÑù/Ğ£×¼/ÂË²¨
-Èë¿Ú:	ÎŞ
-³ö¿Ú:	ÎŞ
-±¸×¢:	ÎŞ
-×÷Õß:	ÎŞÃû´´ĞÂ
+å‡½æ•°å: void imu_data_sampling(void)
+è¯´æ˜:	IMUæ•°æ®é‡‡æ ·/æ ¡å‡†/æ»¤æ³¢
+å…¥å£:	æ— 
+å‡ºå£:	æ— 
+å¤‡æ³¨:	æ— 
+ä½œè€…:	æ— ååˆ›æ–°
 ****************************************************/
 void imu_data_sampling(void)
 {
 	if(smartcar_imu.lpf_init==0)
 	{
-		set_cutoff_frequency(200, 50,&gyro_lpf_param); //×ËÌ¬½ÇËÙ¶È·´À¡ÂË²¨²ÎÊı 
-		set_cutoff_frequency(200, 30,&accel_lpf_param);//×ËÌ¬½âËã¼Ó¼ÆĞŞÕıÂË²¨Öµ
+		set_cutoff_frequency(200, 50,&gyro_lpf_param); //å§¿æ€è§’é€Ÿåº¦åé¦ˆæ»¤æ³¢å‚æ•° 
+		set_cutoff_frequency(200, 30,&accel_lpf_param);//å§¿æ€è§£ç®—åŠ è®¡ä¿®æ­£æ»¤æ³¢å€¼
 	  smartcar_imu.lpf_init=1;
 	}
 	smartcar_imu.last_temperature_raw=smartcar_imu.temperature_raw;
-	//ÍÓÂİÒÇ/ÍÓÂİÒÇÊı¾İ²É¼¯
+	//é™€èºä»ª/é™€èºä»ªæ•°æ®é‡‡é›†
 	ICM206xx_Read_Data(&smartcar_imu._gyro_dps_raw,&smartcar_imu._accel_g_raw,&smartcar_imu.temperature_raw);
-	//ÍÓÂİÒÇÊı¾İµÍÍ¨ÂË²¨
+	//é™€èºä»ªæ•°æ®ä½é€šæ»¤æ³¢
 	smartcar_imu.gyro_dps_raw.x=LPButterworth(smartcar_imu._gyro_dps_raw.x,&gyro_filter_buf[0],&gyro_lpf_param);
   smartcar_imu.gyro_dps_raw.y=LPButterworth(smartcar_imu._gyro_dps_raw.y,&gyro_filter_buf[1],&gyro_lpf_param);
   smartcar_imu.gyro_dps_raw.z=LPButterworth(smartcar_imu._gyro_dps_raw.z,&gyro_filter_buf[2],&gyro_lpf_param);		
-	//¼ÓËÙ¶ÈÊı¾İµÍÍ¨ÂË²¨
+	//åŠ é€Ÿåº¦æ•°æ®ä½é€šæ»¤æ³¢
 	smartcar_imu.accel_g_raw.x=LPButterworth(smartcar_imu._accel_g_raw.x,&accel_filter_buf[0],&accel_lpf_param);
 	smartcar_imu.accel_g_raw.y=LPButterworth(smartcar_imu._accel_g_raw.y,&accel_filter_buf[1],&accel_lpf_param);
 	smartcar_imu.accel_g_raw.z=LPButterworth(smartcar_imu._accel_g_raw.z,&accel_filter_buf[2],&accel_lpf_param);	
-	//ÎÂ¶È´«¸ĞÆ÷Êı¾İÒ»½×µÍÍ¨ÂË²¨
+	//æ¸©åº¦ä¼ æ„Ÿå™¨æ•°æ®ä¸€é˜¶ä½é€šæ»¤æ³¢
 	smartcar_imu.temperature_filter=0.75f*smartcar_imu.temperature_raw+0.25f*smartcar_imu.temperature_filter;
-  //µÃµ½Ğ£×¼ºóµÄ½ÇËÙ¶È¡¢¼ÓËÙ¶È¡¢´ÅÁ¦¼ÆÊı¾İ
+  //å¾—åˆ°æ ¡å‡†åçš„è§’é€Ÿåº¦ã€åŠ é€Ÿåº¦ã€ç£åŠ›è®¡æ•°æ®
 	vector3f_sub(smartcar_imu.gyro_dps_raw,smartcar_imu.gyro_offset,&smartcar_imu.gyro_dps);
   
 	smartcar_imu.accel_g.x=smartcar_imu.accel_scale.x*smartcar_imu.accel_g_raw.x-smartcar_imu.accel_offset.x;
   smartcar_imu.accel_g.y=smartcar_imu.accel_scale.y*smartcar_imu.accel_g_raw.y-smartcar_imu.accel_offset.y;
   smartcar_imu.accel_g.z=smartcar_imu.accel_scale.z*smartcar_imu.accel_g_raw.z-smartcar_imu.accel_offset.z;  	
-	//¼ÓËÙ¶È¼Æ/ÍÓÂİÒÇĞ£×¼¼ì²â
+	//åŠ é€Ÿåº¦è®¡/é™€èºä»ªæ ¡å‡†æ£€æµ‹
 	imu_calibration(&smartcar_imu.gyro_dps_raw,&smartcar_imu.accel_g_raw);
 	
-	//Í¨¹ıÈıÖá¼ÓËÙ¶È¼Æ,¼ÆËãË®Æ½¹Û²â½Ç¶È
+	//é€šè¿‡ä¸‰è½´åŠ é€Ÿåº¦è®¡,è®¡ç®—æ°´å¹³è§‚æµ‹è§’åº¦
 	float ax,ay,az;
 	ax=smartcar_imu.accel_g.x;
 	ay=smartcar_imu.accel_g.y;
 	az=smartcar_imu.accel_g.z;
 	
-  smartcar_imu.rpy_obs_deg[0]=-57.3f*atan(ax*invSqrt(ay*ay+az*az)); //ºá¹ö½Ç
-  smartcar_imu.rpy_obs_deg[1]= 57.3f*atan(ay*invSqrt(ax*ax+az*az)); //¸©Ñö½Ç
-	//¸©ÑöÖá×ËÌ¬½Ç¿¨¶ûÂüÂË²¨
+  smartcar_imu.rpy_obs_deg[0]=-57.3f*atan(ax*invSqrt(ay*ay+az*az)); //æ¨ªæ»šè§’
+  smartcar_imu.rpy_obs_deg[1]= 57.3f*atan(ay*invSqrt(ax*ax+az*az)); //ä¿¯ä»°è§’
+	//ä¿¯ä»°è½´å§¿æ€è§’å¡å°”æ›¼æ»¤æ³¢
 	smartcar_imu.rpy_kalman_deg[1]=kalman_filter(smartcar_imu.rpy_obs_deg[1],smartcar_imu.gyro_dps.x);
 }
 
 /***************************************************
-º¯ÊıÃû: void trackless_ahrs_update(void)
-ËµÃ÷:	×ËÌ¬¸üĞÂ
-Èë¿Ú:	ÎŞ
-³ö¿Ú:	ÎŞ
-±¸×¢:	ÎŞ
-×÷Õß:	ÎŞÃû´´ĞÂ
+å‡½æ•°å: void trackless_ahrs_update(void)
+è¯´æ˜:	å§¿æ€æ›´æ–°
+å…¥å£:	æ— 
+å‡ºå£:	æ— 
+å¤‡æ³¨:	æ— 
+ä½œè€…:	æ— ååˆ›æ–°
 ****************************************************/
 void trackless_ahrs_update(void)
 {
@@ -224,11 +232,11 @@ void trackless_ahrs_update(void)
 	accelerometer.axis.z=smartcar_imu.accel_g.z;
 	if(smartcar_imu.quaternion_init_ok==0)
 	{
-		if(smartcar_imu.temperature_stable_flag==1)//ÎÂ¶ÈÎÈ¶¨
+		if(smartcar_imu.temperature_stable_flag==1)//æ¸©åº¦ç¨³å®š
 		{
 			calculate_quaternion_init(smartcar_imu.accel_g,smartcar_imu.mag_tesla,smartcar_imu.quaternion_init);
 			smartcar_imu.quaternion_init_ok	=	1;
-			//AHRS³õÊ¼»¯
+			//AHRSåˆå§‹åŒ–
 			FusionOffsetInitialise(&offset, sampling_frequent);
 			FusionAhrsInitialise(&ahrs);
 			//Set AHRS algorithm settings
@@ -251,7 +259,7 @@ void trackless_ahrs_update(void)
 		smartcar_imu.rpy_deg[_ROL]=euler.angle.pitch;
 		smartcar_imu.rpy_deg[_PIT]=euler.angle.roll;
 		smartcar_imu.rpy_deg[_YAW]=euler.angle.yaw;
-		//»ñÈ¡µ¼º½ÏµÏµÍ³ÔË¶¯¼ÓËÙ¶È
+		//è·å–å¯¼èˆªç³»ç³»ç»Ÿè¿åŠ¨åŠ é€Ÿåº¦
 		smartcar_imu.accel_earth_cmpss.x=earthacceleration.axis.x*GRAVITY_MSS*100.0f;
 		smartcar_imu.accel_earth_cmpss.y=earthacceleration.axis.y*GRAVITY_MSS*100.0f;
 		smartcar_imu.accel_earth_cmpss.z=earthacceleration.axis.z*GRAVITY_MSS*100.0f;
@@ -270,25 +278,25 @@ void trackless_ahrs_update(void)
   smartcar_imu.rpy_gyro_dps[_PIT]=smartcar_imu.gyro_dps.x;
   smartcar_imu.rpy_gyro_dps[_ROL]=smartcar_imu.gyro_dps.y;
   smartcar_imu.rpy_gyro_dps[_YAW]=smartcar_imu.gyro_dps.z;
-  //¼ÆËã×ËÌ¬Ïà¹ØÈı½Çº¯Êı
+  //è®¡ç®—å§¿æ€ç›¸å…³ä¸‰è§’å‡½æ•°
   smartcar_imu.sin_rpy[_PIT]=FastSin(smartcar_imu.rpy_deg[_PIT]*DEG2RAD);
   smartcar_imu.cos_rpy[_PIT]=FastCos(smartcar_imu.rpy_deg[_PIT]*DEG2RAD);
   smartcar_imu.sin_rpy[_ROL]=FastSin(smartcar_imu.rpy_deg[_ROL]*DEG2RAD);
   smartcar_imu.cos_rpy[_ROL]=FastCos(smartcar_imu.rpy_deg[_ROL]*DEG2RAD);
   smartcar_imu.sin_rpy[_YAW]=FastSin(smartcar_imu.rpy_deg[_YAW]*DEG2RAD);
   smartcar_imu.cos_rpy[_YAW]=FastCos(smartcar_imu.rpy_deg[_YAW]*DEG2RAD);
-	//ÌáÈ¡×ËÌ¬ËÄÔªÊı
+	//æå–å§¿æ€å››å…ƒæ•°
   smartcar_imu.quaternion[0]=ahrs.quaternion.element.w;
 	smartcar_imu.quaternion[1]=ahrs.quaternion.element.x;
   smartcar_imu.quaternion[2]=ahrs.quaternion.element.y;
 	smartcar_imu.quaternion[3]=ahrs.quaternion.element.z;
-	//¼ÆËãÔØÌåÏµµ½µ¼º½ÏµĞı×ª¾ØÕó
-	quaternion_to_cb2n(smartcar_imu.quaternion,smartcar_imu.cb2n);						  //Í¨¹ıËÄÔªÊıÇóÈ¡Ğı×ª¾ØÕó	
-	//½«ÎŞÈË»úÔÚµ¼º½×ø±êÏµÏÂµÄÑØ×ÅÕı¶«¡¢Õı±±·½ÏòµÄÔË¶¯¼ÓËÙ¶ÈĞı×ªµ½µ±Ç°º½ÏòµÄÔË¶¯¼ÓËÙ¶È:»úÍ·(¸©Ñö)+ºá¹ö 
-  smartcar_imu.accel_body_cmpss.x= smartcar_imu.accel_earth_cmpss.x*smartcar_imu.cos_rpy[_YAW]+smartcar_imu.accel_earth_cmpss.y*smartcar_imu.sin_rpy[_YAW];  //ºá¹öÕıÏòÔË¶¯¼ÓËÙ¶È  XÖáÕıÏò
-  smartcar_imu.accel_body_cmpss.y=-smartcar_imu.accel_earth_cmpss.x*smartcar_imu.sin_rpy[_YAW]+smartcar_imu.accel_earth_cmpss.y*smartcar_imu.cos_rpy[_YAW];  //»úÍ·ÕıÏòÔË¶¯¼ÓËÙ¶È  YÖáÕıÏò
+	//è®¡ç®—è½½ä½“ç³»åˆ°å¯¼èˆªç³»æ—‹è½¬çŸ©é˜µ
+	quaternion_to_cb2n(smartcar_imu.quaternion,smartcar_imu.cb2n);						  //é€šè¿‡å››å…ƒæ•°æ±‚å–æ—‹è½¬çŸ©é˜µ	
+	//å°†æ— äººæœºåœ¨å¯¼èˆªåæ ‡ç³»ä¸‹çš„æ²¿ç€æ­£ä¸œã€æ­£åŒ—æ–¹å‘çš„è¿åŠ¨åŠ é€Ÿåº¦æ—‹è½¬åˆ°å½“å‰èˆªå‘çš„è¿åŠ¨åŠ é€Ÿåº¦:æœºå¤´(ä¿¯ä»°)+æ¨ªæ»š 
+  smartcar_imu.accel_body_cmpss.x= smartcar_imu.accel_earth_cmpss.x*smartcar_imu.cos_rpy[_YAW]+smartcar_imu.accel_earth_cmpss.y*smartcar_imu.sin_rpy[_YAW];  //æ¨ªæ»šæ­£å‘è¿åŠ¨åŠ é€Ÿåº¦  Xè½´æ­£å‘
+  smartcar_imu.accel_body_cmpss.y=-smartcar_imu.accel_earth_cmpss.x*smartcar_imu.sin_rpy[_YAW]+smartcar_imu.accel_earth_cmpss.y*smartcar_imu.cos_rpy[_YAW];  //æœºå¤´æ­£å‘è¿åŠ¨åŠ é€Ÿåº¦  Yè½´æ­£å‘
 	
-	//{-sin¦È          cos¦Èsin ¦µ                          cos¦Ècos¦µ                   }
+	//{-sinÎ¸          cosÎ¸sin Î¦                          cosÎ¸cosÎ¦                   }
   smartcar_imu.yaw_gyro_enu=-smartcar_imu.sin_rpy[_ROL]*smartcar_imu.gyro_dps.x
 														+smartcar_imu.cos_rpy[_ROL]*smartcar_imu.sin_rpy[_PIT]*smartcar_imu.gyro_dps.y
 														+smartcar_imu.cos_rpy[_PIT]*smartcar_imu.cos_rpy[_ROL]*smartcar_imu.gyro_dps.z;	
@@ -296,13 +304,80 @@ void trackless_ahrs_update(void)
 }
 
 
+
+float temp_kp=8.0f,temp_ki=0.75f,temp_kd=125.0f;
+float temp_error=0,temp_expect=50.0f,temp_feedback=0,temp_last_error=0;
+float	temp_integral=0,temp_output=0;
 /***************************************************
-º¯ÊıÃû: uint8_t temperature_state_get(void)
-ËµÃ÷:	ÎÂ¶È½Ó½üÄ¿±êÖµ¼ì²â
-Èë¿Ú:	ÎŞ
-³ö¿Ú:	uint8_t ¾ÍÎ»±êÖ¾
-±¸×¢:	ÎŞ
-×÷Õß:	ÎŞÃû´´ĞÂ
+å‡½æ•°å: void imu_temperature_ctrl(void)
+è¯´æ˜:	IMUæ’æ¸©æ§åˆ¶
+å…¥å£:	æ— 
+å‡ºå£:	æ— 
+å¤‡æ³¨:	æ— 
+ä½œè€…:	æ— ååˆ›æ–°
+****************************************************/
+void imu_temperature_ctrl(void)
+{
+	temperature_state_check();
+	static uint16_t tmp_period_cnt=0;
+	tmp_period_cnt++;
+	if(tmp_period_cnt<20) return;
+	tmp_period_cnt=0;
+	
+	float temp_dis_error=0;
+	temp_last_error=temp_error;
+	temp_feedback=smartcar_imu.temperature_filter;
+	temp_error=temp_expect-temp_feedback;
+	temp_error=constrain_float(temp_error,-50,50);
+	if(ABS(temp_error)<10)	temp_integral+=temp_ki*temp_error*0.1f;
+	temp_integral=constrain_float(temp_integral,-80,80);
+	temp_dis_error=temp_error-temp_last_error;
+	temp_output=temp_kp*temp_error+temp_integral+temp_kd*temp_dis_error;
+	temp_output=constrain_float(temp_output,-100,100);
+}
+
+/***************************************************
+å‡½æ•°å: void simulation_pwm_init(void)
+è¯´æ˜:	æ¨¡æ‹Ÿpwmåˆå§‹åŒ–
+å…¥å£:	æ— 
+å‡ºå£:	æ— 
+å¤‡æ³¨:	æ— 
+ä½œè€…:	æ— ååˆ›æ–°
+****************************************************/
+void simulation_pwm_init(void)
+{	
+	DL_GPIO_clearPins(PORTB_PORT, PORTB_HEATER_PIN);
+}
+
+#define Simulation_PWM_Period_MAX  100//100*1ms=0.1S
+/***************************************************
+å‡½æ•°å: void simulation_pwm_output(void)
+è¯´æ˜:	æ¨¡æ‹Ÿpwmè¾“å‡º
+å…¥å£:	æ— 
+å‡ºå£:	æ— 
+å¤‡æ³¨:	æ— 
+ä½œè€…:	æ— ååˆ›æ–°
+****************************************************/
+void simulation_pwm_output(void)
+{
+#if temperature_ctrl_enable
+	int16_t width=temp_output;
+	static uint16_t cnt=0;	cnt++;
+	if(cnt>=Simulation_PWM_Period_MAX)  cnt=0;
+  if(cnt<=width) DL_GPIO_setPins(PORTB_PORT, PORTB_HEATER_PIN);
+	else DL_GPIO_clearPins(PORTB_PORT, PORTB_HEATER_PIN);
+#else
+	DL_GPIO_clearPins(PORTB_PORT, PORTB_HEATER_PIN);
+#endif
+}
+
+/***************************************************
+å‡½æ•°å: uint8_t temperature_state_get(void)
+è¯´æ˜:	æ¸©åº¦æ¥è¿‘ç›®æ ‡å€¼æ£€æµ‹
+å…¥å£:	æ— 
+å‡ºå£:	uint8_t å°±ä½æ ‡å¿—
+å¤‡æ³¨:	æ— 
+ä½œè€…:	æ— ååˆ›æ–°
 ****************************************************/
 uint8_t temperature_state_get(void)
 {
@@ -316,12 +391,12 @@ uint8_t temperature_state_get(void)
 }
 
 /***************************************************
-º¯ÊıÃû: void temperature_state_check(void)
-ËµÃ÷:	ÎÂ¶Èºã¶¨¼ì²â
-Èë¿Ú:	ÎŞ
-³ö¿Ú:	ÎŞ
-±¸×¢:	ÎŞ
-×÷Õß:	ÎŞÃû´´ĞÂ
+å‡½æ•°å: void temperature_state_check(void)
+è¯´æ˜:	æ¸©åº¦æ’å®šæ£€æµ‹
+å…¥å£:	æ— 
+å‡ºå£:	æ— 
+å¤‡æ³¨:	æ— 
+ä½œè€…:	æ— ååˆ›æ–°
 ****************************************************/
 void temperature_state_check(void)
 {
@@ -346,3 +421,4 @@ void temperature_state_check(void)
 		smartcar_imu.imu_health=0;
 	}	
 }	
+

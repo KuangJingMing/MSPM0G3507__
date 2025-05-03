@@ -11,8 +11,6 @@ static uint8_t imu_address=ICM20689_ADRESS;
 uint8_t icm_read_register[5]={0x00,0x02,0x08,0x08,0x03};
 uint8_t icm_read_check[5]={0};
 
-extern void imu_calibration_params_init(void);
-
 /***************************************
 函数名:	void ICM206xx_Init(void)
 说明: 加速度计/陀螺仪初始化

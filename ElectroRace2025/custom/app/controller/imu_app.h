@@ -6,11 +6,16 @@
 #include "icm20608.h"      // IMU 驱动头文件
 #include "filter.h"
 #include "fast_math.h"
+#include "eeprom_parameter.h"
 
-
+void imu_calibration_params_init(void);
 void imu_data_sampling(void);
 void trackless_ahrs_update(void);
 void temperature_state_check(void);
+
+void simulation_pwm_init(void);
+void simulation_pwm_output(void);
+void imu_temperature_ctrl(void);
 
 extern sensor smartcar_imu;
 

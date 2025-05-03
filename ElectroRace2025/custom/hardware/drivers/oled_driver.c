@@ -155,9 +155,9 @@ void oled_i2c_hardware_init(void)
 		    // 复位 OLED
     OLED_I2C_RST_Clr();
     // 使用 FreeRTOS 延时，避免阻塞整个系统
-    vTaskDelay(pdMS_TO_TICKS(10));
+    delay_ms(10);
     OLED_I2C_RST_Set();
-    vTaskDelay(pdMS_TO_TICKS(10));
+    delay_ms(10);
 }
 
 // U8g2 I2C GPIO 和延时回调函数

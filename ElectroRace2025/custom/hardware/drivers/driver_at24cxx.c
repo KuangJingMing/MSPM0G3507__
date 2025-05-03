@@ -1,482 +1,168 @@
-/**
- * Copyright (c) 2015 - present LibDriver All rights reserved
- * 
- * The MIT License (MIT)
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE. 
- *
- * @file      driver_at24cxx.c
- * @brief     driver at24cxx source file
- * @version   2.0.0
- * @author    Shifeng Li
- * @date      2021-02-17
- *
- * <h3>history</h3>
- * <table>
- * <tr><th>Date        <th>Version  <th>Author      <th>Description
- * <tr><td>2021/02/17  <td>2.0      <td>Shifeng Li  <td>format the code
- * <tr><td>2020/10/15  <td>1.0      <td>Shifeng Li  <td>first upload
- * </table>
- */
+#include "driver_at24cxx.h" 
+#include "log_config.h"
+#include "log.h"
+#include "ti_msp_dl_config.h"
+#include "delay.h"
+#include "sw_i2c.h"
 
-#include "driver_at24cxx.h"
+// 实例化一个 sw_i2c_t 结构体，用于您的 IIC 外设
+const sw_i2c_t at24cxx_i2c = {
+    .sdaPort = EPM_PORT,      // 替换为您的 SDA 端口
+    .sdaPin = EPM_EPM_SDA_PIN, // 替换为您的 SDA 引脚
+    .sdaIOMUX = EPM_EPM_SDA_IOMUX, // 替换为您的 SDA IOMUX 配置
+    .sclPort = EPM_PORT,      // 替换为您的 SCL 端口
+    .sclPin = EPM_EPM_SCL_PIN, // 替换为您的 SCL 引脚
+    .sclIOMUX = EPM_EPM_SCL_IOMUX, // 替换为您的 SCL IOMUX 配置
+};
 
-/**
- * @brief chip information definition
- */
-#define CHIP_NAME                 "Microchip AT24CXX"       /**< chip name */
-#define MANUFACTURER_NAME         "Microchip"               /**< manufacturer name */
-#define SUPPLY_VOLTAGE_MIN        1.7f                      /**< chip min supply voltage */
-#define SUPPLY_VOLTAGE_MAX        5.5f                      /**< chip max supply voltage */
-#define MAX_CURRENT               5.0f                      /**< chip max current */
-#define TEMPERATURE_MIN           -40.0f                    /**< chip min operating temperature */
-#define TEMPERATURE_MAX           85.0f                     /**< chip max operating temperature */
-#define DRIVER_VERSION            2000                      /**< driver version */
-
-/**
- * @brief     initialize the chip
- * @param[in] *handle pointer to an at24cxx handle structure
- * @return    status code
- *            - 0 success
- *            - 1 iic initialization failed
- *            - 2 handle is NULL
- *            - 3 linked functions is NULL
- * @note      none
- */
-uint8_t at24cxx_init(at24cxx_handle_t *handle)
+//初始化IIC接口
+void AT24CXX_Init(void)
 {
-    if (handle == NULL)                                                        /* check handle */
-    {
-        return 2;                                                              /* return error */
-    }
-    if (handle->debug_print == NULL)                                           /* check debug_print */
-    {
-        return 3;                                                              /* return error */
-    }
-    if (handle->iic_init == NULL)                                              /* check iic_init */
-    {
-        handle->debug_print("at24cxx: iic_init is null.\n");                   /* iic_init is null */
-       
-        return 3;                                                              /* return error */
-    }
-    if (handle->iic_deinit == NULL)                                            /* check iic_deinit */
-    {
-        handle->debug_print("at24cxx: iic_deinit is null.\n");                 /* iic_deinit is null */
-       
-        return 3;                                                              /* return error */
-    }
-    if (handle->iic_read == NULL)                                              /* check iic_read */
-    {
-        handle->debug_print("at24cxx: iic_read is null.\n");                   /* iic_read is null */
-       
-        return 3;                                                              /* return error */
-    }
-    if (handle->iic_write == NULL)                                             /* check iic_write */
-    {
-        handle->debug_print("at24cxx: iic_write is null.\n");                  /* iic_write is null */
-       
-        return 3;                                                              /* return error */
-    }
-    if (handle->iic_read_address16 == NULL)                                    /* check iic_read_address16 */
-    {
-        handle->debug_print("at24cxx: iic_read_address16 is null.\n");         /* iic_read_address16 is null */
-       
-        return 3;                                                              /* return error */
-    }
-    if (handle->iic_write_address16 == NULL)                                   /* check iic_write_address16 */
-    {
-        handle->debug_print("at24cxx: iic_write_address16 is null.\n");        /* iic_write_address16 is null */
-       
-        return 3;                                                              /* return error */
-    }
-    if (handle->delay_ms == NULL)                                              /* check delay_ms */
-    {
-        handle->debug_print("at24cxx: delay_ms is null.\n");                   /* delay_ms is null */
-       
-        return 3;                                                              /* return error */
-    }
+	SOFT_IIC_Init(&at24cxx_i2c);
+	int flag = 0;
+  while(++flag < 800) //检测不到24c02
+  {
+		if (AT24CXX_Check() == 0) {
+			break;
+		}
+    delay_ms(20);
+  }
 
-    if (handle->iic_init() != 0)                                               /* iic init */
-    {
-        handle->debug_print("at24cxx: iic init failed.\n");                    /* iic init failed */
-       
-        return 1;                                                              /* return error */
-    }
-    handle->inited = 1;                                                        /* flag finish initialization */
-
-    return 0;                                                                  /* success return 0 */
+  //AT24CXX_Erase_All();
 }
 
-/**
- * @brief     close the chip
- * @param[in] *handle pointer to an at24cxx handle structure
- * @return    status code
- *            - 0 success
- *            - 1 iic deinit failed
- *            - 2 handle is NULL
- *            - 3 handle is not initialized
- * @note      none
- */
-uint8_t at24cxx_deinit(at24cxx_handle_t *handle)
+// Read one byte from AT24CXX
+uint8_t AT24CXX_ReadOneByte(uint16_t ReadAddr)
 {
-    if (handle == NULL)                                              /* check handle */
-    {
-        return 2;                                                    /* return error */
+    uint8_t temp = 0;
+    uint8_t dev_addr = AT24C0X_IIC_BASE_ADDR;
+    uint16_t reg_addr = ReadAddr;
+    if(EE_TYPE <= AT24C16) { // 小容量，页号塞到地址高3bit（8页支持16Kbit）
+        dev_addr = AT24C0X_IIC_BASE_ADDR + AT24CXX_BLOCK(ReadAddr);
+        reg_addr = ReadAddr & 0xFF;
     }
-    if (handle->inited != 1)                                         /* check handle initialization */
-    {
-        return 3;                                                    /* return error */
-    }
-    
-    if (handle->iic_deinit() != 0)                                   /* iic deinit */
-    {
-        handle->debug_print("at24cxx: iic deinit failed.\n");        /* iic deinit failed */
-        
-        return 1;                                                    /* return error */
-    }   
-    handle->inited = 0;                                              /* flag close */
-    
-    return 0;                                                        /* success return 0 */
+    SOFT_IIC_Read_Len(&at24cxx_i2c, dev_addr, reg_addr, 1, &temp);
+    return temp;
 }
 
-/**
- * @brief     set the chip type
- * @param[in] *handle pointer to an at24cxx handle structure
- * @param[in] type chip type
- * @return    status code
- *            - 0 success
- *            - 2 handle is NULL
- * @note      none
- */
-uint8_t at24cxx_set_type(at24cxx_handle_t *handle, at24cxx_t type)
+// Write one byte to AT24CXX
+void AT24CXX_WriteOneByte(uint16_t WriteAddr, uint8_t DataToWrite)
 {
-    if (handle == NULL)                 /* check handle */
-    {
-        return 2;                       /* return error */
+    uint8_t dev_addr = AT24C0X_IIC_BASE_ADDR;
+    uint16_t reg_addr = WriteAddr;
+    if(EE_TYPE <= AT24C16) { // 小容量
+        dev_addr = AT24C0X_IIC_BASE_ADDR + AT24CXX_BLOCK(WriteAddr);
+        reg_addr = WriteAddr & 0xFF;
     }
-
-    handle->id = (uint32_t)type;        /* set id */
-    
-    return 0;                           /* success return 0 */
+    SOFT_IIC_Write_Len(&at24cxx_i2c, dev_addr, reg_addr, 1, (uint8_t*)&DataToWrite);
+    delay_ms(10);
 }
 
-/**
- * @brief      get the chip type
- * @param[in]  *handle pointer to an at24cxx handle structure
- * @param[out] *type pointer to a chip type buffer
- * @return     status code
- *             - 0 success
- *             - 2 handle is NULL
- * @note       none
- */
-uint8_t at24cxx_get_type(at24cxx_handle_t *handle, at24cxx_t *type)
+void AT24CXX_Erase_All(void)
 {
-    if (handle == NULL)                     /* check handle */
-    {
-        return 2;                           /* return error */
-    }
-
-    *type = (at24cxx_t)(handle->id);        /* get id */
-    
-    return 0;                               /* success return 0 */
+  for(uint16_t i = 0; i <= EE_TYPE; i++)
+  {
+    AT24CXX_WriteOneByte(i, 0xff);
+    delay_ms(10);
+  }
 }
 
-/**
- * @brief     set the chip address pin
- * @param[in] *handle pointer to an at24cxx handle structure
- * @param[in] addr_pin chip address pin
- * @return    status code
- *            - 0 success
- *            - 2 handle is NULL
- * @note      none
- */
-uint8_t at24cxx_set_addr_pin(at24cxx_handle_t *handle, at24cxx_address_t addr_pin)
-{
-    if (handle == NULL)                       /* check handle */
-    {
-        return 2;                             /* return error */
-    }
+uint8_t at24cxx_debug[2048];
 
-    handle->iic_addr = 0xA0;                  /* set iic addr */
-    handle->iic_addr |= addr_pin << 1;        /* set iic address */
-    
-    return 0;                                 /* success return 0 */
+void AT24CXX_Read_All(void)
+{
+  for(uint16_t i = 0; i <= EE_TYPE; i++)
+  {
+    at24cxx_debug[i] = AT24CXX_ReadOneByte(i);
+  }
 }
 
-/**
- * @brief      get the chip address pin
- * @param[in]  *handle pointer to an at24cxx handle structure
- * @param[out] *addr_pin pointer to a chip address pin
- * @return     status code
- *             - 0 success
- *             - 2 handle is NULL
- * @note       none
- */
-uint8_t at24cxx_get_addr_pin(at24cxx_handle_t *handle, at24cxx_address_t *addr_pin)
+//在AT24CXX里面的指定地址开始写入长度为Len的数据
+//该函数用于写入16bit或者32bit的数据.
+//WriteAddr  :开始写入的地址
+//DataToWrite:数据数组首地址
+//Len        :要写入数据的长度2,4
+void AT24CXX_WriteLenByte(uint16_t WriteAddr, u32 DataToWrite, uint8_t Len)
 {
-    if (handle == NULL)                                                        /* check handle */
-    {
-        return 2;                                                              /* return error */
-    }
+  uint8_t t;
 
-    *addr_pin = (at24cxx_address_t)((handle->iic_addr & (~0xA0)) >> 1);        /* get iic address */
-    
-    return 0;                                                                  /* success return 0 */
+  for (t = 0; t < Len; t++)
+  {
+    AT24CXX_WriteOneByte(WriteAddr + t, (DataToWrite >> (8 * t)) & 0xff);
+  }
 }
 
-/**
- * @brief      read bytes from the chip
- * @param[in]  *handle pointer to an at24cxx handle structure
- * @param[in]  address register address
- * @param[out] *buf pointer to a data buffer
- * @param[in]  len buffer length
- * @return     status code
- *             - 0 success
- *             - 1 read data failed
- *             - 2 handle is NULL
- *             - 3 handle is not initialized
- *             - 4 end address is over the max address
- * @note       none
- */
-uint8_t at24cxx_read(at24cxx_handle_t *handle, uint32_t address, uint8_t *buf, uint16_t len)
+//在AT24CXX里面的指定地址开始读出长度为Len的数据
+//该函数用于读出16bit或者32bit的数据.
+//ReadAddr   :开始读出的地址
+//返回值     :数据
+//Len        :要读出数据的长度2,4
+u32 AT24CXX_ReadLenByte(uint16_t ReadAddr, uint8_t Len)
 {
-    uint8_t page_remain;
-    
-    if (handle == NULL)                                                                                      /* check handle */
-    {
-        return 2;                                                                                            /* return error */
-    }
-    if (handle->inited != 1)                                                                                 /* check handle initialization */
-    {
-        return 3;                                                                                            /* return error */
-    }
+  uint8_t t;
+  u32 temp = 0;
 
-    if ((address + len) > handle->id)                                                                        /* check length */
-    {
-        handle->debug_print("at24cxx: read out of range.\n");                                                /* read out of range */
-       
-        return 4;                                                                                            /* return error */
-    }
-    page_remain = (uint8_t)(8 - address % 8);                                                                /* get page remain */
-    if (len <= page_remain)                                                                                  /* page remain */
-    {
-        page_remain = (uint8_t)len;                                                                          /* set page remain */
-    }
-    if (handle->id > (uint32_t)AT24C16)                                                                      /* choose id to set different address */
-    {
-        while (1)
-        {
-            if (handle->iic_read_address16((uint8_t)(handle->iic_addr + ((address / 65536) << 1)), 
-                                           address % 65536, buf,
-                                           page_remain) != 0)                                                /* read page */
-            {
-                handle->debug_print("at24cxx: read failed.\n");                                              /* read failed */
-               
-                return 1;                                                                                    /* return error */
-            }
-            if (page_remain == len)                                                                          /* check break */
-            {
-                break;                                                                                       /* break loop */
-            }
-            else
-            {
-                address += page_remain;                                                                      /* address increase */
-                buf += page_remain;                                                                          /* buffer point increase */
-                len -= page_remain;                                                                          /* length decrease */
-                if (len < 8)                                                                                 /* check length */
-                {
-                    page_remain = (uint8_t)len;                                                              /* set the reset length */
-                }
-                else
-                {
-                    page_remain = 8;                                                                         /* set page */
-                }
-            }
-        }
-    }
-    else
-    {
-        while (1)
-        {
-            if (handle->iic_read((uint8_t)(handle->iic_addr + ((address / 256) << 1)), address % 256, buf,
-                                  page_remain) != 0)                                                         /* read page */
-            {
-                handle->debug_print("at24cxx: read failed.\n");                                              /* read failed */
-               
-                return 1;                                                                                    /* return error */
-            }
-            if (page_remain == len)                                                                          /* check break */
-            {
-                break;                                                                                       /* break loop */
-            }
-            else
-            {
-                address += page_remain;                                                                      /* address increase */
-                buf += page_remain;                                                                          /* buffer point increase */
-                len -= page_remain;                                                                          /* length decrease */
-                if (len < 8)                                                                                 /* check length */
-                {
-                    page_remain = (uint8_t)len;                                                              /* set the reset length */
-                }
-                else
-                {
-                    page_remain = 8;                                                                         /* set page */
-                }
-            }
-        }
-    }
-    
-    return 0;                                                                                                /* success return 0 */
+  for (t = 0; t < Len; t++)
+  {
+    temp <<= 8;
+    temp += AT24CXX_ReadOneByte(ReadAddr + Len - t - 1);
+  }
+
+  return temp;
 }
 
-/**
- * @brief     write bytes to the chip
- * @param[in] *handle pointer to an at24cxx handle structure
- * @param[in] address register address
- * @param[in] *buf pointer to a data buffer
- * @param[in] len buffer length
- * @return    status code
- *            - 0 success
- *            - 1 write data failed
- *            - 2 handle is NULL
- *            - 3 handle is not initialized
- *            - 4 end address is over the max address
- * @note      none
- */
-uint8_t at24cxx_write(at24cxx_handle_t *handle, uint32_t address, uint8_t *buf, uint16_t len)
+//在AT24CXX里面的指定地址开始读出指定个数的数据
+//ReadAddr :开始读出的地址 对24c02为0~255
+//pBuffer  :数据数组首地址
+//NumToRead:要读出数据的个数
+void AT24CXX_Read(uint16_t ReadAddr, uint8_t *pBuffer, uint16_t NumToRead)
 {
-    uint8_t page_remain;
-    
-    if (handle == NULL)                                                                                       /* check handle */
-    {
-        return 2;                                                                                             /* return error */
-    }
-    if (handle->inited != 1)                                                                                  /* check handle initialization */
-    {
-        return 3;                                                                                             /* return error */
-    }
-
-    if ((address + len) > handle->id)                                                                         /* check length */
-    {
-        handle->debug_print("at24cxx: write out of range.\n");                                                /* write out of range */
-       
-        return 1;                                                                                             /* return error */
-    }
-    page_remain = (uint8_t)(8 - address % 8);                                                                 /* set page remain */
-    if (len <= page_remain)                                                                                   /* check length */
-    {
-        page_remain = (uint8_t)len;                                                                           /* set page remain */
-    }
-    if (handle->id > (uint32_t)AT24C16)                                                                       /* check id */
-    {
-        while (1)
-        {
-            if (handle->iic_write_address16((uint8_t)(handle->iic_addr + ((address / 65536) << 1)), 
-                                            address % 65536, buf,
-                                            page_remain) != 0)                                                /* write page */
-            {
-                handle->debug_print("at24cxx: write failed.\n");                                              /* write failed */
-               
-                return 1;                                                                                     /* return error */
-            }
-            handle->delay_ms(6);                                                                              /* wait 6 ms */
-            if (page_remain == len)                                                                           /* check break */
-            {
-                break;                                                                                        /* break */
-            }
-            else
-            {
-                address += page_remain;                                                                       /* address increase */
-                buf += page_remain;                                                                           /* buffer point increase */
-                len -= page_remain;                                                                           /* length decrease */
-                if (len < 8)                                                                                  /* check length */
-                {
-                    page_remain = (uint8_t)len;                                                               /* set the rest length */
-                }
-                else
-                {
-                    page_remain = 8;                                                                          /* set page */
-                }
-            }
-        }
-    }
-    else
-    {
-        while (1)
-        {
-            if (handle->iic_write((uint8_t)(handle->iic_addr + ((address / 256) << 1)), address % 256, buf,
-                                  page_remain) != 0)                                                          /* write page */
-            {
-                handle->debug_print("at24cxx: write failed.\n");                                              /* write failed */
-               
-                return 1;                                                                                     /* return error */
-            }
-            handle->delay_ms(6);                                                                              /* wait 6 ms */
-            if (page_remain == len)                                                                           /* check break */
-            {
-                break;                                                                                        /* break */
-            }
-            else
-            {
-                address += page_remain;                                                                       /* address increase */
-                buf += page_remain;                                                                           /* buffer point increase */
-                len -= page_remain;                                                                           /* length decrease */
-                if (len < 8)                                                                                  /* check length */
-                {
-                    page_remain = (uint8_t)len;                                                               /* set the rest length */
-                }
-                else
-                {
-                    page_remain = 8;                                                                          /* set page */
-                }
-            }
-        }
-    }
-    
-    return 0;                                                                                                 /* success return 0 */
+  while (NumToRead)
+  {
+    *pBuffer++ = AT24CXX_ReadOneByte(ReadAddr++);
+    NumToRead--;
+  }
 }
 
-/**
- * @brief      get chip's information
- * @param[out] *info pointer to an at24cxx info structure
- * @return     status code
- *             - 0 success
- *             - 2 handle is NULL
- * @note       none
- */
-uint8_t at24cxx_info(at24cxx_info_t *info)
+//在AT24CXX里面的指定地址开始写入指定个数的数据
+//WriteAddr :开始写入的地址 对24c02为0~255
+//pBuffer   :数据数组首地址
+//NumToWrite:要写入数据的个数
+void AT24CXX_Write(uint16_t WriteAddr, uint8_t *pBuffer, uint16_t NumToWrite)
 {
-    if (info == NULL)                                               /* check handle */
-    {
-        return 2;                                                   /* return error */
-    }
-    
-    memset(info, 0, sizeof(at24cxx_info_t));                        /* initialize at24cxx info structure */
-    strncpy(info->chip_name, CHIP_NAME, 32);                        /* copy chip name */
-    strncpy(info->manufacturer_name, MANUFACTURER_NAME, 32);        /* copy manufacturer name */
-    strncpy(info->interface, "IIC", 8);                             /* copy interface name */
-    info->supply_voltage_min_v = SUPPLY_VOLTAGE_MIN;                /* set minimal supply voltage */
-    info->supply_voltage_max_v = SUPPLY_VOLTAGE_MAX;                /* set maximum supply voltage */
-    info->max_current_ma = MAX_CURRENT;                             /* set maximum current */
-    info->temperature_max = TEMPERATURE_MAX;                        /* set minimal temperature */
-    info->temperature_min = TEMPERATURE_MIN;                        /* set maximum temperature */
-    info->driver_version = DRIVER_VERSION;                          /* set driver version */
-    
-    return 0;                                                       /* success return 0 */
+  while (NumToWrite--)
+  {
+    AT24CXX_WriteOneByte(WriteAddr, *pBuffer);
+    WriteAddr++;
+    pBuffer++;
+  }
 }
+
+//检查AT24CXX是否正常
+//这里用了24XX的最后一个地址(255)来存储标志字.
+//如果用其他24C系列,这个地址要修改
+//返回1:检测失败
+//返回0:检测成功
+#define at24cx_check_address 1600//1600  240
+#define at24cx_end_address 	 2047//2047  255 
+
+uint8_t AT24CXX_Check(void)
+{
+  volatile uint8_t temp;
+  temp = AT24CXX_ReadOneByte(at24cx_end_address); //避免每次开机都写AT24CXX
+
+  if (temp == 0X55)	return 0;
+  else //排除第一次初始化的情况
+  {
+    AT24CXX_Erase_All();//先全部擦除
+    AT24CXX_WriteOneByte(at24cx_end_address, 0X55);
+    temp = AT24CXX_ReadOneByte(at24cx_end_address);
+
+    if (temp == 0X55)	return 0;
+  }
+
+  return 1;
+}
+
+
+

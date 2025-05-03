@@ -20,7 +20,7 @@
 #include "icm20608.h"
 #include "imu_app.h"
 #include "driver_at24cxx.h" // LibDriver AT24CXX
-#include "driver_at24cxx_interface.h"
 #include "tests.h"
+#include "eeprom_parameter.h"
 
 #endif // COMMON_H
