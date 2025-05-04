@@ -7,8 +7,6 @@
 // 定义软件定时器的周期（以 tick 为单位）
 
 #define TIMER_5MS_PERIOD_MS     5
-#define TIMER_5MS_PERIOD_TICKS  pdMS_TO_TICKS(TIMER_5MS_PERIOD_MS)
-#define NUM_PERIOD_TASKS 7
 
 // 定义事件 ID 枚举
 typedef enum {
@@ -19,21 +17,24 @@ typedef enum {
     EVENT_MENU_VAR_UPDATE,
     EVENT_PERIOD_PRINT,
 		EVENT_ALERT,
+		EVENT_CAR,
+	  NUM_PERIOD_TASKS
 } EVENT_IDS;
 
 // 定义运行状态枚举
 typedef enum {
     RUN,
     IDLE,
-} RUNNING_FLAG;
+} TASK_STATE;
 
-// 定义周期性任务结构体
+
+// 增加period_ticks字段，避免重复计算
 typedef struct {
     EVENT_IDS id;
-    RUNNING_FLAG is_running;
-    void (*task_handler)(void); // Function pointer to the sub-task handler
-    uint16_t period_ms;         // Task's period in milliseconds
-		uint32_t last_execution_tick;
+    TASK_STATE is_running;
+    void (*task_handler)(void);
+    uint32_t period_ms;
+    uint32_t period_ticks;  // 存储计算后的ticks值
 } period_task_t;
 
 

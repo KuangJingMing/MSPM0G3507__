@@ -17,5 +17,9 @@
 #define MAX_TX_BUFFER_SIZE 256
 #define MAX_RX_BUFFER_SIZE 255
 
+// 定义常量宏
+#define ENCODER_PERIOD_MS          20              // 20ms 采样周期
+#define WHEEL_RADIUS_CM            3.5f          // 轮胎半径，单位：cm
+#define PULSE_NUM_PER_CIRCLE       1040           // 轮胎一圈的编码器计数
 
 #endif // common_defines_H

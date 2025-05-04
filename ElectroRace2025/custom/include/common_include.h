@@ -30,5 +30,6 @@
 #include "periodic_event_task.h"
 #include "menu_logic.h"
 #include "imu_temp_control.h"
+#include "car_controller.h"
 
 #endif // COMMON_H

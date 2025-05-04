@@ -12,6 +12,7 @@ void user_init(void) {
 	AT24CXX_Init();
 	imu_init_blocking();
 	imu_temperature_ctrl_init();
+	car_init();
 	create_periodic_event_task();
 }
 

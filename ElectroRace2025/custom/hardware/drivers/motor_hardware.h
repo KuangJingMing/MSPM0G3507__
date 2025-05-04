@@ -18,8 +18,8 @@ typedef enum {
 
 // 定义电机类型 (两轮或四轮)
 typedef enum {
-    MOTOR_TYPE_TWO_WHEEL,
-    MOTOR_TYPE_FOUR_WHEEL
+    MOTOR_TYPE_TWO_WHEEL = 2,
+    MOTOR_TYPE_FOUR_WHEEL = 4
 } MotorType;
 
 // 电机配置结构体

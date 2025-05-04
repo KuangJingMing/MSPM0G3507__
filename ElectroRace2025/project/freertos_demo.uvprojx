@@ -519,6 +519,11 @@
               <FileType>1</FileType>
               <FilePath>..\custom\app\controller\imu_temp_control.c</FilePath>
             </File>
+            <File>
+              <FileName>car_controller.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\app\controller\car_controller.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

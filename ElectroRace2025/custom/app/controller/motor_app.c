@@ -11,14 +11,14 @@ MotorSystemConfig g_motor_system_config = {
 
     .motors = {
         // 配置前左电机 (根据你的实际硬件连接和 DL 库配置)
-        [MOTOR_FRONT_LEFT] = {
+        [MOTOR_FRONT_RIGHT] = {
             .enabled = true, // 默认启用
             .timer_instance = (GPTIMER_Regs*) Motor_PWM1_INST, // 定时器实例指针
             .cc_reverse_pwm_index = DL_TIMER_CC_0_INDEX, // 反向 PWM 通道索引
             .cc_forward_pwm_index = DL_TIMER_CC_1_INDEX, // 正向 PWM 通道索引
         },
         // 配置前右电机 (根据你的实际硬件连接和 DL 库配置)
-        [MOTOR_FRONT_RIGHT] = {
+        [MOTOR_FRONT_LEFT] = {
             .enabled = true, // 默认启用
             .timer_instance = (GPTIMER_Regs*) Motor_PWM2_INST,
             .cc_reverse_pwm_index = DL_TIMER_CC_1_INDEX,
