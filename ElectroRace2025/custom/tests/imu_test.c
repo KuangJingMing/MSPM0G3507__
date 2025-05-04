@@ -8,7 +8,7 @@
 void imu_init(void) {
     while (ICM206xx_Init()){}
     imu_calibration_params_init();
-		simulation_pwm_init();
+		imu_temperature_ctrl_init();
 }
 
 void imu_task(void *arg) {

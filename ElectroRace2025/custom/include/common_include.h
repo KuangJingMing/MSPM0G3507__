@@ -27,8 +27,8 @@
 #include "beep.h"
 #include "rgb_led.h"
 #include "alert.h"
-#include "timer_task_notification.h"
 #include "periodic_event_task.h"
 #include "menu_logic.h"
+#include "imu_temp_control.h"
 
 #endif // COMMON_H

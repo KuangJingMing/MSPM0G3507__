@@ -92,7 +92,8 @@
   ..\custom\math\fast_math.h ..\custom\app\controller\eeprom_parameter.h \
   ..\custom\hardware\drivers\driver_at24cxx.h \
   ..\custom\hardware\drivers\beep.h ..\custom\hardware\drivers\rgb_led.h \
-  ..\custom\app\controller\alert.h \
-  ..\custom\user\timer_task_notification.h \
-  ..\custom\user\periodic_event_task.h ..\custom\app\ui\menu_logic.h \
+  ..\custom\app\controller\alert.h ..\custom\user\periodic_event_task.h \
+  ..\custom\app\ui\menu_logic.h \
+  ..\custom\app\controller\imu_temp_control.h ..\custom\math\arm_math.h \
+  ..\source\third_party\CMSIS\Core\Include\cmsis_compiler.h \
   ..\custom\include\log_config.h ..\custom\utils\log.h

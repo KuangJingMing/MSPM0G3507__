@@ -70,4 +70,14 @@
   ..\kernel\freertos\Source\include\mpu_wrappers.h \
   ..\kernel\freertos\Source\include\task.h \
   ..\kernel\freertos\Source\include\list.h \
-  ..\kernel\freertos\Source\include\timers.h ..\custom\app\ui\menu_ui.h
+  ..\kernel\freertos\Source\include\timers.h ..\custom\app\ui\menu_ui.h \
+  ..\custom\app\controller\imu_app.h ..\custom\math\Fusion\Fusion.h \
+  ..\custom\math\Fusion\FusionAhrs.h \
+  ..\custom\math\Fusion\FusionConvention.h \
+  ..\custom\math\Fusion\FusionMath.h ..\custom\math\Fusion\FusionAxes.h \
+  ..\custom\math\Fusion\FusionCalibration.h \
+  ..\custom\math\Fusion\FusionCompass.h \
+  ..\custom\math\Fusion\FusionOffset.h ..\custom\include\data_type.h \
+  ..\custom\hardware\drivers\icm20608.h ..\custom\math\filter.h \
+  ..\custom\math\fast_math.h ..\custom\app\controller\eeprom_parameter.h \
+  ..\custom\hardware\drivers\driver_at24cxx.h

@@ -8,6 +8,9 @@
 #include "fast_math.h"
 #include "eeprom_parameter.h"
 
+void imu_init_blocking(void);
+void imu_update_task(void);
+
 void imu_calibration_params_init(void);
 void imu_data_sampling(void);
 void trackless_ahrs_update(void);

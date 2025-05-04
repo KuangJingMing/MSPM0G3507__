@@ -20,5 +20,5 @@ void gd_task(void *arg) {
 
 
 void gd_task_create(void) {
-    xTaskCreate(gd_task, "gd_task", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, NULL);
+    xTaskCreate(gd_task, "gd_task", configMINIMAL_STACK_SIZE * 2, NULL, tskIDLE_PRIORITY + 1, NULL);
 }

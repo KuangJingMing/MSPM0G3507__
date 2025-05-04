@@ -4,6 +4,7 @@
 #include "menu_logic.h"
 #include "menu_ui.h"
 #include "u8g2.h"
+#include "imu_app.h"
 
 static void run_task01_cb(void *arg) {
     u8g2_ClearBuffer(&u8g2);
@@ -58,10 +59,10 @@ static void init_all_menu_nodes(void) {
 	init_menu_node(&set_pid_speed,       "Set Pid Speed",    NULL,             MENU_TYPE_NORMAL,        &menu_root,      0, NULL);                  // 一级菜单：设置PID速度
 	init_menu_node(&set_pid_mileage,     "Set Pid Mileage",  NULL,             MENU_TYPE_NORMAL,        &menu_root,      0, NULL);                  // 一级菜单：设置PID里程
 	init_menu_node(&play_games,          "Play Game",        NULL,             MENU_TYPE_NORMAL,        &menu_root,      0, NULL);                  // 一级菜单：玩游戏
-		init_menu_node(&play_games1,          "Play Game1",        NULL,             MENU_TYPE_NORMAL,        &menu_root,      0, NULL);                  // 一级菜单：玩游戏
-		init_menu_node(&play_games2,          "Play Game2",        NULL,             MENU_TYPE_NORMAL,        &menu_root,      0, NULL);                  // 一级菜单：玩游戏
-		init_menu_node(&play_games3,          "Play Game3",        NULL,             MENU_TYPE_NORMAL,        &menu_root,      0, NULL);                  // 一级菜单：玩游戏
-		init_menu_node(&play_games4,          "Play Game4",        NULL,             MENU_TYPE_NORMAL,        &menu_root,      0, NULL);                  // 一级菜单：玩游戏
+	init_menu_node(&play_games1,          "Play Game1",        NULL,             MENU_TYPE_NORMAL,        &menu_root,      0, NULL);                  // 一级菜单：玩游戏
+	init_menu_node(&play_games2,          "Play Game2",        NULL,             MENU_TYPE_NORMAL,        &menu_root,      0, NULL);                  // 一级菜单：玩游戏
+	init_menu_node(&play_games3,          "Play Game3",        NULL,             MENU_TYPE_NORMAL,        &menu_root,      0, NULL);                  // 一级菜单：玩游戏
+	init_menu_node(&play_games4,          "Play Game4",        NULL,             MENU_TYPE_NORMAL,        &menu_root,      0, NULL);                  // 一级菜单：玩游戏
 	init_menu_node(&task01,              "run Task01",       run_task01_cb,    MENU_TYPE_NORMAL,        &menu_run_tasks, 0, NULL);                // 二级菜单：任务1
 	init_menu_node(&task02,              "run Task02",       run_task02_cb,    MENU_TYPE_NORMAL,        &menu_run_tasks, 0, NULL);                // 二级菜单：任务2
 	init_menu_node(&task03,              "run Task03",       run_task03_cb,    MENU_TYPE_NORMAL,        &menu_run_tasks, 0, NULL);                // 二级菜单：任务3
@@ -70,14 +71,12 @@ static void init_all_menu_nodes(void) {
 }
 
 
-float a, b, c, d;
-
 void menu_init_and_create(void) {
 
-	add_variable("VA1", &a);
-	add_variable("VA2", &b);
-	add_variable("VA3", &c);
-	add_variable("VA4", &d);
+	add_variable("ROL", &smartcar_imu.rpy_deg[_ROL]);
+	add_variable("PIT", &smartcar_imu.rpy_deg[_PIT]);
+	add_variable("TAW", &smartcar_imu.rpy_deg[_YAW]);
+	add_variable("TMP", &smartcar_imu.temperature_filter);
 	
 	init_all_menu_nodes();
   user_button_init(&btn_single_click_callback, &btn_long_press_cb);    

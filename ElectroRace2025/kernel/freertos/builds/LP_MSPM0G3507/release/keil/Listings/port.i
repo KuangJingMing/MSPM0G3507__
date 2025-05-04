@@ -1001,7 +1001,7 @@ __attribute__( ( weak ) ) void vPortSetupTimerInterrupt( void )
 
 
         {
-            ulTimerCountsForOneTick = ( ((unsigned long) 32000000) / ((TickType_t) 1000) );
+            ulTimerCountsForOneTick = ( ((unsigned long) 80000000) / ((TickType_t) 1000) );
             xMaximumPossibleSuppressedTicks = ( 0xffffffUL ) / ulTimerCountsForOneTick;
             ulStoppedTimerCompensation = ( 45UL );
         }
@@ -1012,7 +1012,7 @@ __attribute__( ( weak ) ) void vPortSetupTimerInterrupt( void )
     ( *( ( volatile uint32_t * ) 0xe000e018 ) ) = 0UL;
 
 
-    ( *( ( volatile uint32_t * ) 0xe000e014 ) ) = ( ((unsigned long) 32000000) / ((TickType_t) 1000) ) - 1UL;
+    ( *( ( volatile uint32_t * ) 0xe000e014 ) ) = ( ((unsigned long) 80000000) / ((TickType_t) 1000) ) - 1UL;
     ( *( ( volatile uint32_t * ) 0xe000e010 ) ) = ( 1UL << 2UL ) | ( 1UL << 1UL ) | ( 1UL << 0UL );
 }
 

@@ -70,7 +70,7 @@
 #define configUSE_16_BIT_TICKS 0 /* Only for 8 and 16-bit hardware. */
 
 /* Constants that describe the hardware and memory usage. */
-#define configCPU_CLOCK_HZ ((unsigned long) 32000000)
+#define configCPU_CLOCK_HZ ((unsigned long) 80000000)
 /* Smallest stack size allowed in words */
 #define configMINIMAL_STACK_SIZE ((unsigned short) 128)
 #define configMAX_TASK_NAME_LEN (12)

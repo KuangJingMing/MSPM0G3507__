@@ -9,12 +9,14 @@ void system_init(void) {
 
 void user_init(void) {
 	menu_init_and_create();
-	create_5ms_sw_timer();
+	AT24CXX_Init();
+	imu_init_blocking();
+	imu_temperature_ctrl_init();
 	create_periodic_event_task();
 }
 
 void test_task_init_and_create(void) {
-	imu_task_create();	
+	at24cxx_single_test();	
 }
 
 int main(void) {
@@ -57,7 +59,7 @@ void vApplicationStackOverflowHook( TaskHandle_t xTask, char *pcTaskName )
 // rgb 红色
 void HardFault_Handler(void) 
 {
-    log_e("!!! Unhandled Interrupt !!!\n");
+    log_e("!!! Unhandled Interrupt HardFault_Handler !!!\n");
 	
 		play_alert_blocking(3, COLOR_RED);
 	

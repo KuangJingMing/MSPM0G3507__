@@ -1180,7 +1180,7 @@ ClockP_getCpuFreq:
 	.p2align	2
 @ %bb.1:
 __arm_cp.7_0:
-	.long	32000000                        @ 0x1e84800
+	.long	80000000                        @ 0x4c4b400
 .Lcpi_end2:
 	.size	__arm_cp.7_0, .Lcpi_end2-__arm_cp.7_0
 .Lfunc_end7:

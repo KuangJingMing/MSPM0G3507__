@@ -74,7 +74,7 @@ extern "C" {
 
 
 
-#define CPUCLK_FREQ                                                     32000000
+#define CPUCLK_FREQ                                                     80000000
 
 
 
@@ -82,7 +82,7 @@ extern "C" {
 #define Motor_PWM1_INST                                                    TIMA0
 #define Motor_PWM1_INST_IRQHandler                              TIMA0_IRQHandler
 #define Motor_PWM1_INST_INT_IRQN                                (TIMA0_INT_IRQn)
-#define Motor_PWM1_INST_CLK_FREQ                                         4000000
+#define Motor_PWM1_INST_CLK_FREQ                                        10000000
 /* GPIO defines for channel 0 */
 #define GPIO_Motor_PWM1_C0_PORT                                            GPIOB
 #define GPIO_Motor_PWM1_C0_PIN                                    DL_GPIO_PIN_14
@@ -100,7 +100,7 @@ extern "C" {
 #define Motor_PWM2_INST                                                    TIMG8
 #define Motor_PWM2_INST_IRQHandler                              TIMG8_IRQHandler
 #define Motor_PWM2_INST_INT_IRQN                                (TIMG8_INT_IRQn)
-#define Motor_PWM2_INST_CLK_FREQ                                         4000000
+#define Motor_PWM2_INST_CLK_FREQ                                         5000000
 /* GPIO defines for channel 0 */
 #define GPIO_Motor_PWM2_C0_PORT                                            GPIOA
 #define GPIO_Motor_PWM2_C0_PIN                                     DL_GPIO_PIN_7
@@ -142,7 +142,7 @@ extern "C" {
 
 /* Defines for UART_DEBUG */
 #define UART_DEBUG_INST                                                    UART0
-#define UART_DEBUG_INST_FREQUENCY                                       32000000
+#define UART_DEBUG_INST_FREQUENCY                                       40000000
 #define UART_DEBUG_INST_IRQHandler                              UART0_IRQHandler
 #define UART_DEBUG_INST_INT_IRQN                                  UART0_INT_IRQn
 #define GPIO_UART_DEBUG_RX_PORT                                            GPIOA
@@ -154,8 +154,8 @@ extern "C" {
 #define GPIO_UART_DEBUG_IOMUX_RX_FUNC                  IOMUX_PINCM22_PF_UART0_RX
 #define GPIO_UART_DEBUG_IOMUX_TX_FUNC                  IOMUX_PINCM21_PF_UART0_TX
 #define UART_DEBUG_BAUD_RATE                                            (115200)
-#define UART_DEBUG_IBRD_32_MHZ_115200_BAUD                                  (17)
-#define UART_DEBUG_FBRD_32_MHZ_115200_BAUD                                  (23)
+#define UART_DEBUG_IBRD_40_MHZ_115200_BAUD                                  (21)
+#define UART_DEBUG_FBRD_40_MHZ_115200_BAUD                                  (45)
 
 
 
@@ -180,12 +180,12 @@ extern "C" {
 
 
 
-/* Port definition for Pin Group PORTB */
-#define PORTB_PORT                                                       (GPIOB)
+/* Port definition for Pin Group PORTA */
+#define PORTA_PORT                                                       (GPIOA)
 
-/* Defines for HEATER: GPIOB.0 with pinCMx 12 on package pin 47 */
-#define PORTB_HEATER_PIN                                         (DL_GPIO_PIN_0)
-#define PORTB_HEATER_IOMUX                                       (IOMUX_PINCM12)
+/* Defines for BEEP: GPIOA.27 with pinCMx 60 on package pin 31 */
+#define PORTA_BEEP_PIN                                          (DL_GPIO_PIN_27)
+#define PORTA_BEEP_IOMUX                                         (IOMUX_PINCM60)
 /* Port definition for Pin Group PCA9555 */
 #define PCA9555_PORT                                                     (GPIOA)
 
@@ -256,6 +256,12 @@ extern "C" {
 /* Defines for EPM_SCL: GPIOA.31 with pinCMx 6 on package pin 39 */
 #define EPM_EPM_SCL_PIN                                         (DL_GPIO_PIN_31)
 #define EPM_EPM_SCL_IOMUX                                         (IOMUX_PINCM6)
+/* Port definition for Pin Group PORTB */
+#define PORTB_PORT                                                       (GPIOB)
+
+/* Defines for HEATER: GPIOB.0 with pinCMx 12 on package pin 47 */
+#define PORTB_HEATER_PIN                                         (DL_GPIO_PIN_0)
+#define PORTB_HEATER_IOMUX                                       (IOMUX_PINCM12)
 /* Defines for R: GPIOB.26 with pinCMx 57 on package pin 28 */
 #define PORTB_R_PIN                                             (DL_GPIO_PIN_26)
 #define PORTB_R_IOMUX                                            (IOMUX_PINCM57)
@@ -265,12 +271,6 @@ extern "C" {
 /* Defines for B: GPIOB.22 with pinCMx 50 on package pin 21 */
 #define PORTB_B_PIN                                             (DL_GPIO_PIN_22)
 #define PORTB_B_IOMUX                                            (IOMUX_PINCM50)
-/* Port definition for Pin Group PORTA */
-#define PORTA_PORT                                                       (GPIOA)
-
-/* Defines for BEEP: GPIOA.27 with pinCMx 60 on package pin 31 */
-#define PORTA_BEEP_PIN                                          (DL_GPIO_PIN_27)
-#define PORTA_BEEP_IOMUX                                         (IOMUX_PINCM60)
 
 /* clang-format on */
 

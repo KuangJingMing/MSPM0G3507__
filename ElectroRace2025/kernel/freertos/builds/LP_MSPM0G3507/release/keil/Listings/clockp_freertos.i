@@ -1403,7 +1403,7 @@ void ClockP_destruct(ClockP_Struct *clockP)
 void ClockP_getCpuFreq(ClockP_FreqHz *freq)
 {
 
-    freq->lo = (uint32_t)((unsigned long) 32000000);
+    freq->lo = (uint32_t)((unsigned long) 80000000);
     freq->hi = 0;
 }
 

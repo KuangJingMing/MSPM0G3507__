@@ -1,25 +1,26 @@
 #include "sw_i2c.h"
 #include "delay.h"
+//#include "log_config.h"
 #include "log.h"
 #include "ti_msp_dl_config.h"
+
 
 /**
  * @brief I2C 软件模拟延时函数
  * @note  延时时间根据 CPU 主频和目标 I2C 频率调整，当前设置为约 5us（基于 32MHz CPU 频率）
  */
-inline void SOFT_IIC_DLY(void)
+ void SOFT_IIC_DLY(void)
 {
     uint8_t i;
     // 延时循环次数根据第一份代码调整，目标 SCL 频率约为 200KHz
-    for (i = 0; i < 10; i++)
-        ;
+		delay_us(1);
 }
 
 /**
  * @brief 初始化 I2C GPIO
  * @param i2c_cfg I2C 配置结构体指针
  */
-inline void SOFT_IIC_Init(const sw_i2c_t *i2c_cfg)
+ void SOFT_IIC_Init(const sw_i2c_t *i2c_cfg)
 {
     if (i2c_cfg == NULL)
     {
@@ -43,7 +44,7 @@ inline void SOFT_IIC_Init(const sw_i2c_t *i2c_cfg)
  * @brief 设置 SDA 为输出模式
  * @param i2c_cfg I2C 配置结构体指针
  */
-inline void SOFT_SDA_OUT(const sw_i2c_t *i2c_cfg)
+ void SOFT_SDA_OUT(const sw_i2c_t *i2c_cfg)
 {
     DL_GPIO_initDigitalOutput(i2c_cfg->sdaIOMUX);
     DL_GPIO_enableOutput(i2c_cfg->sdaPort, i2c_cfg->sdaPin);
@@ -53,7 +54,7 @@ inline void SOFT_SDA_OUT(const sw_i2c_t *i2c_cfg)
  * @brief 设置 SDA 为输入模式
  * @param i2c_cfg I2C 配置结构体指针
  */
-inline void SOFT_SDA_IN(const sw_i2c_t *i2c_cfg)
+ void SOFT_SDA_IN(const sw_i2c_t *i2c_cfg)
 {
     DL_GPIO_initDigitalInputFeatures(i2c_cfg->sdaIOMUX, DL_GPIO_INVERSION_DISABLE, 
                                     DL_GPIO_RESISTOR_PULL_UP, DL_GPIO_HYSTERESIS_DISABLE, 
@@ -65,7 +66,7 @@ inline void SOFT_SDA_IN(const sw_i2c_t *i2c_cfg)
  * @brief 产生 I2C 起始信号
  * @param i2c_cfg I2C 配置结构体指针
  */
-inline void SOFT_IIC_Start(const sw_i2c_t *i2c_cfg)
+ void SOFT_IIC_Start(const sw_i2c_t *i2c_cfg)
 {
     SOFT_SDA_OUT(i2c_cfg); // SDA 设为输出模式
     DL_GPIO_setPins(i2c_cfg->sdaPort, i2c_cfg->sdaPin); // SDA 高电平
@@ -83,7 +84,7 @@ inline void SOFT_IIC_Start(const sw_i2c_t *i2c_cfg)
  * @brief 产生 I2C 停止信号
  * @param i2c_cfg I2C 配置结构体指针
  */
-inline void SOFT_IIC_Stop(const sw_i2c_t *i2c_cfg)
+ void SOFT_IIC_Stop(const sw_i2c_t *i2c_cfg)
 {
     SOFT_SDA_OUT(i2c_cfg); // SDA 设为输出模式
     DL_GPIO_clearPins(i2c_cfg->sclPort, i2c_cfg->sclPin); // SCL 拉低
@@ -101,7 +102,7 @@ inline void SOFT_IIC_Stop(const sw_i2c_t *i2c_cfg)
  * @param i2c_cfg I2C 配置结构体指针
  * @return 0: 应答成功, 1: 应答失败
  */
-inline uint8_t SOFT_IIC_Wait_Ack(const sw_i2c_t *i2c_cfg)
+ uint8_t SOFT_IIC_Wait_Ack(const sw_i2c_t *i2c_cfg)
 {
     uint32_t timeout = 0;
     SOFT_SDA_IN(i2c_cfg); // SDA 设为输入模式
@@ -115,7 +116,7 @@ inline uint8_t SOFT_IIC_Wait_Ack(const sw_i2c_t *i2c_cfg)
     while ((DL_GPIO_readPins(i2c_cfg->sdaPort, i2c_cfg->sdaPin) & i2c_cfg->sdaPin) == i2c_cfg->sdaPin)
     {
         timeout++;
-        if (timeout > 100) // 超时保护，防止死循环
+        if (timeout > 300) // 超时保护，防止死循环
         {
             log_e("等待 I2C 应答超时\n");
             SOFT_IIC_Stop(i2c_cfg); // 发送停止信号
@@ -134,7 +135,7 @@ inline uint8_t SOFT_IIC_Wait_Ack(const sw_i2c_t *i2c_cfg)
  * @brief 产生 ACK 应答信号
  * @param i2c_cfg I2C 配置结构体指针
  */
-inline void SOFT_IIC_Ack(const sw_i2c_t *i2c_cfg)
+ void SOFT_IIC_Ack(const sw_i2c_t *i2c_cfg)
 {
     SOFT_SDA_OUT(i2c_cfg); // SDA 设为输出模式
     DL_GPIO_clearPins(i2c_cfg->sclPort, i2c_cfg->sclPin); // SCL 拉低
@@ -152,7 +153,7 @@ inline void SOFT_IIC_Ack(const sw_i2c_t *i2c_cfg)
  * @brief 产生 NACK 非应答信号
  * @param i2c_cfg I2C 配置结构体指针
  */
-inline void SOFT_IIC_NAck(const sw_i2c_t *i2c_cfg)
+ void SOFT_IIC_NAck(const sw_i2c_t *i2c_cfg)
 {
     SOFT_SDA_OUT(i2c_cfg); // SDA 设为输出模式
     DL_GPIO_clearPins(i2c_cfg->sclPort, i2c_cfg->sclPin); // SCL 拉低
@@ -170,7 +171,7 @@ inline void SOFT_IIC_NAck(const sw_i2c_t *i2c_cfg)
  * @param i2c_cfg I2C 配置结构体指针
  * @param txd 要发送的字节数据
  */
-inline void SOFT_IIC_Send_Byte(const sw_i2c_t *i2c_cfg, uint8_t txd)
+ void SOFT_IIC_Send_Byte(const sw_i2c_t *i2c_cfg, uint8_t txd)
 {
     uint8_t i;
     SOFT_SDA_OUT(i2c_cfg); // SDA 设为输出模式
@@ -198,7 +199,7 @@ inline void SOFT_IIC_Send_Byte(const sw_i2c_t *i2c_cfg, uint8_t txd)
  * @param ack 是否发送 ACK (1: 发送 ACK, 0: 发送 NACK)
  * @return 读取到的字节数据
  */
-inline uint8_t SOFT_IIC_Read_Byte(const sw_i2c_t *i2c_cfg, unsigned char ack)
+ uint8_t SOFT_IIC_Read_Byte(const sw_i2c_t *i2c_cfg, unsigned char ack)
 {
     uint8_t i, receive = 0;
     SOFT_SDA_IN(i2c_cfg); // SDA 设为输入模式

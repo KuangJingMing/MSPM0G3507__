@@ -419,11 +419,6 @@
               <FileType>1</FileType>
               <FilePath>..\custom\user\periodic_event_task.c</FilePath>
             </File>
-            <File>
-              <FileName>timer_task_notification.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\custom\user\timer_task_notification.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -518,6 +513,11 @@
               <FileName>alert.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\custom\app\controller\alert.c</FilePath>
+            </File>
+            <File>
+              <FileName>imu_temp_control.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\app\controller\imu_temp_control.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -648,6 +648,16 @@
               <FileName>filter.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\custom\math\filter.c</FilePath>
+            </File>
+            <File>
+              <FileName>arm_pid_init_f32.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\math\arm_pid_init_f32.c</FilePath>
+            </File>
+            <File>
+              <FileName>arm_pid_reset_f32.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\math\arm_pid_reset_f32.c</FilePath>
             </File>
           </Files>
         </Group>

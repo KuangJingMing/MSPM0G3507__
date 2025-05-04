@@ -5,6 +5,9 @@
 #include "delay.h"
 #include "sw_i2c.h"
 
+#include "log_config.h"
+#include "log.h"
+
 // 实例化一个 sw_i2c_t 结构体，用于您的 IIC 外设
 const sw_i2c_t at24cxx_i2c = {
     .sdaPort = EPM_PORT,      // 替换为您的 SDA 端口
@@ -15,21 +18,38 @@ const sw_i2c_t at24cxx_i2c = {
     .sclIOMUX = EPM_EPM_SCL_IOMUX, // 替换为您的 SCL IOMUX 配置
 };
 
-//初始化IIC接口
+// 初始化IIC接口
 void AT24CXX_Init(void)
 {
-	SOFT_IIC_Init(&at24cxx_i2c);
-	int flag = 0;
-  while(++flag < 800) //检测不到24c02
-  {
-		if (AT24CXX_Check() == 0) {
-			break;
-		}
-    delay_ms(20);
-  }
-
-  //AT24CXX_Erase_All();
+    SOFT_IIC_Init(&at24cxx_i2c);
+    int attempts = 0;
+		static uint8_t at24cxx_initialized_ok;
+    const int max_attempts = 800;
+    const uint32_t delay_ms_between_attempts = 20;
+    while(attempts < max_attempts)
+    {
+        if (AT24CXX_Check() == 0) { // 假设 0 表示成功
+            at24cxx_initialized_ok = 1; // 设置初始化成功标志
+            break; // 检测成功，跳出循环
+        }
+        attempts++;
+        delay_ms(delay_ms_between_attempts);
+    }
+    if (at24cxx_initialized_ok != 1) {
+        // EEPROM 检测失败，进行错误处理
+        at24cxx_initialized_ok = 2; // 设置初始化失败标志
+        // TODO: Add error logging or reporting here
+        log_e("AT24C02 initialization failed after %d attempts.", max_attempts);
+    } else {
+        // EEPROM 初始化成功
+        log_i("AT24C02 initialized successfully.");
+    }
+    // 如果需要，取消注释进行擦除
+    // if (at24cxx_initialized_ok == 1) {
+    //     AT24CXX_Erase_All();
+    // }
 }
+
 
 // Read one byte from AT24CXX
 uint8_t AT24CXX_ReadOneByte(uint16_t ReadAddr)

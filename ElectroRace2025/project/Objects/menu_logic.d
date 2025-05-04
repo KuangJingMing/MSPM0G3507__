@@ -70,4 +70,4 @@
   ..\source\ti\driverlib\m0p\dl_systick.h \
   ..\source\third_party\u8g2\u8g2.h ..\source\third_party\u8g2\u8x8.h \
   ..\custom\app\ui\menu_ui.h ..\custom\include\common_defines.h \
-  ..\custom\user\timer_task_notification.h
+  ..\custom\user\periodic_event_task.h

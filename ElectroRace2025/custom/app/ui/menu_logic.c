@@ -1,7 +1,7 @@
 #include "menu_logic.h"
 #include "menu_ui.h"
 #include "common_defines.h"
-#include "timer_task_notification.h"
+#include "periodic_event_task.h"
 
 static TaskHandle_t xOLEDTaskHandle;
 static MenuNode *current_menu;

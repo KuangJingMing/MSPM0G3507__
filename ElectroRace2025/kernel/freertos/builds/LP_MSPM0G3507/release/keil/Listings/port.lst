@@ -377,7 +377,7 @@ __arm_cp.4_3:
 .Lcpi_end7:
 	.size	__arm_cp.4_3, .Lcpi_end7-__arm_cp.4_3
 __arm_cp.4_4:
-	.long	31999                           @ 0x7cff
+	.long	79999                           @ 0x1387f
 .Lcpi_end8:
 	.size	__arm_cp.4_4, .Lcpi_end8-__arm_cp.4_4
 .Lfunc_end4:
@@ -824,57 +824,55 @@ vPortSuppressTicksAndSleep:
 	.cfi_offset r6, -12
 	.cfi_offset r5, -16
 	.cfi_offset r4, -20
-	.pad	#20
-	sub	sp, #20
-	.cfi_def_cfa_offset 40
-	mov	r6, r0
+	.pad	#12
+	sub	sp, #12
+	.cfi_def_cfa_offset 32
+	mov	r5, r0
 .Ltmp66:
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r6
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r5
 	.loc	2 407 33 prologue_end           @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:407:33
 	ldr	r0, __arm_cp.14_0
 	ldrb	r1, [r0]
-	ldr	r7, __arm_cp.14_1
+	ldr	r6, __arm_cp.14_1
 .Ltmp67:
 	.loc	2 416 35                        @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:416:35
-	ldr	r0, [r7]
+	ldr	r0, [r6]
 	movs	r2, #1
-	str	r2, [sp, #16]                   @ 4-byte Spill
+	str	r2, [sp, #8]                    @ 4-byte Spill
 	bics	r0, r2
-	str	r0, [r7]
+	str	r0, [r6]
 	.loc	2 421 25                        @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:421:25
-	ldr	r0, [r7, #8]
-	movs	r2, #125
-	lsls	r4, r2, #8
+	ldr	r0, [r6, #8]
 	.loc	2 421 64 is_stmt 0              @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:421:64
 	ldr	r2, __arm_cp.14_2
 	ldrb	r3, [r2]
+	ldr	r2, __arm_cp.14_3
 	cmp	r3, #0
-	mov	r2, r4
 	beq	.LBB14_13
 .Ltmp68:
 @ %bb.1:
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r6
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r5
 	.loc	2 407 33 is_stmt 1              @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:407:33
 	cmp	r1, #0
 	bne	.LBB14_14
 .Ltmp69:
 .LBB14_2:
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r6
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r5
 	.loc	2 407 13 is_stmt 0              @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:407:13
-	cmp	r6, r1
+	cmp	r5, r1
 	blo	.LBB14_4
 .Ltmp70:
 .LBB14_3:
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r6
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r5
 	.loc	2 0 13                          @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:0:13
-	mov	r6, r1
+	mov	r5, r1
 .Ltmp71:
 	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- [DW_OP_LLVM_entry_value 1] $r0
 .LBB14_4:
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r6
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r5
 	.loc	2 421 110 is_stmt 1             @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:421:110
-	subs	r1, r6, #1
-	str	r1, [sp, #4]                    @ 4-byte Spill
+	subs	r1, r5, #1
+	str	r1, [sp]                        @ 4-byte Spill
 	.loc	2 421 88 is_stmt 0              @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:421:88
 	muls	r2, r1, r2
 	.loc	2 421 60                        @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:421:60
@@ -882,35 +880,34 @@ vPortSuppressTicksAndSleep:
 .Ltmp72:
 	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r0
 	.loc	2 423 29 is_stmt 1              @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:423:29
-	ldr	r1, __arm_cp.14_3
+	ldr	r1, __arm_cp.14_4
 	ldrb	r1, [r1]
 	cmp	r1, #0
-	str	r4, [sp, #12]                   @ 4-byte Spill
 	beq	.LBB14_6
 .Ltmp73:
 @ %bb.5:
 	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r0
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r6
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r5
 	.loc	2 0 29 is_stmt 0                @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:0:29
 	movs	r1, #45
 .Ltmp74:
 .LBB14_6:
 	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r0
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r6
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r5
 	.loc	2 423 13                        @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:423:13
-	subs	r5, r0, r1
+	subs	r4, r0, r1
 	bhi	.LBB14_8
 .Ltmp75:
 @ %bb.7:
 	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r0
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r6
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r5
 	.loc	2 0 13                          @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:0:13
-	mov	r5, r0
+	mov	r4, r0
 .Ltmp76:
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r5
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r4
 .LBB14_8:
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r6
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r5
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r5
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r4
 	.loc	2 430 9 is_stmt 1               @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:430:9
 	@APP
 	cpsid i
@@ -923,11 +920,11 @@ vPortSuppressTicksAndSleep:
 	@APP
 	isb	sy
 	@NO_APP
-	movs	r4, #0
-	mvns	r0, r4
+	movs	r7, #0
+	mvns	r0, r7
 .Ltmp77:
 	.loc	2 436 13                        @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:436:13
-	str	r0, [sp, #8]                    @ 4-byte Spill
+	str	r0, [sp, #4]                    @ 4-byte Spill
 	bl	eTaskConfirmSleepModeStatus
 .Ltmp78:
 	.loc	2 436 13 is_stmt 0              @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:436:13
@@ -935,27 +932,27 @@ vPortSuppressTicksAndSleep:
 	beq	.LBB14_15
 .Ltmp79:
 @ %bb.9:
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r5
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r6
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r4
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r5
 	.loc	2 456 39 is_stmt 1              @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:456:39
-	str	r5, [r7, #4]
+	str	r4, [r6, #4]
 	.loc	2 460 48                        @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:460:48
-	str	r4, [r7, #8]
+	str	r7, [r6, #8]
 	.loc	2 463 39                        @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:463:39
-	ldr	r0, [r7]
-	ldr	r1, [sp, #16]                   @ 4-byte Reload
+	ldr	r0, [r6]
+	ldr	r1, [sp, #8]                    @ 4-byte Reload
 	orrs	r0, r1
-	str	r0, [r7]
+	str	r0, [r6]
 .Ltmp80:
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xModifiableIdleTime <- $r6
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xModifiableIdleTime <- $r5
 	.loc	2 473 17                        @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:473:17
-	cmp	r6, #0
+	cmp	r5, #0
 	beq	.LBB14_11
 .Ltmp81:
 @ %bb.10:
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xModifiableIdleTime <- $r6
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r5
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r6
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xModifiableIdleTime <- $r5
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r4
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r5
 	.loc	2 475 17                        @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:475:17
 	@APP
 	dsb	sy
@@ -970,9 +967,9 @@ vPortSuppressTicksAndSleep:
 	@NO_APP
 .Ltmp82:
 .LBB14_11:
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xModifiableIdleTime <- $r6
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r5
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r6
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xModifiableIdleTime <- $r5
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r4
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r5
 	.loc	2 485 13                        @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:485:13
 	@APP
 	cpsie i
@@ -999,47 +996,48 @@ vPortSuppressTicksAndSleep:
 	@NO_APP
 	movs	r0, #6
 	.loc	2 504 39                        @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:504:39
-	str	r0, [r7]
+	str	r0, [r6]
 .Ltmp83:
 	.loc	2 511 19                        @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:511:19
-	ldr	r0, [r7]
+	ldr	r0, [r6]
 .Ltmp84:
 	.loc	2 511 17 is_stmt 0              @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:511:17
 	lsls	r0, r0, #15
 	bmi	.LBB14_17
 .Ltmp85:
 @ %bb.12:
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xModifiableIdleTime <- $r6
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r5
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r6
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xModifiableIdleTime <- $r5
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r4
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r5
 	.loc	2 0 17                          @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:0:17
-	ldr	r5, [sp, #12]                   @ 4-byte Reload
+	ldr	r4, __arm_cp.14_3
 .Ltmp86:
 	.loc	2 542 68 is_stmt 1              @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:542:68
-	muls	r6, r5, r6
+	muls	r5, r4, r5
 .Ltmp87:
 	.loc	2 542 98 is_stmt 0              @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:542:98
-	ldr	r0, [r7, #8]
+	ldr	r0, [r6, #8]
 	.loc	2 542 96                        @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:542:96
-	subs	r6, r6, r0
+	subs	r5, r5, r0
 .Ltmp88:
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulCompletedSysTickDecrements <- $r6
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulCompletedSysTickDecrements <- $r5
+	.loc	2 0 96                          @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:0:96
+	ldr	r1, __arm_cp.14_3
 	.loc	2 546 70 is_stmt 1              @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:546:70
-	mov	r0, r6
-	mov	r1, r5
+	mov	r0, r5
 	bl	__aeabi_uidiv
 .Ltmp89:
 	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulCompleteTickPeriods <- $r0
 	.loc	2 550 79                        @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:550:79
-	mov	r1, r5
+	mov	r1, r4
 	muls	r1, r0, r1
 	.loc	2 550 107 is_stmt 0             @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:550:107
-	subs	r1, r1, r6
-	adds	r1, r1, r5
+	subs	r1, r1, r5
+	adds	r1, r1, r4
 	b	.LBB14_31
 .Ltmp90:
 .LBB14_13:
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r6
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r5
 	.loc	2 0 107                         @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:0:107
 	mov	r2, r3
 .Ltmp91:
@@ -1048,27 +1046,26 @@ vPortSuppressTicksAndSleep:
 	beq	.LBB14_2
 .Ltmp92:
 .LBB14_14:
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r6
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r5
 	.loc	2 0 33 is_stmt 0                @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:0:33
-	movs	r1, #131
-	lsls	r1, r1, #2
+	movs	r1, #209
 	.loc	2 407 13                        @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:407:13
-	cmp	r6, r1
+	cmp	r5, r1
 	bhs	.LBB14_3
 	b	.LBB14_4
 .Ltmp93:
 .LBB14_15:
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r5
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r6
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r4
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r5
 	.loc	2 440 41 is_stmt 1              @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:440:41
-	ldr	r0, [r7, #8]
+	ldr	r0, [r6, #8]
 	.loc	2 440 39 is_stmt 0              @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:440:39
-	str	r0, [r7, #4]
+	str	r0, [r6, #4]
 	.loc	2 443 39 is_stmt 1              @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:443:39
-	ldr	r0, [r7]
-	ldr	r1, [sp, #16]                   @ 4-byte Reload
+	ldr	r0, [r6]
+	ldr	r1, [sp, #8]                    @ 4-byte Reload
 	orrs	r0, r1
-	str	r0, [r7]
+	str	r0, [r6]
 	.loc	2 447 41                        @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:447:41
 	ldr	r0, __arm_cp.14_2
 	ldrb	r0, [r0]
@@ -1077,16 +1074,16 @@ vPortSuppressTicksAndSleep:
 	bne	.LBB14_19
 .Ltmp94:
 @ %bb.16:
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r5
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r6
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r4
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r5
 	.loc	2 0 65                          @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:0:65
-	ldr	r0, [sp, #8]                    @ 4-byte Reload
+	ldr	r0, [sp, #4]                    @ 4-byte Reload
 	b	.LBB14_20
 .Ltmp95:
 .LBB14_17:
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xModifiableIdleTime <- $r6
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r5
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r6
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xModifiableIdleTime <- $r5
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r4
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r5
 	.loc	2 519 43 is_stmt 1              @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:519:43
 	ldr	r0, __arm_cp.14_2
 	ldrb	r0, [r0]
@@ -1095,60 +1092,60 @@ vPortSuppressTicksAndSleep:
 	bne	.LBB14_21
 .Ltmp96:
 @ %bb.18:
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xModifiableIdleTime <- $r6
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r5
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r6
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xModifiableIdleTime <- $r5
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r4
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r5
 	.loc	2 0 67                          @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:0:67
-	ldr	r1, [sp, #8]                    @ 4-byte Reload
-	ldr	r6, [sp, #12]                   @ 4-byte Reload
+	ldr	r1, [sp, #4]                    @ 4-byte Reload
+	ldr	r5, __arm_cp.14_3
 .Ltmp97:
 	b	.LBB14_22
 .Ltmp98:
 .LBB14_19:
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r5
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r6
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r4
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r5
 	.loc	2 447 65 is_stmt 1              @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:447:65
-	ldr	r0, [sp, #12]                   @ 4-byte Reload
+	ldr	r0, __arm_cp.14_3
 	subs	r0, r0, #1
 .Ltmp99:
 .LBB14_20:
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r5
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r6
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r4
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r5
 	.loc	2 447 39 is_stmt 0              @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:447:39
-	str	r0, [r7, #4]
+	str	r0, [r6, #4]
 	.loc	2 451 13 is_stmt 1              @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:451:13
 	@APP
 	cpsie i
 	@NO_APP
 .Ltmp100:
 	.loc	2 564 5 epilogue_begin          @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:564:5
-	add	sp, #20
+	add	sp, #12
 	pop	{r4, r5, r6, r7, pc}
 .Ltmp101:
 .LBB14_21:
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xModifiableIdleTime <- $r6
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r5
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r6
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xModifiableIdleTime <- $r5
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r4
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:xExpectedIdleTime <- $r5
 	.loc	2 0 5 is_stmt 0                 @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:0:5
-	ldr	r6, [sp, #12]                   @ 4-byte Reload
+	ldr	r5, __arm_cp.14_3
 .Ltmp102:
 	.loc	2 519 67 is_stmt 1              @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:519:67
-	subs	r1, r6, #1
+	subs	r1, r5, #1
 .Ltmp103:
 .LBB14_22:
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r5
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulReloadValue <- $r4
 	.loc	2 519 95 is_stmt 0              @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:519:95
-	ldr	r2, [r7, #8]
+	ldr	r2, [r6, #8]
 	.loc	2 519 93                        @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:519:93
-	subs	r2, r2, r5
+	subs	r2, r2, r4
 	.loc	2 519 75                        @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:519:75
 	adds	r2, r2, r1
 .Ltmp104:
 	@DEBUG_VALUE: ulCalculatedLoadValue <- $r2
 	.loc	2 0 75                          @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:0:75
 	cmp	r0, #0
-	mov	r3, r6
-	mov	r5, r6
+	mov	r3, r5
+	mov	r4, r5
 .Ltmp105:
 	bne	.LBB14_24
 .Ltmp106:
@@ -1184,7 +1181,7 @@ vPortSuppressTicksAndSleep:
 .LBB14_28:
 	@DEBUG_VALUE: ulCalculatedLoadValue <- $r2
 	.loc	2 524 47                        @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:524:47
-	ldr	r2, __arm_cp.14_3
+	ldr	r2, __arm_cp.14_4
 .Ltmp112:
 	ldrb	r2, [r2]
 	.loc	2 524 76                        @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:524:76
@@ -1197,22 +1194,22 @@ vPortSuppressTicksAndSleep:
 .LBB14_30:
 	@DEBUG_VALUE: ulCalculatedLoadValue <- $r1
 .Ltmp114:
-	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulCompleteTickPeriods <- [DW_OP_plus_uconst 4] [$sp+0]
-	ldr	r0, [sp, #4]                    @ 4-byte Reload
+	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulCompleteTickPeriods <- [$sp+0]
+	ldr	r0, [sp]                        @ 4-byte Reload
 .Ltmp115:
 	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulCompleteTickPeriods <- $r0
 .LBB14_31:
 	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulCompleteTickPeriods <- $r0
-	str	r1, [r7, #4]
+	str	r1, [r6, #4]
 .Ltmp116:
 	@DEBUG_VALUE: vPortSuppressTicksAndSleep:ulCompleteTickPeriods <- $r0
 	.loc	2 556 48 is_stmt 1              @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:556:48
-	str	r4, [r7, #8]
+	str	r7, [r6, #8]
 	.loc	2 557 39                        @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:557:39
-	ldr	r2, [r7]
-	ldr	r1, [sp, #16]                   @ 4-byte Reload
+	ldr	r2, [r6]
+	ldr	r1, [sp, #8]                    @ 4-byte Reload
 	orrs	r2, r1
-	str	r2, [r7]
+	str	r2, [r6]
 	.loc	2 558 13                        @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:558:13
 	bl	vTaskStepTick
 .Ltmp117:
@@ -1224,21 +1221,21 @@ vPortSuppressTicksAndSleep:
 	bne	.LBB14_33
 @ %bb.32:
 	.loc	2 0 65                          @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:0:65
-	ldr	r0, [sp, #8]                    @ 4-byte Reload
+	ldr	r0, [sp, #4]                    @ 4-byte Reload
 	b	.LBB14_34
 .LBB14_33:
 	.loc	2 559 65                        @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:559:65
-	subs	r0, r5, #1
+	subs	r0, r4, #1
 .LBB14_34:
 	.loc	2 559 39                        @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:559:39
-	str	r0, [r7, #4]
+	str	r0, [r6, #4]
 	.loc	2 562 13 is_stmt 1              @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:562:13
 	@APP
 	cpsie i
 	@NO_APP
 .Ltmp118:
 	.loc	2 564 5 epilogue_begin          @ ../../../../../../kernel/freertos/Source/portable/GCC/ARM_CM0/port.c:564:5
-	add	sp, #20
+	add	sp, #12
 	pop	{r4, r5, r6, r7, pc}
 .Ltmp119:
 	.loc	2 0 5 is_stmt 0                 @ :0:5
@@ -1258,9 +1255,13 @@ __arm_cp.14_2:
 .Lcpi_end16:
 	.size	__arm_cp.14_2, .Lcpi_end16-__arm_cp.14_2
 __arm_cp.14_3:
-	.long	ulStoppedTimerCompensation
+	.long	80000                           @ 0x13880
 .Lcpi_end17:
 	.size	__arm_cp.14_3, .Lcpi_end17-__arm_cp.14_3
+__arm_cp.14_4:
+	.long	ulStoppedTimerCompensation
+.Lcpi_end18:
+	.size	__arm_cp.14_4, .Lcpi_end18-__arm_cp.14_4
 .Lfunc_end14:
 	.size	vPortSuppressTicksAndSleep, .Lfunc_end14-vPortSuppressTicksAndSleep
 	.cfi_endproc
@@ -1361,15 +1362,15 @@ ulStoppedTimerCompensation:
 	.long	.Ltmp66-.Lfunc_begin14
 	.long	.Ltmp87-.Lfunc_begin14
 	.short	1                               @ Loc expr size
-	.byte	86                              @ DW_OP_reg6
+	.byte	85                              @ DW_OP_reg5
 	.long	.Ltmp90-.Lfunc_begin14
 	.long	.Ltmp97-.Lfunc_begin14
 	.short	1                               @ Loc expr size
-	.byte	86                              @ DW_OP_reg6
+	.byte	85                              @ DW_OP_reg5
 	.long	.Ltmp98-.Lfunc_begin14
 	.long	.Ltmp102-.Lfunc_begin14
 	.short	1                               @ Loc expr size
-	.byte	86                              @ DW_OP_reg6
+	.byte	85                              @ DW_OP_reg5
 	.long	0
 	.long	0
 .Ldebug_loc4:
@@ -1382,11 +1383,11 @@ ulStoppedTimerCompensation:
 	.long	.Ltmp76-.Lfunc_begin14
 	.long	.Ltmp86-.Lfunc_begin14
 	.short	1                               @ Loc expr size
-	.byte	85                              @ DW_OP_reg5
+	.byte	84                              @ DW_OP_reg4
 	.long	.Ltmp93-.Lfunc_begin14
 	.long	.Ltmp105-.Lfunc_begin14
 	.short	1                               @ Loc expr size
-	.byte	85                              @ DW_OP_reg5
+	.byte	84                              @ DW_OP_reg4
 	.long	0
 	.long	0
 .Ldebug_loc5:
@@ -1395,15 +1396,15 @@ ulStoppedTimerCompensation:
 	.long	.Ltmp80-.Lfunc_begin14
 	.long	.Ltmp87-.Lfunc_begin14
 	.short	1                               @ Loc expr size
-	.byte	86                              @ DW_OP_reg6
+	.byte	85                              @ DW_OP_reg5
 	.long	.Ltmp95-.Lfunc_begin14
 	.long	.Ltmp97-.Lfunc_begin14
 	.short	1                               @ Loc expr size
-	.byte	86                              @ DW_OP_reg6
+	.byte	85                              @ DW_OP_reg5
 	.long	.Ltmp101-.Lfunc_begin14
 	.long	.Ltmp102-.Lfunc_begin14
 	.short	1                               @ Loc expr size
-	.byte	86                              @ DW_OP_reg6
+	.byte	85                              @ DW_OP_reg5
 	.long	0
 	.long	0
 .Ldebug_loc6:
@@ -1412,7 +1413,7 @@ ulStoppedTimerCompensation:
 	.long	.Ltmp88-.Lfunc_begin14
 	.long	.Ltmp90-.Lfunc_begin14
 	.short	1                               @ Loc expr size
-	.byte	86                              @ DW_OP_reg6
+	.byte	85                              @ DW_OP_reg5
 	.long	0
 	.long	0
 .Ldebug_loc7:
@@ -1426,7 +1427,7 @@ ulStoppedTimerCompensation:
 	.long	.Ltmp115-.Lfunc_begin14
 	.short	2                               @ Loc expr size
 	.byte	125                             @ DW_OP_breg13
-	.byte	4                               @ 4
+	.byte	0                               @ 0
 	.long	.Ltmp115-.Lfunc_begin14
 	.long	.Ltmp117-.Lfunc_begin14
 	.short	1                               @ Loc expr size
@@ -1876,7 +1877,7 @@ ulStoppedTimerCompensation:
 	.byte	148
 	.byte	1
 	.byte	16
-	.ascii	"\200\372\001"
+	.ascii	"\200\361\004"
 	.byte	30
 	.byte	48
 	.byte	34
@@ -1901,7 +1902,7 @@ ulStoppedTimerCompensation:
 	.byte	148
 	.byte	1
 	.byte	16
-	.ascii	"\214\004"
+	.ascii	"\321\001"
 	.byte	30
 	.byte	48
 	.byte	34

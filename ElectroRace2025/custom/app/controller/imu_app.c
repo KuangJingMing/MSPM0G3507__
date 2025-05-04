@@ -20,6 +20,16 @@ static lpf_buf gyro_filter_buf[3],accel_filter_buf[3];
 static FusionAhrs ahrs;
 static FusionOffset offset;
 
+void imu_init_blocking(void) {
+    while (ICM206xx_Init()){}
+    imu_calibration_params_init();
+}
+
+void imu_update_task(void) {
+		imu_data_sampling();
+    trackless_ahrs_update();
+}
+
 /***************************************
 函数名:	void imu_calibration_params_init(void)
 说明: 加速度计/陀螺仪标定数据初始化
@@ -33,16 +43,13 @@ void imu_calibration_params_init(void)
 	vector3f gyro_offset_temp = {MY_NAN, MY_NAN, MY_NAN};
 	vector3f accel_offset_temp = {MY_NAN, MY_NAN, MY_NAN};
 
-//	vector3f gyro_offset_temp = {-0.502767801, -0.376522154, 0.250806689};
-//	vector3f accel_offset_temp = {-0.185732797, -0.0094138002, 0.00534683466};
-
 	
-//	ReadFlashParameterOne(GYRO_X_OFFSET,&gyro_offset_temp.x);
-//	ReadFlashParameterOne(GYRO_Y_OFFSET,&gyro_offset_temp.y);
-//	ReadFlashParameterOne(GYRO_Z_OFFSET,&gyro_offset_temp.z);		
-//	ReadFlashParameterOne(ACCEL_X_OFFSET,&accel_offset_temp.x);
-//	ReadFlashParameterOne(ACCEL_Y_OFFSET,&accel_offset_temp.y);
-//	ReadFlashParameterOne(ACCEL_Z_OFFSET,&accel_offset_temp.z);
+	ReadFlashParameterOne(GYRO_X_OFFSET,&gyro_offset_temp.x);
+	ReadFlashParameterOne(GYRO_Y_OFFSET,&gyro_offset_temp.y);
+	ReadFlashParameterOne(GYRO_Z_OFFSET,&gyro_offset_temp.z);		
+	ReadFlashParameterOne(ACCEL_X_OFFSET,&accel_offset_temp.x);
+	ReadFlashParameterOne(ACCEL_Y_OFFSET,&accel_offset_temp.y);
+	ReadFlashParameterOne(ACCEL_Z_OFFSET,&accel_offset_temp.z);
 	
 	if(isnan(gyro_offset_temp.x)==0
 		&&isnan(gyro_offset_temp.y)==0
@@ -154,7 +161,9 @@ void imu_calibration(vector3f *gyro,vector3f *accel)
 		accel_sum.y=0;
 		accel_sum.z=0;		
 		cnt=0;
-			
+		
+		set_alert_count(1);
+		start_alert();
 		
 		smartcar_imu.imu_cal_flag=1;
 	}
@@ -249,7 +258,7 @@ void trackless_ahrs_update(void)
 							.recoveryTriggerPeriod = 5 * sampling_frequent, /* 5 seconds */
 			};
 			FusionAhrsSetSettings(&ahrs, &settings);
-			set_alert_count(3);
+			set_alert_count(2);
 			start_alert();
 		}		
 	}
@@ -308,121 +317,4 @@ void trackless_ahrs_update(void)
 }
 
 
-
-float temp_kp=8.0f,temp_ki=0.75f,temp_kd=125.0f;
-float temp_error=0,temp_expect=50.0f,temp_feedback=0,temp_last_error=0;
-float	temp_integral=0,temp_output=0;
-/***************************************************
-函数名: void imu_temperature_ctrl(void)
-说明:	IMU恒温控制
-入口:	无
-出口:	无
-备注:	无
-作者:	无名创新
-****************************************************/
-void imu_temperature_ctrl(void)
-{
-	temperature_state_check();
-	static uint16_t tmp_period_cnt=0;
-	tmp_period_cnt++;
-	if(tmp_period_cnt<20) return;
-	tmp_period_cnt=0;
-	
-	float temp_dis_error=0;
-	temp_last_error=temp_error;
-	temp_feedback=smartcar_imu.temperature_filter;
-	temp_error=temp_expect-temp_feedback;
-	temp_error=constrain_float(temp_error,-50,50);
-	if(ABS(temp_error)<10)	temp_integral+=temp_ki*temp_error*0.1f;
-	temp_integral=constrain_float(temp_integral,-80,80);
-	temp_dis_error=temp_error-temp_last_error;
-	temp_output=temp_kp*temp_error+temp_integral+temp_kd*temp_dis_error;
-	temp_output=constrain_float(temp_output,-100,100);
-}
-
-/***************************************************
-函数名: void simulation_pwm_init(void)
-说明:	模拟pwm初始化
-入口:	无
-出口:	无
-备注:	无
-作者:	无名创新
-****************************************************/
-void simulation_pwm_init(void)
-{	
-	DL_GPIO_clearPins(PORTB_PORT, PORTB_HEATER_PIN);
-}
-
-#define Simulation_PWM_Period_MAX  100//100*1ms=0.1S
-/***************************************************
-函数名: void simulation_pwm_output(void)
-说明:	模拟pwm输出
-入口:	无
-出口:	无
-备注:	无
-作者:	无名创新
-****************************************************/
-void simulation_pwm_output(void)
-{
-#if temperature_ctrl_enable
-	int16_t width=temp_output;
-	static uint16_t cnt=0;	cnt++;
-	if(cnt>=Simulation_PWM_Period_MAX)  cnt=0;
-  if(cnt<=width) DL_GPIO_setPins(PORTB_PORT, PORTB_HEATER_PIN);
-	else DL_GPIO_clearPins(PORTB_PORT, PORTB_HEATER_PIN);
-#else
-	DL_GPIO_clearPins(PORTB_PORT, PORTB_HEATER_PIN);
-#endif
-}
-
-/***************************************************
-函数名: uint8_t temperature_state_get(void)
-说明:	温度接近目标值检测
-入口:	无
-出口:	uint8_t 就位标志
-备注:	无
-作者:	无名创新
-****************************************************/
-uint8_t temperature_state_get(void)
-{
-#if temperature_ctrl_enable
-	return (ABS(temp_error))<=3.0f?1:0;
-#else
-	return 1;
-#endif
-  
-	
-}
-
-/***************************************************
-函数名: void temperature_state_check(void)
-说明:	温度恒定检测
-入口:	无
-出口:	无
-备注:	无
-作者:	无名创新
-****************************************************/
-void temperature_state_check(void)
-{
-	static uint16_t _cnt=0;
-	static uint16_t temperature_crash_cnt=0;
-	if(temperature_state_get()==1){
-		_cnt++;
-		if(_cnt>=400) smartcar_imu.temperature_stable_flag=1;
-	}
-	else{
-		_cnt/=2;
-	}
-	
-	if(temperature_crash_cnt<400)
-	{
-		if(smartcar_imu.last_temperature_raw==smartcar_imu.temperature_raw)	temperature_crash_cnt++;
-		else temperature_crash_cnt/=2;
-		smartcar_imu.imu_health=1;		
-	}
-	else
-	{
-		smartcar_imu.imu_health=0;
-	}	
-}	
 
