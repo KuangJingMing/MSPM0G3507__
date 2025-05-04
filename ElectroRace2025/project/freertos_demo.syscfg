@@ -236,6 +236,7 @@ SPI1.peripheral.mosiPin.$assign = "PB15";
 SPI1.peripheral.misoPin.$assign = "PA16";
 
 SYSCTL.clockTreeEn = true;
+scripting.suppress("For best practices when the CPUCLK is running at 32MHz and above, clear the flash status bit using DL_FlashCTL_executeClearStatus\\(\\) before executing any flash operation\\. Otherwise there may be false positives\\.", SYSCTL);
 
 TIMER1.$name              = "TIMER_delay";
 TIMER1.timerClkDiv        = 8;
