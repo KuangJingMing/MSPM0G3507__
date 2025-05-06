@@ -28,14 +28,17 @@ typedef enum {
 } TASK_STATE;
 
 
-// 增加period_ticks字段，避免重复计算
+// 修改period_task_t结构体，仅增加执行时间字段
 typedef struct {
     EVENT_IDS id;
     TASK_STATE is_running;
     void (*task_handler)(void);
     uint32_t period_ms;
     uint32_t period_ticks;  // 存储计算后的ticks值
+    uint32_t execution_time_ms; // 任务执行时间（毫秒）
+    uint8_t has_timeout; // 标记任务是否超时
 } period_task_t;
+
 
 
 void create_periodic_event_task(void);

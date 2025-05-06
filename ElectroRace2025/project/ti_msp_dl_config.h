@@ -41,7 +41,6 @@
 #define ti_msp_dl_config_h
 
 #define CONFIG_MSPM0G350X
-#define CONFIG_MSPM0G3505
 
 #if defined(__ti_version__) || defined(__TI_COMPILER_VERSION__)
 #define SYSCONFIG_WEAK __attribute__((weak))
@@ -142,7 +141,6 @@ extern "C" {
 
 /* Defines for UART_DEBUG */
 #define UART_DEBUG_INST                                                    UART0
-#define UART_DEBUG_INST_FREQUENCY                                       40000000
 #define UART_DEBUG_INST_IRQHandler                              UART0_IRQHandler
 #define UART_DEBUG_INST_INT_IRQN                                  UART0_INT_IRQn
 #define GPIO_UART_DEBUG_RX_PORT                                            GPIOA
@@ -177,6 +175,12 @@ extern "C" {
 #define GPIO_SPI_0_SCLK_PIN                                      DL_GPIO_PIN_17
 #define GPIO_SPI_0_IOMUX_SCLK                                   (IOMUX_PINCM39)
 #define GPIO_SPI_0_IOMUX_SCLK_FUNC                   IOMUX_PINCM39_PF_SPI1_SCLK
+
+
+
+/* Defines for DMA_CH0 */
+#define DMA_CH0_CHAN_ID                                                      (0)
+#define UART_DEBUG_INST_DMA_TRIGGER                          (DMA_UART0_TX_TRIG)
 
 
 
@@ -284,6 +288,7 @@ void SYSCFG_DL_TIMER_delay_init(void);
 void SYSCFG_DL_I2C_0_init(void);
 void SYSCFG_DL_UART_DEBUG_init(void);
 void SYSCFG_DL_SPI_0_init(void);
+void SYSCFG_DL_DMA_init(void);
 
 
 bool SYSCFG_DL_saveConfiguration(void);

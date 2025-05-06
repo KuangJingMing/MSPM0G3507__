@@ -1,24 +1,6 @@
 #include "embedfire_protocol.h"
 #include "ti_msp_dl_config.h"
 
-//==============================================================================
-// 协议接收状态机和处理 (RX方向)
-//==============================================================================
-void UART_DEBUG_INST_IRQHandler(void) {
-		uint8_t uart_data;
-    switch( DL_UART_getPendingInterrupt(UART_DEBUG_INST) )
-    {
-        case DL_UART_IIDX_RX://如果是接收中断
-            //接发送过来的数据保存在变量中
-            uart_data = DL_UART_Main_receiveData(UART_DEBUG_INST);
-						protocol_receive_byte(uart_data);
-            break;
-        
-        default://其他的串口中断
-            break;
-		}
-}
-
 // 接收状态机的枚举
 typedef enum {
     STATE_WAITING_FOR_HEADER_BYTE0, // 等待包头第一个字节 0x53

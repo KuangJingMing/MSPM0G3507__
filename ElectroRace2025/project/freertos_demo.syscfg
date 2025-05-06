@@ -1,9 +1,8 @@
 /**
  * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
  * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
- * @cliArgs --device "MSPM0G350X" --part "Default" --package "LQFP-64(PM)" --product "mspm0_sdk@2.04.00.06"
- * @v2CliArgs --device "MSPM0G3505" --package "LQFP-64(PM)" --product "mspm0_sdk@2.04.00.06"
- * @versions {"tool":"1.23.1+4034"}
+ * @cliArgs --device "MSPM0G350X" --package "LQFP-64(PM)" --part "Default" --product "mspm0_sdk@2.01.00.03"
+ * @versions {"tool":"1.20.0+3587"}
  */
 
 /**
@@ -227,16 +226,15 @@ SPI1.targetBitRate              = 1000000;
 SPI1.frameFormat                = "MOTO3";
 SPI1.phase                      = "1";
 SPI1.polarity                   = "1";
-SPI1.sclkPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric4";
-SPI1.mosiPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric5";
-SPI1.misoPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric6";
 SPI1.peripheral.$assign         = "SPI1";
 SPI1.peripheral.sclkPin.$assign = "PA17";
 SPI1.peripheral.mosiPin.$assign = "PB15";
 SPI1.peripheral.misoPin.$assign = "PA16";
+SPI1.sclkPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric4";
+SPI1.mosiPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric5";
+SPI1.misoPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric6";
 
 SYSCTL.clockTreeEn = true;
-scripting.suppress("For best practices when the CPUCLK is running at 32MHz and above, clear the flash status bit using DL_FlashCTL_executeClearStatus\\(\\) before executing any flash operation\\. Otherwise there may be false positives\\.", SYSCTL);
 
 TIMER1.$name              = "TIMER_delay";
 TIMER1.timerClkDiv        = 8;
@@ -247,8 +245,11 @@ TIMER1.peripheral.$assign = "TIMA1";
 
 UART1.$name                            = "UART_DEBUG";
 UART1.targetBaudRate                   = 115200;
-UART1.enabledInterrupts                = ["RX"];
-UART1.interruptPriority                = "1";
+UART1.enabledDMATXTriggers             = "DL_UART_DMA_INTERRUPT_TX";
+UART1.enableFIFO                       = true;
+UART1.rxFifoThreshold                  = "DL_UART_RX_FIFO_LEVEL_ONE_ENTRY";
+UART1.txFifoThreshold                  = "DL_UART_TX_FIFO_LEVEL_ONE_ENTRY";
+UART1.enabledInterrupts                = ["DMA_DONE_TX","EOT_DONE","RX"];
 UART1.peripheral.$assign               = "UART0";
 UART1.peripheral.rxPin.$assign         = "PA11";
 UART1.peripheral.txPin.$assign         = "PA10";
@@ -261,6 +262,10 @@ UART1.rxPinConfig.hideOutputInversion  = scripting.forceWrite(false);
 UART1.rxPinConfig.onlyInternalResistor = scripting.forceWrite(false);
 UART1.rxPinConfig.passedPeripheralType = scripting.forceWrite("Digital");
 UART1.rxPinConfig.$name                = "ti_driverlib_gpio_GPIOPinGeneric8";
+UART1.DMA_CHANNEL_TX.$name             = "DMA_CH0";
+UART1.DMA_CHANNEL_TX.addressMode       = "b2f";
+UART1.DMA_CHANNEL_TX.dstLength         = "BYTE";
+UART1.DMA_CHANNEL_TX.srcLength         = "BYTE";
 
 ProjectConfig.genDisable = true;
 scripting.suppress("Project Configuration File generation is disabled for this project\\. SysConfig Project Migration is not currently supported for this project\\.", ProjectConfig);
@@ -270,10 +275,11 @@ scripting.suppress("Project Configuration File generation is disabled for this p
  * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
  * re-solve from scratch.
  */
-Board.peripheral.$suggestSolution            = "DEBUGSS";
-Board.peripheral.swclkPin.$suggestSolution   = "PA20";
-Board.peripheral.swdioPin.$suggestSolution   = "PA19";
-GPIO1.associatedPins[0].pin.$suggestSolution = "PA8";
-GPIO1.associatedPins[1].pin.$suggestSolution = "PA9";
-GPIO5.associatedPins[0].pin.$suggestSolution = "PA28";
-GPIO5.associatedPins[1].pin.$suggestSolution = "PA31";
+Board.peripheral.$suggestSolution                = "DEBUGSS";
+Board.peripheral.swclkPin.$suggestSolution       = "PA20";
+Board.peripheral.swdioPin.$suggestSolution       = "PA19";
+GPIO1.associatedPins[0].pin.$suggestSolution     = "PA8";
+GPIO1.associatedPins[1].pin.$suggestSolution     = "PA9";
+GPIO5.associatedPins[0].pin.$suggestSolution     = "PA28";
+GPIO5.associatedPins[1].pin.$suggestSolution     = "PA31";
+UART1.DMA_CHANNEL_TX.peripheral.$suggestSolution = "DMA_CH0";

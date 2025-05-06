@@ -314,7 +314,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>3</Optim>
+            <Optim>0</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -418,6 +418,11 @@
               <FileName>periodic_event_task.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\custom\user\periodic_event_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>mspm0g3507_it.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\user\mspm0g3507_it.c</FilePath>
             </File>
           </Files>
         </Group>

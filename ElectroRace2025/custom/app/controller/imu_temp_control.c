@@ -7,11 +7,13 @@
 
 #define temperature_ctrl_enable 1
 #define Simulation_PWM_Period_MAX  100
+#define BASE_PWM_VAL 7.5  //对p项进行补偿
+
 
 // PID 参数 (使用 float32_t 类型)
-static float32_t temp_kp = 30.0f;
+static float32_t temp_kp = 1.0f;
 static float32_t temp_ki = 0.0f;
-static float32_t temp_kd = 100.0f;
+static float32_t temp_kd = 0.0f;
 
 // 目标温度
 static float32_t temp_expect = 50.0f;
@@ -43,31 +45,17 @@ void imu_temperature_ctrl_task(void) {
 ****************************************************/
 void imu_temperature_ctrl(void)
 {
-    static uint32_t startup_time = 0;
-    static float32_t max_output_limit = 20.0f; // 初始限制为10
-
     // 确保PID初始化
     static uint8_t pid_initialized = 0;
     if (!pid_initialized) {
         init_temp_pid();
         pid_initialized = 1;
     }
-
     temperature_state_check();
-
     temp_feedback = smartcar_imu.temperature_filter;
     temp_error = temp_expect - temp_feedback;      
-    temp_output = arm_pid_f32(&S_temp, temp_error);
-
-    // 开机初期限制输出（例如前1秒）
-    if (startup_time < 200) { // 假设任务周期为5ms，2000*5ms=10s
-        temp_output = constrain_float(temp_output, -50.0f, max_output_limit);
-        max_output_limit += 0.05f; // 每周期增加0.05，逐步放开限制
-        if (max_output_limit > 50.0f) max_output_limit = 50.0f;
-        startup_time++;
-    } else {
-        temp_output = constrain_float(temp_output, -50.0f, 50.0f);
-    }
+    temp_output = BASE_PWM_VAL;
+		temp_output += arm_pid_f32(&S_temp, temp_error);
 }
 
 
@@ -146,7 +134,7 @@ uint8_t temperature_state_get(void)
 {
 #if temperature_ctrl_enable
     // 使用计算出的误差来判断是否接近目标值
-    return (ABS(temp_error) <= 1.0f) ? 1 : 0;
+    return (ABS(temp_error) <= 2.5f) ? 1 : 0;
 #else
     return 1;
 #endif

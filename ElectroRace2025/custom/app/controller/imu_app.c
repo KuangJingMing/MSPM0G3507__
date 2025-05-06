@@ -5,6 +5,9 @@
 #include "beep.h"
 #include "alert.h"
 #include <math.h>
+#include "log_config.h"
+#include "log.h"
+#include "periodic_event_task.h"
 
 // 生成一个单精度浮点数 NaN 的宏，按照 IEEE 754 标准
 #define MY_NAN ( *(float *)(uint32_t[]){0x7FC00000} )
@@ -21,7 +24,10 @@ static FusionAhrs ahrs;
 static FusionOffset offset;
 
 void imu_init_blocking(void) {
-    while (ICM206xx_Init()){}
+    while (ICM206xx_Init()){
+			log_i("imu init ...");
+			delay_ms(500);
+		}
     imu_calibration_params_init();
 }
 
@@ -260,6 +266,7 @@ void trackless_ahrs_update(void)
 			FusionAhrsSetSettings(&ahrs, &settings);
 			set_alert_count(2);
 			start_alert();
+			enable_periodic_task(EVENT_CAR);
 		}		
 	}
 

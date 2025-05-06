@@ -40,7 +40,7 @@ void speed_pid_init(float32_t Kp, float32_t Ki, float32_t Kd) {
 void car_init(void) {
     encoder_application_init();
 		motor_init();
-		speed_pid_init(50, 1, 12);
+		speed_pid_init(600, 1, 0);
 }
 
 void update_speed(void) {
@@ -59,16 +59,17 @@ void update_distance(void) {
 
 
 void update_speed_pid(void) {
-    float32_t	output; // PID 控制器输出
     float32_t error;  // 速度误差
+		float32_t outputs[2];
     for (int i = 0; i < type; i++) {
         // 计算速度误差 = 目标速度 - 当前速度
         error = car.target_speed[i] - encoder.cmps[i];
         // 计算 PID 输出
-        output = arm_pid_f32(&car.speed_pid[i], error);
+        outputs[i] = arm_pid_f32(&car.speed_pid[i], error);
         // 设置电机 PWM 输出（假设有 motor_set_pwm 函数）
-        motor_set_pwm(i, (int)output);
-    }
+		}
+		motor_set_pwm(0, (int)outputs[0]);
+		motor_set_pwm(1, (int)outputs[1]);
 }
 
 
