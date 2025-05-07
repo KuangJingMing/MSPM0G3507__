@@ -10,19 +10,16 @@ QueueHandle_t uart_rx_queue = NULL;
 QueueHandle_t uart_tx_queue = NULL;
 
 void uart_tx_task(void *param);
-void uart_rx_task(void *param);
-
-// 缓冲区
-static char tx_buffer[MAX_TX_BUFFER_SIZE];
+void uart_rx_task(void *param); 
 
 /**
  * @brief 初始化 UART 相关的 FreeRTOS 资源
  */
 void uart_init(void) {
     uart_rx_queue = xQueueCreate(UART_RX_QUEUE_SIZE, sizeof(uint8_t));
-    uart_tx_queue = xQueueCreate(UART_TX_QUEUE_SIZE, sizeof(uint8_t));
+    uart_tx_queue = xQueueCreate(UART_TX_QUEUE_SIZE, sizeof(uart_tx_packet_t)); // 修改队列元素类型为 uart_tx_packet_t
     xTaskCreate(uart_rx_task, "UART_RX", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 2, &uart_rx_task_handle);
-    xTaskCreate(uart_tx_task, "UART_TX", configMINIMAL_STACK_SIZE * 2, NULL, tskIDLE_PRIORITY + 2, &uart_tx_task_handle);
+    xTaskCreate(uart_tx_task, "UART_TX", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 2, &uart_tx_task_handle);
 }
 
 /**
@@ -58,17 +55,16 @@ void usart_send_bytes(UART_Regs *uart, const uint8_t *data, size_t length) {
  * @param ... 格式化参数
  */
 void usart_printf(UART_Regs *uart, const char *format, ...) {
-    memset(tx_buffer, 0, sizeof(tx_buffer));
+    uart_tx_packet_t tx_packet;
     va_list args;
     va_start(args, format);
-    vsnprintf(tx_buffer, sizeof(tx_buffer), format, args);
+    vsnprintf((char *)tx_packet.buf, sizeof(tx_packet.buf), format, args);
     va_end(args);
+    tx_packet.len = strlen((char *)tx_packet.buf);
 
-    size_t len = strlen(tx_buffer);
-    for (size_t i = 0; i < len; i++) {
-        xQueueSend(uart_tx_queue, &tx_buffer[i], portMAX_DELAY);
-    }
-    // 通知发送任务有数据需要发送
+    // 发送到队列
+    xQueueSend(uart_tx_queue, &tx_packet, portMAX_DELAY);
+    // 通知发送任务有新数据
     xTaskNotifyGive(uart_tx_task_handle);
 }
 
@@ -77,34 +73,29 @@ void usart_printf(UART_Regs *uart, const char *format, ...) {
  * @param param 任务参数（未使用）
  */
 void uart_tx_task(void *param) {
-    uint8_t data;
-    static uint8_t tx_temp_buffer[MAX_TX_BUFFER_SIZE];
-    uint32_t buffer_index = 0;
+    uart_tx_packet_t tx_packet;
     BaseType_t dma_transfer_active = pdFALSE;
+
     while (1) {
         // 等待任务通知（可能是有新数据或DMA传输完成）
         ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+
         // 如果没有正在进行的DMA传输，准备新的数据
         if (dma_transfer_active == pdFALSE) {
-            // 从队列中读取数据，直到队列为空
-            buffer_index = 0;
-            while (xQueueReceive(uart_tx_queue, &data, 0) == pdPASS) {
-                if (buffer_index < MAX_TX_BUFFER_SIZE) {
-                    tx_temp_buffer[buffer_index++] = data;
+            // 从队列中读取数据
+            if (xQueueReceive(uart_tx_queue, &tx_packet, 0) == pdPASS) {
+                // 如果有数据，通过 DMA 发送
+                if (tx_packet.len > 0) {
+                    dma_transfer_active = pdTRUE;
+                    usart_send_bytes(UART_DEBUG_INST, tx_packet.buf, tx_packet.len);
                 }
             }
-            // 如果有数据，则通过 DMA 发送
-            if (buffer_index > 0) {
-                dma_transfer_active = pdTRUE;
-                usart_send_bytes(UART_DEBUG_INST, tx_temp_buffer, buffer_index);
-            }
         } else {
-            // DMA传输已完成
+            // DMA 传输已完成，标记为未激活状态
             dma_transfer_active = pdFALSE;
         }
     }
 }
-
 
 /**
  * @brief UART 接收任务

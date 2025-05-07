@@ -18,7 +18,9 @@
 #define MAX_RX_BUFFER_SIZE MAX_TX_BUFFER_SIZE
 
 #define UART_RX_QUEUE_SIZE MAX_TX_BUFFER_SIZE
-#define UART_TX_QUEUE_SIZE UART_RX_QUEUE_SIZE
+#define UART_TX_QUEUE_SIZE 2
+
+#define TEMPERATURE_CTRL_ENABLE 1 //温度控制使能
 
 #define ENCODER_PERIOD_MS          20              // 20ms 采样周期
 #define WHEEL_RADIUS_CM            3.5f          // 轮胎半径，单位：cm

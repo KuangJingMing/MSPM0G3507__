@@ -42,11 +42,17 @@ static FusionAhrs ahrs;
 static FusionOffset offset;
 
 void imu_init_blocking(void) {
+		static uint8_t cnt = 0;
     while (ICM206xx_Init()) {
         log_i("imu init ...");
+				if (++cnt >= 5) {
+						log_i("imu init time_out");
+						return;
+				}
         delay_ms(500);
     }
     imu_calibration_params_init();
+		log_i("imu_init ok");
 }
 
 void imu_update_task(void) {

@@ -10,6 +10,12 @@
 #include "task.h"
 #include "queue.h"
 
+typedef struct {
+    uint8_t buf[MAX_TX_BUFFER_SIZE];
+    size_t  len;
+} uart_tx_packet_t;
+
+
 typedef struct UsartUtil 
 {
 	uint8_t data;

@@ -5,7 +5,7 @@
 #include "arm_math.h" // 需要包含 CMSIS-DSP 头文件
 
 
-#define temperature_ctrl_enable 1
+
 #define Simulation_PWM_Period_MAX  100
 #define BASE_PWM_VAL 7.5  //对p项进行补偿
 
@@ -96,7 +96,7 @@ void simulation_pwm_init(void)
 ****************************************************/
 void simulation_pwm_output(void)
 {
-#if temperature_ctrl_enable
+#if TEMPERATURE_CTRL_ENABLE
     // 将浮点数输出转换为 int16_t，用于模拟 PWM 宽度
     // 需要考虑负值，如果你的加热器只支持正向输出，需要处理负值。
     int16_t width = (int16_t)temp_output;
@@ -132,7 +132,7 @@ void simulation_pwm_output(void)
 ****************************************************/
 uint8_t temperature_state_get(void)
 {
-#if temperature_ctrl_enable
+#if TEMPERATURE_CTRL_ENABLE
     // 使用计算出的误差来判断是否接近目标值
     return (ABS(temp_error) <= 2.5f) ? 1 : 0;
 #else
