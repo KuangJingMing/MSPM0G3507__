@@ -6,6 +6,7 @@
 #include "alert.h"
 #include <math.h>
 #include "periodic_event_task.h"
+#include "common_defines.h"
 
 // 生成一个单精度浮点数 NaN 的宏，按照 IEEE 754 标准
 #define MY_NAN ( *(float *)(uint32_t[]){0x7FC00000} )
@@ -71,14 +72,14 @@ void imu_update_task(void) {
 void imu_calibration_params_init(void) {
     vector3f gyro_offset_temp = {MY_NAN, MY_NAN, MY_NAN};
     vector3f accel_offset_temp = {MY_NAN, MY_NAN, MY_NAN};
-
+#if USE_EEPROOM
     ReadFlashParameterOne(GYRO_X_OFFSET, &gyro_offset_temp.x);
     ReadFlashParameterOne(GYRO_Y_OFFSET, &gyro_offset_temp.y);
     ReadFlashParameterOne(GYRO_Z_OFFSET, &gyro_offset_temp.z);      
     ReadFlashParameterOne(ACCEL_X_OFFSET, &accel_offset_temp.x);
     ReadFlashParameterOne(ACCEL_Y_OFFSET, &accel_offset_temp.y);
     ReadFlashParameterOne(ACCEL_Z_OFFSET, &accel_offset_temp.z);
-    
+#endif
     if (isnan(gyro_offset_temp.x) == 0
         && isnan(gyro_offset_temp.y) == 0
         && isnan(gyro_offset_temp.z) == 0) { // 如果之前已经温度校准过，开机时直接用之前校准的数据
@@ -123,14 +124,16 @@ void imu_calibration_params_init(void) {
 ***************************************/
 void imu_calibration(vector3f *gyro, vector3f *accel) {
     if (smartcar_imu.imu_cal_flag == 1) return;
-    
+#if TEMPERATURE_CTRL_ENABLE
+    if (smartcar_imu.temperature_stable_flag == 0) return;
+#endif	
     static uint16_t cnt = 0;
     static vector3f last_gyro;
     static vector3f accel_sum, gyro_sum;
     if (ABS(gyro->x - last_gyro.x) <= IMU_GYRO_DELTA_DPS
         && ABS(gyro->y - last_gyro.y) <= IMU_GYRO_DELTA_DPS
         && ABS(gyro->z - last_gyro.z) <= IMU_GYRO_DELTA_DPS
-        && smartcar_imu.temperature_stable_flag == 1) {
+        ) {
         gyro_sum.x += gyro->x;
         gyro_sum.y += gyro->y;
         gyro_sum.z += gyro->z;
@@ -159,7 +162,7 @@ void imu_calibration(vector3f *gyro, vector3f *accel) {
         smartcar_imu.accel_offset.x = (accel_sum.x / cnt); // 得到标定偏移
         smartcar_imu.accel_offset.y = (accel_sum.y / cnt);
         smartcar_imu.accel_offset.z = (accel_sum.z / cnt) - safe_sqrt(1 - sq2(smartcar_imu.accel_offset.x) - sq2(smartcar_imu.accel_offset.y));
-            
+#if USE_EEPROOM            
         WriteFlashParameter_Three(GYRO_X_OFFSET,
                                   smartcar_imu.gyro_offset.x,
                                   smartcar_imu.gyro_offset.y,
@@ -168,7 +171,7 @@ void imu_calibration(vector3f *gyro, vector3f *accel) {
                                   smartcar_imu.accel_offset.x,
                                   smartcar_imu.accel_offset.y,
                                   smartcar_imu.accel_offset.z);   
-        
+#endif       
         gyro_sum.x = 0;
         gyro_sum.y = 0;
         gyro_sum.z = 0;
@@ -242,6 +245,8 @@ void imu_data_sampling(void) {
 ****************************************************/
 void trackless_ahrs_update(void) {
     /****************************************************/
+	  if (smartcar_imu.imu_cal_flag == 0) return; //没初始化完则不采集
+	
     FusionVector gyroscope = {0.0f, 0.0f, 0.0f};
     FusionVector accelerometer = {0.0f, 0.0f, 1.0f};
     FusionVector earthacceleration = {0.0f, 0.0f, 0.0f}; 
@@ -254,7 +259,9 @@ void trackless_ahrs_update(void) {
     accelerometer.axis.y = smartcar_imu.accel_g.y;
     accelerometer.axis.z = smartcar_imu.accel_g.z;
     if (smartcar_imu.quaternion_init_ok == 0) {
-        if (smartcar_imu.temperature_stable_flag == 1) { // 温度稳定
+#if TEMPERATURE_CTRL_ENABLE
+        if (smartcar_imu.temperature_stable_flag == 0) return;
+#endif
             calculate_quaternion_init(smartcar_imu.accel_g, smartcar_imu.mag_tesla, smartcar_imu.quaternion_init);
             smartcar_imu.quaternion_init_ok = 1;
             // AHRS初始化
@@ -270,8 +277,7 @@ void trackless_ahrs_update(void) {
             FusionAhrsSetSettings(&ahrs, &settings);
             set_alert_count(2);
             start_alert();
-            enable_periodic_task(EVENT_CAR);
-        }       
+//            enable_periodic_task(EVENT_CAR);   
     }
 
     if (smartcar_imu.quaternion_init_ok == 1) {
