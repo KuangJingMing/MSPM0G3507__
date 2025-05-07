@@ -28,7 +28,7 @@ void protocol_send_packet(const uint8_t* data, size_t data_length) {
     uint8_t checksum = protocol_calculate_checksum(data, data_length);
     // 假设 EMBEDFIRE_PROTOCOL_UART_INST 是你的 UART 实例
     usart_send_bytes(EMBEDFIRE_PROTOCOL_UART_INST, data, data_length);
-    uart_send_byte(EMBEDFIRE_PROTOCOL_UART_INST, checksum);
+    usart_send_byte(EMBEDFIRE_PROTOCOL_UART_INST, checksum);
 #else
     // 如果没有定义 EMBEDFIRE_PROTOCOL_UART_INST，这里不会发送数据，可能会有编译警告
     log_w("EMBEDFIRE_PROTOCOL_UART_INST is not defined, cannot send protocol packet.\n");

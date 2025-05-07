@@ -6,6 +6,9 @@
 #include "stdio.h"
 #include "string.h"
 #include "common_defines.h"
+#include "freertos.h"
+#include "task.h"
+#include "queue.h"
 
 typedef struct UsartUtil 
 {
@@ -16,8 +19,10 @@ typedef struct UsartUtil
 	uint8_t rx_data_ready;
 } UsartUtil;
 
-void uart_send_byte(UART_Regs* uart, uint8_t byte);
+void usart_send_byte(UART_Regs* uart, uint8_t byte);
 void usart_send_bytes(UART_Regs* uart, const uint8_t* data, size_t length);
 void usart_printf(UART_Regs* uart, const char* format, ...);
+
+void uart_init(void);
 
 #endif

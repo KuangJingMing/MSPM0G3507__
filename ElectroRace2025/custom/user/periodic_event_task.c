@@ -6,10 +6,10 @@
 static TaskHandle_t PeriodicEventTaskHandle;
 
 void debug_task(void) {
-//	log_i("Euler angles (deg): Roll=%.2f, Pitch=%.2f, Yaw=%.2f Temp = %.2f\r\n",
-//				 smartcar_imu.rpy_deg[_ROL],
-//				 smartcar_imu.rpy_deg[_PIT],
-//				 smartcar_imu.rpy_deg[_YAW], smartcar_imu.temperature_filter);
+	log_i("Euler angles (deg): Roll=%.2f, Pitch=%.2f, Yaw=%.2f Temp = %.2f\r\n",
+				 smartcar_imu.rpy_deg[_ROL],
+				 smartcar_imu.rpy_deg[_PIT],
+				 smartcar_imu.rpy_deg[_YAW], smartcar_imu.temperature_filter);
 //	log_i("l_speed = %.2lf, r_speed = %.2lf, mileage = %.2lf", encoder.cmps[0], encoder.cmps[1], encoder.distance_cm[0]);
 }
 

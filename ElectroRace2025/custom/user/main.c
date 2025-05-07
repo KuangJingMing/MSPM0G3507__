@@ -14,6 +14,7 @@ void system_init(void)
 
 void user_init(void) 
 {
+		uart_init();
     menu_init_and_create();
     AT24CXX_Init();
     imu_init_blocking();
@@ -38,7 +39,7 @@ static void create_init_task(void)
     BaseType_t result = xTaskCreate(
         init_task,              		// 任务函数
         "InitTask",            			// 任务名称
-        configMINIMAL_STACK_SIZE,   // 堆栈大小（单位：word）
+        configMINIMAL_STACK_SIZE * 2,   // 堆栈大小（单位：word）
         NULL,                 		 	// 任务参数
         tskIDLE_PRIORITY + 2,  			// 优先级（比空闲任务高）
         &init_task_handle      			// 任务句柄
@@ -50,8 +51,6 @@ static void create_init_task(void)
         while (1) {
             // 创建失败，进入死循环
         }
-    } else {
-        log_i("Initialization task created successfully.");
     }
 }
 

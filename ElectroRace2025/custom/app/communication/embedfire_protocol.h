@@ -6,7 +6,7 @@
 #include <string.h> // For memcpy and memmove
 
 // 包含你的 UART 驱动头文件
-#include "uart_driver.h" // 假设这个头文件提供了 usart_send_bytes 和 uart_send_byte 函数
+#include "uart_driver.h" // 假设这个头文件提供了 usart_send_bytes 和 usart_send_byte 函数
 
 // 定义用于 Embedfire 协议通信的 UART 实例
 // 你需要在你的项目配置头文件或其他地方定义 UART_DEBUG_INST
