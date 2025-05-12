@@ -13,7 +13,7 @@
 #define s32    int32	
 #define u32    uint32_t
 
-#define UNIT_TEST_MODE 0
+#define UNIT_TEST_MODE 1
 #define MAX_TX_BUFFER_SIZE 256
 #define MAX_RX_BUFFER_SIZE MAX_TX_BUFFER_SIZE
 

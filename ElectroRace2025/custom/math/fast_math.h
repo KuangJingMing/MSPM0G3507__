@@ -18,6 +18,7 @@
 #define MAX(a,b)  ((a)>(b)?(a):(b))
 #define MIN(a,b)  ((a)>(b)?(b):(a))
 
+float calculate_angle_error(float target, float current);
 float constrain_float(float amt, float low, float high); 
 float sq(float v);
 float safe_sqrt(float v);

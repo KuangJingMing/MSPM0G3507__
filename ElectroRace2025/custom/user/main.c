@@ -10,16 +10,17 @@ void system_init(void)
 {
     SYSCFG_DL_init();
     NVIC_EnableIRQ(UART_DEBUG_INST_INT_IRQN);
+		uart_init();
 }
 
 void user_init(void) 
 {
-		uart_init();
     menu_init_and_create();
     AT24CXX_Init();
     imu_init_blocking();
     imu_temperature_ctrl_init();
     car_init();
+		car_path_init();
     create_periodic_event_task();
 }
 
@@ -56,7 +57,7 @@ static void create_init_task(void)
 
 void test_task_init_and_create(void) 
 {
-    gd_task_create();    
+    hmc5883l_test_task_start();    
 }
 
 int main(void) 

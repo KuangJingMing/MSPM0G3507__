@@ -164,10 +164,19 @@ GPIO6.associatedPins[3].assignedPin  = "22";
 GPIO6.associatedPins[3].pin.$assign  = "PB22";
 
 GPIO7.$name                          = "PORTA";
+GPIO7.associatedPins.create(3);
 GPIO7.associatedPins[0].$name        = "BEEP";
 GPIO7.associatedPins[0].assignedPort = "PORTA";
 GPIO7.associatedPins[0].assignedPin  = "27";
 GPIO7.associatedPins[0].pin.$assign  = "PA27";
+GPIO7.associatedPins[1].$name        = "HMC5883L_SDA";
+GPIO7.associatedPins[1].assignedPort = "PORTA";
+GPIO7.associatedPins[1].assignedPin  = "1";
+GPIO7.associatedPins[1].pin.$assign  = "PA1";
+GPIO7.associatedPins[2].$name        = "HMC5883L_SCL";
+GPIO7.associatedPins[2].assignedPort = "PORTA";
+GPIO7.associatedPins[2].assignedPin  = "0";
+GPIO7.associatedPins[2].pin.$assign  = "PA0";
 
 I2C1.$name                           = "I2C_0";
 I2C1.basicEnableController           = true;

@@ -275,6 +275,12 @@ extern "C" {
 /* Defines for B: GPIOB.22 with pinCMx 50 on package pin 21 */
 #define PORTB_B_PIN                                             (DL_GPIO_PIN_22)
 #define PORTB_B_IOMUX                                            (IOMUX_PINCM50)
+/* Defines for HMC5883L_SDA: GPIOA.1 with pinCMx 2 on package pin 34 */
+#define PORTA_HMC5883L_SDA_PIN                                   (DL_GPIO_PIN_1)
+#define PORTA_HMC5883L_SDA_IOMUX                                  (IOMUX_PINCM2)
+/* Defines for HMC5883L_SCL: GPIOA.0 with pinCMx 1 on package pin 33 */
+#define PORTA_HMC5883L_SCL_PIN                                   (DL_GPIO_PIN_0)
+#define PORTA_HMC5883L_SCL_IOMUX                                  (IOMUX_PINCM1)
 
 /* clang-format on */
 

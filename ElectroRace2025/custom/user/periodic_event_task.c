@@ -1,28 +1,30 @@
 #include "periodic_event_task.h"
 #include "common_include.h" // 确保 TIMER_5MS_PERIOD_MS 在这里定义为 5
-#include "log_config.h"
+//#include "log_config.h"
 #include "log.h"
 
 static TaskHandle_t PeriodicEventTaskHandle;
 
 void debug_task(void) {
-//	log_i("Euler angles (deg): Roll=%.2f, Pitch=%.2f, Yaw=%.2f Temp = %.2f\r\n",
-//				 smartcar_imu.rpy_deg[_ROL],
-//				 smartcar_imu.rpy_deg[_PIT],
-//				 smartcar_imu.rpy_deg[_YAW], smartcar_imu.temperature_filter);
-//	log_i("l_speed = %.2lf, r_speed = %.2lf, mileage = %.2lf", encoder.cmps[0], encoder.cmps[1], encoder.distance_cm[0]);
+	log_i("Euler angles (deg): Roll=%.2f, Pitch=%.2f, Yaw=%.2f Temp = %.2f\r\n",
+				 smartcar_imu.rpy_deg[_ROL],
+				 smartcar_imu.rpy_deg[_PIT],
+				 smartcar_imu.rpy_deg[_YAW], smartcar_imu.temperature_filter);
+
 }
 
 // Define periodic tasks array
 // {ID, RUNNING_FLAG, task_handler, period_ms}
 period_task_t period_tasks[] = {
-    { EVENT_IMU_UPDATE,       RUN,  	imu_update_task, 					 5    }, // 5ms
-    { EVENT_TEMP_CONTROL,     RUN,  	imu_temperature_ctrl_task, 5    }, // 5ms
-    { EVENT_KEY_STATE_UPDATE, RUN,  	button_ticks, 		 				 20   }, // 20ms
-    { EVENT_MENU_VAR_UPDATE,  IDLE, 	NotifyMenuFromISR, 				 2000 }, // 2000ms (2s)
-		{ EVENT_PERIOD_PRINT,  		RUN,   	debug_task, 							 500  }, // 500ms
-		{ EVENT_ALERT, 						RUN,  	alert_ticks, 							 10,  }, // 10ms
-		{ EVENT_CAR, 				   		IDLE,  	car_task, 							   20,  }, // 10ms
+    { EVENT_IMU_UPDATE,        RUN,  	imu_update_task, 					 5    }, // 5ms
+    { EVENT_TEMP_CONTROL,      RUN,  	imu_temperature_ctrl_task, 5    }, // 5ms
+    { EVENT_KEY_STATE_UPDATE,  RUN,  	button_ticks, 		 				 20   }, // 20ms
+    { EVENT_MENU_VAR_UPDATE,   IDLE, 	NotifyMenuFromISR, 				 2000 }, // 2000ms (2s)
+		{ EVENT_PERIOD_PRINT,  		 RUN,   debug_task, 							 500  }, // 500ms
+		{ EVENT_ALERT, 						 RUN,  	alert_ticks, 							 10,  }, // 10ms
+		{ EVENT_CAR_STATE_MACHINE, RUN,   car_state_machine, 				 20,  }, // 20ms
+		{ EVENT_CAR, 				   		 IDLE,  car_task, 				         20,  }, // 20ms
+		
 };
 
 
@@ -107,6 +109,7 @@ void PeriodicEventTask(void *pvParameters)
         
         // 如果累计任务时间超过了周期时间，输出所有任务的运行时间
         if (total_execution_time_ms > TIMER_5MS_PERIOD_MS) {
+
             log_w("Total execution time exceeded cycle time: %lu ms", (unsigned long)total_execution_time_ms);
             log_w("Tasks executed in this cycle: %d", tasks_executed_this_cycle);
             
@@ -158,9 +161,9 @@ void create_periodic_event_task(void) {
     BaseType_t xReturn = xTaskCreate(
         PeriodicEventTask,
         "PeriodicEventTask",
-        configMINIMAL_STACK_SIZE * 3,
+        configMINIMAL_STACK_SIZE * 4,
         NULL,
-        tskIDLE_PRIORITY + 1,
+        tskIDLE_PRIORITY + 2,
         &PeriodicEventTaskHandle);
     if (xReturn == pdPASS) {
         log_i("PeriodicEventTask created successfully!");

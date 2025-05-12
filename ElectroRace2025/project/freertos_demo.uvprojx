@@ -444,6 +444,11 @@
               <FileType>1</FileType>
               <FilePath>..\custom\tests\gray_detection_test.c</FilePath>
             </File>
+            <File>
+              <FileName>hmc5883l_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\tests\hmc5883l_test.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -528,6 +533,11 @@
               <FileName>car_controller.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\custom\app\controller\car_controller.c</FilePath>
+            </File>
+            <File>
+              <FileName>car_state_machine.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\app\controller\car_state_machine.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -623,6 +633,11 @@
               <FileName>rgb_led.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\custom\hardware\drivers\rgb_led.c</FilePath>
+            </File>
+            <File>
+              <FileName>hmc5883l.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\custom\hardware\drivers\hmc5883l.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -2,6 +2,18 @@
 #include "math.h"
 
 
+float calculate_angle_error(float target, float current) {
+    float error = target - current;
+    if (fabsf(error) > 180.0f) {
+        if (target > 0) {
+            error -= 360.0f;
+        } else {
+            error += 360.0f;
+        }
+    }
+    return error;
+}
+
 // constrain a value
 float constrain_float(float amt, float low, float high) 
 {

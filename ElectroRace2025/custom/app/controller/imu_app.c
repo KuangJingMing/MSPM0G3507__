@@ -16,7 +16,7 @@
 
 // 基于采样周期自动计算的参数
 #define IMU_SAMPLING_FREQUENCY_HZ       (1000.0f / IMU_SAMPLING_PERIOD_MS) // 采样频率 (1000ms / 周期)
-#define IMU_GYRO_DELTA_DPS              3.0f    // 陀螺仪变化阈值
+#define IMU_GYRO_DELTA_DPS              1.0f    // 陀螺仪变化阈值
 #define IMU_GYRO_LPF_CUTOFF_HZ         50.0f   // 陀螺仪低通滤波截止频率
 #define IMU_ACCEL_LPF_CUTOFF_HZ        30.0f   // 加速度计低通滤波截止频率
 #define IMU_CALIBRATION_TIME_S          2.0f    // 校准时间 2秒
@@ -48,6 +48,8 @@ void imu_init_blocking(void) {
         log_i("imu init ...");
 				if (++cnt >= 5) {
 						log_i("imu init time_out");
+						play_alert_blocking(3, COLOR_RED);
+						while (1) {}
 						return;
 				}
         delay_ms(500);
@@ -72,6 +74,14 @@ void imu_update_task(void) {
 void imu_calibration_params_init(void) {
     vector3f gyro_offset_temp = {MY_NAN, MY_NAN, MY_NAN};
     vector3f accel_offset_temp = {MY_NAN, MY_NAN, MY_NAN};
+		
+		gyro_offset_temp.x = -0.282747746f;
+		gyro_offset_temp.y = -0.320837736f;
+		gyro_offset_temp.z =  0.264331222f;
+		accel_offset_temp.x = -0.175919175f;
+		accel_offset_temp.y = -0.0052526081f;
+		accel_offset_temp.z = -0.00341617105f;
+
 #if USE_EEPROOM
     ReadFlashParameterOne(GYRO_X_OFFSET, &gyro_offset_temp.x);
     ReadFlashParameterOne(GYRO_Y_OFFSET, &gyro_offset_temp.y);
@@ -245,8 +255,7 @@ void imu_data_sampling(void) {
 ****************************************************/
 void trackless_ahrs_update(void) {
     /****************************************************/
-	  if (smartcar_imu.imu_cal_flag == 0) return; //没初始化完则不采集
-	
+
     FusionVector gyroscope = {0.0f, 0.0f, 0.0f};
     FusionVector accelerometer = {0.0f, 0.0f, 1.0f};
     FusionVector earthacceleration = {0.0f, 0.0f, 0.0f}; 
@@ -277,7 +286,6 @@ void trackless_ahrs_update(void) {
             FusionAhrsSetSettings(&ahrs, &settings);
             set_alert_count(2);
             start_alert();
-//            enable_periodic_task(EVENT_CAR);   
     }
 
     if (smartcar_imu.quaternion_init_ok == 1) {
@@ -300,6 +308,11 @@ void trackless_ahrs_update(void) {
         } else {
             smartcar_imu.imu_convergence_flag = 1;
         }
+				static TickType_t start_tick = 0;
+				TickType_t current_tick = xTaskGetTickCount();
+				if (current_tick - start_tick >= 7000) {
+					 enable_periodic_task(EVENT_CAR);   
+				}
     }
 
     smartcar_imu.rpy_gyro_dps[_PIT] = smartcar_imu.gyro_dps.x;
