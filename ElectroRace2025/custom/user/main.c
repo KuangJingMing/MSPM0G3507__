@@ -57,7 +57,7 @@ static void create_init_task(void)
 
 void test_task_init_and_create(void) 
 {
-    hmc5883l_test_task_start();    
+    mpu6050_task_create();    
 }
 
 int main(void) 
@@ -88,7 +88,7 @@ void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName)
 {
     log_e("!!! STACK OVERFLOW: %s !!!\n", pcTaskName); // 错误日志输出
     
-    play_alert_blocking(3, COLOR_PURPLE);
+		play_alert_blocking(3, COLOR_PURPLE);
     
     taskDISABLE_INTERRUPTS();
     while (1)

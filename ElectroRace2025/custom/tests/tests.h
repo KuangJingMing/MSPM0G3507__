@@ -9,4 +9,7 @@ void imu_task_create(void) ;
 void gd_task_create(void);
 // 磁力计单独测试
 void hmc5883l_test_task_start(void);
+// MPU6050单独测试
+void mpu6050_task_create(void);
+
 #endif

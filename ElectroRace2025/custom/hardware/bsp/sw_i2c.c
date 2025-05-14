@@ -11,8 +11,6 @@
  */
  void SOFT_IIC_DLY(void)
 {
-    uint8_t i;
-    // 延时循环次数根据第一份代码调整，目标 SCL 频率约为 200KHz
 		delay_us(1);
 }
 
