@@ -6,18 +6,6 @@
 #include <stdio.h> // 为了 log 输出
 #include <stdlib.h> // 为了 abs() 函数
 
-// 包含单片机特定的定时器寄存器定义头文件 (确保 GPTIMER_Regs 被定义)
-// 你需要根据你的 MSPM0G3507 的实际 DL 库路径来包含正确的头文件。
-// 通常在 ti/mspm0/sdk/docs/english/doxygen/html/public_api.html 可以找到相关信息。
-// 示例：
-// #include "ti_msp_dl_core.h"
-// #include "ti_msp_dl_gptimer.h"
-// #include "ti_msp_dl_gpio.h" // 需要包含 GPIO 的头文件
-
-// 假设 DL_Timer_setCaptureCompareValue, DL_Timer_startCounter, DL_Timer_stopCounter,
-// DL_GPIO_setPins, DL_GPIO_clearPins 等函数已经被包含在 motor_hardware.h 或者上述的 DL 库头文件中。
-
-
 // 声明 TB6612 驱动内部函数 (static)
 static void tb6612_enable_all_motor_impl(const MotorSystemConfig* g_motor_system_config);
 static void tb6612_disable_all_motor_impl(const MotorSystemConfig* g_motor_system_config);

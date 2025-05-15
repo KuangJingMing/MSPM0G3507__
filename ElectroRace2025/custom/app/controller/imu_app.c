@@ -17,8 +17,8 @@
 // 基于采样周期自动计算的参数
 #define IMU_SAMPLING_FREQUENCY_HZ       (1000.0f / IMU_SAMPLING_PERIOD_MS) // 采样频率 (1000ms / 周期)
 #define IMU_GYRO_DELTA_DPS              1.0f    // 陀螺仪变化阈值
-#define IMU_GYRO_LPF_CUTOFF_HZ         50.0f   // 陀螺仪低通滤波截止频率
-#define IMU_ACCEL_LPF_CUTOFF_HZ        30.0f   // 加速度计低通滤波截止频率
+#define IMU_GYRO_LPF_CUTOFF_HZ         	50.0f   // 陀螺仪低通滤波截止频率
+#define IMU_ACCEL_LPF_CUTOFF_HZ       	30.0f   // 加速度计低通滤波截止频率
 #define IMU_CALIBRATION_TIME_S          2.0f    // 校准时间 2秒
 #define IMU_CALIBRATION_SAMPLES         (uint16_t)(IMU_CALIBRATION_TIME_S * IMU_SAMPLING_FREQUENCY_HZ) // 校准采样次数
 #define IMU_CONVERGENCE_TIME_S          5.0f    // IMU收敛时间 5秒

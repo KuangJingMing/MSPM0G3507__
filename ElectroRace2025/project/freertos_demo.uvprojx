@@ -444,16 +444,6 @@
               <FileType>1</FileType>
               <FilePath>..\custom\tests\gray_detection_test.c</FilePath>
             </File>
-            <File>
-              <FileName>hmc5883l_test.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\custom\tests\hmc5883l_test.c</FilePath>
-            </File>
-            <File>
-              <FileName>mpu6050_test.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\custom\tests\mpu6050_test.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -572,21 +562,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>app/dmplib</GroupName>
-          <Files>
-            <File>
-              <FileName>inv_mpu.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\custom\app\dmplib\Src\inv_mpu.c</FilePath>
-            </File>
-            <File>
-              <FileName>inv_mpu_dmp_motion_driver.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\custom\app\dmplib\Src\inv_mpu_dmp_motion_driver.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>utils</GroupName>
           <Files>
             <File>
@@ -653,16 +628,6 @@
               <FileName>rgb_led.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\custom\hardware\drivers\rgb_led.c</FilePath>
-            </File>
-            <File>
-              <FileName>hmc5883l.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\custom\hardware\drivers\hmc5883l.c</FilePath>
-            </File>
-            <File>
-              <FileName>mpuiic_driver.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\custom\hardware\drivers\mpuiic_driver.c</FilePath>
             </File>
           </Files>
         </Group>

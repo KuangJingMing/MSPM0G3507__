@@ -57,7 +57,7 @@ static void create_init_task(void)
 
 void test_task_init_and_create(void) 
 {
-    mpu6050_task_create();    
+    imu_task_create();   
 }
 
 int main(void) 

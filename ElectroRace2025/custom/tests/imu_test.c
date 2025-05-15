@@ -63,5 +63,5 @@ void imu_task(void *arg) {
 
 
 void imu_task_create(void) {
-    xTaskCreate(imu_task, "IMUTask", configMINIMAL_STACK_SIZE * 2, NULL, tskIDLE_PRIORITY + 1, NULL);
+    xTaskCreate(imu_task, "IMUTask", configMINIMAL_STACK_SIZE * 3, NULL, tskIDLE_PRIORITY + 1, NULL);
 }
