@@ -6,24 +6,18 @@
 static TaskHandle_t PeriodicEventTaskHandle;
 
 void debug_task(void) {
-	log_i("Euler angles (deg): Roll=%.2f, Pitch=%.2f, Yaw=%.2f Temp = %.2f\r\n",
-				 smartcar_imu.rpy_deg[_ROL],
-				 smartcar_imu.rpy_deg[_PIT],
-				 smartcar_imu.rpy_deg[_YAW], smartcar_imu.temperature_filter);
-
+	log_i("wit: roll = %.2lf, yaw = %.2lf, pitch = %.2lf", jy901s.roll, jy901s.yaw, jy901s.pitch);
 }
 
 // Define periodic tasks array
 // {ID, RUNNING_FLAG, task_handler, period_ms}
 period_task_t period_tasks[] = {
-    { EVENT_IMU_UPDATE,        RUN,  	imu_update_task, 					 5    }, // 5ms
-    { EVENT_TEMP_CONTROL,      RUN,  	imu_temperature_ctrl_task, 5    }, // 5ms
     { EVENT_KEY_STATE_UPDATE,  RUN,  	button_ticks, 		 				 20   }, // 20ms
     { EVENT_MENU_VAR_UPDATE,   IDLE, 	NotifyMenuFromISR, 				 2000 }, // 2000ms (2s)
 		{ EVENT_PERIOD_PRINT,  		 RUN,   debug_task, 							 500  }, // 500ms
 		{ EVENT_ALERT, 						 RUN,  	alert_ticks, 							 10,  }, // 10ms
-		{ EVENT_CAR_STATE_MACHINE, RUN,   car_state_machine, 				 20,  }, // 20ms
-		{ EVENT_CAR, 				   		 IDLE,  car_task, 				         20,  }, // 20ms
+		{ EVENT_CAR_STATE_MACHINE, IDLE,   car_state_machine, 				 20,  }, // 20ms
+		{ EVENT_CAR, 				   		 RUN,  car_task, 				         20,  }, // 20ms
 		
 };
 
@@ -42,7 +36,7 @@ void PeriodicEventTask(void *pvParameters)
     {
         // 计算ticks并存储，避免后续重复计算
         period_tasks[i].period_ticks = (period_tasks[i].period_ms > 0) 
-            ? MAX(1, period_tasks[i].period_ms / TIMER_5MS_PERIOD_MS) 
+            ? fmax(1, period_tasks[i].period_ms / TIMER_5MS_PERIOD_MS) 
             : 1;  // 处理0ms和小于5ms的特殊情况
         
         // 对于短周期任务(<=5ms)，设置为下一个tick运行

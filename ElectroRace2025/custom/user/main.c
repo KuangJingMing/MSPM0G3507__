@@ -9,18 +9,17 @@ static TaskHandle_t init_task_handle = NULL;
 void system_init(void) 
 {
     SYSCFG_DL_init();
-    NVIC_EnableIRQ(UART_DEBUG_INST_INT_IRQN);
-		uart_init();
+#if DEBUG_MODE
+		debug_uart_init();
+#endif
 }
 
 void user_init(void) 
 {
+		jy901s.init();
     menu_init_and_create();
-    AT24CXX_Init();
-    imu_init_blocking();
-    imu_temperature_ctrl_init();
     car_init();
-		car_path_init();
+		gray_detection_init();
     create_periodic_event_task();
 }
 
@@ -57,7 +56,7 @@ static void create_init_task(void)
 
 void test_task_init_and_create(void) 
 {
-    imu_task_create();   
+	gd_task_create();
 }
 
 int main(void) 

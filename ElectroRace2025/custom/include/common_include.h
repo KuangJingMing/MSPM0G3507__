@@ -19,18 +19,14 @@
 #include "button_app.h"
 #include "menu_app.h"
 #include "encoder_app.h"
-#include "icm20608.h"
-#include "imu_app.h"
-#include "driver_at24cxx.h" // LibDriver AT24CXX
 #include "tests.h"
-#include "eeprom_parameter.h"
 #include "beep.h"
 #include "rgb_led.h"
 #include "alert.h"
 #include "periodic_event_task.h"
 #include "menu_logic.h"
-#include "imu_temp_control.h"
 #include "car_controller.h"
 #include "car_state_machine.h"
+#include "wit_jyxx.h"
 
 #endif // COMMON_H

@@ -3,7 +3,7 @@
 #include "task.h"
 #include "mspm0g3507_it.h"
 #include "ti_msp_dl_config.h"
-#include "uart_driver.h"
+#include "uart_debug.h"
 
 
 extern TaskHandle_t uart_tx_task_handle;

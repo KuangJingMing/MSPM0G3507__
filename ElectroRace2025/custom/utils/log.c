@@ -20,7 +20,7 @@ static void log_print(int level, const char *format, va_list args) {
 
         char buffer[MAX_LOG_SIZE];
         vsnprintf(buffer, sizeof(buffer), format, args);
-        usart_printf(UART_DEBUG_INST, "%s %s\r\n", level_tag, buffer);
+        debug_uart_printf("%s %s\r\n", level_tag, buffer);
     }
 }
 
@@ -47,15 +47,15 @@ void LOG_E(const char *format, ...) {
 
 void LOG_HEX(const unsigned char *data, int len) {
     if (LOG_LEVEL_INFO <= MODULE_LOG_LEVEL) {
-        usart_printf(UART_DEBUG_INST, "%s HEX Data (%d bytes):\r\n", LOG_TAG_INFO, len);
+        debug_uart_printf("%s HEX Data (%d bytes):\r\n", LOG_TAG_INFO, len);
         for (int i = 0; i < len; i++) {
-            usart_printf(UART_DEBUG_INST, "%02X ", data[i]);
+            debug_uart_printf("%02X ", data[i]);
             if ((i + 1) % 16 == 0) {
-                usart_printf(UART_DEBUG_INST, "\r\n");
+                debug_uart_printf("\r\n");
             }
         }
         if (len % 16 != 0) {
-            usart_printf(UART_DEBUG_INST, "\r\n");
+            debug_uart_printf("\r\n");
         }
     }
 }

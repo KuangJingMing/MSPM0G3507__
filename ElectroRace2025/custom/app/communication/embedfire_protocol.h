@@ -6,19 +6,7 @@
 #include <string.h> // For memcpy and memmove
 
 // 包含你的 UART 驱动头文件
-#include "uart_driver.h" // 假设这个头文件提供了 usart_send_bytes 和 usart_send_byte 函数
-
-// 定义用于 Embedfire 协议通信的 UART 实例
-// 你需要在你的项目配置头文件或其他地方定义 UART_DEBUG_INST
-// 例如： #define UART_DEBUG_INST UART0
-#ifdef UART_DEBUG_INST
-#define EMBEDFIRE_PROTOCOL_UART_INST UART_DEBUG_INST
-#else
-// 如果没有定义 UART_DEBUG_INST，这里不会强制报错，只会导致后续使用时产生警告
-// 这通常不是一个好的做法，建议定义 UART_DEBUG_INST 或者使用默认值
-#warning "UART_DEBUG_INST is not defined. Embedfire protocol communication may not work correctly."
-// #define EMBEDFIRE_PROTOCOL_UART_INST NULL // 或者定义一个默认值
-#endif
+#include "uart_debug.h" // 假设这个头文件提供了 usart_send_bytes 和 usart_send_byte 函数
 
 //==============================================================================
 // 协议常量定义

@@ -154,6 +154,21 @@ extern "C" {
 #define UART_DEBUG_BAUD_RATE                                            (115200)
 #define UART_DEBUG_IBRD_40_MHZ_115200_BAUD                                  (21)
 #define UART_DEBUG_FBRD_40_MHZ_115200_BAUD                                  (45)
+/* Defines for UART_WIT */
+#define UART_WIT_INST                                                      UART3
+#define UART_WIT_INST_IRQHandler                                UART3_IRQHandler
+#define UART_WIT_INST_INT_IRQN                                    UART3_INT_IRQn
+#define GPIO_UART_WIT_RX_PORT                                              GPIOB
+#define GPIO_UART_WIT_TX_PORT                                              GPIOB
+#define GPIO_UART_WIT_RX_PIN                                       DL_GPIO_PIN_3
+#define GPIO_UART_WIT_TX_PIN                                       DL_GPIO_PIN_2
+#define GPIO_UART_WIT_IOMUX_RX                                   (IOMUX_PINCM16)
+#define GPIO_UART_WIT_IOMUX_TX                                   (IOMUX_PINCM15)
+#define GPIO_UART_WIT_IOMUX_RX_FUNC                    IOMUX_PINCM16_PF_UART3_RX
+#define GPIO_UART_WIT_IOMUX_TX_FUNC                    IOMUX_PINCM15_PF_UART3_TX
+#define UART_WIT_BAUD_RATE                                                (9600)
+#define UART_WIT_IBRD_80_MHZ_9600_BAUD                                     (520)
+#define UART_WIT_FBRD_80_MHZ_9600_BAUD                                      (53)
 
 
 
@@ -251,15 +266,6 @@ extern "C" {
 /* Defines for PIN_4: GPIOB.11 with pinCMx 28 on package pin 63 */
 #define GPIO_KEY_PIN_4_PIN                                      (DL_GPIO_PIN_11)
 #define GPIO_KEY_PIN_4_IOMUX                                     (IOMUX_PINCM28)
-/* Port definition for Pin Group EPM */
-#define EPM_PORT                                                         (GPIOA)
-
-/* Defines for EPM_SDA: GPIOA.28 with pinCMx 3 on package pin 35 */
-#define EPM_EPM_SDA_PIN                                         (DL_GPIO_PIN_28)
-#define EPM_EPM_SDA_IOMUX                                         (IOMUX_PINCM3)
-/* Defines for EPM_SCL: GPIOA.31 with pinCMx 6 on package pin 39 */
-#define EPM_EPM_SCL_PIN                                         (DL_GPIO_PIN_31)
-#define EPM_EPM_SCL_IOMUX                                         (IOMUX_PINCM6)
 /* Port definition for Pin Group PORTB */
 #define PORTB_PORT                                                       (GPIOB)
 
@@ -275,12 +281,6 @@ extern "C" {
 /* Defines for B: GPIOB.22 with pinCMx 50 on package pin 21 */
 #define PORTB_B_PIN                                             (DL_GPIO_PIN_22)
 #define PORTB_B_IOMUX                                            (IOMUX_PINCM50)
-/* Defines for HMC5883L_SDA: GPIOA.1 with pinCMx 2 on package pin 34 */
-#define PORTA_HMC5883L_SDA_PIN                                   (DL_GPIO_PIN_1)
-#define PORTA_HMC5883L_SDA_IOMUX                                  (IOMUX_PINCM2)
-/* Defines for HMC5883L_SCL: GPIOA.0 with pinCMx 1 on package pin 33 */
-#define PORTA_HMC5883L_SCL_PIN                                   (DL_GPIO_PIN_0)
-#define PORTA_HMC5883L_SCL_IOMUX                                  (IOMUX_PINCM1)
 
 /* clang-format on */
 
@@ -293,6 +293,7 @@ void SYSCFG_DL_Motor_PWM2_init(void);
 void SYSCFG_DL_TIMER_delay_init(void);
 void SYSCFG_DL_I2C_0_init(void);
 void SYSCFG_DL_UART_DEBUG_init(void);
+void SYSCFG_DL_UART_WIT_init(void);
 void SYSCFG_DL_SPI_0_init(void);
 void SYSCFG_DL_DMA_init(void);
 

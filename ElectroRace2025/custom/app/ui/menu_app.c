@@ -4,30 +4,94 @@
 #include "menu_logic.h"
 #include "menu_ui.h"
 #include "u8g2.h"
-#include "imu_app.h"
+#include "wit_jyxx.h"
+#include "common_include.h"
+
+static action_config_t task1_action_config = {
+    .actions = {
+				{ACTION_SPIN_TURN, 0.0f}, 												// 旋转到0度 
+        {ACTION_MOVE_UNTIL_BLACK, CAR_STATE_GO_STRAIGHT}, // 通过直行修正的方式直到黑线停下 
+    },
+    .is_loop_enabled = true,
+    .loop_count = 1
+};
+
+static action_config_t task2_action_config = {
+    .actions = {
+				{ACTION_SPIN_TURN, 0.0f}, 												// 旋转到0度 
+        {ACTION_MOVE_UNTIL_BLACK, CAR_STATE_GO_STRAIGHT}, // 通过直行修正的方式直到黑线停下 
+        {ACTION_MOVE_UNTIL_WHITE, CAR_STATE_TRACK},       // 通过循迹修正的方式直到白线停下
+				{ACTION_SPIN_TURN, -180.0f}, 											// 旋转到-180度 
+        {ACTION_MOVE_UNTIL_BLACK, CAR_STATE_GO_STRAIGHT}, // 通过直行修正的方式直到黑线停下 
+        {ACTION_MOVE_UNTIL_WHITE, CAR_STATE_TRACK},       // 通过循迹修正的方式直到白线停下
+    },
+    .is_loop_enabled = true,
+    .loop_count = 1
+};
+
+static action_config_t task3_action_config = {
+    .actions = {
+        {ACTION_SPIN_TURN, -35.0f},                       // 旋转到-35度
+        {ACTION_MOVE_UNTIL_BLACK, CAR_STATE_GO_STRAIGHT}, // 通过直行修正的方式直到黑线停下 
+        {ACTION_MOVE_UNTIL_WHITE, CAR_STATE_TRACK},       // 通过循迹修正的方式直到白线停下
+        {ACTION_SPIN_TURN, -145.0f},                      // 旋转到-145度
+        {ACTION_MOVE_UNTIL_BLACK, CAR_STATE_GO_STRAIGHT}, // 通过直行修正的方式直到黑线停下 
+        {ACTION_MOVE_UNTIL_WHITE, CAR_STATE_TRACK},       // 通过循迹修正的方式直到白线停下
+    },
+    .is_loop_enabled = true,
+    .loop_count = 1
+};
+
+// 默认动作配置表，用户可直接修改此表定义动作序列和循环模式
+static action_config_t task4_action_config = {
+    .actions = {
+        {ACTION_SPIN_TURN, -35.0f},                       // 旋转到-35度
+        {ACTION_MOVE_UNTIL_BLACK, CAR_STATE_GO_STRAIGHT}, // 通过直行修正的方式直到黑线停下 
+        {ACTION_MOVE_UNTIL_WHITE, CAR_STATE_TRACK},       // 通过循迹修正的方式直到白线停下
+        {ACTION_SPIN_TURN, -145.0f},                      // 旋转到-145度
+        {ACTION_MOVE_UNTIL_BLACK, CAR_STATE_GO_STRAIGHT}, // 通过直行修正的方式直到黑线停下 
+        {ACTION_MOVE_UNTIL_WHITE, CAR_STATE_TRACK},       // 通过循迹修正的方式直到白线停下
+    },
+    .action_count = 0,  // 初始值为0，自动计算
+    .is_loop_enabled = true,
+    .loop_count = 4
+};
+
 
 static void run_task01_cb(void *arg) {
     u8g2_ClearBuffer(&u8g2);
     draw_centered_text("Running Task 01", 1);
     u8g2_SendBuffer(&u8g2);
+		jy901s.reset();
+		car_path_init(&task1_action_config);
+		enable_periodic_task(EVENT_CAR_STATE_MACHINE);
 }
 
 static void run_task02_cb(void *arg) {
     u8g2_ClearBuffer(&u8g2);
     draw_centered_text("Running Task 02", 1);
     u8g2_SendBuffer(&u8g2);
+		jy901s.reset();
+		car_path_init(&task2_action_config);
+		enable_periodic_task(EVENT_CAR_STATE_MACHINE);
 }
 
 static void run_task03_cb(void *arg) {
     u8g2_ClearBuffer(&u8g2);
     draw_centered_text("Running Task 03", 1);
     u8g2_SendBuffer(&u8g2);
+		jy901s.reset();
+		car_path_init(&task3_action_config);
+		enable_periodic_task(EVENT_CAR_STATE_MACHINE);
 }
 
 static void run_task04_cb(void *arg) {
     u8g2_ClearBuffer(&u8g2);
     draw_centered_text("Running Task 04", 1);
     u8g2_SendBuffer(&u8g2);
+		jy901s.reset();
+		car_path_init(&task4_action_config);
+		enable_periodic_task(EVENT_CAR_STATE_MACHINE);
 }
 
 static void view_variables_cb(void *arg) {
@@ -72,12 +136,7 @@ static void init_all_menu_nodes(void) {
 
 
 void menu_init_and_create(void) {
-
-	add_variable("ROL", &smartcar_imu.rpy_deg[_ROL]);
-	add_variable("PIT", &smartcar_imu.rpy_deg[_PIT]);
-	add_variable("TAW", &smartcar_imu.rpy_deg[_YAW]);
-	add_variable("TMP", &smartcar_imu.temperature_filter);
-	
+	add_variable("YAW", &jy901s.yaw);
 	init_all_menu_nodes();
   user_button_init(&btn_single_click_callback, &btn_long_press_cb);    
 	create_oled_menu(&menu_root);
