@@ -5,6 +5,7 @@
 #include "log.h"
 #include "wit_jyxx.h"
 #include "gray_detection_app.h"
+#include "alert.h"
 
 // 预计算常量以提高性能
 static const float CIRCLE_TO_RPM = (60.0f / (ENCODER_PERIOD_MS * 0.001f)); // 采样周期转换为 RPM 的系数
@@ -20,7 +21,7 @@ static const float TIME_INTERVAL_S = (ENCODER_PERIOD_MS * 0.001f); // 采样周�
 
 #define DISTANCE_KP 0.6f           // 直线行驶比例系数
 #define ANGLE_KP 0.2f              // 旋转比例系数
-#define TRACK_KP 1.0f          	 // 巡线比例控制系数
+#define TRACK_KP 1.4f          	 // 巡线比例控制系数
 
 #define CRUISE_SPEED 15.0f         // 直线巡航速度
 #define TURN_SPEED 10.0f           // 旋转速度
@@ -29,12 +30,12 @@ static const float TIME_INTERVAL_S = (ENCODER_PERIOD_MS * 0.001f); // 采样周�
 #define MIN_TURN_SPEED 2.0f        // 旋转最小有效速度
 
 #define DISTANCE_THRESHOLD_CM 0.5f // 距离误差阈值
-#define ANGLE_THRESHOLD_DEG 2.0f   // 角度误差阈值
+#define ANGLE_THRESHOLD_DEG 1.5f   // 角度误差阈值
 
 #define TRACK_NUM 12							 // 巡线个数
 
-#define MAX_TRACK_CORRECTION 10.0f  // 巡线最大修正因子
-#define TRACK_BASE_SPEED 15.0f		 // 巡线基础速度
+#define MAX_TRACK_CORRECTION 14.0f  // 巡线最大修正因子
+#define TRACK_BASE_SPEED 13.0f		 // 巡线基础速度
 
 // 电机类型
 MotorType type = MOTOR_TYPE_TWO_WHEEL;
@@ -172,6 +173,8 @@ bool car_move_until(CAR_STATES move_state, LINE_STATES l_state) {
         white_detection_count = 0; // 重置全白计数器
         if (has_black) {
             car.state = CAR_STATE_STOP; // 检测到黑色，停止小车
+						set_alert_count(1);
+						start_alert();
             return true;                // 达到目标条件
         } else {
             return false; // 未检测到黑色（全白），继续移动
@@ -180,9 +183,11 @@ bool car_move_until(CAR_STATES move_state, LINE_STATES l_state) {
         // 目标是检测到全白（所有传感器值为0），且需要连续20次确认
         if (is_all_white) {
             white_detection_count++; // 检测到全白，计数器加1 
-            if (white_detection_count >= 10 && get_mileage_cm() >= 100) { // 连续100次全白并且总里程达到100
+            if (white_detection_count >= 5 && get_mileage_cm() >= 100) { // 连续100次全白并且总里程达到100
                 car.state = CAR_STATE_STOP; // 停止小车
                 white_detection_count = 0;  // 重置计数器
+								set_alert_count(1);
+								start_alert();
                 return true;                // 达到目标条件
             }
         } else {
@@ -347,16 +352,11 @@ void update_track_control(void) {
         float correction_limit = target_lost ? MAX_TRACK_CORRECTION * 2.0f : MAX_TRACK_CORRECTION;
         float speed_correction = constrain_float(pid_output, -correction_limit, correction_limit);
 
-        // 根据偏差方向调整速度（丢失目标时方向基于last_valid_adjustment）
-        if (error > 0.0f || (target_lost && last_valid_adjustment > 0.0f)) {
-            // 偏右或上一次偏右，左轮加速，右轮减速（向左转向）
-            left_speed = TRACK_BASE_SPEED + speed_correction;
-            right_speed = TRACK_BASE_SPEED - speed_correction;
-        } else {
-            // 偏左或上一次偏左，右轮加速，左轮减速（向右转向）
-            left_speed = TRACK_BASE_SPEED + speed_correction;
-            right_speed = TRACK_BASE_SPEED - speed_correction;
-        }
+        // 根据PID输出直接调整速度
+        // pid_output > 0 表示偏右，需向左转（左轮加速，右轮减速）
+        // pid_output < 0 表示偏左，需向右转（左轮减速，右轮加速）
+        left_speed = TRACK_BASE_SPEED + speed_correction;
+        right_speed = TRACK_BASE_SPEED - speed_correction;
 
         // 限制速度范围，防止速度过低或反向
         // 丢失目标时允许更大的速度差以实现大幅度转向

@@ -10,6 +10,7 @@ static action_queue_t action_queue = {
 
 // 当前使用的动作配置，初始化时可以被用户传入的配置覆盖
 static action_config_t *current_action_config;
+static uint8_t current_loop_count = 0;  // 循环次数计数器
 
 /**
  * @brief 初始化动作队列
@@ -103,8 +104,12 @@ bool action_queue_load_from_config(action_config_t *config) {
 void car_path_init(action_config_t *config) {
     if (config != NULL) {
         current_action_config = config;  // 使用用户传入的配置
-    } 
+    }
     action_queue_load_from_config(current_action_config);  // 加载动作到队列
+    current_loop_count = 0;  // 重置循环计数器
+    if (current_action_config->loop_count > 0) {
+        current_action_config->is_loop_enabled = true;
+    }
 }
 
 /**
@@ -113,12 +118,12 @@ void car_path_init(action_config_t *config) {
 void car_state_machine(void) {
     static car_action_t current_action;  // 当前正在执行的动作
     static bool is_action_active = false;  // 是否有动作正在执行
-    static uint8_t count = 0;  // 循环次数计数器
+
 
     // 如果当前没有动作在执行，且队列为空，且循环模式启用，则重新加载配置表
     if (!is_action_active && action_queue_is_empty() && current_action_config->is_loop_enabled) {
-        count++;  // 完成一次完整序列循环，计数器加1
-        if (count >= current_action_config->loop_count) {
+        current_loop_count++;  // 完成一次完整序列循环，计数器加1
+        if (current_loop_count >= current_action_config->loop_count) {
             current_action_config->is_loop_enabled = false;  // 达到循环次数限制，禁用循环
             car.state = CAR_STATE_STOP;  // 确保小车进入停止状态
             for (int i = 0; i < MOTOR_TYPE_TWO_WHEEL; i++) {
