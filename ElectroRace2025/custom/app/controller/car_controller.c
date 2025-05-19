@@ -34,7 +34,7 @@ static const float TIME_INTERVAL_S = (ENCODER_PERIOD_MS * 0.001f); // 采样周�
 
 #define TRACK_NUM 12							 // 巡线个数
 
-#define MAX_TRACK_CORRECTION 14.0f  // 巡线最大修正因子
+#define MAX_TRACK_CORRECTION 17.0f  // 巡线最大修正因子
 #define TRACK_BASE_SPEED 11.5f		 // 巡线基础速度
 
 // 电机类型
