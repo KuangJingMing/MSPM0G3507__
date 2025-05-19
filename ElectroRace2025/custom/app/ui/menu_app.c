@@ -31,7 +31,7 @@ static action_config_t task2_action_config = {
 
 static action_config_t task3_action_config = {
     .actions = {
-        {ACTION_SPIN_TURN, -40.0f},                       // 旋转到-35度
+        {ACTION_SPIN_TURN, -38.0f},                       // 旋转到-35度
         {ACTION_MOVE_UNTIL_BLACK, CAR_STATE_GO_STRAIGHT}, // 通过直行修正的方式直到黑线停下 
         {ACTION_MOVE_UNTIL_WHITE, CAR_STATE_TRACK},       // 通过循迹修正的方式直到白线停下
         {ACTION_SPIN_TURN, -145.0f},                      // 旋转到-145度
@@ -45,10 +45,10 @@ static action_config_t task3_action_config = {
 // 默认动作配置表，用户可直接修改此表定义动作序列和循环模式
 static action_config_t task4_action_config = {
     .actions = {
-        {ACTION_SPIN_TURN, -40.0f},                       // 旋转到-45度
+        {ACTION_SPIN_TURN, -38.0f},                       // 旋转到-45度
         {ACTION_MOVE_UNTIL_BLACK, CAR_STATE_GO_STRAIGHT}, // 通过直行修正的方式直到黑线停下 
         {ACTION_MOVE_UNTIL_WHITE, CAR_STATE_TRACK},       // 通过循迹修正的方式直到白线停下
-        {ACTION_SPIN_TURN, -145.0f},                      // 旋转到-145度
+        {ACTION_SPIN_TURN, -146.0f},                      // 旋转到-145度
         {ACTION_MOVE_UNTIL_BLACK, CAR_STATE_GO_STRAIGHT}, // 通过直行修正的方式直到黑线停下 
         {ACTION_MOVE_UNTIL_WHITE, CAR_STATE_TRACK},       // 通过循迹修正的方式直到白线停下
     },

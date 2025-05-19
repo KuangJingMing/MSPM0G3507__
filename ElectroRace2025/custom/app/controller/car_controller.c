@@ -19,9 +19,9 @@ static const float TIME_INTERVAL_S = (ENCODER_PERIOD_MS * 0.001f); // 采样周�
 #define SPEED_KI 1
 #define SPEED_KD 0
 
-#define DISTANCE_KP 0.6f           // 直线行驶比例系数
-#define ANGLE_KP 0.2f              // 旋转比例系数
-#define TRACK_KP 1.4f          	 // 巡线比例控制系数
+#define DISTANCE_KP 0.7f           // 直线行驶比例系数
+#define ANGLE_KP 0.3f              // 旋转比例系数
+#define TRACK_KP 1.46f          	 // 巡线比例控制系数
 
 #define CRUISE_SPEED 15.0f         // 直线巡航速度
 #define TURN_SPEED 10.0f           // 旋转速度
@@ -35,7 +35,7 @@ static const float TIME_INTERVAL_S = (ENCODER_PERIOD_MS * 0.001f); // 采样周�
 #define TRACK_NUM 12							 // 巡线个数
 
 #define MAX_TRACK_CORRECTION 14.0f  // 巡线最大修正因子
-#define TRACK_BASE_SPEED 13.0f		 // 巡线基础速度
+#define TRACK_BASE_SPEED 11.5f		 // 巡线基础速度
 
 // 电机类型
 MotorType type = MOTOR_TYPE_TWO_WHEEL;
